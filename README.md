@@ -1,10 +1,19 @@
-# StratView
+# Installation
 
+[Node JS](https://nodejs.org/en/download) version v20.9.0
+Install Angular CLI globally:
+```bash
+npm install -g @angular/cli
+```
+Install Dependencies:
+```bash
+npm install
+```
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
 
-## Development server
+## Run project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
