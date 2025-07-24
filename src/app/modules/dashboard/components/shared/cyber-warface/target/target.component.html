@@ -1,0 +1,20 @@
+<div>
+  <div>
+    <h2 style="white-space: nowrap">Mục tiêu tác chiến</h2>
+    <p style="white-space: nowrap; color: rgba(137, 141, 143, 1)">Đang khai thác</p>
+  </div>
+  <div style="height: 316px;">
+    <ng-container *ngIf="targetData | async as data">
+      <!-- <ejs-accumulationchart id="target-pie-chart" [title]="targetTitle" class="chart-right-panel"
+        [legendSettings]="targetlegendSettings" [centerLabel]="centerLabel" [enableSmartLabels]="true" height="500"
+        (textRender)="onTextRender($event)" (loaded)="onChartLoaded($event)">
+        <e-accumulation-series-collection>
+          <e-accumulation-series [dataSource]="data" xName="unit_name" yName="count" innerRadius="50%"
+            [dataLabel]="targetDataLabel" [palettes]="targetColors" radius="70%">
+          </e-accumulation-series>
+        </e-accumulation-series-collection>
+      </ejs-accumulationchart> -->
+      <div echarts [options]="targetChartOption" class="target-chart"></div>
+    </ng-container>
+  </div>
+</div>

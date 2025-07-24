@@ -1,0 +1,74 @@
+<div class="duty-roster-3107 btth-top-panel-card">
+  <div class="d-flex justify-content-between" style="margin-bottom: 25px;">
+    <div>
+      <h2 class="top-green-text">Kịp trực, trạng thái SSCĐ, cấp độ xử trí</h2>
+      <h4 class="top-green-text">TCH TT: 2// Nguyễn Văn Mạnh, PCHT TMT - TB: 3/ Đào Thanh Tùng</h4>
+    </div>
+    <div class="d-flex gap-6">
+      <div>
+      <h5 class="top-green-text" style="font-weight: 700;">Quân số</h5>
+      <h4 class="top-green-text" style="font-weight: 700; text-align: right;">142</h4>
+    </div>
+    <div>
+      <h5 class="top-green-text" style="font-weight: 700;">Có mặt</h5>
+      <h4 class="top-green-text" style="font-weight: 700; text-align: right;">138</h4>
+    </div>
+    <div>
+      <h5 class="top-green-text" style="font-weight: 700;">Vắng mặt</h5>
+      <h4 class="top-green-text" style="font-weight: 700; text-align: right;">4</h4>
+    </div>
+    </div>
+  </div>
+  <div class="overflow-auto" style="height: 208px; flex: 1">
+    <table class="btth-top-table h-100 table-combat-readiness">
+      <thead>
+        <tr>
+          <th style="width: 30%;"></th>
+          <th>TM</th>
+          <th>CT</th>
+          <th>HCKT</th>
+          <th>51</th>
+          <th>52</th>
+          <th>53</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of combatReadinessData, let i = index">
+          <td>
+            <p style="font-weight: 700!important;">{{item.loai}}</p>
+          </td>
+          <td>
+            
+            <p>{{ item.TM }}</p>
+
+          </td>
+          <td>
+
+            <p>{{ item.C1 }}</p>
+
+          </td>
+          <td>
+
+            <p>{{ item.HCKT }}</p>
+
+          </td>
+          <td>
+
+            <p>{{ item.CumS1 }}</p>
+
+          </td>
+          <td>
+
+            <p>{{ item.CumS2 }}</p>
+
+          </td>
+          <td>
+
+            <p>{{ item.CumS3 }}</p>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

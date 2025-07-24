@@ -1,0 +1,29 @@
+.hover-pointer{
+  cursor: pointer;
+}
+.hover-pointer:hover {
+  color: green; /* Color on hover */
+}
+.tabel-alert-left-panel th:nth-child(1),  
+.tabel-alert-left-panel td:nth-child(1) {  
+  width: 4%;  
+}
+.tabel-alert-left-panel{
+  margin-bottom: 24px;
+  th{
+    padding: 24px !important;
+  }
+}
+.td-sub-title{
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: rgba(58, 58, 58, 1) !important;
+}
+.chart-info-area-left{
+  width: 100%;
+  height: 280px;
+  .left-info-chart{
+    width: 100%;
+    height: 100%;
+  }
+}

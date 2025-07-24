@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-between title-boder-chart">
+  <h4 style="white-space: nowrap">{{ title }}</h4>
+
+  <!-- Nếu có subTitle -->
+  <h4 *ngIf="subTitle" style="white-space:nowrap;color:rgba(83, 83, 83, 1); font-size: 18px;">
+    {{ subTitle }}
+  </h4>
+
+  <!-- Nếu không có subTitle và có sourceOptions -->
+  <div *ngIf="!subTitle && sourceOptions?.length" class="d-flex align-items-center" style="gap: 12px;">
+    <div *ngFor="let option of sourceOptions" class="d-flex align-items-center" style="gap: 4px;">
+      <span class="circle-icon" [ngStyle]="{ 'background-color': option.color }"></span>
+      <p>{{ option.label }}</p>
+    </div>
+  </div>
+
+  <!-- Nếu không có subTitle mà có radioOptions -->
+  <div *ngIf="!subTitle && radioOptions?.length" class="d-flex align-items-center" style="gap: 12px;">
+    <label *ngFor="let opt of radioOptions" class="d-flex align-items-center" style="gap: 4px;">
+      <input
+        type="radio"
+        name="source"
+        [value]="opt.value"
+        [checked]="opt.value === selectedValue"
+        (change)="onRadioChange(opt.value)" />
+      <span [ngStyle]="{ color: opt.color || '#555', 'font-weight': opt.color ? '600' : 'normal' }">
+        {{ opt.label }}
+      </span>
+    </label>
+  </div>
+</div>

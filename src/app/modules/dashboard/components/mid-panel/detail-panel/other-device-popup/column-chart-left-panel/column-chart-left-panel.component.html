@@ -1,0 +1,33 @@
+<div>
+  <h2>Thống kê theo miền</h2>
+</div>
+<div style="height: 600px;">
+  <!-- <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    id="chart-container"
+    (textRender)="onTextRender($event)"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="connect"
+        fill="#045E2B"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="disconnect"
+        fill="#F58501"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart> -->
+  <div echarts [options]="statisticDomainChartOption" class="statistic-domain-chart-popup" [autoResize]="true"></div>
+</div>

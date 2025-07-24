@@ -1,0 +1,159 @@
+div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  form {
+    margin-bottom: 0.5em;
+  }
+}
+
+label {
+  font-size: 2em;
+}
+
+table {
+  th,
+  td {
+    font-size: 1.5em !important;
+  }
+}
+
+table {
+  background: var(--bgGroup);
+  border-radius: 1.4em;
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+  flex: none;
+  height: 10em;
+  overflow-y: auto;
+
+  thead {
+      position: sticky;          /* Giữ thead cố định */
+      top: 0;                    /* Cố định ở đầu bảng */
+      z-index: 1;
+  }
+  tr {
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: 0.8em;
+      }
+
+      td:last-child {
+        border-bottom-right-radius: 0.8em;
+      }
+    }
+  }
+
+  tr {
+    td {
+      border-top: 0.1em solid var(--colorBorderGroup);
+      border-bottom: 0.1em solid var(--colorBorderGroup) !important;
+    }
+
+    &:first-child {
+      th:first-child {
+        border-top-left-radius: 0.8em;
+      }
+
+      th:last-child {
+        border-top-right-radius: 0.8em;
+      }
+    }
+  }
+
+  td {
+    background: none;
+    border: 0.1em solid var(--colorBorderGroup);
+    font-size: 1.5em;
+    line-height: 1.2em;
+    font-weight: 500;
+    color: #3a3a3a;
+    vertical-align: middle;
+    border-top: none;
+    border-left: none;
+    text-align: center;
+    div {
+      font-weight: 300;
+      font-size: 1em;
+      color: #757575;
+    }
+    cite {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    cite.yellow_odd {
+      color: #f58501;
+    }
+
+    cite.red_odd {
+      color: #d00b0b;
+    }
+
+    &:first-child {
+      font-size: 1.5em;
+      line-height: 1.2em;
+      border-left: 0.1em solid var(--colorBorderGroup);
+    }
+  }
+
+  th {
+    color: #3a3a3a;
+    font-size: 2em;
+    height: 3em;
+    background: var(--bgCard);
+    border: 0.1em solid var(--colorBorderGroup);
+    vertical-align: middle;
+    border-left: none;
+    text-align: center;
+    &:first-child {
+      width: 5%;
+    }
+    &first-child ~ th {
+      width: 16%;
+    }
+
+    &.text-right {
+      text-align: right;
+    }
+  }
+
+  th:first-child {
+    border-top-left-radius: 0.8em;
+    border-left: 0.1em solid var(--colorBorderGroup);
+    text-align: center;
+    padding-left: 0 !important;
+  }
+
+  th:last-child {
+    border-top-right-radius: 0.8em;
+  }
+
+
+}
+
+
+.table-operator-2{
+  max-height: 12em; /* Đặt chiều cao tối đa cho phần tbody */
+  overflow-y: auto;  /* Bật thanh cuộn dọc */
+  display: block !important; /* Đảm bảo bảng có thể cuộn */
+  margin-bottom: 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  position: sticky; /* Giữ phần thead cố định khi cuộn */
+  top: 0;
+  z-index: 10;
+  padding: 0.5em;
+}
+
+tbody td {
+  padding: 0.5em;
+}

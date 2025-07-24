@@ -1,0 +1,31 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Phòng thủ mạng ></span>
+      <span class="choise-item">Máy trạm Internet</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group">
+    <div class="row">
+      <div class="card-border">
+        <h2>TA21</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataTA21"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+
+    <!-- Change to Agent SOC-I -->
+    <!-- <div class="row">
+      <div class="card-border">
+        <h2>SOCi</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataFidelis"
+        ></app-column-chart-left-panel>
+      </div>
+    </div> -->
+  </div>
+</div>

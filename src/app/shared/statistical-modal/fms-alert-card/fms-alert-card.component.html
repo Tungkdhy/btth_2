@@ -1,0 +1,125 @@
+<div class="row">
+  <!--begin::Header-->
+  <div class="row mb-1 d-flex justify-content-between align-items-center">
+    <!--begin::Title-->
+    <div [ngClass]="isMap ? 'row' : 'col-md-6 col-xxl-9'">
+      <h3>Cảnh báo an toàn thông tin</h3>
+    </div>
+    <div [ngClass]="isMap ? 'row' : 'col-md-6 col-xxl-3'">
+      <ng-container *ngrxLet="{ start: startDate$, end: endDate$ } as date">
+        <app-date-time-range-picker
+          [startDate]="date.start"
+          [endDate]="date.end"
+          (selectDate)="handleSelectDate($event)"
+        ></app-date-time-range-picker>
+      </ng-container>
+    </div>
+
+    <!--end::Title-->
+  </div>
+  <!--end::Header-->
+
+  <!--begin::Body-->
+  <!-- <div class="row h-100 m-0">
+    <div *ngIf="!isMap; else mapBlock" id="wrap" class="h-100">
+      <div [id]="summaryChartId">
+        <ng-container
+          *ngrxLet="{
+            internet: internet$,
+            blackDomain: blackDomain$,
+            malware: malware$
+          } as alert"
+        >
+          <app-summary-fms-alert-card
+            [internetAlert]="alert.internet"
+            [blackDomainAlert]="alert.blackDomain"
+            [malwareAlert]="alert.malware"
+            (selectDataPoint)="handleActiveDetailChart($event)"
+          ></app-summary-fms-alert-card>
+        </ng-container>
+      </div>
+      <div [id]="detailChartId">
+        <ng-container *ngIf="violatedDevices">
+          <app-detail-fms-alert-card
+            [violatedDevice]="violatedDevices"
+            (chartClick)="openSecondaryModal($event, violatedDevices.event)"
+          ></app-detail-fms-alert-card>
+        </ng-container>
+      </div>
+    </div>
+    <ng-template #mapBlock>
+      <div class="ol-statistical-fms p-0">
+        <ng-container
+          *ngrxLet="{
+            internet: internet$,
+            blackDomain: blackDomain$,
+            malware: malware$
+          } as alert"
+        >
+          <app-summary-fms-alert-card-panel
+            [internetAlert]="alert.internet"
+            [blackDomainAlert]="alert.blackDomain"
+            [malwareAlert]="alert.malware"
+            (selectDataPoint)="openSecondaryModal(unitId, $event.eventType!)"
+          ></app-summary-fms-alert-card-panel>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div> -->
+  <!--end: Card Body-->
+
+  <!--begin::Body-->
+  <div class="row h-100 m-0">
+    <!--begin::Chart-->
+    <div *ngIf="!isMap; else mapBlock" id="wrap" class="h-100">
+      <div class="row">
+        <div class="col-6">
+          <div>
+            <ng-container
+              *ngrxLet="{
+                internet: internet$,
+                blackDomain: blackDomain$,
+                malware: malware$
+              } as alert"
+            >
+              <app-summary-fms-alert-card
+                [internetAlert]="alert.internet"
+                [blackDomainAlert]="alert.blackDomain"
+                [malwareAlert]="alert.malware"
+                (selectDataPoint)="handleActiveDetailChart($event)"
+              ></app-summary-fms-alert-card>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+              <app-detail-fms-alert-card
+                [violatedDevice]="violatedDevices"
+                (chartClick)="openSecondaryModal($event, violatedDevices.event)"
+              ></app-detail-fms-alert-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #mapBlock>
+      <div class="ol-statistical-fms p-0">
+        <ng-container
+          *ngrxLet="{
+            internet: internet$,
+            blackDomain: blackDomain$,
+            malware: malware$
+          } as alert"
+        >
+          <app-summary-fms-alert-card-panel
+            [internetAlert]="alert.internet"
+            [blackDomainAlert]="alert.blackDomain"
+            [malwareAlert]="alert.malware"
+            (selectDataPoint)="openSecondaryModal(unitId, $event.eventType!)"
+          ></app-summary-fms-alert-card-panel>
+        </ng-container>
+      </div>
+    </ng-template>
+    <!--end::Chart-->
+  </div>
+  <!--end: Card Body-->
+</div>

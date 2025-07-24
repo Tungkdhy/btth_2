@@ -1,0 +1,19 @@
+<h1>Thông tin chi tiết</h1>
+<div *ngIf="type == 'CLIENT' || type == 'SERVER'">
+  <h3>
+    Tên: {{item?.fms?.host_name}}</h3>
+  <div>
+    Hệ điều hành: {{item?.os_tag}}
+  </div>
+  <div>
+    RAM:{{item?.ram_tag}}
+  </div>
+  <div>
+    CPU:{{item?.fms?.cpu}}
+  </div>
+  <div>
+    Ổ cứng: {{item?.storage_tag}}
+  </div>
+</div>
+
+

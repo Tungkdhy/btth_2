@@ -1,0 +1,139 @@
+.modal-content {
+  width: 75vw !important;
+  max-height: 60vh !important;
+  background: var(--bgColor);
+
+  .modal-full {
+    flex: 1;
+    display: flex;
+  }
+
+  li {
+    font-size: 1.5em !important;
+  }
+
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content {
+  flex: 1 !important;
+}
+
+app-info-client-server-card {
+  display: flex;
+}
+
+.modal-full {
+  .protect-infor-wrapper {
+    display: flex;
+    /* 1:2 ratio */
+    gap: 1em;
+    flex: 1;
+
+    .infor-left,
+    .infor-right {
+      padding: 10px;
+      max-height: 60vh !important;
+      background-color: var(--bgGroup);
+    }
+
+    .infor-right {
+      flex: 2;
+    }
+
+    .infor-left {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .img-target {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .detail-infor {
+        margin-top: 2em;
+        flex: 1;
+        display: flex;
+        justify-content: start;
+        width: 100%;
+        padding-left: 7em;
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5em;
+
+        .item {
+          font-size: 2.5em;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25em;
+          line-height: 1.5em;
+
+          .title {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .tab-wrapper {
+    height: 100% !important;
+
+    .tab-items {
+      height: 100% !important;
+
+      .tab-item {
+        height: 100% !important;
+      }
+    }
+  }
+
+  .modal-header {
+    padding: 1em 1em 0 1em !important;
+  }
+
+  h3 {
+    font-size: 3em !important;
+    color: var(--colorText) !important;
+    font-weight: bold;
+    padding-top: 0.5em !important;
+  }
+
+  .btn {
+    padding: 0;
+    margin: auto;
+  }
+
+  .text-active-primary.active {
+    color: var(--colorTitle) !important;
+    border-color: var(--colorTitle) !important;
+  }
+}
+
+.e-tab .e-tab-header .e-toolbar-item.e-active .e-tab-text {
+  color: var(--colorTitle) !important;
+  border-color: var(--colorTitle);
+}
+
+.nodata {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  font-size: 3em;
+  flex: 1;
+  align-items: center;
+}
+
+.img-target {
+  margin-top: 2em;
+
+  .img-data {
+    height: 30vh;
+    max-width: 30vh;
+  }
+}

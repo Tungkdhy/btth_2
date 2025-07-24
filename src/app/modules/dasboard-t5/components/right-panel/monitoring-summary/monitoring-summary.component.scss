@@ -1,0 +1,32 @@
+.summary-container {
+    gap: 32px;
+    padding: 16px;
+  }
+  
+  .summary-box {
+    min-width: 250px;
+    max-width: 300px;
+    font-size: 15px;
+  }
+  
+  .summary-title {
+    font-weight: 700;             // In đậm
+    font-size: 14px;              // Tăng cỡ chữ
+    text-decoration: underline;   // Gạch chân
+    text-underline-offset: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  
+    &:hover {
+      color: #007bff;
+    }
+  }
+  .summary-item {
+    margin: 4px 0;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-size: 12px;
+    &:hover {
+      color: #007bff;
+    }
+  }

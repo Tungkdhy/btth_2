@@ -1,0 +1,96 @@
+<app-nav-tabs
+  [tabs]="tabs"
+  [activeTab]="selectedTab"
+  (tabChange)="onTabChange($event)"
+>
+  <ng-template #tab1Content>
+    <ng-container *ngIf="infraAlerts$ | async as alerts">
+      <div class="m-5">
+        <h2>Mất kết nối</h2>
+        <div [ngSwitch]="alerts.total">
+          <!-- Case 1: total > 1, hiển thị bảng -->
+          <div *ngSwitchDefault>
+            <!-- parent.component.html -->
+            <app-data-table-expand
+              id="infra-network"
+              [data]="alerts.data"
+              [columns]="infraColumns"
+              [detailTemplate]="detailInfraTemplate"
+              [pageSize]="5"
+              [total]="alerts.total"
+              (pageChanged)="onInfraNetworkPageChanged($event)"
+            ></app-data-table-expand>
+
+            <ng-template #detailInfraTemplate let-row>
+              <app-alert-detail-card
+                [infraAlertData]="row"
+              ></app-alert-detail-card>
+            </ng-template>
+          </div>
+          <!-- Case 2: total = 1, hiển thị chi tiết -->
+          <div *ngSwitchCase="1">
+            <app-alert-detail-card
+              [infraAlertData]="alerts.data[0]"
+            ></app-alert-detail-card>
+          </div>
+
+          <!-- Case 3: total = 0, không có cảnh báo -->
+          <div class="d-flex justify-content-center" *ngSwitchCase="0">
+            <p>Không có cảnh báo</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="infoSecAlerts$ | async as alerts">
+      <div class="m-5">
+        <h2>An toàn thông tin</h2>
+        <div [ngSwitch]="alerts.total">
+          <!-- Case 1: total > 1, hiển thị bảng -->
+          <div *ngSwitchDefault>
+            <!-- parent.component.html -->
+            <app-data-table-expand
+              id="info-sec"
+              [data]="alerts.data"
+              [columns]="infoSecColumns"
+              [detailTemplate]="detailInfoSecTemplate"
+              [pageSize]="5"
+              [total]="alerts.total"
+              (pageChanged)="onInfoSecPageChanged($event)"
+            ></app-data-table-expand>
+
+            <ng-template #detailInfoSecTemplate let-row>
+              <app-alert-detail-card
+                [infoSecAlertData]="row"
+              ></app-alert-detail-card>
+            </ng-template>
+          </div>
+          <!-- Case 2: total = 1, hiển thị chi tiết -->
+          <div *ngSwitchCase="1">
+            <app-alert-detail-card
+              [infoSecAlertData]="alerts.data[0]"
+            ></app-alert-detail-card>
+          </div>
+
+          <!-- Case 3: total = 0, không có cảnh báo -->
+          <div class="d-flex justify-content-center" *ngSwitchCase="0">
+            <p>Không có cảnh báo</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template #tab2Content>
+    <ng-container *ngIf="selectedFeature">
+      <app-unit-strength-wrapper
+        [selectedFeature]="selectedFeature"
+      ></app-unit-strength-wrapper>
+    </ng-container>
+  </ng-template>
+  <ng-template #tab3Content>
+    <ng-container *ngIf="selectedTab === 'topology'">
+      <app-topology-wrapper-card
+        [selectedFeature]="selectedFeature"
+      ></app-topology-wrapper-card>
+    </ng-container>
+  </ng-template>
+</app-nav-tabs>

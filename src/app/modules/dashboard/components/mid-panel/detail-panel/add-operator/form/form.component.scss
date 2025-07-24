@@ -1,0 +1,156 @@
+.form-input {
+  flex: 1;
+  display:flex;
+  height: 34vh;
+  overflow-y: auto;
+  span.ngb-dp-navigation-chevron {
+    font-size: 1em !important;
+  }
+
+  div span {
+    font-size: 1em;
+  }
+
+}
+
+.form-check-input {
+  border: 0.2em solid rgba(58, 58, 58, 1);
+  border-radius: 0.2em;
+  margin: auto;
+  font-size: 1.5em;
+}
+
+.form-control{
+  font-size: 1.5em;
+}
+
+table {
+  background: var(--bgGroup);
+  border-radius: 1.4em;
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+  tr {
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: 0.8em;
+      }
+
+      td:last-child {
+        border-bottom-right-radius: 0.8em;
+      }
+    }
+  }
+
+  tr {
+    td {
+      border-top: 0.1em solid var(--colorBorderGroup);
+    }
+
+    &:first-child {
+      th:first-child {
+        border-top-left-radius: 0.8em;
+      }
+
+      th:last-child {
+        border-top-right-radius: 0.8em;
+      }
+    }
+  }
+
+  td {
+    background: none;
+    border: 0.1em solid var(--colorBorderGroup);
+    font-size: 1.5em;
+    line-height: 1.2em;
+    font-weight: 500;
+    color: #3a3a3a;
+    vertical-align: middle;
+    border-top: none;
+    border-left: none;
+    text-align: center;
+    div {
+      font-weight: 300;
+      font-size: 1em;
+      color: #757575;
+    }
+    cite {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    cite.yellow_odd {
+      color: #f58501;
+    }
+
+    cite.red_odd {
+      color: #d00b0b;
+    }
+
+    &:first-child {
+      font-size: 1.5em;
+      line-height: 1.2em;
+      border-left: 0.1em solid var(--colorBorderGroup);
+    }
+  }
+
+  th {
+    color: #3a3a3a;
+    font-size: 2em;
+    height: 3em;
+    background: var(--bgCard);
+    border: 0.1em solid var(--colorBorderGroup);
+    vertical-align: middle;
+    border-left: none;
+    text-align: center;
+    &:first-child {
+      width: 5%;
+    }
+    &first-child ~ th {
+      width: 16%;
+    }
+
+    &.text-right {
+      text-align: right;
+    }
+  }
+
+  th:first-child {
+    border-top-left-radius: 0.8em;
+    border-left: 0.1em solid var(--colorBorderGroup);
+    text-align: center;
+    padding-left: 0 !important;
+  }
+
+  th:last-child {
+    border-top-right-radius: 0.8em;
+  }
+
+
+  tbody {
+    overflow-y: auto;
+    height: 30vh;
+    max-height: 30vh;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+
+
+
+//.custom-datepicker-input {
+//  font-size: 1em;  /* Điều chỉnh kích thước font */
+//  width: 20em;     /* Điều chỉnh chiều rộng của trường input */
+//  padding: 0.6em;    /* Điều chỉnh khoảng cách padding */
+//}
+//
+//.custom-datepicker-input::placeholder {
+//  font-size: 0.9em;  /* Điều chỉnh kích thước font cho placeholder */
+//  color: #999;      /* Màu placeholder */
+//}

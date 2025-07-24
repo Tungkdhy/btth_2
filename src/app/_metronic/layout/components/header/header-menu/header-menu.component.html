@@ -1,0 +1,1039 @@
+<ng-container
+  *ngIf="currentMenu.includes(convertToUnsignedAndDash(menu.SYSTEM))"
+>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.UNIT))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.SYSTEM, menu.UNIT)"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.UNIT))"
+    >
+      <span class="menu-title">{{ menu.UNIT }}</span>
+    </a>
+  </div>
+
+  <!--  <div-->
+  <!--    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.SYNCHRONIZATION))"-->
+  <!--    class="menu-item me-lg-1"-->
+  <!--  >-->
+  <!--    <a-->
+  <!--      class="menu-link py-3"-->
+  <!--      routerLinkActive="active menu-here"-->
+  <!--      [routerLink]="convertToUrl(menu.SYSTEM, menu.SYNCHRONIZATION)"-->
+  <!--      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.SYNCHRONIZATION))"-->
+  <!--    >-->
+  <!--      <span class="menu-title">{{ menu.SYNCHRONIZATION }}</span>-->
+  <!--    </a>-->
+  <!--  </div>-->
+
+  <!--  <div-->
+  <!--    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.MONITORING_SYSTEM))"-->
+  <!--    class="menu-item me-lg-1"-->
+  <!--  >-->
+  <!--    <a-->
+  <!--      class="menu-link py-3"-->
+  <!--      routerLinkActive="active"-->
+  <!--      [routerLink]="convertToUrl(menu.SYSTEM, menu.MONITORING_SYSTEM)"-->
+  <!--      [ngClass]="-->
+  <!--        calculateMenuItemCssClass(convertToUrl(menu.MONITORING_SYSTEM))-->
+  <!--      "-->
+  <!--    >-->
+  <!--      <span class="menu-title">{{ menu.MONITORING_SYSTEM }}</span>-->
+  <!--    </a>-->
+  <!--  </div>-->
+
+  <!--  <div-->
+  <!--    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.ALERT))"-->
+  <!--    class="menu-item me-lg-1"-->
+  <!--  >-->
+  <!--    <a-->
+  <!--      class="menu-link py-3"-->
+  <!--      routerLinkActive="active"-->
+  <!--      routerLink="/he-thong/canh-bao"-->
+  <!--      [ngClass]="calculateMenuItemCssClass('/canh-bao')"-->
+  <!--    >-->
+  <!--      <span class="menu-title">Cảnh báo</span>-->
+  <!--    </a>-->
+  <!--  </div>-->
+
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.GROUP))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active"
+      routerLink="/he-thong/nhom"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.GROUP))"
+    >
+      <span class="menu-title">{{ menu.GROUP }}</span>
+    </a>
+  </div>
+
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.USER))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active"
+      routerLink="/he-thong/nguoi-dung"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.USER))"
+    >
+      <span class="menu-title">{{ menu.USER }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.COORDINATE))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.SYSTEM, menu.COORDINATE)"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.COORDINATE))"
+    >
+      <span class="menu-title">{{ menu.COORDINATE }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.SYSTEM, menu.ALERT_CONFIGURATION))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.SYSTEM, menu.ALERT_CONFIGURATION)"
+      [ngClass]="
+        calculateMenuItemCssClass(convertToUrl(menu.ALERT_CONFIGURATION))
+      "
+    >
+      <span class="menu-title">{{ menu.ALERT_CONFIGURATION }}</span>
+    </a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="currentMenu.includes(convertToUnsignedAndDash(menu.MAP))">
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.MAP, menu.MILITARY_MAP))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.MAP, menu.MILITARY_MAP)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.MILITARY_MAP))"
+    >
+      <span class="menu-title">{{ menu.MILITARY_MAP }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.MAP, menu.TOPOLOGY_MAP))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.MAP, menu.TOPOLOGY_MAP)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.TOPOLOGY_MAP))"
+    >
+      <span class="menu-title">{{ menu.TOPOLOGY_MAP }}</span>
+    </a>
+  </div>
+</ng-container>
+
+<ng-container
+  *ngIf="currentMenu.includes(convertToUnsignedAndDash(menu.STATISTIC))"
+>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.STATISTIC, menu.DEVICE_STATUS))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.STATISTIC, menu.DEVICE_STATUS)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.DEVICE_STATUS))"
+    >
+      <span class="menu-title">{{ menu.DEVICE_STATUS }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.STATISTIC, menu.MONITORING_SERVER))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.STATISTIC, menu.MONITORING_SERVER)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="
+        calculateMenuItemCssClass(convertToUrl(menu.MONITORING_SERVER))
+      "
+    >
+      <span class="menu-title">{{ menu.MONITORING_SERVER }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="
+      hasMenuAllow(convertToDash(menu.STATISTIC, menu.REFERENCE_STATISTICS))
+    "
+    class="menu-item menu-lg-down-accordion me-lg-1"
+    data-kt-menu-trigger="click"
+    data-kt-menu-placement="bottom-start"
+  >
+    <span
+      class="menu-link py-3"
+      [ngClass]="
+        calculateMenuItemCssClass(convertToUrl(menu.REFERENCE_STATISTICS))
+      "
+    >
+      <span class="menu-title"> {{ menu.REFERENCE_STATISTICS }} </span>
+    </span>
+    <div
+      class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+      data-kt-menu-dismiss="true"
+    >
+      <div data-kt-menu-dismiss="true">
+        <div class="border-left-lg-1">
+          <div class="menu-inline menu-column menu-active-bg">
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.STATISTIC,
+                    menu.REFERENCE_STATISTICS,
+                    menu.REFERENCE_UNIT_STATISTICS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.REFERENCE_UNIT_STATISTICS)
+                  )
+                "
+              >
+                <!--                <span class="menu-icon">-->
+                <!--                  -->
+                <!--                </span>-->
+                <span class="menu-title">
+                  {{ menu.REFERENCE_UNIT_STATISTICS }}
+                </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.STATISTIC,
+                    menu.REFERENCE_STATISTICS,
+                    menu.REFERENCE_DEVICE_STATISTICS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.REFERENCE_DEVICE_STATISTICS)
+                  )
+                "
+              >
+                <!--                <span class="menu-icon">-->
+                <!--                  -->
+                <!--                </span>-->
+                <span class="menu-title">
+                  {{ menu.REFERENCE_DEVICE_STATISTICS }}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.STATISTIC))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.STATISTIC, menu.COMPARE_HTGS)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.COMPARE_HTGS))"
+    >
+      <span class="menu-title">{{ menu.COMPARE_HTGS }}</span>
+    </a>
+  </div>
+</ng-container>
+
+<ng-container
+  *ngIf="currentMenu.includes(convertToUnsignedAndDash(menu.DEVICE_MANAGEMENT))"
+>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.DEVICE_MANAGEMENT, menu.DEVICE))"
+    class="menu-item menu-lg-down-accordion me-lg-1"
+    data-kt-menu-trigger="click"
+    data-kt-menu-placement="bottom-start"
+  >
+    <span
+      class="menu-link py-3"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.DEVICE))"
+    >
+      <span class="menu-title"> {{ menu.DEVICE }} </span>
+    </span>
+    <div
+      class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+      data-kt-menu-dismiss="true"
+    >
+      <div data-kt-menu-dismiss="true">
+        <div class="border-left-lg-1">
+          <div class="menu-inline menu-column menu-active-bg">
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(menu.DEVICE_MANAGEMENT, menu.DEVICE, menu.ROUTER)
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.ROUTER))"
+              >
+                <span class="menu-icon">
+                  <span class="svg-icon svg-icon-2x">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="router">
+                        <path
+                          class="device-icon-bold"
+                          d="M6.2088 17.1422C13.8204 12.7476 26.1797 12.7476 33.7913 17.1422C41.4029 21.5367 41.4029 28.6724 33.7913 33.0669C26.1797 37.4615 13.8204 37.4615 6.2088 33.0669C-1.40293 28.6724 -1.40293 21.5367 6.2088 17.1422Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M0.5 16.4918H39.5V25.1045H0.5V16.4918Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M6.2088 8.52948C13.8204 4.13487 26.1797 4.13487 33.7913 8.52948C41.4029 12.9239 41.4029 20.0597 33.7913 24.4541C26.1797 28.8488 13.8204 28.8488 6.2088 24.4541C-1.40293 20.0597 -1.40293 12.9239 6.2088 8.52948Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M13.8202 21.2411L15.5705 22.2517L10.5458 22.0434L10.1851 19.1425L11.9353 20.153L16.4555 17.5431L18.3404 18.6314L13.8202 21.2411ZM26.3414 11.8355L24.5912 10.8251L29.6159 11.0333L29.9766 13.9343L28.2263 12.9237L23.7062 15.5335L21.8213 14.4453L26.3414 11.8355ZM14.1004 11.3323L15.8506 10.322L10.8259 10.5302L10.4652 13.4312L12.2155 12.4206L16.7358 15.0304L18.6207 13.9422L14.1004 11.3323ZM26.9271 20.9143L25.1768 21.9249L30.2015 21.7166L30.5623 18.8157L28.812 19.8262L24.2918 17.2165L22.4069 18.3046L26.9271 20.9143Z"
+                          fill="white"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+                <span class="menu-title">
+                  {{ menu.ROUTER }}
+                </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(menu.DEVICE_MANAGEMENT, menu.DEVICE, menu.SWITCH)
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.SWITCH))"
+              >
+                <span class="menu-icon">
+                  <span class="svg-icon svg-icon-2x">
+                    <svg
+                      width="30"
+                      height="31"
+                      viewBox="0 0 40 41"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="switch">
+                        <path
+                          class="device-icon-bold"
+                          d="M0 17.2083H39.9364V24.3577H0V17.2083Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M20.9944 13.0667C20.428 12.7396 19.5699 12.7041 19.0793 12.9872L0.331058 23.8116C-0.159388 24.0947 -0.0977843 24.5902 0.46855 24.9173L18.9418 35.5827C19.5083 35.9098 20.3664 35.9453 20.8569 35.6622L39.6051 24.8378C40.0957 24.5547 40.0341 24.0592 39.4677 23.7321L20.9944 13.0667Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M20.9944 5.98317C20.428 5.65625 19.5699 5.62054 19.0793 5.90386L0.331058 16.7282C-0.159388 17.0114 -0.0977843 17.5067 0.46855 17.8338L18.9418 28.4994C19.5083 28.8264 20.3664 28.862 20.8569 28.5788L39.6051 17.7545C40.0957 17.4712 40.0341 16.9758 39.4677 16.6487L20.9944 5.98317Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M8.73749 17.9177L6.95947 18.9443L7.32597 15.9971L12.4304 15.7855L10.6524 16.8121L16.1727 19.9993L14.2578 21.1049L8.73749 17.9177ZM15.729 13.8812L13.951 14.9078L14.3175 11.9606L19.422 11.749L17.6439 12.7756L23.1643 15.9628L21.2494 17.0682L15.729 13.8812Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M31.1988 16.5648L32.9768 15.5383L32.6103 18.4854L27.5057 18.697L29.2839 17.6704L23.7635 14.4833L25.6784 13.3777L31.1988 16.5648ZM24.2071 20.6015L25.9852 19.5749L25.6188 22.5221L20.5142 22.7337L22.2923 21.7069L16.772 18.5199L18.6869 17.4143L24.2071 20.6015Z"
+                          fill="white"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+                <span class="menu-title">
+                  {{ menu.SWITCH }}
+                </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.DEVICE,
+                    menu.FIREWALL
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(convertToUrl(menu.FIREWALL))
+                "
+              >
+                <span class="menu-icon">
+                  <span class="svg-icon svg-icon-2x">
+                    <svg
+                      width="30"
+                      height="31"
+                      viewBox="0 0 40 41"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="firewall">
+                        <path
+                          class="device-icon-light"
+                          d="M16.0621 5.11613C16.0621 5.11613 18.1624 4.20613 20.2218 4.1178L20.2721 4.84863L17.9177 5.65474L16.0621 5.11613Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M15.3812 13.8189C15.3812 13.8189 14.2456 5.24864 20.1639 4.11531C20.5639 4.03865 22.002 6.21669 22.0128 8.75946C22.0128 8.75946 23.7286 9.01446 23.255 5.18975C23.255 5.18975 22.8008 -0.637168 27.5403 0.184495C27.8886 0.244773 27.4436 1.15171 27.1992 2.22699C26.965 3.25726 27.3272 4.53364 27.8975 5.30364C28.5536 6.18891 29.0655 6.86947 29.7805 7.5953C30.6705 8.49946 31.463 9.52251 32.0689 10.655C32.7477 11.9242 33.1875 13.3272 33.1552 14.6505C33.0722 18.0855 30.9536 22.675 27.75 21.7494C25.8936 21.213 23.517 17.9608 21.7645 16.9233C19.6722 15.6844 17.5175 14.8692 15.3812 13.8189Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M26.4465 0.111146C26.4465 0.111146 25.2062 0.0711462 24.2254 0.267256C23.3201 0.448367 22.5145 0.937531 22.3273 1.05781C21.9723 1.28642 22.6248 1.30336 22.6248 1.30336L25.5926 0.725588L26.4465 0.111146Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M12.6517 14.3741C12.6517 14.3741 11.5161 5.80388 17.4344 4.67055C17.8344 4.59388 19.2727 6.77193 19.2833 9.3147C19.2833 9.3147 20.9994 9.56997 20.5255 5.74499C20.5255 5.74499 20.0714 -0.0819312 24.8108 0.739732C25.1591 0.800009 24.7141 1.70695 24.4697 2.7825C24.2358 3.8125 24.5977 5.08888 25.1683 5.85888C25.8241 6.74415 26.3363 7.4247 27.051 8.15081C27.941 9.05497 28.7335 10.0777 29.3394 11.2102C30.0185 12.4794 30.458 13.8825 30.426 15.2061C30.3427 18.6408 28.2241 23.2302 25.0208 22.3046C23.1641 21.7685 20.7875 18.5163 19.035 17.4785C16.943 16.2397 14.788 15.4244 12.6517 14.3741Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M11.7406 19.2402L11.1875 18.9208V21.8716L11.7406 22.1908V19.2402Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M23.755 20.1174L6.26872 10.0217C5.87511 9.79443 5.55566 10.0361 5.55566 10.5608V14.0091L23.755 24.5163V20.1174ZM31.2072 28.8191L5.55566 14.0091V17.6619L31.2072 32.4716V28.8191Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M31.2072 32.4716L5.55566 17.6619V21.3144L31.2072 36.1243V32.4716Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M31.2072 36.1232L5.55566 21.3136V24.966L31.2072 39.776V36.1232ZM31.2072 25.1652L23.7559 20.8633V24.5158L31.2072 28.818V25.1652Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M9.13867 8.93918C8.71062 8.69196 8.06173 8.66529 7.6909 8.87918L5.89147 9.91807C5.40147 10.2011 5.46286 10.6964 6.02897 11.0231L30.7105 25.273L34.0702 23.3336L9.13867 8.93918Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M12.469 14.3466L11.7845 13.9514V17.6041L12.469 17.9994V14.3466ZM8.65872 16.1961L7.974 15.8008V19.4536L8.65872 19.8488V16.1961ZM14.6554 19.6583L13.9706 19.263V22.9158L14.6554 23.311V19.6583ZM10.5293 20.9288L9.84455 20.5335V24.1863L10.5293 24.5816V20.9288ZM16.6631 24.4702L15.9787 24.0749V27.7277L16.6631 28.123V24.4702ZM12.469 25.306L11.7845 24.9107V28.5635L12.469 28.9588V25.306ZM18.4534 28.761L17.769 28.3657V32.0185L18.4534 32.4138V28.761ZM25.8692 33.0424L25.1845 32.6471V36.2999L25.8692 36.6951V33.0424ZM31.4492 36.264L30.7645 35.8688V39.5215L31.4492 39.9168V36.264ZM23.3848 28.351L22.7 27.9557V31.6082L23.3848 32.0035V28.351ZM28.9789 31.5807L28.2945 31.1854V34.8382L28.9789 35.2335V31.5807ZM21.1464 23.406L20.4617 23.0108V26.6632L21.1464 27.0585V23.406ZM27.1431 26.868L26.4584 26.4727V30.1254L27.1431 30.5207V26.868ZM31.4492 29.3543L30.7645 28.9591V32.6115L31.4492 33.0068V29.3543Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M31.4492 33.0068L30.7644 32.6116V36.2643L31.4492 36.6596V33.0068ZM31.4492 28.9599L5.55566 14.0103V14.7991L31.4492 29.7488V28.9599ZM31.4492 25.3049L5.59094 10.3756C5.5715 10.3644 5.55566 10.3764 5.55566 10.4022V11.1442L31.4492 26.0938V25.3049Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M31.4492 32.6124L5.55566 17.6627V18.4519L31.4492 33.4013V32.6124ZM31.4492 36.2662L5.55566 21.3166V22.1055L31.4492 37.0551V36.2662ZM25.1225 21.6521L24.4378 21.2569V24.9096L25.1225 25.3049V21.6521ZM31.4492 25.5293L30.7644 25.1341V28.5624L31.4492 28.9577V25.5293ZM14.7998 12.2105L11.7845 13.9513L12.469 14.3466L15.4842 12.6058L14.7998 12.2105Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M34.2224 23.5113L31.4491 25.1124V39.8754L34.2224 38.2743V23.5113Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M34.2223 34.6652L31.449 36.2663V37.0552L34.2223 35.4541V34.6652ZM34.2223 31.0105L31.449 32.6116V33.4005L34.2223 31.7994V31.0105ZM34.2223 27.3566L31.449 28.9577V29.7466L34.2223 28.1455V27.3566ZM33.782 23.1672L30.7643 24.9097L31.449 25.3049L34.0793 23.7863C34.2932 23.6627 34.2662 23.4469 34.0193 23.3041L33.782 23.1672Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_641_32">
+                          <rect
+                            width="30"
+                            height="31"
+                            fill="white"
+                            transform="translate(0 0.104858)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </span>
+                </span>
+                <span class="menu-title">
+                  {{ menu.FIREWALL }}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.DEVICE_MANAGEMENT, menu.ENDPOINT))"
+    class="menu-item menu-lg-down-accordion me-lg-1"
+    data-kt-menu-trigger="click"
+    data-kt-menu-placement="bottom-start"
+  >
+    <span
+      class="menu-link py-3"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.ENDPOINT))"
+    >
+      <span class="menu-title"> {{ menu.ENDPOINT }} </span>
+    </span>
+    <div
+      class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+      data-kt-menu-dismiss="true"
+    >
+      <div data-kt-menu-dismiss="true">
+        <div class="border-left-lg-1">
+          <div class="menu-inline menu-column menu-active-bg">
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.ENDPOINT,
+                    menu.SERVER
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.SERVER))"
+              >
+                <span class="menu-icon">
+                  <span class="svg-icon svg-icon-2x">
+                    <svg
+                      width="30"
+                      height="31"
+                      viewBox="0 0 40 41"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="server-device" clip-path="url(#clip0_654_163)">
+                        <path
+                          class="device-icon-bold"
+                          d="M18.3427 22.9146C17.9139 22.6671 17.2642 22.6402 16.8927 22.8546L4.77918 29.8485C4.40775 30.0628 4.45439 30.438 4.88315 30.6855L21.626 40.3521C22.0549 40.5996 22.7047 40.6265 23.0761 40.4122L35.1897 33.4184C35.5611 33.204 35.5145 32.8289 35.0855 32.5812L18.3427 22.9146Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M17.7071 35.1786C17.911 35.2964 18.0767 35.5832 18.0767 35.8188C18.0767 36.0543 17.911 36.15 17.7071 36.0322C17.5031 35.9144 17.3375 35.6276 17.3375 35.392C17.3375 35.1565 17.5031 35.0608 17.7071 35.1786ZM19.1878 36.0335C19.3917 36.1513 19.5574 36.4381 19.5574 36.6737C19.5574 36.9093 19.3917 37.0048 19.1878 36.887C18.9838 36.7694 18.8183 36.4824 18.8183 36.247C18.8183 36.0114 18.9838 35.9157 19.1878 36.0335ZM20.6684 36.8885C20.8725 37.0062 21.038 37.2931 21.038 37.5286C21.038 37.764 20.8725 37.8597 20.6684 37.7419C20.4645 37.6241 20.2988 37.3373 20.2988 37.1017C20.2988 36.8663 20.4645 36.7707 20.6684 36.8885Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M4.5314 25.2612C4.5314 25.2612 4.49379 30.2806 4.53656 30.2738C4.57914 30.2671 6.60605 31.3184 6.60605 31.3184L8.67333 29.2378L8.80107 27.7442L4.5314 25.2612ZM35.4403 28.0769V33.0533L32.3065 34.876L30.6914 31.0376L35.4403 28.0769Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.3427 17.9368C17.9139 17.6892 17.2642 17.6623 16.8927 17.8767L4.77918 24.8704C4.40775 25.085 4.45439 25.4601 4.88315 25.7077L21.626 35.3742C22.0549 35.6218 22.7047 35.6487 23.0761 35.4343L35.1897 28.4406C35.5611 28.226 35.5145 27.8509 35.0855 27.6033L18.3427 17.9368Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M19.9783 32.9663C19.9783 32.9663 21.8821 34.3276 23.0279 33.6946C24.1737 33.0614 34.2787 27.1375 34.2787 27.1375L34.2695 25.408L19.9783 30.9016V32.9663Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M7.78027 23.859V25.9237L19.9843 32.9698V30.9051L7.78027 23.859Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M14.5834 33.802C14.5834 33.5664 14.44 33.2923 14.2634 33.1904L6.1469 28.5045C5.97031 28.4024 5.8269 28.5108 5.8269 28.7463C5.8269 28.9819 5.97031 29.256 6.1469 29.358L14.2634 34.0439C14.44 34.146 14.5834 34.0376 14.5834 33.802Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M18.3427 22.9146C17.9139 22.6671 17.2642 22.6402 16.8927 22.8546L4.77918 29.8485C4.40775 30.0628 4.45439 30.438 4.88315 30.6855L21.626 40.3521C22.0549 40.5996 22.7047 40.6265 23.0761 40.4122L35.1897 33.4184C35.5611 33.204 35.5145 32.8289 35.0855 32.5812L18.3427 22.9146Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M17.7071 35.1786C17.911 35.2964 18.0767 35.5832 18.0767 35.8188C18.0767 36.0543 17.911 36.15 17.7071 36.0322C17.5031 35.9144 17.3375 35.6276 17.3375 35.392C17.3375 35.1565 17.5031 35.0608 17.7071 35.1786ZM19.1878 36.0335C19.3917 36.1513 19.5574 36.4381 19.5574 36.6737C19.5574 36.9093 19.3917 37.0048 19.1878 36.887C18.9838 36.7694 18.8183 36.4824 18.8183 36.247C18.8183 36.0114 18.9838 35.9157 19.1878 36.0335ZM20.6684 36.8885C20.8725 37.0062 21.038 37.2931 21.038 37.5286C21.038 37.764 20.8725 37.8597 20.6684 37.7419C20.4645 37.6241 20.2988 37.3373 20.2988 37.1017C20.2988 36.8663 20.4645 36.7707 20.6684 36.8885Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M4.5314 25.2612C4.5314 25.2612 4.49379 30.2806 4.53656 30.2738C4.57914 30.2671 6.60605 31.3184 6.60605 31.3184L8.67333 29.2378L8.80107 27.7442L4.5314 25.2612ZM35.4403 28.0769V33.0533L32.3065 34.876L30.6914 31.0376L35.4403 28.0769Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.3427 17.9368C17.9139 17.6892 17.2642 17.6623 16.8927 17.8767L4.77918 24.8704C4.40775 25.085 4.45439 25.4601 4.88315 25.7077L21.626 35.3742C22.0549 35.6218 22.7047 35.6487 23.0761 35.4343L35.1897 28.4406C35.5611 28.226 35.5145 27.8509 35.0855 27.6033L18.3427 17.9368Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M19.9783 32.9663C19.9783 32.9663 21.8821 34.3276 23.0279 33.6946C24.1737 33.0614 34.2787 27.1375 34.2787 27.1375L34.2695 25.408L19.9783 30.9016V32.9663Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M7.78027 23.859V25.9237L19.9843 32.9698V30.9051L7.78027 23.859Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M14.5834 33.802C14.5834 33.5664 14.44 33.2923 14.2634 33.1904L6.1469 28.5045C5.97031 28.4024 5.8269 28.5108 5.8269 28.7463C5.8269 28.9819 5.97031 29.256 6.1469 29.358L14.2634 34.0439C14.44 34.146 14.5834 34.0376 14.5834 33.802Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M18.3427 14.4157C17.9139 14.1679 17.2642 14.141 16.8927 14.3554L4.77918 21.3493C4.40775 21.5637 4.45439 21.9388 4.88315 22.1864L21.626 31.8529C22.0549 32.1005 22.7047 32.1274 23.0761 31.913L35.1897 24.9193C35.5611 24.7049 35.5145 24.3298 35.0855 24.082L18.3427 14.4157Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M17.7071 26.6794C17.911 26.7972 18.0767 27.0841 18.0767 27.3196C18.0767 27.5552 17.911 27.6509 17.7071 27.5331C17.5031 27.4153 17.3375 27.1285 17.3375 26.8929C17.3375 26.6573 17.5031 26.5617 17.7071 26.6794ZM19.1878 27.5344C19.3917 27.6522 19.5574 27.939 19.5574 28.1746C19.5574 28.4101 19.3917 28.5056 19.1878 28.3878C18.9838 28.2702 18.8183 27.9832 18.8183 27.7478C18.8183 27.5123 18.9838 27.4166 19.1878 27.5344ZM20.6684 28.3893C20.8725 28.5071 21.038 28.7939 21.038 29.0295C21.038 29.2649 20.8725 29.3605 20.6684 29.2428C20.4645 29.125 20.2988 28.8382 20.2988 28.6026C20.2988 28.3672 20.4645 28.2715 20.6684 28.3893Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M4.5314 16.762C4.5314 16.762 4.49379 21.7814 4.53656 21.7746C4.57914 21.7679 6.60605 22.8192 6.60605 22.8192L8.67333 20.7386L8.80107 19.245L4.5314 16.762ZM35.4403 19.5779V24.5541L32.3065 26.3768L30.6914 22.5384L35.4403 19.5779Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.3427 9.43759C17.9139 9.19004 17.2642 9.16312 16.8927 9.3775L4.77918 16.3712C4.40775 16.5858 4.45439 16.9609 4.88315 17.2085L21.626 26.875C22.0549 27.1226 22.7047 27.1495 23.0761 26.9351L35.1897 19.9414C35.5611 19.7268 35.5145 19.3517 35.0855 19.1041L18.3427 9.43759ZM14.5834 25.3028C14.5834 25.0673 14.44 24.7932 14.2634 24.6912L6.14693 20.0053C5.97034 19.9032 5.82693 20.0116 5.82693 20.2472C5.82693 20.4828 5.97034 20.7569 6.14693 20.8588L14.2634 25.5447C14.44 25.6468 14.5834 25.5384 14.5834 25.3028Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M19.9783 24.4796C19.9783 24.4796 21.8821 25.8411 23.0279 25.2079C24.1737 24.5749 34.2787 18.6508 34.2787 18.6508L34.2695 16.9213L19.9783 22.4151V24.4796Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-semibold"
+                          d="M7.78027 15.3726V17.4373L19.9843 24.4833V22.4186L7.78027 15.3726Z"
+                          fill="#9698A3"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M18.3427 5.91652C17.9139 5.66878 17.2642 5.64187 16.8927 5.85624L4.77918 12.8502C4.40775 13.0645 4.45439 13.4397 4.88315 13.6872L21.626 23.3538C22.0549 23.6013 22.7047 23.6284 23.0761 23.4138L35.1897 16.4201C35.5611 16.2057 35.5145 15.8306 35.0855 15.5829L18.3427 5.91652Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M17.7071 18.1803C17.911 18.2981 18.0767 18.5849 18.0767 18.8205C18.0767 19.0561 17.911 19.1517 17.7071 19.0339C17.5031 18.9162 17.3375 18.6293 17.3375 18.3938C17.3375 18.1582 17.5031 18.0625 17.7071 18.1803ZM19.1878 19.0352C19.3917 19.153 19.5574 19.4398 19.5574 19.6754C19.5574 19.911 19.3917 20.0065 19.1878 19.8887C18.9838 19.7711 18.8183 19.4841 18.8183 19.2487C18.8183 19.0131 18.9838 18.9174 19.1878 19.0352ZM20.6684 19.8902C20.8725 20.0079 21.038 20.2948 21.038 20.5303C21.038 20.7657 20.8725 20.8614 20.6684 20.7436C20.4645 20.6258 20.2988 20.339 20.2988 20.1034C20.2988 19.868 20.4645 19.7724 20.6684 19.8902Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M4.5314 8.26288C4.5314 8.26288 4.49379 13.2822 4.53656 13.2754C4.57914 13.2688 6.60605 14.32 6.60605 14.32L8.67333 12.2395L8.80107 10.7458L4.5314 8.26288ZM35.4403 11.0787V16.055L32.3065 17.8776L30.6914 14.0393L35.4403 11.0787Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.3427 0.938449C17.9139 0.690891 17.2642 0.663979 16.8927 0.878356L4.77918 7.87209C4.40775 8.08665 4.45439 8.46177 4.88315 8.70932L21.626 18.3759C22.0549 18.6234 22.7047 18.6503 23.0761 18.436L35.1897 11.4422C35.5611 11.2277 35.5145 10.8525 35.0855 10.605L18.3427 0.938449ZM14.5834 16.8037C14.5834 16.5681 14.44 16.294 14.2634 16.1921L6.14693 11.5062C5.97034 11.4041 5.82693 11.5126 5.82693 11.748C5.82693 11.9836 5.97034 12.2577 6.14693 12.3596L14.2634 17.0457C14.44 17.1477 14.5834 17.0393 14.5834 16.8037Z"
+                          fill="#A1A4B2"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_654_163">
+                          <rect
+                            width="40"
+                            height="40"
+                            fill="white"
+                            transform="translate(0 0.733643)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </span>
+                </span>
+                <span class="menu-title"> {{ menu.SERVER }} </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.ENDPOINT,
+                    menu.CLIENT
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.CLIENT))"
+              >
+                <span class="menu-icon">
+                  <span class="svg-icon svg-icon-2x">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="client-device">
+                        <path
+                          class="device-icon-bold"
+                          d="M39.989 14.4316C39.989 14.3026 39.9104 14.2432 39.8137 14.2991L31.2236 19.2585V37.3904C31.2236 37.6485 31.3807 37.7672 31.5742 37.6555L39.8137 32.8985C39.9104 32.8426 39.989 32.6925 39.989 32.5635V14.4316Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M31.2755 19.2285L9.05067 6.39698C8.89546 6.30738 8.76941 6.40262 8.76941 6.60962V24.7966C8.76941 24.9001 8.8324 25.0205 8.91004 25.0653L30.5725 37.5721C30.9605 37.7961 31.2755 37.558 31.2755 37.0406V19.2285Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.1188 1.57108C17.8285 1.40349 17.3887 1.38526 17.1374 1.53044L8.93913 6.26371C8.68771 6.40882 8.71928 6.66271 9.00955 6.8303L30.6196 19.3069C30.9099 19.4745 31.3497 19.4927 31.601 19.3476L39.7993 14.6143C40.0507 14.4691 40.0191 14.2152 39.7289 14.0476L18.1188 1.57108Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M18.1188 19.8636C17.8285 19.696 17.3887 19.6777 17.1374 19.8229L8.93913 24.5562C8.68771 24.7013 8.71928 24.9552 9.00955 25.1228L30.6196 37.5993C30.9099 37.7669 31.3497 37.7852 31.601 37.6401L39.7993 32.9068C40.0507 32.7616 40.0191 32.5077 39.7289 32.3401L18.1188 19.8636Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M1.07859 10.2471C0.996824 10.1999 0.872971 10.1948 0.802208 10.2357L0.142373 10.6166C0.07161 10.6575 0.0804811 10.729 0.162247 10.7762L17.93 21.0344C18.0118 21.0816 18.1356 21.0867 18.2065 21.0459L18.8662 20.665C18.9371 20.6241 18.9281 20.5525 18.8464 20.5054L1.07859 10.2471Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M18.9045 20.619C18.9045 20.5866 18.8849 20.5717 18.8606 20.5857L18.0692 21.0426C18.0449 21.0566 18.0253 21.0943 18.0253 21.1266V36.6869C18.0253 36.7192 18.0449 36.7342 18.0692 36.7201L18.8606 36.2632C18.8849 36.2492 18.9045 36.2116 18.9045 36.1792V20.619Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M18.115 21.3776C18.115 21.1116 17.9531 20.8022 17.7537 20.6871L0.361379 10.6456C0.161881 10.5305 0 10.6529 0 10.9188V26.015C0 26.2809 0.161881 26.5903 0.361379 26.7054L17.7537 36.7469C17.9531 36.8621 18.115 36.7396 18.115 36.4737V21.3776Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M16.963 21.9047C16.963 21.6808 16.8267 21.4203 16.6588 21.3233L1.31858 12.4666C1.15065 12.3696 1.01428 12.4727 1.01428 12.6966V25.4085C1.01428 25.6324 1.15065 25.8929 1.31858 25.9899L16.6588 34.8465C16.8267 34.9435 16.963 34.8404 16.963 34.6165V21.9047Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-bold"
+                          d="M5.02667 30.5485C4.7395 30.3827 4.3044 30.3647 4.05573 30.5083L0.4506 32.5897C0.201863 32.7333 0.233153 32.9845 0.520331 33.1503L9.62242 38.4054C9.90959 38.5712 10.3447 38.5892 10.5934 38.4457L14.1985 36.3642C14.4472 36.2206 14.416 35.9694 14.1288 35.8036L5.02667 30.5485Z"
+                          fill="#848694"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M8.98875 31.6865L8.13574 31.194V32.8804L8.98875 33.3729V31.6865Z"
+                          fill="white"
+                        />
+                        <path
+                          class="device-icon-light"
+                          d="M39.055 19.5781L33.1211 23.0041V25.0866L39.055 21.6606V19.5781ZM39.055 23.3623L33.1211 26.7883V28.8708L39.055 25.4449V23.3623Z"
+                          fill="#A1A4B2"
+                        />
+                        <path
+                          class="device-icon-white"
+                          d="M36.6749 28.8526C36.9987 28.6656 37.2615 28.8175 37.2615 29.1914C37.2615 29.5653 36.9987 30.0207 36.6749 30.2076C36.351 30.3946 36.0881 30.2428 36.0881 29.8688C36.0881 29.4949 36.351 29.0396 36.6749 28.8526Z"
+                          fill="white"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+                <span class="menu-title">{{ menu.CLIENT }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="
+      hasMenuAllow(
+        convertToDash(menu.DEVICE_MANAGEMENT, menu.COMMAND_AUTOMATION)
+      )
+    "
+    class="menu-item menu-lg-down-accordion me-lg-1"
+    data-kt-menu-trigger="click"
+    data-kt-menu-placement="bottom-start"
+  >
+    <!--    <a-->
+    <!--      class="menu-link py-3"-->
+    <!--      routerLinkActive="active menu-here"-->
+    <!--      [routerLink]="-->
+    <!--        convertToUrl(menu.DEVICE_MANAGEMENT, menu.COMMAND_AUTOMATION)-->
+    <!--      "-->
+    <!--      [queryParams]="{ id: (unitId$ | async) }"-->
+    <!--      [ngClass]="-->
+    <!--        calculateMenuItemCssClass(convertToUrl(menu.COMMAND_AUTOMATION))-->
+    <!--      "-->
+    <!--    >-->
+    <!--      &lt;!&ndash;      <span class="menu-title">{{ menu.COMMAND_AUTOMATION }}</span>&ndash;&gt;-->
+    <!--      <span class="menu-title">Hỗ trợ tự động hóa chỉ huy</span>-->
+    <!--    </a>-->
+    <span
+      class="menu-link py-3"
+      [ngClass]="
+        calculateMenuItemCssClass(convertToUrl(menu.COMMAND_AUTOMATION))
+      "
+    >
+      <span class="menu-title"> Hỗ trợ tự động hóa chỉ huy </span>
+    </span>
+    <div
+      class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+      data-kt-menu-dismiss="true"
+    >
+      <div data-kt-menu-dismiss="true">
+        <div class="border-left-lg-1">
+          <div class="menu-inline menu-column menu-active-bg">
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.COMMAND_AUTOMATION,
+                    menu.DYNAMIC_DEFINITION
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.DYNAMIC_DEFINITION)
+                  )
+                "
+              >
+                <span class="menu-icon">
+                  <!--                  icon-->
+                </span>
+                <span class="menu-title"> {{ menu.DYNAMIC_DEFINITION }} </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.COMMAND_AUTOMATION,
+                    menu.VIOLATED_ENDPOINTS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.VIOLATED_ENDPOINTS)
+                  )
+                "
+              >
+                <span class="menu-icon">
+                  <!--                  icon-->
+                </span>
+                <span class="menu-title"> {{ menu.VIOLATED_ENDPOINTS }} </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.DEVICE_MANAGEMENT,
+                    menu.COMMAND_AUTOMATION,
+                    menu.ACTION_LOGS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(convertToUrl(menu.ACTION_LOGS))
+                "
+              >
+                <span class="menu-icon">
+                  <!--                  icon-->
+                </span>
+                <span class="menu-title"> {{ menu.ACTION_LOGS }} </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.DEVICE_MANAGEMENT))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.DEVICE_MANAGEMENT, menu.REFERENCE_DEVICE)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.REFERENCE_DEVICE))"
+    >
+      <span class="menu-title">{{ menu.REFERENCE_DEVICE }}</span>
+    </a>
+  </div>
+</ng-container>
+
+<!-- tool header menu -->
+<ng-container
+  *ngIf="currentMenu.includes(convertToUnsignedAndDash(menu.TOOLS))"
+>
+  <div
+    *ngIf="
+      hasMenuAllow(convertToDash(menu.TOOLS, menu.SYSTEM_MONITORING_TOOLS))
+    "
+    class="menu-item menu-lg-down-accordion me-lg-1"
+    data-kt-menu-trigger="click"
+    data-kt-menu-placement="bottom-start"
+  >
+    <span
+      class="menu-link py-3"
+      [ngClass]="
+        calculateMenuItemCssClass(convertToUrl(menu.SYSTEM_MONITORING_TOOLS))
+      "
+    >
+      <span class="menu-title"> {{ menu.SYSTEM_MONITORING_TOOLS }} </span>
+    </span>
+    <div
+      class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px"
+      data-kt-menu-dismiss="true"
+    >
+      <div data-kt-menu-dismiss="true">
+        <div class="border-left-lg-1">
+          <div class="menu-inline menu-column menu-active-bg">
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.TOOLS,
+                    menu.SYSTEM_MONITORING_TOOLS,
+                    menu.SYSMONITORING_MANAGEMENT_TOOLS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.SYSMONITORING_MANAGEMENT_TOOLS)
+                  )
+                "
+              >
+                <span class="menu-title">
+                  {{ menu.SYSMONITORING_MANAGEMENT_TOOLS }}
+                </span>
+              </a>
+            </div>
+            <div class="menu-item">
+              <a
+                class="menu-link cursor-pointer"
+                routerLinkActive="active"
+                [routerLink]="
+                  convertToUrl(
+                    menu.TOOLS,
+                    menu.SYSTEM_MONITORING_TOOLS,
+                    menu.SYSMONITORING_STATISTIC_TOOLS
+                  )
+                "
+                [queryParams]="{ id: (unitId$ | async) }"
+                [ngClass]="
+                  calculateMenuItemCssClass(
+                    convertToUrl(menu.SYSMONITORING_STATISTIC_TOOLS)
+                  )
+                "
+              >
+                <span class="menu-title">
+                  {{ menu.SYSMONITORING_STATISTIC_TOOLS }}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.TOOLS, menu.TA21))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.TOOLS, menu.TA21)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.TA21))"
+    >
+      <span class="menu-title">{{ menu.TA21 }}</span>
+    </a>
+  </div>
+  <div
+    *ngIf="hasMenuAllow(convertToDash(menu.TOOLS, menu.WAFS))"
+    class="menu-item me-lg-1"
+  >
+    <a
+      class="menu-link py-3"
+      routerLinkActive="active menu-here"
+      [routerLink]="convertToUrl(menu.TOOLS, menu.WAFS)"
+      [queryParams]="{ id: (unitId$ | async) }"
+      [ngClass]="calculateMenuItemCssClass(convertToUrl(menu.WAFS))"
+    >
+      <span class="menu-title">{{ menu.WAFS }}</span>
+    </a>
+  </div>
+</ng-container>

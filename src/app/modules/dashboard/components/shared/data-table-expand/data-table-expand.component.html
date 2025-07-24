@@ -1,0 +1,64 @@
+<table class="table">
+  <thead>
+    <tr>
+      <!-- Display column headers -->
+      <th *ngFor="let column of columns">{{ column.header }}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let row of paginatedData; let i = index">
+      <tr>
+        <!-- Display row values -->
+        <td *ngFor="let column of columns">{{ formatCell(column, row) }}</td>
+        <td class="d-flex justify-content-center">
+          <button class="expand-btn rounded-btn" (click)="toggleExpand(i)">
+            <i
+              class="bi"
+              [ngClass]="
+                expandedRows[i] ? 'bi-chevron-down rotate' : 'bi-chevron-right'
+              "
+            ></i>
+          </button>
+        </td>
+      </tr>
+      <tr [class.expanded]="expandedRows[i]" *ngIf="expandedRows[i]">
+        <td [attr.colspan]="columns.length + 1">
+          <div class="expanded-content expanded">
+            <ng-container
+              *ngTemplateOutlet="detailTemplate; context: { $implicit: row }"
+            ></ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<!-- Pagination controls -->
+<div *ngIf="isPaginationNeeded()" class="pagination-controls mt-3">
+  <button
+    class="btn btn-primary"
+    (click)="prevPage()"
+    [disabled]="currentPage === 1"
+  >
+    Trước
+  </button>
+
+  <!-- Display pagination pages with a limit of 3 -->
+  <button
+    *ngFor="let page of paginationPages"
+    [class.active]="currentPage === page"
+    (click)="changePage(page)"
+  >
+    {{ page }}
+  </button>
+
+  <button
+    class="btn btn-primary"
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+  >
+    Sau
+  </button>
+</div>

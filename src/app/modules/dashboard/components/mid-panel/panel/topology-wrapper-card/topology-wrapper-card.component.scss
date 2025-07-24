@@ -1,0 +1,60 @@
+h2 {
+  font-size: 2.5em;
+  padding-top: 0.5em;
+}
+
+.btn-group > .btn {
+  flex: none;
+  font-size: 1.5em;
+  border-radius: 0.8em;
+  background: var(--colorTitle);
+  color: white;
+  padding: 0.2em;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  align-items: center;
+}
+
+.btn-group > .btn-group {
+  width: fit-content;
+  .network-group {
+    width: fit-content;
+  }
+}
+
+div {
+  flex: none !important;
+}
+
+.network-group {
+  display: flex !important;
+}
+
+.form-select-box {
+  background-size: 0.5em 0.5em !important;
+  background: var(--colorHighlight);
+  border: 0.1em solid var(--colorBorderGroup);
+  padding: 0.2em 1em;
+  margin-left: 1em;
+  font-size: 1.5rem;
+  border-radius: 1em;
+  color: var(--colorText);
+  line-height: 1.5em;
+  margin-right: 1em;
+}
+
+.modal-header {
+  .form-select-box {
+    font-size: 2.5em;
+  }
+
+  .close {
+    font-size: 3em;
+    border: hidden;
+    background-color: transparent;
+  }
+}

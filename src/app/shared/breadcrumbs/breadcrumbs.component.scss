@@ -1,0 +1,64 @@
+.breadcrumb {
+  background: none;
+  margin: 0 !important;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  max-width: 70vw;
+  .breadcrumb-item:last-child {
+    margin-right: 0.5rem; /* Add spacing between breadcrumb items */
+    overflow: hidden; /* Hide overflowed content within each breadcrumb item */
+    text-overflow: ellipsis; /* Show ellipsis when text is too long */
+  }
+
+  .breadcrumb-item a:last-child {
+    text-decoration: none; /* Remove underline from links */
+    white-space: nowrap; /* Prevent text inside the link from wrapping */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Show ellipsis when text overflows */
+    display: inline-block; /* Ensure the ellipsis works correctly */
+    max-width: 100%; /* Ensure the item does not exceed its container */
+  }
+  li {
+    color: var(--colorTitle);
+    // line-height: 120% !important;
+    a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 5rem;
+    }
+  }
+  li:first-child {
+    a {
+      font-size: 37px;
+      color: var(--colorTitle);
+    }
+  }
+
+  li:not(:first-child) {
+    a {
+      font-size: 3em;
+    }
+  }
+}
+
+.breadcrumb-item a {
+  cursor: pointer;
+  text-decoration: none;
+  &:nth-child(1) {
+    font-size: 37px;
+    font-weight: 700;
+  }
+}
+
+#ol-breadcrumb .breadcrumb-item.active {
+  font-weight: 700;
+  color: rgb(2, 2, 2) !important;
+}
+
+#ol-breadcrumb .breadcrumb-item.active a {
+  pointer-events: none;
+}

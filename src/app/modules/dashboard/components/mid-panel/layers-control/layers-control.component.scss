@@ -1,0 +1,86 @@
+.layers-control {
+  position: absolute;
+  bottom: 0.5em;
+  left: 0.5em;
+  /* Background color with transparency */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Background image */
+  background-image: url("/assets/images/layers_switcher.jpeg");
+  /* Background properties for image positioning and repetition */
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* Optionally, set background-size if needed */
+  background-size: cover; /* or contain, based on your needs */
+  border: 5px solid #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 7;
+  max-width: 500px; /* Reduced width */
+  font-size: 16px; /* Increased font size */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.layers-toggle {
+  cursor: pointer;
+  padding: 5px;
+  font-weight: bold;
+  color: var(--cardBorderColor);
+  border-radius: 6px;
+  text-align: center;
+  user-select: none; /* Prevent text selection */
+  font-size: 3rem; /* Larger font size */
+}
+
+#icon-map.bi {
+  font-size: 2rem !important;
+  color: #f1f1f1;
+}
+
+.layers-list {
+  display: none;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 5px;
+  border-radius: 8px;
+  border-top: 1px solid #eee;
+}
+
+.layers-control:hover .layers-list {
+  display: block;
+}
+
+input[type="checkbox"] {
+  width: 20px; /* Larger checkbox */
+  height: 20px;
+  border-radius: 50%; /* Rounded corners */
+  background-color: #045e2b; /* Custom color */
+  margin-right: 8px;
+}
+label input[type="checkbox"]:checked {
+  background-color: #045e2b;
+}
+label {
+  display: block;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 2.5rem;
+  color: var(--colorText);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background-color: var(--cardBorderColor);
+}
+
+.layer-group {
+  margin-top: 15px;
+  padding-left: 10px;
+  border-left: 2px solid var(--colorBorderGroup); /* Blue line to indicate grouping */
+}
+
+.layer-group h5 {
+  margin-bottom: 10px;
+  font-size: 3rem;
+  color: var(--colorTitle);
+}

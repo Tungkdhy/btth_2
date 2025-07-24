@@ -1,0 +1,11 @@
+table {
+  th {
+    padding: 0.5rem 1.5rem;
+    &:nth-child(2){
+      text-align: left;
+    }
+    &:nth-child(6){
+      text-align: left;
+    }
+  }
+}

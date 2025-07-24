@@ -1,0 +1,17 @@
+<div class="overview-container">
+  <div class="detail-map-body bg-group">
+    <ng-container *ngIf="place$ | async as place">
+      <div class="detail-map-item">
+        <strong>Địa danh</strong>
+        <div class="form-control-plaintext">{{ place }}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="info$ | async as info">
+      <div *ngFor="let item of info" class="detail-map-item">
+        <strong>{{ item.name }}</strong>
+        <div class="form-control-plaintext">{{ item.value }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

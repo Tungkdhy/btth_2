@@ -1,0 +1,202 @@
+<div class="detail-panel container-fluid">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Điều hành tác chiến ></span>
+      <span class="choise-item"> Chi tiết nhiệm vụ</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="operational-command row">
+    <div class="half-part">
+      <div id="details" aria-labelledby="details-tab">
+        <div class="bg-group">
+          <h2>Tổng quan</h2>
+          <div class="">
+            <label class="">Tên nhiệm vụ:</label>
+            <div class="">
+              <textarea
+                type="text"
+                class="form-control"
+                [value]="shiftOperation?.NhiemVu"
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <div class="content-oc">
+            <label class="col-form-label">Nội dung:</label>
+            <div class="">
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Nhập nội dung"
+                [value]="shiftOperation?.NoiDung"
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <div class="content-origin">
+            <div class="">
+              <label class="col-form-label">Thời hạn xử lý:</label>
+              <textarea
+                class="form-control"
+                [value]="shiftOperation?.ThoiHanXuLy"
+                disabled
+              ></textarea>
+            </div>
+            <div class="">
+              <label class="col-form-label">Độ khẩn:</label>
+              <textarea
+                class="form-control"
+                [value]="shiftOperation?.DoKhan"
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <div class="content-origin">
+            <div>
+              <label class="col-form-label">Nguồn tin:</label>
+              <textarea
+                type="text"
+                class="form-control"
+                [value]="shiftOperation?.NguonTin"
+                disabled
+                placeholder="Nhập nguồn tin"
+              ></textarea>
+            </div>
+          </div>
+          <div class="content-origin">
+            <div>
+              <label class="col-form-label">Người giao:</label>
+              <textarea
+                type="text"
+                class="form-control"
+                placeholder="Nhập tên người giao"
+                [value]="shiftOperation?.NguoiGiao"
+                disabled
+              ></textarea>
+            </div>
+          </div>
+          <div class="attachment">
+            <label class="col-sm-3 col-form-label">Tệp đính kèm:</label>
+            <div class="">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let file of shiftOperation?.linkfiles"
+                >
+                  <a [href]="file.Linkfile" target="_blank">{{
+                    file.TenFile
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="half-part">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="diagram-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#diagram"
+            type="button"
+            role="tab"
+            aria-controls="diagram"
+            aria-selected="true"
+          >
+            Luồng xử lý
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="detail-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#detail"
+            type="button"
+            role="tab"
+            aria-controls="detail"
+            aria-selected="false"
+          >
+            Nhật ký báo cáo
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content bg-group  height-group" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="diagram"
+          role="tabpanel"
+          aria-labelledby="diagram-tab"
+        >
+          <div class="">
+            <div #container class="jsplumb-container">
+              <div
+                *ngFor="let task of tasks; let i = index"
+                class="task-rectangle"
+                id="task-{{ task.id }}"
+                [ngClass]="{
+                  hoanthanh: task.TrangThai === '01',
+                  dangthuchien: task.TrangThai === '02',
+                  chuathuchien: task.TrangThai === '03'
+                }"
+              >
+                <div>
+                  <b style="font-size: 18px">{{ task.TenDonVi }}</b>
+                </div>
+                <div>{{ task.DVGiao }}</div>
+                <div>{{ task.Gui }}</div>
+                <div>{{ task.Nhan }}</div>
+                <div>{{ task.HT }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade "
+          id="detail"
+          role="tabpanel"
+          aria-labelledby="detail-tab"
+        >
+          <table class="table table-bordered table-3">
+            <thead>
+              <tr>
+                <th>Đơn vị</th>
+                <th>Tình trạng xử lý</th>
+                <th>Thời gian</th>
+                <th>Lời nhắn</th>
+                <th>Tệp đính kèm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let group of listNhatKyNhiemVu">
+                <tr *ngFor="let item of group?.items">
+                  <td>{{ group?.tendonvi }}</td>
+                  <td>{{ item?.TinhTrangXuLy }}</td>
+                  <td>{{ getLastActive(item?.ThoiGian) }}</td>
+                  <td>{{ item?.LoiNhan }}</td>
+                  <td>
+                    <ul
+                      *ngIf="item?.TepDinhKem && item?.TepDinhKem?.length > 0"
+                    >
+                      <li *ngFor="let tep of item?.TepDinhKem">
+                        <a [href]="tep?.linkfile" target="_blank">{{
+                          tep?.tenfile
+                        }}</a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

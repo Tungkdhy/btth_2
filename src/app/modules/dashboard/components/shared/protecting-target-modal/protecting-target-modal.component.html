@@ -1,0 +1,75 @@
+<div class="modal-content">
+  <div class="modal-full">
+    <div class="protect-infor-wrapper">
+      <div class="infor-left">
+        <div class="img-target">
+          <img
+            src="data:image/png;base64,{{
+              inforLeftData[0]?.image?.image || null
+            }}"
+            alt="Lỗi hiển thị"
+            class="img-data"
+          />
+        </div>
+        <div class="detail-infor">
+          <div class="item">
+            <div class="title">Họ tên</div>
+            <div>{{ inforLeftData[0]?.name || null }}</div>
+          </div>
+          <div class="item">
+            <div class="title">Năm sinh</div>
+            <div>{{ inforLeftData[0]?.namsinh || null }}</div>
+          </div>
+          <div *ngIf="inforLeftData[0]?.capbac" class="item">
+            <div class="title">Cấp bậc</div>
+            <div>{{ inforLeftData[0]?.capbac || null }}</div>
+          </div>
+          <div class="item">
+            <div class="title">Chức vụ</div>
+            <div>{{ inforLeftData[0]?.chucvu || null }}</div>
+          </div>
+          <div class="item">
+            <div class="title">Quê quán</div>
+            <div>{{ inforLeftData[0]?.quequan || null }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="infor-right" style="overflow-y: auto !important;">
+        <ejs-tab id="tab-panel" class="tab-wrapper">
+          <e-tabitems class="tab-items">
+            <e-tabitem class="tab-item">
+              <ng-template #headerText>Thông tin liên quan</ng-template>
+              <ng-template #content class="content">
+                <app-protecting-target-information
+                  [startDate]="selectedStartDate"
+                  [endDate]="selectedEndDate"
+                  [id]="id"
+                ></app-protecting-target-information>
+              </ng-template>
+            </e-tabitem>
+            <e-tabitem class="tab-item">
+              <ng-template #headerText>Bài viết tiêu cực</ng-template>
+              <ng-template #content class="content">
+                <app-protecting-target-negative-management
+                  [startDate]="selectedStartDate"
+                  [endDate]="selectedEndDate"
+                  [id]="id"
+                ></app-protecting-target-negative-management>
+              </ng-template>
+            </e-tabitem>
+            <e-tabitem class="tab-item">
+              <ng-template #headerText>Thông tin bóc gỡ</ng-template>
+              <ng-template #content class="content">
+                <app-bocgo-infor
+                  [startDate]="selectedStartDate"
+                  [endDate]="selectedEndDate"
+                  [id]="id"
+                ></app-bocgo-infor>
+              </ng-template>
+            </e-tabitem>
+          </e-tabitems>
+        </ejs-tab>
+      </div>
+    </div>
+  </div>
+</div>

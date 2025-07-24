@@ -1,0 +1,15 @@
+<div class="card">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">{{ type === 'UNIT' ? 'Thêm đơn vị' : 'Thêm cơ cấu tổ chức'}}</h4>
+    <div class="btn btn-icon btn-sm btn-active-light-primary btn-close"
+         (click)="modal.dismiss()">
+      <span class="svg-icon svg-icon-2x"></span>
+    </div>
+  </div>
+  <app-form-unit
+    [type]="type"
+    [belong]="belong"
+    (close)="modal.close()"
+  ></app-form-unit>
+</div>

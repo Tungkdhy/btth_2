@@ -1,0 +1,52 @@
+.modal-header {
+  li {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+  }
+}
+
+.tab-content {
+  flex: 1 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+app-info-client-server-card {
+  display: flex;
+  flex:1;
+}
+.tab-pane{
+  height: 100%;
+}
+app-device-info-card,
+app-device-port-list-card,
+app-device-computer-list-card,
+app-cleaned-malware-list-card,
+app-uncleaned-malware-list-card{
+height: 100%;
+}
+
+.modal-full {
+  // font-size: 0.7em;
+  // .modal-header {
+  //   padding: 1em 1em 0 1em !important;
+  // }
+  // h3 {
+  //   font-size: 3em !important;
+  //   color: var(--colorText) !important;
+  //   font-weight: bold;
+  //   padding-top: 0.5em !important;
+  // }
+  // .btn {
+  //   padding: 0;
+  //   margin: 0;
+  // }
+  .text-active-primary.active {
+    color: var(--colorTitle) !important;
+    border-color: var(--colorTitle) !important;
+  }
+
+  display:flex;
+  flex-direction: column;
+  height:100%;
+}

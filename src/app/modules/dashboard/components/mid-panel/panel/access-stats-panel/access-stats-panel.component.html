@@ -1,0 +1,73 @@
+<ng-container *ngIf="stats$ | async as stats">
+  <div class="p-2 m-5">
+    <h2>Thực lực</h2>
+    <table>
+      <tr class="tr-bg-3a">
+        <td colspan="2">Thiết bị mạng</td>
+      </tr>
+      <tr>
+        <td>Định tuyến</td>
+        <td>
+          {{ stats.router | numberFormat }}
+        </td>
+      </tr>
+      <tr>
+        <td>Chuyển mạch</td>
+        <td>
+          {{ stats.switch | numberFormat }}
+        </td>
+      </tr>
+      <tr>
+        <td>Tường lửa</td>
+        <td>
+          {{ stats.firewall | numberFormat }}
+        </td>
+      </tr>
+      <tr class="tr-bg-3a">
+        <td colspan="2">Thiết bị đầu cuối</td>
+      </tr>
+      <tr>
+        <td>Máy chủ</td>
+        <td>
+          {{ stats.server | numberFormat }}
+        </td>
+      </tr>
+      <tr>
+        <td>Máy trạm</td>
+        <td>
+          {{ stats.client | numberFormat }}
+        </td>
+      </tr>
+    </table>
+
+    <app-nav-tabs
+      [tabs]="tabs"
+      [activeTab]="selectedTab"
+      (tabChange)="onTabChange($event)"
+    >
+      <ng-template #tab1Content>
+        <table>
+          <tr>
+            <td>Mất kết nối</td>
+            <td>
+              {{ stats.disconnected | numberFormat }}
+            </td>
+          </tr>
+          <tr>
+            <td>ATTT</td>
+            <td>
+              {{ stats.infoSec | numberFormat }}
+            </td>
+          </tr>
+        </table>
+      </ng-template>
+      <ng-template #tab2Content>
+        <ng-container *ngIf="selectedTab === 'topology'">
+          <app-topology-wrapper-card
+            [selectedFeature]="selectedFeature"
+          ></app-topology-wrapper-card>
+        </ng-container>
+      </ng-template>
+    </app-nav-tabs>
+  </div>
+</ng-container>

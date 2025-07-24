@@ -1,0 +1,262 @@
+<div [class]="classTable">
+  <ng-container *ngIf="title && disableFunctions">
+    <div class="card-header">
+      <div class="card-title">{{ title }}</div>
+      <div class="card-toolbar">
+        <div
+          *ngIf="showCloseButton"
+          class="btn btn-icon btn-sm btn-active-light-primary btn-close me-2"
+          (click)="close()"
+        >
+          <span class="svg-icon svg-icon-2x"></span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!disableFunctions">
+    <div *ngIf="!isSelectAll; else elseBlock" class="card-header">
+      <div class="card-title">
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1">
+          <span class="svg-icon svg-icon-1 position-absolute ms-4">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                opacity="0.5"
+                x="17.0365"
+                y="15.1223"
+                width="8.15546"
+                height="2"
+                rx="1"
+                transform="rotate(45 17.0365 15.1223)"
+                fill="currentColor"
+              ></rect>
+              <path
+                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </span>
+          <input
+            id="search-input"
+            type="text"
+            [(ngModel)]="searchText"
+            (input)="onSearchInputChange($event)"
+            data-kt-ecommerce-product-filter="searchModel"
+            class="form-control form-control-solid w-md-250px w-xl-350px ps-14"
+            placeholder="Tìm kiếm"
+            autofocus
+          />
+        </div>
+        <button
+          type="button"
+          id="search-button"
+          class="btn btn-primary ms-2 me-2"
+          (click)="onSearch()"
+        >
+          Tìm kiếm
+        </button>
+        <button
+          *ngIf="allowSearchAdvanced"
+          #advancedButton
+          type="button"
+          class="ms-5 btn btn-link collapsed"
+          data-bs-toggle="collapse"
+          href="#advanced_search_form"
+          aria-expanded="true"
+          aria-controls="advanced_search_form"
+        >
+          Nâng cao
+        </button>
+        <!--end::Search-->
+      </div>
+      <div
+        class="card-toolbar flex-row-fluid justify-content-end gap-5"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-trigger="hover"
+      >
+        <!--        <a-->
+        <!--          *ngIf="allowAllowComputer"-->
+        <!--          class="btn btn-lg btn-light-success"-->
+        <!--          (click)="allowComputer.emit()"-->
+        <!--        >-->
+        <!--          <span-->
+        <!--            [inlineSVG]="'./assets/media/icons/duotune/general/gen037.svg'"-->
+        <!--            class="svg-icon svg-icon-3"-->
+        <!--          ></span>-->
+        <!--          Cho phép-->
+        <!--        </a>-->
+        <!--        <a-->
+        <!--          *ngIf="allowBlockComputer"-->
+        <!--          class="btn btn-lg btn-light-warning"-->
+        <!--          (click)="blockComputer.emit()"-->
+        <!--        >-->
+        <!--          <span-->
+        <!--            [inlineSVG]="'./assets/media/icons/duotune/general/gen034.svg'"-->
+        <!--            class="svg-icon svg-icon-3"-->
+        <!--          ></span>-->
+        <!--          Chặn-->
+        <!--        </a>-->
+        <button
+          *ngIf="showExportButton"
+          type="button"
+          class="btn btn-info d-flex align-items-center gap-2"
+          title="Click để import excel"
+          (click)="export.emit()"
+        >
+          <i
+            *ngIf="!isLoadingExport; else loading"
+            class="las la-file-excel fs-3"
+          ></i>
+          Xuất Excel
+        </button>
+        <a
+          *ngIf="!readonly && allowInsert"
+          class="btn btn-lg btn-light-primary"
+          (click)="add.emit()"
+        >
+          <span
+            [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+            class="svg-icon svg-icon-3"
+          ></span>
+          Thêm mới
+        </a>
+        <div
+          *ngIf="showCloseButton"
+          class="btn btn-icon btn-sm btn-active-light-primary btn-close me-2"
+          (click)="goBack()"
+        >
+          <span class="svg-icon svg-icon-2x"></span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="card-header border-0 pt-5 d-flex justify-content-end">
+        <h3 class="card-title">
+          <span class="card-label fw-bolder fs-6 mb-1"
+            >{{ listSelect.length }} bản ghi được chọn
+          </span>
+        </h3>
+        <div
+          class="card-toolbar"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-trigger="hover"
+          title="Click to add a user"
+        >
+          <a class="btn btn-lg btn-primary"> Duyệt </a>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+  <div class="card-body py-3">
+    <ng-container *ngIf="!disableFunctions">
+      <div class="collapse show" id="advanced_search_form">
+        <div class="row g-8">
+          <div *ngIf="treeData" class="col-lg-4">
+            <label class="fs-6 form-label fw-bold text-dark">Đơn vị</label>
+            <app-dropdown-tree
+              id="unit-tree"
+              [fields]="treeData"
+              (selectNode)="handleSelectUnit($event)"
+              placeholder="Tất cả"
+            ></app-dropdown-tree>
+          </div>
+          <div
+            *ngIf="searchModel && searchModel.type === 'router'"
+            class="col-lg-4"
+          >
+            <label class="fs-6 form-label fw-bold text-dark">Loại</label>
+            <select
+              name="category"
+              [(ngModel)]="searchModel.category"
+              class="form-select form-select-solid form-select-lg"
+            >
+              <option value="" selected>Tất cả</option>
+              <option value="ROUTER_BCTT">Router BCTT</option>
+              <option value="ROUTER_CY">Router Cơ yếu</option>
+              <option value="ROUTER">Router</option>
+            </select>
+          </div>
+          <ng-content select=".advanced-search-1"></ng-content>
+          <ng-content select=".advanced-search-2"></ng-content>
+          <ng-content select=".advanced-search-3"></ng-content>
+          <ng-content select=".advanced-search-4"></ng-content>
+          <ng-content select=".advanced-search-5"></ng-content>
+        </div>
+
+        <div class="separator separator-dashed mt-9 mb-6"></div>
+      </div>
+    </ng-container>
+    <ng-content></ng-content>
+  </div>
+  <ng-container *ngIf="searchModel && searchModel.length > 0">
+    <div class="card-footer d-flex justify-content-between p-">
+      <div
+        class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
+      >
+        <div class="fw-bold me-5">
+          <select
+            class="form-select form-select-solid"
+            [(ngModel)]="searchModel.size"
+            (change)="changeSize()"
+          >
+            <option *ngFor="let size of sizeList" [ngValue]="size">
+              {{ size }}
+            </option>
+          </select>
+        </div>
+        <div class="fs-7 text-gray-600">
+          <span
+            *ngIf="
+              searchModel.length -
+                ((searchModel.page - 1) * searchModel.size + 1) <
+                searchModel.size;
+              else elseBlock
+            "
+          >
+            Hiển thị từ {{ (searchModel.page - 1) * searchModel.size + 1 }} tới
+            {{ searchModel.length }} trên tổng số {{ searchModel.length }} bản
+            ghi
+          </span>
+          <ng-template #elseBlock>
+            Hiển thị từ {{ (searchModel.page - 1) * searchModel.size + 1 }} tới
+            {{ searchModel.page * searchModel.size }} trên tổng số
+            {{ searchModel.length }} bản ghi
+          </ng-template>
+        </div>
+      </div>
+      <div
+        class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end"
+      >
+        <ngb-pagination
+          class="d-flex justify-content-center"
+          (pageChange)="changePageSize($event)"
+          [collectionSize]="searchModel.length"
+          [(page)]="searchModel.page"
+          [pageSize]="searchModel.size"
+          [maxSize]="searchModel.maxSize"
+          [rotate]="searchModel.rotate"
+        >
+          <ng-template ngbPaginationPrevious>{{
+            searchModel.previous
+          }}</ng-template>
+          <ng-template ngbPaginationNext>{{ searchModel.next }}</ng-template>
+          <ng-template ngbPaginationEllipsis>...</ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <app-neun-loading></app-neun-loading>
+</ng-template>

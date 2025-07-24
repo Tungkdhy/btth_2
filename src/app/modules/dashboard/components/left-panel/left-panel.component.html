@@ -1,0 +1,10 @@
+<div [ngClass]="borderClass">
+  <app-network-defend-ittable
+    [startDate]="startDate"
+    [endDate]="endDate"
+    [regionType]="regionType"
+    [subType]="subType"
+  ></app-network-defend-ittable>
+</div>
+<ng-container *ngIf="payloadData$ | async"></ng-container>
+<!-- <ng-container *ngIf="date$ | async"></ng-container> -->

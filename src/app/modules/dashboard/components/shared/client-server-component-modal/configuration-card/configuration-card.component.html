@@ -1,0 +1,32 @@
+<div class="detail-device">
+  <div class="btth-info-popup">
+    <!-- Name -->
+    <div class="info-device-wrap">
+      <div class="info-area-device">
+        <label>Hệ điều hành</label>
+        <div class="form-control-plaintext">
+          <p>{{ device?.fms?.os }}</p>
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label>CPU</label>
+        <div class="form-control-plaintext">
+          <p>{{ device?.fms?.cpu }}</p>
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label>RAM (GB)</label>
+        <div class="form-control-plaintext">
+          <p>{{ formatMBtoGB(device?.fms?.ram) | numberFormat }}</p>
+        </div>
+      </div>
+      <!-- Type -->
+      <div class="info-area-device">
+        <label>Dung lượng ổ cứng (GB)</label>
+        <div class="form-control-plaintext">
+          <p>{{ formatKBtoGB(device?.fms?.storage) | numberFormat }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

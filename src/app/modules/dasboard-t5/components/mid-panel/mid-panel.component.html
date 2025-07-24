@@ -1,0 +1,158 @@
+<div class="map-container relative btth-lr-panel-card">
+    <!-- Bản đồ -->
+    <div id="map" class="map"></div>
+  
+    <!-- Header upload file -->
+    <div
+      class="header-container w-[450px] h-[60px] flex items-center justify-center overflow-x-auto"
+      (click)="handleDivClick()"
+    >
+      <div>HÌNH THÁI CHUNG</div>
+      <input
+        type="file"
+        accept=".json"
+        #fileInput
+        style="display: none"
+        (change)="handleFileChange($event)"
+      />
+    </div>
+  
+    <!-- Bảng dữ liệu -->
+    <!-- <div class="table-container mb-3 mr-5 overflow-x-auto">
+      <table class="table-fixed min-w-[500px] max-w-full border-collapse table-auto bg-transparent">
+        <thead>
+          <tr class="bg-gray-200 text-left">
+            <th class="px-2 py-2 text-center bg-blue-300 w-[50px]"></th>
+            <th class="px-2 py-2 text-center bg-blue-300 w-[70px]">STT</th>
+            <th class="px-4 py-2 text-center bg-blue-300 w-[200px]">Hướng</th>
+            <th class="px-4 py-2 text-center bg-blue-300 w-[120px]" style="width: 20%;">Kết quả</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="rows$ | async as rows">
+          <ng-container *ngFor="let row of rows; let i = index">
+            <tr (click)="handleParentRowClick(row.id)" class="cursor-pointer hover:bg-gray-100">
+              <td class="text-center">{{ expandedParentRows.includes(row.id) ? '-' : '+' }}</td>
+              <td class="text-center">{{ i + 1 }}</td>
+              <td class="text-center break-words whitespace-normal">{{ row.target }}</td>
+              <td class="text-center">
+                <span class="font-bold text-green-600">{{ row.current }}</span>
+                <span class="text-gray-400 font-semibold">/ {{ row.total }}</span>
+              </td>
+            </tr>
+  
+            <ng-container *ngIf="expandedParentRows.includes(row.id)">
+              <tr>
+                <td colspan="4">
+                  <table class="w-full border-collapse">
+                    <thead class="bg-yellow-200">
+                      <tr>
+                        <th class="w-[43px]"></th>
+                        <th class="w-[74px] text-center">STT</th>
+                        <th class="w-[218px] text-center">Đối tượng</th>
+                        <th class="w-[115px] text-center" style="width: 20%;">Kết quả</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let parent of row.parents; let j = index">
+                        <tr
+                          (click)="onParentRowClick(parent.id, row)"
+                          class="cursor-pointer hover:bg-gray-100"
+                        >
+                          <td class="text-center">{{ expandedRows.includes(parent.id) ? '-' : '+' }}</td>
+                          <td class="text-center">{{ i + 1 }}.{{ j + 1 }}</td>
+                          <td class="text-center break-words whitespace-normal">{{ parent.name }}</td>
+                          <td class="text-center break-words whitespace-normal">
+                            <span class="text-green-500 font-semibold">{{ parent.success_count }}</span> /
+                            <span class="text-gray-500 font-semibold">{{ parent.child_number }}</span>
+                          </td>
+                        </tr>
+                        <ng-container *ngIf="expandedRows.includes(parent.id)">
+                          <tr>
+                            <td colspan="4">
+                              <table class="w-full border-collapse">
+                                <thead class="bg-slate-400 text-white">
+                                  <tr>
+                                    <th class="w-[118px]"></th>
+                                    <th class="w-[220px] text-center">Mục tiêu</th>
+                                    <th class="w-[105px] text-center">Trạng thái</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <ng-container *ngFor="let child of filterChildrenByParent(row, parent.id); let k = index">
+                                    <tr
+                                      (click)="moveToLocation(child.lat, child.lon); selectedChild = child"
+                                      class="hover:bg-gray-100 cursor-pointer"
+                                    >
+                                      <td class="text-center">{{ i + 1 }}.{{ j + 1 }}.{{ k + 1 }}</td>
+                                      <td class="text-center break-words whitespace-normal">{{ child.name }}</td>
+                                      <td class="text-center">
+                                        {{ renderStatusIcon(child.status) }}
+                                      </td>
+                                    </tr>
+                                  </ng-container>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+   -->
+    <!-- Nút Reset Zoom -->
+    <!-- <button
+      (click)="resetZoom()"
+      class="absolute bottom-4 left-4 p-2 bg-white-opacity border border-gray-300"
+      style="border-radius:10px"
+    >
+      <img src="./assets/ic_global.svg" style="width:40px; height:40px" alt="Mục tiêu tác chiến" />
+    </button> -->
+  
+    <!-- Thông tin mục tiêu -->
+    <div *ngIf="selectedChild" class="dialog">
+      <table class="table-fixed w-[450px] mx-auto border-collapse bg-white shadow-lg rounded-lg">
+        <tbody>
+          <tr>
+            <td colspan="2" class="px-4 py-2 text-center font-semibold text-xl border-b">{{ selectedChild.name || 'No Name' }}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="px-4 py-2">
+              <img *ngIf="selectedChild.imageUrl" [src]="selectedChild.imageUrl" alt="Ảnh đại diện" class="w-full h-auto" />
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 w-32 font-semibold border-b">Địa chỉ IP</td>
+            <td class="px-4 py-2 break-words border-b">{{ selectedChild.ip || 'N/A' }}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 w-32 font-semibold border-b">Tên miền</td>
+            <td class="px-4 py-2 break-words border-b">{{ selectedChild.domain || 'N/A' }}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 w-32 font-semibold border-b">Thuộc tổ chức</td>
+            <td class="px-4 py-2 break-words border-b">{{ selectedChild.organization || 'N/A' }}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 w-32 font-semibold border-b">Mô tả</td>
+            <td class="px-4 py-2 break-words border-b">{{ selectedChild.description || 'N/A' }}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 w-32 font-semibold border-b">Trạng thái</td>
+            <td class="px-4 py-2 break-words border-b">
+              <span [ngClass]="{ 'text-green-600 font-bold': selectedChild.status === 1, 'text-red-600 font-bold': selectedChild.status === 0 }">
+                {{ selectedChild.status === 1 ? 'Khai thác thành công' : 'Đang tiến hành khai thác' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

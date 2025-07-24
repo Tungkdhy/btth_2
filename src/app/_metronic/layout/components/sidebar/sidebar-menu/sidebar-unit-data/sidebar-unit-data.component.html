@@ -1,0 +1,172 @@
+<ng-container *ngFor="let unit of highestLevelUnits">
+  <div
+    *ngIf="unit.treeLevel === unitData[0].treeLevel"
+    [class]="unit.hasChildren ? 'menu-item menu-accordion' : 'menu-item'"
+    data-kt-menu-trigger="click"
+  >
+    <span
+      [class]="unit.hasChildren ? 'menu-link' : 'without-sub menu-link'"
+      [ngClass]="isSelectedUnitId(unit.id) ? 'active' : ''"
+      (click)="handleSelectUnit(unit)"
+    >
+      <span class="menu-icon">
+        <app-neun-icon-unit [unit]="unit"></app-neun-icon-unit>
+      </span>
+      <span class="menu-title">{{ unit.name }} </span>
+      <span class="menu-arrow" *ngIf="unit.hasChildren"></span>
+    </span>
+    <ng-container *ngIf="unit.hasChildren">
+      <div class="menu-sub menu-sub-accordion">
+        <app-sidebar-unit-data
+          [unitData]="getChildrenFromUnitsById(unitData, unit.id)"
+          (selectUnit)="handleSelectUnit($event)"
+        ></app-sidebar-unit-data>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<!--<div class="menu-item menu-accordion" data-kt-menu-trigger="click">-->
+<!--  <span class="menu-link">-->
+<!--    <span class="menu-bullet">-->
+<!--      <span class="bullet bullet-dot"></span>-->
+<!--    </span>-->
+<!--    <span class="menu-title" data-link="/crafted/pages/profile">Profile </span>-->
+<!--    <span class="menu-arrow"></span>-->
+<!--  </span>-->
+<!--  <div class="menu-sub menu-sub-accordion">-->
+<!--    <div class="menu-item">-->
+<!--      <a class="menu-link without-sub">-->
+<!--        <span class="menu-bullet">-->
+<!--          <span class="bullet bullet-dot"></span>-->
+<!--        </span>-->
+<!--        <span class="menu-title">Overview</span>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--    <div class="menu-item">-->
+<!--      <a class="menu-link without-sub">-->
+<!--        <span class="menu-bullet">-->
+<!--          <span class="bullet bullet-dot"></span>-->
+<!--        </span>-->
+<!--        <span class="menu-title">Projects</span>-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">-->
+<!--  <div-->
+<!--    class="menu-item menu-accordion"-->
+<!--    routerLinkActive="here show"-->
+<!--    data-kt-menu-trigger="click"-->
+<!--  >-->
+<!--    <span class="menu-link">-->
+<!--      <span class="menu-bullet">-->
+<!--        <span class="bullet bullet-dot"></span>-->
+<!--      </span>-->
+<!--      <span class="menu-title" data-link="/crafted/pages/profile"-->
+<!--        >Profile-->
+<!--      </span>-->
+<!--      <span class="menu-arrow"></span>-->
+<!--    </span>-->
+<!--    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">-->
+<!--      <div class="menu-item">-->
+<!--        <a class="menu-link without-sub" routerLinkActive="active">-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Overview</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/profile/projects"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Projects</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/profile/campaigns"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Campaigns</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/profile/documents"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Documents</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/profile/connections"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Connections</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div-->
+<!--    class="menu-item menu-accordion"-->
+<!--    routerLinkActive="here show"-->
+<!--    data-kt-menu-trigger="click"-->
+<!--  >-->
+<!--    <span class="menu-link">-->
+<!--      <span class="menu-bullet">-->
+<!--        <span class="bullet bullet-dot"></span>-->
+<!--      </span>-->
+<!--      <span class="menu-title" data-link="/crafted/pages/wizards"-->
+<!--        >Wizards-->
+<!--      </span>-->
+<!--      <span class="menu-arrow"></span>-->
+<!--    </span>-->
+<!--    <div class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/wizards/horizontal"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Horizontal</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="menu-item">-->
+<!--        <a-->
+<!--          class="menu-link without-sub"-->
+<!--          routerLinkActive="active"-->
+<!--          routerLink="/crafted/pages/wizards/vertical"-->
+<!--        >-->
+<!--          <span class="menu-bullet">-->
+<!--            <span class="bullet bullet-dot"></span>-->
+<!--          </span>-->
+<!--          <span class="menu-title">Vertical</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,92 @@
+<div [title]="tooltipText" class="card shadow-sm card-hover h-xl-125px">
+  <!--begin::Body-->
+  <div
+    class="card-body d-flex align-items-center justify-content-center py-3 px-5"
+  >
+    <div class="container h-100">
+      <div class="row h-100">
+        <div
+          class="col-6 d-flex flex-column justify-content-center align-items-center"
+        >
+          <span [inlineSVG]="iconUrl" class="svg-icon svg-icon-3x"></span>
+          <div class="alert-title">
+            <span class="fw-semibold fs-10 text-gray-400">
+              {{ name }}
+            </span>
+          </div>
+        </div>
+        <div class="col-6 d-flex justify-content-center align-items-center">
+          <div id="info-alert-section">
+            <!--begin::Section-->
+            <div class="d-flex flex-column my-xl-2 align-items-center">
+              <!--begin::Number-->
+              <span class="fw-semibold fs-1 text-gray-800 lh-1 ls-n2">
+                {{ deviceTotal | numberFormat }}
+              </span>
+              <!--end::Number-->
+            </div>
+            <!--end::Section-->
+
+            <!--begin::Badge-->
+            <div class="text-center">
+              <span
+                *ngIf="deviceDown"
+                class="badge badge-light-danger fs-2 px-xl-5 px-xxl-7 justify-content-center"
+              >
+                <i class="ki-duotone ki-cross-circle fs-3 text-danger ms-n1">
+                  <span class="path1"></span><span class="path2"></span>
+                </i>
+                {{ deviceDown | numberFormat }}
+              </span>
+            </div>
+            <!--end::Badge-->
+
+            <!--begin::Info Insecurity-->
+            <ng-container *ngIf="isInfoInsecurity">
+              <div class="d-flex flex-column">
+                <ng-container *ngIf="internetAlerts">
+                  <div class="text-center badge badge-light-danger mb-1">
+                    <img
+                      class="icon-img me-2 ms-n1"
+                      src="assets/media/svg/network-device/internet-access.svg"
+                      alt="infected-malware"
+                    />
+                    <span class="fs-9 w-100">
+                      {{ internetAlerts | numberFormat }}
+                    </span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="malwareAlerts">
+                  <div class="text-center badge badge-light-danger mb-1">
+                    <img
+                      class="icon-img me-2 ms-n1"
+                      src="assets/media/svg/network-device/infected-malware.svg"
+                      alt="infected-malware"
+                    />
+                    <span class="fs-9 w-100">
+                      {{ malwareAlerts | numberFormat }}
+                    </span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="domainAlerts">
+                  <div class="text-center badge badge-light-danger mb-1">
+                    <img
+                      class="icon-img me-2 ms-n1"
+                      src="assets/media/svg/network-device/malicious-domain-access.svg"
+                      alt="infected-malware"
+                    />
+                    <span class="fs-9 w-100">
+                      {{ domainAlerts | numberFormat }}
+                    </span>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+            <!--end::Info Insecurity-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end::Body-->
+</div>

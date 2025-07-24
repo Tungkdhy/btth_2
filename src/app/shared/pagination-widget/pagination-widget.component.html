@@ -1,0 +1,40 @@
+<div class="card-footer d-flex justify-content-between p-">
+  <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start">
+    <div class="col-sm-12 col-md-2 fw-bold table_length">
+      <select #size class="form-select form-select-solid" style="width: auto" (change)="changeSize(size.value)">
+        <option value="100" selected >100</option>
+        <option value="1000">1000</option>
+        <option value="10000">10000</option>
+        <option value="20000">20000</option>
+      </select>
+
+    </div>
+    <div class="col-sm-12 col-md-10 table_info fs-7 text-gray-600">
+          <span
+            *ngIf="searchModel.length - (((searchModel.page - 1) * searchModel.size) + 1) < searchModel.size; else elseBlock">
+            Hiển thị từ {{((searchModel.page - 1) * searchModel.size) + 1}} tới {{searchModel.length}}
+            trên tổng số {{searchModel.length}} bản ghi
+          </span>
+      <ng-template #elseBlock>
+        Hiển thị từ {{((searchModel.page - 1) * searchModel.size) + 1}} tới {{searchModel.page * searchModel.size}} trên
+        tổng số {{searchModel.length}} bản ghi
+      </ng-template>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end">
+    <ngb-pagination
+      class="d-flex justify-content-center"
+      (pageChange)="changePage($event)"
+      [collectionSize]="searchModel.length"
+      [(page)]="searchModel.page"
+      [pageSize]="searchModel.size"
+      [maxSize]="searchModel.maxSize"
+      [rotate]="searchModel.rotate"
+    >
+      <ng-template ngbPaginationPrevious>{{searchModel.previous}}</ng-template>
+      <ng-template ngbPaginationNext>{{searchModel.next}}</ng-template>
+      <ng-template ngbPaginationEllipsis>...</ng-template>
+    </ngb-pagination>
+  </div>
+</div>
+

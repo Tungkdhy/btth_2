@@ -1,0 +1,156 @@
+<div class="card card-xxl-stretch my-10 mb-xxl-8">
+  <table
+    class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+  >
+    <thead>
+      <tr class="fw-bolder text-muted text-uppercase text-center">
+        <th rowspan="2" class="align-middle">Hệ thống giám sát</th>
+        <th colspan="3">Thiết bị mạng</th>
+        <th colspan="2">Điểm cuối</th>
+      </tr>
+      <tr class="fw-bolder text-muted text-uppercase text-center">
+        <th>Định tuyến</th>
+        <th>Chuyển mạch</th>
+        <th>Tường lửa</th>
+        <th>Máy chủ</th>
+        <th>Máy trạm</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <th class="fw-bolder text-muted text-uppercase">FMS</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-dau-cuoi']"
+            [queryParams]="{ type: 'server', system: 'fms' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberServerFms$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-dau-cuoi']"
+            [queryParams]="{ type: 'client', system: 'fms' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberClientFms$ | async | numberFormat }}
+          </a>
+        </td>
+      </tr>
+      <tr class="text-center">
+        <th class="fw-bolder text-muted text-uppercase">TA-21</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-dau-cuoi']"
+            [queryParams]="{ type: 'client', system: 'ta21' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberClientTa21$ | async | numberFormat }}
+          </a>
+        </td>
+      </tr>
+      <tr class="text-center">
+        <th class="fw-bolder text-muted text-uppercase">NACS</th>
+        <td></td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-mang']"
+            [queryParams]="{ type: 'switch', system: 'nacs' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberSwitchNac$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-mang']"
+            [queryParams]="{ type: 'firewall', system: 'nacs' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberFirewallNac$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-dau-cuoi']"
+            [queryParams]="{ type: 'server', system: 'nacs' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberServerNac$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-dau-cuoi']"
+            [queryParams]="{ type: 'client', system: 'nacs' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberClientNac$ | async | numberFormat }}
+          </a>
+        </td>
+      </tr>
+      <tr class="text-center">
+        <th class="fw-bolder text-muted text-uppercase">HSM</th>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-mang']"
+            [queryParams]="{ type: 'router', system: 'prtg' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberRouterPrtg$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-mang']"
+            [queryParams]="{ type: 'switch', system: 'prtg' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberSwitchPrtg$ | async | numberFormat }}
+          </a>
+        </td>
+        <td>
+          <a
+            class="text-gray-800 fw-bold text-hover-primary fs-6"
+            [routerLink]="['thiet-bi-mang']"
+            [queryParams]="{ type: 'firewall', system: 'prtg' }"
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+          >
+            {{ numberFirewallPrtg$ | async | numberFormat }}
+          </a>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<router-outlet></router-outlet>

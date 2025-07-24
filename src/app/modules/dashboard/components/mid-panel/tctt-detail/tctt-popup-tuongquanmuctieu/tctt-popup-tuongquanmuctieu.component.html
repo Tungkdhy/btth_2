@@ -1,0 +1,60 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex justify-content-between">
+    <app-breadcrum-left-right titleLevel1="Trinh sát, tác chiến thông tin"
+      titleLevel2="Tương quan mục tiêu" [titleLevel3]="this.filteredData[0].nentang"></app-breadcrum-left-right>
+    <div class="d-flex gap-2 align-items-center" style="line-height: 65px;">
+      <h4>Đóng</h4>
+      <button (click)="togglePopup(false)" style="border: none; padding: 0; outline: none; background: none;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.6663 31.6663L8.33301 29.333L17.6663 19.9997L8.33301 10.6663L10.6663 8.33301L19.9997 17.6663L29.333 8.33301L31.6663 10.6663L22.333 19.9997L31.6663 29.333L29.333 31.6663L19.9997 22.333L10.6663 31.6663Z"
+            fill="#080808" />
+        </svg>
+      </button>
+    </div>
+  </div>
+    <div class="table-header justify">
+      <div class="d-flex gap-6">
+        <input
+          class="btth-search-box"
+          type="text"
+          (input)="filteredData()"
+          [(ngModel)]="searchText"
+          placeholder="Tìm kiếm"
+        />
+        <button class="btth-btn active">Tìm kiếm</button>
+      </div>
+      <!-- <div class="custom-nentang">{{ this.filteredData[0].nentang }}</div> -->
+    </div>
+    <div>
+      <table class="btth-top-table table-detail-tuong-quan h-100">
+        <thead>
+          <tr>
+            <th> STT</th>
+            <th>Tên mục tiêu</th>
+            <th>ID mục tiêu</th>
+            <th>Đơn vị phụ trách</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.filteredData">
+            <td><p style="font-weight: 700;">{{ item.index }}</p></td>
+            <td><p>{{ item.ten }}</p></td>
+            <td><p>{{ item.trangthai }}</p></td>
+            <td><p>{{ item.donvi }}</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination
+      [collectionSize]="this.updatedData.length"
+      [maxSize]="10"
+      [(page)]="this.page"
+      [pageSize]="10"
+      (pageChange)="onPageChange($event)"
+      class="btth-pagination"
+    >
+    </ngb-pagination>
+  </div>
+</div>

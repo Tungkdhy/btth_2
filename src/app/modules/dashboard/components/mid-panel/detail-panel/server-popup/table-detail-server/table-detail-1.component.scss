@@ -1,0 +1,11 @@
+.hover-pointer {
+  cursor: pointer;
+}
+.hover-pointer:hover {
+  color: green; /* Color on hover */
+}
+.table-detail-server th:nth-child(1),  
+.table-detail-server td:nth-child(1) {  
+  width: 4%;  
+}
+

@@ -1,0 +1,63 @@
+<div class="mt-5">
+  <h2>Tương quan mất an toàn thông tin</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [legendSettings]="legendSettings"
+    id="chart-container-3"
+  >
+    <e-series-collection>
+      <e-series
+        id="1"
+        [dataSource]='chartDataInternet'
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Kết nối Internet"
+        fill="#FF5733"
+        [emptyPointSettings]='{ fill: 0 }'
+        [width]="3"
+      >
+      </e-series>
+      <e-series
+      id="2"
+        [dataSource]="chartDataBlackDomain"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Tên miền"
+        fill="#33C1FF"
+        [emptyPointSettings]='{ fill: 0 }'
+        [width]="3"
+      ></e-series>
+      <e-series
+      id="3"
+        [dataSource]="chartDataMalware"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Mã độc"
+        fill="#28B463"
+        [emptyPointSettings]='{ fill: 0 }'
+        [width]="3"
+      ></e-series>
+      <e-series
+      id="4"
+        [dataSource]="chartDataHunting"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Bất thường"
+        fill="#FFC300"
+        [emptyPointSettings]='{ fill: 0 }'
+        [width]="3"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

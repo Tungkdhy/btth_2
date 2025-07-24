@@ -1,0 +1,63 @@
+.add-operator {
+  display: flex;
+  flex-direction: column;
+  height: 97vh;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      margin: 0 1em;
+      font-size: 2.2em;
+    }
+    span {
+      font-size: 1.5em;
+    }
+  }
+  .body-group {
+    display: flex;
+    flex: 1;
+    .input-area {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      app-form-input-opera,
+      app-form {
+        flex: 1;
+        margin: 2em;
+        display: flex;
+      }
+    }
+    .list-area {
+      flex: 1;
+      display: flex;
+      app-search-operator {
+        margin: 2em;
+        flex: 1;
+        display: flex;
+      }
+    }
+  }
+}
+
+button {
+  margin-top: 1.5em;
+  width: 10em;
+  padding: 1em;
+  border-radius: 0.5em;
+  background: #0f59c5;
+  color: #fff;
+  font-size: 2em;
+}
+
+.bg-group {
+  background-color: var(--bgGroup);
+  border-radius: 1.5em;
+  border: 0.1em solid var(--colorBorderGroup);
+  margin: 0;
+  padding: 0.9rem;
+}
+
+input {
+  background: var(--bgCard);
+}

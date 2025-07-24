@@ -1,0 +1,67 @@
+<div class="detail-panel table-detail-panel-card table-popup-server">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Trinh sát, tác chiến thông tin ></span>
+      <span class="choise-item">Tương quan bài viết</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group detail-body">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Tìm kiếm theo mục tiêu"
+        [(ngModel)]="searchTarget"
+        (input)="filterTable()"
+      />
+      <input
+        type="text"
+        placeholder="Tìm kiếm theo đơn vị"
+        [(ngModel)]="searchUnit"
+        (input)="filterTable()"
+      />
+      <input
+        type="text"
+        placeholder="Tìm kiếm theo loại"
+        [(ngModel)]="searchType"
+        (input)="filterTable()"
+      />
+    </div>
+    <div class="data-table">
+      <table class="h-100">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Nội dung</th>
+            <th>Đối tượng</th>
+            <th>Like</th>
+            <th>Comment</th>
+            <th>Nền tảng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of filteredData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ row.target || "-" }}</td>
+            <td>{{ row.priority || "-" }}</td>
+            <td>{{ row.type || "-" }}</td>
+            <td>{{ row.unit || "-" }}</td>
+            <td>{{ "-" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-center p-2">
+      <ngb-pagination
+        [collectionSize]="total"
+        [maxSize]="5"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

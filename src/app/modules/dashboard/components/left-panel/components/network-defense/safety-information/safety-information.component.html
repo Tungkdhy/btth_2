@@ -1,0 +1,226 @@
+<div class="w-100">
+  <div class="d-flex justify-content-between" style="margin-bottom: 24px;">
+    <h2>An toàn thông tin</h2>
+    <div class="hover-pointer" (click)="togglePopup(true, 'SECURITY')">
+      <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_50_12319" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="25">
+          <rect y="0.5" width="24" height="24" fill="#D9D9D9" />
+        </mask>
+        <g mask="url(#mask0_50_12319)">
+          <path
+            d="M5 21.5C4.45 21.5 3.97917 21.3042 3.5875 20.9125C3.19583 20.5208 3 20.05 3 19.5V3.5H5V19.5H21V21.5H5ZM6 18.5V9.5H10V18.5H6ZM11 18.5V4.5H15V18.5H11ZM16 18.5V13.5H20V18.5H16Z"
+            fill="#080808" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div>
+    <table class="btth-top-table table-safety-information h-100">
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            <div *ngIf="areDatesEqual(startDate, endDate)">Trong ngày</div>
+            <div *ngIf="!areDatesEqual(startDate, endDate)">
+              Từ {{ startDate | date: "dd/MM" }} đến
+              {{ endDate | date: "dd/MM" }}
+            </div>
+          </th>
+          <th>Tổng số</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="endPointDevice | async as endPointDevice">
+          <tr>
+            <td class="hover-pointer">
+              <p (click)="togglePopup(true, 'THIET_BI_DAU_CUOI')"
+                [ngStyle]="{ color: isThietBiDauCuoi ? 'green' : 'inherit' }">Triển khai ATTT trên máy tính
+              </p>
+            </td>
+            <td (click)="
+                  togglePopup(
+                    true,
+                    'THIET_BI_DAU_CUOI',
+                    true,
+                    false,
+                    startDate,
+                    endDate
+                  )
+                " class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")
+                ?.json_build_object?.trong_ngay || 0 | numberFormat
+                }}
+              </p>
+            </td>
+            <td (click)="togglePopup(true, 'THIET_BI_DAU_CUOI')" class="hover-pointer">
+              <ng-container *ngIf="tongSo | async as tongSo">
+                <div class="d-flex">
+                  <p>
+                    {{getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")?.json_build_object?.tong_so ||0 |
+                    numberFormat}}
+                  </p>
+                  <p
+                    *ngIf="getValueTongSo(tongSo,mainType,'Thiết bị đầu cuối','Máy chủ') + getValueTongSo(tongSo,mainType,'Thiết bị đầu cuối','Máy trạm') - getValueTongSo(tongSo,mainType,'Thiết bị đầu cuối','Không kết nối')">
+                    /
+                    {{
+                    getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy chủ") +
+                    getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy trạm") -
+                    getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Không kết nối") | numberFormat }}
+                  </p>
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+
+          <tr>
+            <td (click)="togglePopup(true, 'UN_IDENT')" class="hover-pointer">
+              <p [ngStyle]="{ color: isChuaDinhDanh ? 'green' : 'inherit' }">Chưa định danh</p>
+            </td>
+            <td (click)="
+                  togglePopup(true, 'UN_IDENT', true, false, startDate, endDate)
+                " class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")
+                ?.json_build_object?.trong_ngay_chua_dd || 0 | numberFormat
+                }}
+              </p>
+            </td>
+            <td (click)="togglePopup(true, 'UN_IDENT')" class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")
+                ?.json_build_object?.tong_so_chua_dd || 0 | numberFormat
+                }}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td (click)="togglePopup(true, 'DINH_DANH_KHONG_DONG_NHAT')" class="hover-pointer">
+              <p [ngStyle]="{
+                    color: isDinhDanhChuaDongNhat ? 'green' : 'inherit'
+                  }">Định danh chưa đồng nhất</p>
+            </td>
+            <td (click)="
+                  togglePopup(
+                    true,
+                    'DINH_DANH_KHONG_DONG_NHAT',
+                    true,
+                    false,
+                    startDate,
+                    endDate
+                  )
+                " class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")
+                ?.json_build_object?.trong_ngay_dd_ko_tn || 0 | numberFormat
+                }}
+              </p>
+            </td>
+            <td (click)="togglePopup(true, 'DINH_DANH_KHONG_DONG_NHAT')" class="hover-pointer">
+              <p>{{
+                getValueTrienKhai(endPointDevice, "trien_khai_gp_tren_tbdc")
+                ?.json_build_object?.tong_so_dd_ko_tn || 0 | numberFormat
+                }}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p [ngStyle]="{
+                    color: isMaDocThongThuong ? 'green' : 'inherit'
+                  }" (click)="togglePopup(true, 'COMMON_MALWARE', false, true)">
+                Mã độc được nhận diện
+              </p>
+            </td>
+            <td>
+              <p class="hover-pointer" (click)="togglePopup(true, 'COMMON_MALWARE', true, true)">
+                {{ commonInDay || 0 | numberFormat }}
+              </p>
+            </td>
+            <td>
+              <p class="hover-pointer" (click)="togglePopup(true, 'COMMON_MALWARE', false, true)">
+                {{ commonAll || 0 | numberFormat }}
+              </p>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="maDocDaDuocLamSach | async as maDocDaDuocLamSach">
+          <tr>
+            <td (click)="togglePopup(true, 'CLEANED_MALWARE')" class="hover-pointer hover-pointer">
+              <p [ngStyle]="{
+                    color: isMayTinhDuocLamSach ? 'green' : 'inherit'
+                  }">Máy tính được làm sạch</p>
+            </td>
+            <td (click)="
+                  togglePopup(
+                    true,
+                    'CLEANED_MALWARE',
+                    true,
+                    false,
+                    startDate,
+                    endDate
+                  )
+                " class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(maDocDaDuocLamSach, "ma_doc_da_lam_sach")
+                ?.json_build_object?.trong_ngay || 0 | numberFormat
+                }}
+              </p>
+            </td>
+            <td (click)="togglePopup(true, 'CLEANED_MALWARE')" class="hover-pointer">
+              <p>
+                {{
+                getValueTrienKhai(maDocDaDuocLamSach, "ma_doc_da_lam_sach")
+                ?.json_build_object?.tong_so || 0 | numberFormat
+                }}
+              </p>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="record | async as record">
+          <tr>
+            <td>
+              <p (click)="togglePopup(true, 'SAFETY_NETWORK', false)"
+                [ngStyle]="{ color: isMangAnToan ? 'green' : 'inherit' }">Mạng an toàn</p>
+            </td>
+            <td class="hover-pointer" (click)="togglePopup(true, 'SAFETY_NETWORK', true)">
+              <p>{{
+                getTotalMangAnToanTrongNgay(record) | numberFormat
+                }}</p>
+            </td>
+            <td class="hover-pointer" (click)="togglePopup(true, 'SAFETY_NETWORK', false)">
+              <ng-container *ngIf="setting | async as setting">
+                <div class="d-flex">
+                  <p>{{getTotalMangAnToanTongSo(record) | numberFormat }}</p>
+                  <p *ngIf="getValueChuaQuyHoach(setting,mainType,'chua_quy_hoach')">
+                    /{{getValueChuaQuyHoach(setting,mainType,"chua_quy_hoach")
+                    | numberFormat }}
+                  </p>
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p (click)="togglePopup(true, 'PHE_DUYET_HO_SO', false)"
+                [ngStyle]="{ color: isPheDuyet ? 'green' : 'inherit' }">Phê duyệt hồ sơ</p>
+            </td>
+            <td class="hover-pointer" (click)="togglePopup(true, 'PHE_DUYET_HO_SO', true)">
+              <p>{{ sumTrongngay(record) || 0 | numberFormat }}</p>
+            </td>
+            <td class="hover-pointer" (click)="togglePopup(true, 'PHE_DUYET_HO_SO', false)">
+              <p>{{ sumTongso(record) || 0 | numberFormat }}</p>
+              <!-- <span class="hover-pointer" (click)="togglePopupPheDuyetHoSo(true, 'PHE_DUYET_HO_SO',false,false,false,true)"> {{getValueHTTTT(record,"at_feduyet","5")?.json_build_object?.tongso}}</span> -->
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <!--        </ng-container>-->
+  </div>
+</div>

@@ -1,0 +1,198 @@
+<div [ngClass]="borderClass">
+  <ng-container *ngIf="viewDetail; else viewmap" class="mid">
+    <app-tctt-popup *ngIf="isPopupVisibleMucTieuBV" [startDate]="startDate" [endDate]="endDate" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup>
+    <app-overview-tctt *ngIf="isPopupVisibleOverview" [startDate]="startDate" [endDate]="endDate"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-overview-tctt>
+    <app-tctt-diemnong-popup *ngIf="isPopupVisibleDiemNong" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-diemnong-popup>
+    <app-tctt-popup-chudenong *ngIf="isPopupVisibleChuDeNong" [dataDetail]="dataDetail" [treeList]="treeList"
+      [diemtin]="diemtin" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup-chudenong>
+    <app-tctt-popup-kqdangtai *ngIf="isPopupVisibleKQDangTai" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup-kqdangtai>
+    <app-tctt-popup-sacthai *ngIf="isPopupVisibleSacThai" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup-sacthai>
+    <app-tctt-popup-tuongquanmuctieu *ngIf="isPopupVisibleTQMucTieu" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup-tuongquanmuctieu>
+    <app-tctt-popup-tuongquanbaiviet *ngIf="isPopupVisibleTQBaiViet" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-popup-tuongquanbaiviet>
+    <app-router-popup *ngIf="isPopupVisibleRouter" [mainType]="mainType" [subType]="subType" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-router-popup>
+    <app-switch-popup *ngIf="isPopupVisibleSwitch" [regionType]="selectedArea" [mainType]="mainType" [subType]="subType"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-switch-popup>
+
+    <app-agents-int-popup *ngIf="isPopupVisibleAgentInternet"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-agents-int-popup>
+    <app-fidelis-popup *ngIf="isPopupVisibleFidelis"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-fidelis-popup>
+    <app-dieu-hanh-truc-chi-tiet-popup *ngIf="isPopupVisibleChiTietDieuHanhTruc"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-dieu-hanh-truc-chi-tiet-popup>
+
+    <app-add-operator *ngIf="isPopupVisibleAddOperator"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-add-operator>
+    <app-agents-chuyendung-popup *ngIf="isPopupVisibleAgentsCDPopup"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-agents-chuyendung-popup>
+    <app-ta21-popup [ta21Data]="ta21Data" *ngIf="isPopupVisibleTa21"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-ta21-popup>
+    <app-du-phong-86-popup *ngIf="isPopupDuphong86"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-du-phong-86-popup>
+    <app-ct86-popup *ngIf="isPopupCT86" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-ct86-popup>
+    <app-cc-popup *ngIf="isPopupVisibleCC" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-cc-popup>
+    <app-agents-qs-popup *ngIf="isPopupVisibleAgentsQSPopup"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-agents-qs-popup>
+    <app-nacs-popup [nacData]="nacData" *ngIf="isPopupVisibleNacs"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-nacs-popup>
+    <app-operational-detail-command *ngIf="isPopupVisibleChiTietNhiemVuPopup"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"
+      [dataChiTietNhiemVuPopup]="dataChiTietNhiemVuPopup"></app-operational-detail-command>
+    <app-fms-popup *ngIf="isPopupVisibleFmsPopup" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-fms-popup>
+    <app-mms-popup *ngIf="isPopupVisibleMmsPopup" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-mms-popup>
+    <app-firewall-popup *ngIf="isPopupVisibleFirewall" [regionType]="selectedArea" [mainType]="mainType"
+      [subType]="subType" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-firewall-popup>
+    <app-server-popup *ngIf="isPopupVisibleServer" [mainType]="mainType" [subType]="subType" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-server-popup>
+    <app-client-popup *ngIf="isPopupVisibleClient" [mainType]="mainType" [subType]="subType" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-client-popup>
+    <app-other-device-popup *ngIf="isPopupVisibleOtherDevice" [mainType]="mainType" [subType]="subType"
+      [regionType]="selectedArea" (togglePopupEvent)="handleTogglePopupEvent($event)"></app-other-device-popup>
+    <app-portal-popup *ngIf="isPopupVisiblePortal" [mainType]="mainType" [subType]="subType" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-portal-popup>
+    <app-common-popup *ngIf="isPopupVisibleCommon" [mainType]="mainType" [subType]="subType" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-common-popup>
+
+
+    <app-network-device-add-remove-popup *ngIf="isPopupVisibleNetworkDeviceAddRemove" [mainType]="mainType"
+      [subType]="subType" [regionType]="selectedArea" [typeAddRemove]="typeAddRemove" [startDate]="startDate"
+      [endDate]="endDate" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-network-device-add-remove-popup>
+    <app-endpoint-add-remove-popup *ngIf="isPopupVisibleEndpointDeviceAddRemove" [mainType]="mainType"
+      [subType]="subType" [regionType]="selectedArea" [typeAddRemove]="typeAddRemove" [startDate]="startDate"
+      [endDate]="endDate" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-endpoint-add-remove-popup>
+    <app-service-add-remove-popup *ngIf="isPopupVisibleServiceAddRemove" [mainType]="mainType" [subType]="subType"
+      [regionType]="selectedArea" [typeAddRemove]="typeAddRemove" [startDate]="startDate" [endDate]="endDate"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-service-add-remove-popup>
+
+
+    <app-thiet-bi-dau-cuoi-popup *ngIf="isPopupVisibleThietBiDauCuoi" [mainType]="mainType" [subType]="subType"
+      [startDate]="startDate" [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-thiet-bi-dau-cuoi-popup>
+    <app-unident-popup *ngIf="isPopupVisibleUnIdent" [mainType]="mainType" [subType]="subType" [startDate]="startDate"
+      [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-unident-popup>
+    <app-dinh-danh-khong-dong-nhat-popup *ngIf="isPopupVisibleDinhDanhKhongDongNhat" [mainType]="mainType"
+      [subType]="subType" [startDate]="startDate" [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay"
+      [regionType]="selectedArea" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-dinh-danh-khong-dong-nhat-popup>
+    <app-cleaned-malware-popup *ngIf="isPopupVisibleCleanedMalware" [mainType]="mainType" [subType]="subType"
+      [startDate]="startDate" [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-cleaned-malware-popup>
+
+    <app-common-malware-popup *ngIf="isPopupVisibleCommonMalware" [mainType]="mainType" [startDate]="startDate"
+      [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay" [is_common_malware]="is_common_malware"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-common-malware-popup>
+
+    <app-safety-network-popup *ngIf="isPopupVisibleSafetyNetwork" [mainType]="mainType" [subType]="subType"
+      [startDate]="startDate" [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay" [is_at_coban]="is_at_coban"
+      [regionType]="selectedArea" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-safety-network-popup>
+
+    <app-phe-duyet-ho-so-popup *ngIf="isPopupVisiblePheDuyetHoSo" [mainType]="mainType" [subType]="subType"
+      [startDate]="startDate" [endDate]="endDate" [isClickTrongNgay]="is_click_trong_ngay"
+      [is_fe_duyet_3]="is_fe_duyet_3" [is_fe_duyet_4]="is_fe_duyet_4" [is_fe_duyet_5]="is_fe_duyet_5"
+      [regionType]="selectedArea" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-phe-duyet-ho-so-popup>
+
+    <app-infrastructure-alert-popup *ngIf="isPopupVisibleInfrastructureAlert" [mainType]="mainType" [subType]="subType"
+      [startDate]="startDate" [endDate]="endDate" [regionType]="selectedArea" [alertType]="alertType"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-infrastructure-alert-popup>
+
+    <app-infrastructure-alert-second-popup *ngIf="isPopupVisibleInfrastructureSecondAlert" [mainType]="mainType"
+      [subType]="subType" [startDate]="startDate" [endDate]="endDate" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-infrastructure-alert-second-popup>
+
+    <app-safety-information-alert-popup *ngIf="isPopupVisibleSafetyInformationAlert" [mainType]="mainType"
+      [subType]="subType" [startDate]="startDate" [endDate]="endDate" [regionType]="selectedArea"
+      [alertType]="alertType" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-safety-information-alert-popup>
+
+    <app-safety-information-alert-second-popup *ngIf="isPopupVisibleSafetyInformationSecondAlert" [mainType]="mainType"
+      [subType]="subType" [startDate]="startDate" [endDate]="endDate" [regionType]="selectedArea"
+      (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-safety-information-alert-second-popup>
+
+    <app-security-popup *ngIf="isPopupVisibleSecurity" [mainType]="mainType" [subType]="subType" [startDate]="startDate"
+      [endDate]="endDate" [regionType]="selectedArea" (togglePopupEvent)="handleTogglePopupEvent($event)">
+    </app-security-popup>
+    <app-tctt-bocgo-popup *ngIf="isPopupVisibleBocGo" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-bocgo-popup>
+    <app-tctt-chithi-popup *ngIf="isPopupVisibleChiThi" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-chithi-popup>
+    <app-tctt-truyenthong-popup *ngIf="isPopupVisibleTruyenThong" [dataDetail]="dataDetail"
+      (togglePopupEvent)="handleTogglePopupEvent($event)"></app-tctt-truyenthong-popup>
+  </ng-container>
+  <ng-template #viewmap>
+    <div class="mid-panel d-flex flex-column gap-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <button style="border: none; background: none; padding: 0;" (click)="onCloseMid()">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.7337 34.8334L9.16699 32.2667L19.4337 22.0001L9.16699 11.7334L11.7337 9.16675L22.0003 19.4334L32.267 9.16675L34.8337 11.7334L24.567 22.0001L34.8337 32.2667L32.267 34.8334L22.0003 24.5667L11.7337 34.8334Z"
+                fill="#080808" />
+            </svg>
+          </button>
+          <app-breadcrumbs (breadcrumbClicked)="handleBreadcrumbClick($event)"></app-breadcrumbs>
+        </div>
+        <div class="d-flex align-items-center gap-10">
+          <div class="d-flex align-items-center gap-4">
+            <h4>khu vực</h4>
+            <select class="btth-select-box" [(ngModel)]="selectedArea" (ngModelChange)="onRegionChange()"
+              style="width: 260px;">
+              <option *ngFor="let item of regionItems" [value]="item.value">
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+          <div class="d-flex align-items-center gap-4">
+            <h4>Thời gian</h4>
+            <app-date-time-range-picker (selectDate)="handleSelectDate($event)"
+              style="width: 520px;"></app-date-time-range-picker>
+          </div>
+          <!--            <app-avatar></app-avatar>-->
+        </div>
+      </div>
+      <div class="btth-lr-panel-card">
+        <div class="tab-pane active" id="military-map-tab" [ngClass]="{ active: activeTab === 'military-map' }"
+          role="tabpanel">
+          <div [ngSwitch]="currentMap">
+            <app-military-map #militaryMap *ngSwitchCase="'cyber-defense'"
+              [selectedArea]="selectedArea"></app-military-map>
+            <app-information-warfare-map *ngSwitchCase="'info-warfare'"></app-information-warfare-map>
+            <app-tcm-map *ngSwitchCase="'tcm'"></app-tcm-map>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="topology-map-tab" [ngClass]="{ active: activeTab === 'topology-map' }"
+          role="tabpanel">
+          <ng-container *ngIf="topology$ | async as topology">
+            <app-topology-card diagramId="mid-panel" [topologyData]="topology" [id]="eventData"
+              [isFullScreen]="true"></app-topology-card>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<ng-container *ngIf="payloadData$ | async"></ng-container>

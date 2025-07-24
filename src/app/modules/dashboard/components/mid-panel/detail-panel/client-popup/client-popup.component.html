@@ -1,0 +1,39 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex justify-content-end">
+    <div class="d-flex gap-2 align-items-center" style="line-height: 65px;">
+      <h4>Đóng</h4>
+      <button (click)="togglePopup(false)" style="border: none; padding: 0; outline: none; background: none;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.6663 31.6663L8.33301 29.333L17.6663 19.9997L8.33301 10.6663L10.6663 8.33301L19.9997 17.6663L29.333 8.33301L31.6663 10.6663L22.333 19.9997L31.6663 29.333L29.333 31.6663L19.9997 22.333L10.6663 31.6663Z"
+            fill="#080808" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="d-flex gap-6" style="max-width: 100%;">
+      <div class="col btth-lr-panel-card">
+        <app-statistic-pie-chart-popup [pieData]="pieData"></app-statistic-pie-chart-popup>
+      </div>
+      <div class="col btth-lr-panel-card">
+        <app-info-bar id="1" [uploadPostTitle]="uploadPostTitleOS" [uploadData]="columnDataOS">
+        </app-info-bar>
+      </div>
+
+      <div class="col btth-lr-panel-card" id="2">
+        <app-info-bar id="2" [uploadPostTitle]="uploadPostTitleRAM" [uploadData]="columnDataRAM">
+        </app-info-bar>
+      </div>
+
+      <div class="col btth-lr-panel-card" id="3">
+        <app-info-bar id="3" [uploadPostTitle]="uploadPostTitleStorage" [uploadData]="columnDataStorage">
+        </app-info-bar>
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-table-detail-1 [tableData]="tableData" [regionType]="regionType" [mainType]="mainType" [subType]="subType">
+    </app-table-detail-1>
+  </div>
+</div>

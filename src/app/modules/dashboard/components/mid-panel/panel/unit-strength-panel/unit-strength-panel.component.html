@@ -1,0 +1,38 @@
+<table>
+  <tr class="tr-bg-3a">
+    <td colspan="2">Thiết bị mạng</td>
+  </tr>
+  <tr>
+    <td>Định tuyến</td>
+    <td>
+      {{ statistics.router | numberFormat }}
+    </td>
+  </tr>
+  <tr>
+    <td>Chuyển mạch</td>
+    <td>
+      {{ statistics.switch | numberFormat }}
+    </td>
+  </tr>
+  <tr>
+    <td>Tường lửa</td>
+    <td>
+      {{ statistics.firewall | numberFormat }}
+    </td>
+  </tr>
+  <tr class="tr-bg-3a">
+    <td colspan="2">Thiết bị đầu cuối</td>
+  </tr>
+  <tr>
+    <td>Máy chủ</td>
+    <td>
+      {{ statistics.server | numberFormat }}
+    </td>
+  </tr>
+  <tr>
+    <td>Máy trạm</td>
+    <td>
+      {{ statistics.client | numberFormat }}
+    </td>
+  </tr>
+</table>

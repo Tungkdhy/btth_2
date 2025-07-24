@@ -1,0 +1,10 @@
+.top-radio {
+  margin-bottom: 1em;
+}
+
+.top-radio input[type="radio"] {
+  position: relative;
+  width: 1em; /* Adjust size here */
+  height: 1em; /* Adjust size here */
+  margin-right: 1em; /* Space between radio button and label */
+}

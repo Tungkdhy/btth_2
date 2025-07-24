@@ -1,0 +1,7 @@
+/mgis-premaster-frontend-*.tar
+/Dockerfile*
+/docker_run.sh
+/deploy.sh
+/node_modules
+/.angular
+#/dist

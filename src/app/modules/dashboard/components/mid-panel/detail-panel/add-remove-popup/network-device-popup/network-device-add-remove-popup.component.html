@@ -1,0 +1,37 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Phòng thủ mạng ></span>
+      <span class="choise-item"> Tăng giảm thiết bị {{getTypeNetworkDeviceType()}}</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group height-body">
+    <div class="chart-part chart-group">
+      <div class="card-border chart-pie-left">
+        <app-pie-chart-left-panel
+          [pieData]="pieData"
+        ></app-pie-chart-left-panel>
+      </div>
+      <div class="card-border chart-column-row">
+        <app-column-chart-left-panel
+          [columnData]="columnData"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+    <div class="table-part">
+      <app-table-detail-1
+        [tableData]="tableData"
+        [regionType]="regionType"
+        [mainType]="mainType"
+        [subType]="subType"
+        [startDate]="startDate"
+        [endDate]="endDate"
+        [typeAddRemove]="typeAddRemove"
+      >
+      </app-table-detail-1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="nav-tabs-windown">
+  <ul class="nav nav-tabs">
+    <li *ngFor="let tab of tabs" class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="tab.value === activeTab"
+        (click)="selectTab(tab)"
+      >
+        {{ tab.label }}
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <ng-container *ngTemplateOutlet="getActiveContent()"></ng-container>
+  </div>
+</div>
+

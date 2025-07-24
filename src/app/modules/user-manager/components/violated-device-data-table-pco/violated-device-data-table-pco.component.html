@@ -1,0 +1,186 @@
+<!--<div class="card">-->
+<!--  <div class="card-header">-->
+<!--    <div class="card-title d-flex flex-column">-->
+<!--      <ng-container *ngIf="event">-->
+<!--        <div [ngSwitch]="event" class="py-3">-->
+<!--          <h3 *ngSwitchCase="'Internet'" class="fw-bolder">-->
+<!--            Danh sách thiết bị truy cập Internet-->
+<!--          </h3>-->
+<!--          <h3 *ngSwitchCase="'Malware'" class="fw-bolder">-->
+<!--            Danh sách thiết bị nhiễm mã độc-->
+<!--          </h3>-->
+<!--          <h3 *ngSwitchDefault class="fw-bolder">-->
+<!--            Danh sách thiết bị truy cập tên miền độc hại-->
+<!--          </h3>-->
+<!--        </div>-->
+<!--      </ng-container>-->
+
+<!--      <div id="search" class="d-flex flex-row">-->
+<!--        <div class="d-flex align-items-center position-relative my-1">-->
+<!--          <span class="svg-icon svg-icon-1 position-absolute ms-4">-->
+<!--            <svg-->
+<!--              width="24"-->
+<!--              height="24"-->
+<!--              viewBox="0 0 24 24"-->
+<!--              fill="none"-->
+<!--              xmlns="http://www.w3.org/2000/svg"-->
+<!--            >-->
+<!--              <rect-->
+<!--                opacity="0.5"-->
+<!--                x="17.0365"-->
+<!--                y="15.1223"-->
+<!--                width="8.15546"-->
+<!--                height="2"-->
+<!--                rx="1"-->
+<!--                transform="rotate(45 17.0365 15.1223)"-->
+<!--                fill="currentColor"-->
+<!--              ></rect>-->
+<!--              <path-->
+<!--                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"-->
+<!--                fill="currentColor"-->
+<!--              ></path>-->
+<!--            </svg>-->
+<!--          </span>-->
+<!--          <input-->
+<!--            id="search-input"-->
+<!--            type="text"-->
+<!--            data-kt-ecommerce-product-filter="searchModel"-->
+<!--            class="form-control form-control-solid w-md-250px w-xl-350px ps-14"-->
+<!--            placeholder="Tìm kiếm"-->
+<!--            [(ngModel)]="search.searchKey"-->
+<!--            (keyup.enter)="handleSearch()"-->
+<!--            autofocus-->
+<!--          />-->
+<!--        </div>-->
+<!--        <button-->
+<!--          id="search-button"-->
+<!--          class="btn btn-primary ms-2 me-2"-->
+<!--          (click)="handleSearch()"-->
+<!--        >-->
+<!--          Tìm kiếm-->
+<!--        </button>-->
+<!--        <button-->
+<!--          class="ms-5 btn btn-link collapsed"-->
+<!--          data-bs-toggle="collapse"-->
+<!--          aria-expanded="false"-->
+<!--          data-bs-target="#advancedSearchForm"-->
+<!--          aria-controls="advancedSearchForm"-->
+<!--        >-->
+<!--          Nâng cao-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <div class="collapse" id="advancedSearchForm">-->
+<!--        <div class="w-xl-300px py-5">-->
+<!--          <label class="form-label fw-bold">Thời gian:</label>-->
+<!--          <ejs-daterangepicker-->
+<!--            class="form-control form-control-solid"-->
+<!--            cssClass="daterange-custom"-->
+<!--            [format]="'dd/MM/yyyy'"-->
+<!--            [allowEdit]="false"-->
+<!--            [startDate]="startDate"-->
+<!--            [endDate]="endDate"-->
+<!--            locale="vi"-->
+<!--            (change)="onSelectDate($event)"-->
+<!--          ></ejs-daterangepicker>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="card-toolbar">-->
+<!--      <button-->
+<!--        *ngIf="deviceList$ | async as devices"-->
+<!--        type="button"-->
+<!--        class="btn btn-info"-->
+<!--        title="Click để import excel"-->
+<!--        (click)="exportExcel(devices)"-->
+<!--      >-->
+<!--        <i class="las la-file-excel fs-3"></i>-->
+<!--        Export-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <ng-container *ngIf="deviceList$ | async as devices">-->
+<!--    <div class="card-body">-->
+<!--      <div class="table-responsive">-->
+<!--        <table class="table align-middle table-row-dashed gy-5">-->
+<!--          &lt;!&ndash;begin::Table head&ndash;&gt;-->
+<!--          <thead class="border-bottom border-gray-200 fs-7 fw-bold">-->
+<!--            &lt;!&ndash;begin::Table row&ndash;&gt;-->
+<!--            <th class="text-center">Người quản lý</th>-->
+<!--            <th class="text-center">Đơn vị</th>-->
+<!--            <th class="text-center">MAC/IP</th>-->
+<!--            <th class="text-center">Thời gian</th>-->
+<!--            <th class="text-center mw-300px">Mô tả</th>-->
+<!--            <th class="text-end">Xử lý</th>-->
+<!--            &lt;!&ndash;end::Table row&ndash;&gt;-->
+<!--          </thead>-->
+<!--          &lt;!&ndash;end::Table head&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Table body&ndash;&gt;-->
+<!--          <tbody-->
+<!--            *ngIf="devices; else noRecord"-->
+<!--            class="fs-6 fw-semibold text-gray-600"-->
+<!--          >-->
+<!--            &lt;!&ndash;begin::Table row&ndash;&gt;-->
+
+<!--            &lt;!&ndash;end::Table row&ndash;&gt;-->
+<!--            <tr *ngFor="let device of devices">-->
+<!--              <td class="text-center">-->
+<!--                <a class="text-dark fw-bolder text-hover-primary fs-6">{{-->
+<!--                  device.managerName-->
+<!--                }}</a>-->
+<!--              </td>-->
+<!--              <td class="text-center">{{ device.unitName }}</td>-->
+<!--              <td>-->
+<!--                <a-->
+<!--                  class="text-center text-dark fw-bold text-hover-primary d-block mb-1 fs-6"-->
+<!--                >-->
+<!--                  {{ device.sourceMac }}-->
+<!--                </a>-->
+<!--                <span-->
+<!--                  class="text-center text-muted fw-semibold text-muted d-block fs-7"-->
+<!--                >-->
+<!--                  {{ device.sourceIp }}-->
+<!--                </span>-->
+<!--              </td>-->
+<!--              <td class="text-center">-->
+<!--                {{ device.importDate | date : "dd/MM/yyyy" }}-->
+<!--              </td>-->
+<!--              <td class="text-center mw-300px">{{ device.description }}</td>-->
+<!--              <td>-->
+<!--                <div class="d-flex justify-content-end flex-shrink-0 menu-item">-->
+<!--                  <a-->
+<!--                    class="btn btn-sm btn-secondary"-->
+<!--                    (click)="handleView(device.sourceMac)"-->
+<!--                  >-->
+<!--                    Chi tiết-->
+<!--                  </a>-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </tr>-->
+<!--          </tbody>-->
+<!--          <ng-template #noRecord>-->
+<!--            <p class="fs-6 fw-semibold text-gray-600">Không có bản ghi</p>-->
+<!--          </ng-template>-->
+<!--          &lt;!&ndash;end::Table body&ndash;&gt;-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="card-footer">-->
+<!--      <ng-container *ngIf="devices.length > 0" class="row">-->
+<!--        &lt;!&ndash; <div-->
+<!--            class="d-flex align-items-center justify-content-center justify-content-md-end"-->
+<!--          > &ndash;&gt;-->
+<!--        <ngb-pagination-->
+<!--          class="d-flex justify-content-center"-->
+<!--          [collectionSize]="devices.length"-->
+<!--          [(page)]="search.page"-->
+<!--          [pageSize]="search.size"-->
+<!--          [maxSize]="search.maxSize"-->
+<!--          (pageChange)="changePage($event)"-->
+<!--        >-->
+<!--        </ngb-pagination>-->
+<!--        &lt;!&ndash; </div> &ndash;&gt;-->
+<!--      </ng-container>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+<!--</div>-->

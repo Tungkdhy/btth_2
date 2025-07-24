@@ -1,0 +1,29 @@
+<div>
+  <h2>Thống kê trạng thái hoạt động</h2>
+  <div style="height: 580px;">
+    <ng-container *ngIf="this.statusData">
+      <!-- <ejs-accumulationchart
+        class="chart-right-panel"
+        [title]="donutTitle"
+        [legendSettings]="donutlegendSettings"
+        [center]="{ x: '50%', y: '50%' }"
+        [centerLabel]="centerLabel"
+      >
+        <e-accumulation-series-collection>
+          <e-accumulation-series
+            [dataSource]="statusData"
+            xName="trangthai"
+            yName="soluong"
+            innerRadius="50%"
+            [dataLabel]="donutDataLabel"
+            [palettes]="donutColors"
+            radius="80%"
+            legendShape="Rectangle"
+          >
+          </e-accumulation-series>
+        </e-accumulation-series-collection>
+      </ejs-accumulationchart> -->
+      <div echarts [options]="diemNongChartOption" class="diem-nong-chart"></div>
+    </ng-container>
+  </div>
+</div>

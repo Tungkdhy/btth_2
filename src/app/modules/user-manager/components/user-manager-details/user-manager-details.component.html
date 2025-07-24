@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <div class="d-flex overflow-auto">
+        <ul
+          class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-bolder flex-nowrap ms-3"
+        >
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['chi-tiet']"
+              routerLinkActive="active"
+            >
+              Chi tiết
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['mat-khau']"
+              routerLinkActive="active"
+            >
+              Mật khẩu
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['phan-quyen']"
+              routerLinkActive="active"
+            >
+              Phân quyền
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-toolbar">
+      <a
+        class="btn btn-icon btn-sm btn-active-light-primary btn-close"
+        [routerLink]="['../']"
+      >
+        <span class="svg-icon svg-icon-2x"></span>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <router-outlet></router-outlet>
+  </div>
+</div>

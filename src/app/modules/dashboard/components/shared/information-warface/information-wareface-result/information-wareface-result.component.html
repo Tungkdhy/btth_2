@@ -1,0 +1,67 @@
+<div class="h-100 ">
+  <h2 style="margin-bottom: 16px;">Kết quả tác chiến thông tin</h2>
+  <div class="d-flex justify-content-between">
+    <div *ngIf="chithiData$ | async as chiThi">
+      <div class="d-flex gap-2" style="cursor: pointer;">
+        <span class="circle-icon green" style="margin-top: 10px;"></span>
+        <div>
+          <h4 (click)="togglePopup(true, 'ChiThi')" [ngStyle]="{ color: isShowChiThi ? 'green' : 'inherit' }"
+            style="margin-bottom: 8px;">Cung cấp
+            BCĐ35</h4>
+          <span class="status status-green">
+            <p>
+              {{
+              formatNumberWithDotLocal(chiThi[0]?.thongke) || ""
+              }}
+            </p>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="bocgoData$ | async as bocGo">
+      <div *ngIf="bocGo.length > 0 && bocGo[0].hoanthanh > 0">
+        <div class="d-flex gap-2" style="margin-bottom: 8px; cursor: pointer;">
+          <span class="circle-icon green" style="margin-top: 10px;"></span>
+          <div>
+            <h4 (click)="togglePopup(true, 'BocGo')" [ngStyle]="{ color: isShowBocGo ? 'green' : 'inherit' }" style="margin-bottom: 8px;">Bóc gỡ
+            </h4>
+            <span class="status status-green">
+              <p>{{ bocGo[0].hoanthanh }}</p>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="kenhtruyenthongData && kenhtruyenthongData.length">
+      <div class="d-flex gap-2" style="cursor: pointer;">
+        <span class="circle-icon green" style="margin-top: 10px;"></span>
+        <div>
+          <h4 (click)="togglePopup(true, 'TruyenThong')" [ngStyle]="{ color: isShowTruyenThong ? 'green' : 'inherit' }" style="margin-bottom: 8px;">
+            Kênh truyền thông</h4>
+            <span class="status status-green">
+              <p>{{ kenhtruyenthongData[0]?.danghoatdong }}/{{ tongKenhTruyenThong }}
+                hoạt động</p>
+            </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="kenhtruyenthongData.length === 0">
+      <div class="d-flex gap-2">
+        <span class="circle-icon green" style="margin-top: 10px;"></span>
+        <div>
+          <h4 style="margin-bottom: 8px;">Kênh truyền thông</h4>
+          <span class="status status-green">
+            <p>N/A hoạt động</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

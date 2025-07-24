@@ -1,0 +1,34 @@
+<div class="col-6 h-100 chart-monitoring-target">
+  <h2 class="text-left" (click)="togglePopup(true, 'TQBaiViet')">
+    Tỉ lệ tin tiêu cực
+  </h2>
+  <!-- <ng-container class="h-67" *ngIf="chartData | async as data">
+    <ejs-chart id="chart-container" class="chart-right-panel" [primaryXAxis]="primaryXAxisLine" [primaryYAxis]="primaryYAxisLine" [title]="titleLine">
+        <e-series-collection>
+            <e-series [dataSource]="data" type="Line" xName="ngay" yName="tile" fill="red" width="1" [marker]="markerLine" width="3"></e-series>
+        </e-series-collection>
+    </ejs-chart>
+</ng-container> -->
+
+  <ng-container class="h-67" *ngIf="chartData as data">
+    <ejs-chart
+      id="chart-container"
+      class="chart-right-panel"
+      [primaryXAxis]="primaryXAxisLine"
+      [primaryYAxis]="primaryYAxisLine"
+      [title]="titleLine"
+    >
+      <e-series-collection>
+        <e-series
+          [dataSource]="data"
+          type="Line"
+          xName="ngay"
+          yName="tile"
+          [marker]="markerLine"
+          fill="red"
+          width="1"
+        ></e-series>
+      </e-series-collection>
+    </ejs-chart>
+  </ng-container>
+</div>

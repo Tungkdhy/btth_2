@@ -1,0 +1,90 @@
+<!--begin::Menu wrapper-->
+<div
+  id="kt_app_sidebar_menu_wrapper"
+  class="app-sidebar-wrapper scroll-y my-5"
+  data-kt-scroll="true"
+  data-kt-scroll-activate="true"
+  data-kt-scroll-height="auto"
+  data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+  data-kt-scroll-wrappers="#kt_app_sidebar_menu"
+  data-kt-scroll-offset="5px"
+  data-kt-scroll-save-state="true"
+>
+  <!--begin::Menu-->
+  <div
+    class="menu menu-column menu-rounded menu-sub-indention px-3"
+    id="#kt_app_sidebar_menu"
+    data-kt-menu="true"
+    data-kt-menu-expand="false"
+  >
+    <ng-container *ngIf="rootUnit">
+      <!--    My Pages-->
+      <div class="row px-5">
+        <!--        <div class="col-4 d-flex justify-content-center">-->
+        <!--          <div class="menu-item menu-accordion">-->
+        <!--            <span-->
+        <!--              class="menu-link"-->
+        <!--              [ngClass]="isSelectedUnitId(rootUnit.id) ? 'here active' : ''"-->
+        <!--              (click)="handleSelectUnit(rootUnit)"-->
+        <!--            >-->
+        <!--              <span class="menu-icon m-0">-->
+        <!--                <app-neun-icon-unit [unit]="rootUnit"></app-neun-icon-unit>-->
+        <!--              </span>-->
+        <!--              &lt;!&ndash;          <span class="menu-title"> {{ rootUnit.name }} </span>&ndash;&gt;-->
+        <!--            </span>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="col-8">-->
+        <ejs-autocomplete
+          id="atc-element"
+          [dataSource]="unitDataSource"
+          [fields]="autocompleteFields"
+          [(value)]="atcValue"
+          (select)="handleSelectAutocomplete($event)"
+          (filtering)="onFiltering($event)"
+          locale="vi"
+          placeholder="Tìm đơn vị"
+        ></ejs-autocomplete>
+        <!--        </div>-->
+      </div>
+
+      <div class="separator my-2"></div>
+
+      <div class="row">
+        <ng-container *ngIf="unitTreeNoRoot && unitTreeNoRoot.length > 0">
+          <div #unitSideBarMenu *ngFor="let unit of unitTreeNoRoot">
+            <div
+              [id]="'id-' + unit.id"
+              class="menu-item menu-accordion"
+              *ngIf="unit.treeLevel === unitTreeNoRoot[0].treeLevel"
+              data-kt-menu-trigger="click"
+            >
+              <span
+                class="menu-link"
+                [ngClass]="isSelectedUnitId(unit.id) ? 'here show active' : ''"
+                (click)="handleSelectUnit(unit)"
+              >
+                <span class="menu-icon">
+                  <app-neun-icon-unit [unit]="unit"></app-neun-icon-unit>
+                </span>
+                <span class="menu-title"> {{ unit.name }} </span>
+                <span *ngIf="unit.hasChildren" class="menu-arrow"></span>
+              </span>
+              <ng-container *ngIf="unit.hasChildren">
+                <div class="menu-sub menu-sub-accordion">
+                  <app-sidebar-unit-data
+                    [unitData]="
+                      getChildrenFromUnitsById(unitTreeNoRoot, unit.id)
+                    "
+                    (selectUnit)="handleSelectUnit($event)"
+                  ></app-sidebar-unit-data>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  <!--end::Menu-->
+</div>

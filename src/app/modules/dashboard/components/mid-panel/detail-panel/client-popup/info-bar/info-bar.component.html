@@ -1,0 +1,27 @@
+<div>
+  <div>
+    <h2>{{ uploadPostTitle }}</h2>
+  </div>
+  <div style="height: 600px">
+    <!-- <ejs-chart
+        [id]="id"
+        [primaryXAxis]="uploadPostPrimaryXAxis"
+        [primaryYAxis]="uploadPostPrimaryYAxis"
+        height="100%"
+        (textRender)="onTextRender($event)"
+      >
+        <e-series-collection>
+          <e-series
+            [dataSource]="uploadData"
+            type="Bar"
+            xName="group_by"
+            yName="count"
+            [pointColorMapping]="uploadPostColorMapping"
+            [fill]="basicColor"
+            [marker]="marker"
+          ></e-series>
+        </e-series-collection>
+      </ejs-chart> -->
+    <div echarts [id]="id" [options]="inforBarChartOption" class="infor-bar-chart" [autoResize]="true"></div>
+  </div>
+</div>

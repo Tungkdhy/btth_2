@@ -1,0 +1,83 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0.8em;
+  overflow: hidden;
+  background-color: var(--bgCard);
+  font-size: 2.2em;
+  line-height: 1.2em;
+  width: 100%;
+}
+
+tr:first-child th:first-of-type {
+  border-top-left-radius: 0.8em;
+}
+
+tr:first-of-type th:last-of-type {
+  border-top-right-radius: 0.8em;
+}
+
+tr:last-of-type th {
+  border-bottom-left-radius: 0.8em;
+}
+
+tbody tr:first-child td:first-child {
+  width: 70%;
+}
+
+tbody tr:last-of-type td:first-child {
+  border-bottom-left-radius: 0.8em;
+}
+
+tbody tr:last-of-type td:last-child {
+  border-bottom-right-radius: 0.8em;
+}
+
+table thead tr {
+  background-color: var(--colorHighlight);
+}
+
+td {
+  border-left: hidden;
+  border-top: hidden;
+}
+
+th {
+  border-left: hidden;
+}
+
+th,
+td {
+  border: 0.05em solid black;
+  padding: 0.6em;
+  text-align: center;
+}
+
+th:first-child {
+  border-left: 0.05em solid black;
+}
+
+td:first-child {
+  border-left: 0.05em solid black;
+  border-top: 0.05em solid black;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--colorHighlight);
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.pagination-controls button {
+  border: hidden;
+  padding: 0.5em 0.25em;
+}
+
+.pagination-controls button:hover {
+  background-color: var(--colorHighlight);
+}

@@ -1,0 +1,15 @@
+<div [id]="mapId" class="map vh-90">
+  <div id="info"></div>
+  <div class="right-panel-map">
+    <ng-container *ngIf="nuanceMap$ | async as nuanceData">
+      <app-iw-nuance-table [nuanceStats]="nuanceData"></app-iw-nuance-table>
+    </ng-container>
+    <ng-container *ngIf="hotSpotStatsMap$ | async as hotspotStats">
+      <app-iw-hotspot-table
+        [hotspotStats]="hotspotStats"
+      ></app-iw-hotspot-table>
+    </ng-container>
+    <ng-container *ngIf="hotSpotInfoMap$ | async"></ng-container>
+  </div>
+  <app-layers-switcher [layersSwitcher]="mapLayers"></app-layers-switcher>
+</div>

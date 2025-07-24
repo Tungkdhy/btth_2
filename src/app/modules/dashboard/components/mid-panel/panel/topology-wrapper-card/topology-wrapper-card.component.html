@@ -1,0 +1,95 @@
+<ng-container *ngIf="topology$ | async as topology; else loading">
+  <div class="p-2 m-5">
+    <!-- Row with Title and Buttons -->
+    <div class="d-flex justify-content-end align-items-center mb-3">
+      <div class="btn-group">
+        <!-- Button to open popup -->
+        <ng-container *ngIf="isTopologyHasNodes(topology)">
+          <button class="btn me-2" (click)="openModal(content)">
+            Mở cấu trúc mạng
+          </button>
+        </ng-container>
+        <!-- Dropdown for options (Quân sự - default, Internet, Chuyên dùng) -->
+        <div class="btn-group">
+          <div class="network-group">
+            <select
+              class="network-select form-select-box"
+              [(ngModel)]="selectedNetwork"
+              (ngModelChange)="onNetworkChange($event)"
+            >
+              <option *ngFor="let item of networkItems" [value]="item.value">
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topology Card -->
+    <div class="row">
+      <ng-container *ngIf="isTopologyHasNodes(topology); else nothing">
+        <ng-container *ngIf="!isModalOpen; else modalMessage">
+          <app-topology-card [topologyData]="topology"></app-topology-card>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+    <!-- Popup Content -->
+    <div class="modal-header">
+      <app-title-panel [selectedFeature]="selectedFeature"></app-title-panel>
+      <div class="btn-group">
+        <div class="network-group">
+          <select
+            class="network-select form-select-box"
+            [(ngModel)]="selectedNetwork"
+            (ngModelChange)="onNetworkChange($event)"
+          >
+            <option *ngFor="let item of networkItems" [value]="item.value">
+              {{ item.name }}
+            </option>
+          </select>
+
+          <button
+            class="btn btn-light-danger"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <i class="bi bi-x font-size-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body vh-70">
+      <!-- Options inside popup -->
+      <ng-container *ngIf="topology; else loading">
+        <ng-container *ngIf="isTopologyHasNodes(topology); else nothing">
+          <app-topology-card
+            diagramId="modal-topology"
+            [isFullScreen]="true"
+            [topologyData]="topology"
+          ></app-topology-card>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-template>
+</ng-container>
+
+<ng-template #nothing>
+  <div class="text-center">
+    <p>Không có dữ liệu</p>
+  </div>
+</ng-template>
+
+<ng-template #modalMessage>
+  <div class="text-center">
+    <p>Đang hiển thị cấu trúc mạng trên hộp thoại!</p>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <app-neun-loading class="d-flex justify-content-center"></app-neun-loading>
+</ng-template>
+
+<ng-container *ngIf="dismissedModal$ | async"></ng-container>

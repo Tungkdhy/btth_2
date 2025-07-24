@@ -1,0 +1,10 @@
+<ng-container *ngIf="selectedFeature">
+  <app-unit-detail-panel
+    [selectedFeature]="selectedFeature"
+  ></app-unit-detail-panel>
+  <ng-container *ngIf="hasChildren$ | async as hasChildren">
+    <app-unit-list-panel
+      [selectedFeature]="selectedFeature"
+    ></app-unit-list-panel>
+  </ng-container>
+</ng-container>

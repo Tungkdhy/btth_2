@@ -1,0 +1,65 @@
+<div
+  class="table-panel-2 table-detail-panel-card malware h-100 table-popup-server detail-device"
+>
+  <div class="h-100">
+    <table class="h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên</th>
+          <th>Trạng thái</th>
+          <th>Băng thông</th>
+          <th>Máy tính</th>
+          <th>Kết nối gần nhất</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="6" class="text-center">Không có dữ liệu</td> <!-- Số cột phải tương ứng với số tiêu đề cột -->
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+
+          <td>
+            {{ item?.name }}
+          </td>
+          <td >
+            <div
+              [ngClass]="item?.status == 'up'
+                    ? 'active-status'
+                    : 'noactive-status'
+                "
+          >
+            {{ item?.status == "up" ? "Đang hoạt động" : "Mất kết nối" }}
+            </div>
+          </td>
+          <td>
+            {{ item?.speed }}
+            <div *ngIf="item?.vol">
+              <em>< {{ item?.vol }}</em>
+            </div>
+          </td>
+          <td class="text-center">
+            {{item?.endpoint[0]?.count || 0}}
+          </td>
+          <td>
+            {{item?.last_active | date:"dd-mm-yyyy" }}
+            <br/>
+            {{item?.last_active | date:"HH:mm:ss" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="total"
+      [maxSize]="5"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+  </div>
+
+</div>

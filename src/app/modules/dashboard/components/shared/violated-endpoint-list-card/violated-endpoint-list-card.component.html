@@ -1,0 +1,6 @@
+<app-data-table
+  [data]="devices"
+  [config]="{ columns: columns, pageSize: 10 }"
+  (pageChange)="handlePageChange($event)"
+  (searchQuery)="handleSearchQuery($event)"
+></app-data-table>

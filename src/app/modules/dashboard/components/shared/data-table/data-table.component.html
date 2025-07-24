@@ -1,0 +1,76 @@
+<ng-container *ngIf="totalPages > 1 && allowSearch">
+  <div class="search-bar mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="searchControl"
+      placeholder="Search..."
+    />
+  </div>
+</ng-container>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of config.columns"
+        class="text-center"
+        [class.d-none]="!column.isVisible"
+      >
+        {{ column.label }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of paginatedData"
+      (click)="rowClick.emit(item)"
+      [ngStyle]="getPointer()"
+    >
+      <td
+        *ngFor="let column of config.columns"
+        class="text-center"
+        [class.d-none]="!column.isVisible"
+      >
+        <ng-container *ngIf="!column.cellRenderer">
+          {{ item[column.key] }}
+        </ng-container>
+        <!-- Updated part here -->
+        <div
+          *ngIf="column.cellRenderer"
+          [innerHTML]="safeHtml(column.cellRenderer(item))"
+        ></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Pagination and Total Count -->
+<ng-container *ngIf="totalPages > 1">
+  <div class="d-flex justify-content-between align-items-center mt-3 mx-5">
+    <!-- Left side: Total number of items -->
+    <div *ngIf="totalItems" class="total-count">
+      Tổng số: {{ totalItems }}
+      <!-- Assuming `totalItems` holds the total number of items -->
+    </div>
+
+    <!-- Right side: Pagination controls -->
+    <div class="pagination-controls">
+      <button
+        class="btn btn-primary"
+        [disabled]="currentPage === 1"
+        (click)="changePage(currentPage - 1)"
+      >
+        Trước
+      </button>
+      <span class="mx-2">Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button
+        class="btn btn-primary"
+        [disabled]="currentPage === totalPages"
+        (click)="changePage(currentPage + 1)"
+      >
+        Sau
+      </button>
+    </div>
+  </div>
+</ng-container>

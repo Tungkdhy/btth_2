@@ -1,0 +1,22 @@
+<div class="user-dropdown-wrapper">
+  <!-- User button with image -->
+  <button
+    ejs-button
+    class="user-button"
+    cssClass="e-primary"
+    (click)="toggleDropdown()"
+  >
+    <img src="/assets/images/avatar.jpg" alt="User Avatar" class="user-avatar" />
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    *ngIf="showDropdown"
+    class="dropdown-menu"
+    [ngClass]="{ 'dropdown-open': showDropdown }"
+  >
+    <ul>
+      <li (click)="logout()">Đăng xuất</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+<div class="table-detail-panel-card malware">
+  <!-- <div class="d-flex helptool">
+    <input
+      class="detailSearch"
+      type="text"
+      id="searchInput"
+      placeholder="Tìm kiếm"
+    />
+    <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="statusType">
+        <option selected value="">Tất cả</option>
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Mất kết nối</option>
+      </select>
+    </div>
+
+    <button class="detailsearchButton">Tìm kiếm</button>
+  </div> -->
+  <div class="d-flex helptool">
+    <input
+      class="detailSearch"
+      type="text"
+      id="searchInput"
+      [(ngModel)]="searchText"
+      placeholder="Tìm kiếm theo từ khóa"
+    />
+    <div class="d-flex select-box-center">
+      Cấp:
+      <select class="form-select-box-1" [(ngModel)]="capType">
+        <option selected value="">Tất cả</option>
+        <option value="Cấp 1">Cấp 1</option>
+        <option value="Cấp 2">Cấp 2</option>
+        <option value="Cấp 3">Cấp 3</option>
+        <option value="Cấp 4">Cấp 4</option>
+      </select>
+    </div>
+
+    <div class="d-flex select-box-center">
+      Trạng thái:
+      <select class="form-select-box-1" [(ngModel)]="xuLyType">
+        <option selected value="">Tất cả</option>
+        <option value="Mất kết nối">Mất kết nối</option>
+        <option value="Hoạt động">Hoạt động</option>
+      </select>
+    </div>
+    <!--    <ejs-dropdownlist-->
+    <!--      [dataSource]="data"-->
+    <!--      [fields]="fields"-->
+    <!--      [placeholder]="placeholder"-->
+    <!--      (change)="onChange($event)"-->
+    <!--    >-->
+    <!--    </ejs-dropdownlist>-->
+    <!-- <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="statusType">
+        <option selected value="">Tất cả</option>
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Mất kết nối</option>
+      </select>
+    </div> -->
+
+    <button class="detailsearchButton" (click)="search()">Tìm kiếm</button>
+
+    <button class="detailsearchButton" (click)="exportExcel()">
+      Xuất excel
+    </button>
+  </div>
+  <div class="table-detail-haft">
+    <table class="">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Đơn vị</th>
+          <th style="width: 10%">Cấp độ</th>
+          <th style="">Kết nối</th>
+          <th style="text-align: center">Trạng thái</th>
+          <th style="">Địa bàn</th>
+          <th style="">Kết quả xử lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <!-- STT -->
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+          <!-- Unit -->
+          <td>
+            <div>{{ item?.unit_name_manager }}</div>
+            <div>{{ item?.unit_name_manager_parent }}</div>
+          </td>
+          <!-- Cap -->
+          <td style="">
+            {{
+              item.name === "FMS-Tổng"
+                ? "1"
+                : item.name === "FMS-V1" ||
+                  item.name === "FMS-V2" ||
+                  item.name === "FMS-V3"
+                ? "2"
+                : item.name.includes("FMS") &&
+                  item.name !== "FMS-Tổng" &&
+                  item.name !== "FMS-V1" &&
+                  item.name !== "FMS-V2" &&
+                  item.name !== "FMS-V3" &&
+                  !item.name.includes("Kho 602")
+                ? "3"
+                : "4"
+            }}
+          </td>
+          <!-- Last seen -->
+          <td style="">
+            <div>{{ getLastActive(item?.last_up).split("/")[0] }}</div>
+            <div>{{ getLastActive(item?.last_up).split("/")[1] }}</div>
+          </td>
+          <!-- Status -->
+
+          <!-- Region -->
+
+          <!-- Mo Ta -->
+
+          <td>
+            <div
+              [ngClass]="
+                item?.status === 'up' ? 'active-status' : 'noactive-status'
+              "
+            >
+              {{ item?.status === "up" ? "Hoạt động" : "Mất kết nối" }}
+            </div>
+          </td>
+          <td style="text-align: center">{{ getType(item?.region) }}</td>
+          <td>
+            <div [ngClass]="item?.status === 'up' ? 'd-none' : ''">
+              <div>- Trạng thái: {{ item?.statusServer }}</div>
+
+              <div [ngClass]="!item?.matchingStatus?.date ? 'd-none' : ''">
+                - Thời gian: {{ getLastActive(item?.matchingStatus?.date) }}
+              </div>
+              <div [ngClass]="!item?.matchingStatus?.date ? 'd-none' : ''">
+                - Thông tin: {{ item?.matchingStatus?.note }}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="total"
+      [maxSize]="5"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+  </div>
+</div>
+<!-- <div *ngIf="isPopupVisible" class="popup-overlay">
+  <div class="popup-content">
+    <div style="display: inline-block; font-size: 2.7em; font-weight: bold">
+      Chi tiết khắc phục
+    </div>
+    <span
+      class="close-icon right"
+      style="float: right"
+      (click)="isPopupVisible = false"
+      >X</span
+    >
+    <ng-container *ngIf="popUpDetail && popUpDetail.length > 0; else noData">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Nội dung</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of popUpDetail; let index = index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ log.note }}</td>
+            <td>{{ getLastActive(log.date) }}</td>
+            <td>{{ log.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #noData>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Nội dung</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 1em; text-align: center">
+          <tr>
+            <td colspan="4" class="text-center">Không có dữ liệu</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </div>
+</div> -->
+<ng-container *ngIf="payloadData$ | async"></ng-container>

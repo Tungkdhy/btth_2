@@ -1,0 +1,14 @@
+<ng-container *ngIf="nuanceStats && nuanceStats.length > 0">
+  <div class="card p-2">
+    <h2>Chỉ số sắc thái</h2>
+    <app-data-table
+      [data]="nuanceStats"
+      [config]="{
+        columns: columns,
+        pageSize: 10
+      }"
+      (pageChange)="handlePageChange($event)"
+      (searchQuery)="handleSearchQuery($event)"
+    ></app-data-table>
+  </div>
+</ng-container>

@@ -1,0 +1,130 @@
+<div class="card p-5">
+  <div>
+    <div class="bg-body-secondary inner-card table-it-infra-3107 wrap-box-info">
+      <div class="d-flex" style="flex-direction: column;">
+        <div class="title d-flex justify-content-center py-10" style="font-size: 36px;flex:1;">Tổng quan</div>
+        <div
+          class="d-flex justify-content-center pb-5 px-5 description"
+          [ngStyle]="{'word-wrap': 'break-word', 'white-space': 'pre-wrap'}"
+          [innerHTML]="description"
+        ></div>
+
+        <table class="table gy-7 gs-7 m-0" style="flex:1 1 auto;width: 100%;">
+          <thead>
+            <tr class="d-flex">
+              <th class="table-col-1">STT</th>
+              <th class="table-col-2">Đơn vị</th>
+              <th class="table-col-3">Mục tiêu</th>
+              <th class="table-col-4"><span>Lực lượng</span></th>
+              <th class="table-col-5"><span>Khai thác</span></th>
+              <th class="table-col-6"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of legendData">
+              <tr class="d-flex" (click)="onRowClick(item)">
+                <td
+                  class="table-col-1"
+                  style="text-align: center"
+                  [class.selected]="isSelected(item)"
+                >
+                  {{ item.index }}
+                </td>
+                <td
+                  class="table-col-2"
+                  style="text-align: center"
+                  [class.selected]="isSelected(item)"
+                >
+                  <img [src]="generateIcon(item.code)" width="30" height="30" />
+                  {{ item.unit }}
+                </td>
+                <td 
+                  class="table-col-3 wrap-text"
+                  [class.selected]="isSelected(item)">
+                  {{ item.desc }}
+                </td>
+                <td
+                  class="table-col-4"
+                  style="text-align: center"
+                  [class.selected]="isSelected(item)"
+                >
+                  <span [ngClass]="{ 'green-text': isGreenText(item.force) }">{{
+                    getNumerator(item.force)
+                  }}</span>
+                  <span *ngIf="item.force">/</span>
+                  {{ getDenominator(item.force) }}
+                </td>
+                <td
+                  class="table-col-5"
+                  style="text-align: center"
+                  [class.selected]="isSelected(item)"
+                >
+                  <span [ngClass]="{ 'green-text': isGreenText(item.used) }">{{
+                    getNumerator(item.used)
+                  }}</span>
+                  <span *ngIf="item.force">/</span>
+                  {{ getDenominator(item.used) }}
+                </td>
+                <td
+                  class="table-col-6"                  
+                  style="text-align: center"
+                  [class.selected]="isSelected(item)"
+                  (click)="toggleExpand(item)"
+                >
+                  <span>
+                    {{ item.expand ? "-" : "+" }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="item.expand" class="d-flex">
+                <td class="subtable-col-1">&nbsp;</td>
+                <td style="flex:1;padding:0;">
+                  <table style="flex:1;" class="fix-random-border-radius">
+                    <thead>
+                      <tr class="d-flex">
+                        <th class="subtable-col-2">Tên</th>
+                        <th class="subtable-col-3">Mô tả</th>
+                        <th class="subtable-col-4">Tổng số</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let child of item.children">
+                        <tr class="d-flex" (click)="onChildRowClick(child)">                          
+                          <td class="subtable-col-2">{{ child.name }}</td>
+                          <td class="wrap-text subtable-col-3">
+                            {{ child.desc }}
+                          </td>
+                          <td
+                            class="subtable-col-4"
+                            *ngIf="child.type !== 'dulieu'"
+                            style="text-align: center"
+                          >
+                            <span
+                              [ngClass]="{
+                                'green-text': isGreenText(child.total)
+                              }"
+                              >{{ getNumerator(child.total) }}</span
+                            >
+                            <span *ngIf="item.force">/</span>
+                            {{ getDenominator(child.total) }}
+                          </td>
+                          <td
+                            class="subtable-col-4"
+                            *ngIf="child.type === 'dulieu'"
+                            style="text-align: center"
+                          >
+                            {{ getRemoveNull(child.total) }}
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

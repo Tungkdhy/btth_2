@@ -1,0 +1,25 @@
+<ng-container *ngIf="selectedFeature">
+  <!--  <ng-container *ngIf="hasChildren$ | async as hasChildren; else children">-->
+  <!--    <app-unit-group-detail-panel-->
+  <!--      [selectedFeature]="selectedFeature"-->
+  <!--    ></app-unit-group-detail-panel>-->
+  <!--  </ng-container>-->
+  <!--  <ng-template #children>-->
+  <app-unit-detail-panel
+    [selectedFeature]="selectedFeature"
+  ></app-unit-detail-panel>
+  <!--  </ng-template>-->
+</ng-container>
+
+<!--<ng-container *ngIf="selectedFeature">-->
+<!--  <ng-container *ngIf="hasChildren$ | async as hasChildren; else children">-->
+<!--    <app-unit-group-detail-panel-->
+<!--      [selectedFeature]="selectedFeature"-->
+<!--    ></app-unit-group-detail-panel>-->
+<!--  </ng-container>-->
+<!--  <ng-template #children>-->
+<!--    <app-unit-detail-panel-->
+<!--      [selectedFeature]="selectedFeature"-->
+<!--    ></app-unit-detail-panel>-->
+<!--  </ng-template>-->
+<!--</ng-container>-->

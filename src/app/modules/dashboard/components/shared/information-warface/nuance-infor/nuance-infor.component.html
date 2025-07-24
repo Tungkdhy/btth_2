@@ -1,0 +1,69 @@
+<div class="btth-lr-panel-card">
+  <div class="d-flex justify-content-between">
+    <h2 (click)="togglePopup(true, 'SacThai')" [ngStyle]="{ color: isShowChiSoSacThai ? 'green' : 'inherit' }">
+      Chỉ số sắc thái
+    </h2>
+    <div class="d-flex gap-2">
+      <button class="btth-btn" (click)="setActiveData('platform')" [ngClass]="{ active: activeData === 'platform' }">
+        Platform
+      </button>
+      <button class="btth-btn" (click)="setActiveData('spyder')" [ngClass]="{ active: activeData === 'spyder' }">
+        Spyder
+      </button>
+    </div>
+  </div>
+  <div>
+    <ng-container *ngIf="nuanceData$ | async as result">
+      <p *ngIf="result?.updated" style="font-size: 15px !important; color: rgba(137, 141, 143, 1);">
+        Ngày cập nhật: {{ result.updated | date: "dd/MM/yyyy HH:mm:ss" }}
+      </p>
+      <!-- <ejs-accumulationchart
+        class="chart-right-panel"
+        id="nuance-donut-chart"
+        [title]="nuanceTitle"
+        [legendSettings]="nuancelegendSettings"
+        (legendRender)="legendRender($event, result.data)"
+        [center]="{ x: '50%', y: '50%' }"
+        [centerLabel]="centerLabel"
+        [enableSmartLabels]="true"
+      >
+        <e-accumulation-series-collection>
+          <e-accumulation-series
+            [dataSource]="result.data"
+            xName="x"
+            yName="y"
+            innerRadius="50%"
+            [dataLabel]="nuanceDataLabel"
+            [palettes]="nuanceColors"
+            radius="80%"
+            legendShape="Rectangle"
+          >
+          </e-accumulation-series>
+        </e-accumulation-series-collection>
+      </ejs-accumulationchart> -->
+      <div style="height: 350px;">
+        <div echarts [options]="pieChartOption" class="nuance-donut-chart"></div>
+      </div>
+      <!-- <div class="d-flex gap-7 align-items-center">
+        <div class="d-flex align-items-center gap-2">
+          <span class="circle-icon green"></span>
+          <p style="font-weight: 700 !important">Đã xử lý: </p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="circle-icon orange"></span>
+          <p style="font-weight: 700 !important">Đang xử lý: {{
+            countDangXuLyChartUDDV | numberFormat
+            }}</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="circle-icon red"></span>
+          <p style="font-weight: 700 !important">Chưa xử lý: {{
+            countChuaXuLyChartUDDV | numberFormat
+            }}</p>
+        </div>
+      </div> -->
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

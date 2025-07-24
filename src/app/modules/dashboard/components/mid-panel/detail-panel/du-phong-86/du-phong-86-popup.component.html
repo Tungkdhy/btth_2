@@ -1,0 +1,21 @@
+<div class="detail-panel-left-popup">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Phòng Thủ Mạng ></span>
+      <span class="choise-item">Dự phòng VKTB </span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">Đóng</span>
+    </div>
+  </div>
+  <div class="bg-group height-group">
+    <div class="table-part">
+      <app-column-chart-left-panel></app-column-chart-left-panel>
+    </div>
+  </div>
+  <div class="bg-group height-group">
+    <div class="table-part">
+      <app-table-detail-1 [tableData]="tableData"></app-table-detail-1>
+    </div>
+  </div>
+</div>

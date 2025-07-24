@@ -1,0 +1,36 @@
+.l-green-text{
+  color: var(--topGreenColor);
+}
+.hover-pointer{
+  cursor: pointer;
+}
+.hover-pointer:hover {
+  color: green; /* Color on hover */
+}
+.text-bold{
+  font-weight: 700 !important;
+}
+.it-infras-table th:nth-child(1),  
+.it-infras-table td:nth-child(1) {  
+  width: 28%;  
+}
+.it-infras-table th:nth-child(2),  
+.it-infras-table td:nth-child(2) {  
+  width: 31%;  
+}
+.it-infras-table th:nth-child(3),  
+.it-infras-table td:nth-child(3) {  
+  width: 31%;  
+}
+
+.it-infras-table{
+  th,
+  td {
+    padding: 13.5px 24px !important;
+  }
+
+}
+.tangGiam{
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}

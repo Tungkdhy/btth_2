@@ -1,0 +1,242 @@
+<div class="modal-detail-device">
+  <!-- <div class="modal-full" *ngIf="type === 'SWITCH'">
+    <div class="modal-header">
+      <div class="d-flex overflow-auto">
+        <ul
+          class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-bolder flex-nowrap ms-3"
+        >
+          <li class="nav-item">
+            <a
+              class="nav-link active text-active-primary me-6"
+              data-bs-toggle="tab"
+              tabindex="-1"
+              href="#tab_info"
+            >
+              Tổng quan
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              data-bs-toggle="tab"
+              tabindex="-1"
+              href="#tab_port"
+            >
+              Cổng kết nối
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              data-bs-toggle="tab"
+              tabindex="-1"
+              href="#tab_endpoint_switch"
+            >
+              Thiết bị đầu cuối
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              data-bs-toggle="tab"
+              tabindex="-1"
+              href="#cleaned_malware"
+            >
+              Máy tính được làm sạch mã độc
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-active-primary me-6"
+              data-bs-toggle="tab"
+              tabindex="-1"
+              href="#uncleaned_malware"
+            >
+              Máy tính an toàn thông tin
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn" aria-label="Close" (click)="modal.dismiss()">X</div>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="tab_info" role="tabpanel">
+        <div class="modal-body">
+          <app-device-info-card
+            [serial_number]="serialNumber"
+          ></app-device-info-card>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tab_port" role="tabpanel">
+        <app-device-port-list-card
+          [serial_number]="serialNumber"
+        ></app-device-port-list-card>
+      </div>
+
+      <div class="tab-pane fade" id="tab_endpoint_switch" role="tabpanel">
+        <app-device-computer-list-card
+          [serial_number]="serialNumber"
+        ></app-device-computer-list-card>
+      </div>
+
+      <div class="tab-pane fade" id="cleaned_malware" role="tabpanel">
+        <app-cleaned-malware-list-card
+          [serial_number]="serialNumber"
+        ></app-cleaned-malware-list-card>
+      </div>
+      <div class="tab-pane fade" id="uncleaned_malware" role="tabpanel">
+        <app-uncleaned-malware-list-card
+          [serial_number]="serialNumber"
+        ></app-uncleaned-malware-list-card>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="modal-full" *ngIf="type === 'SERVER'">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div class="d-flex overflow-auto">
+        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent flex-nowrap ms-3">
+          <li class="nav-item">
+            <a class="nav-link active text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#tab_info">
+              Tổng quan
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#tab_port">
+              Cấu hình
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#tab_endpoint_switch">
+              Ứng dụng
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#cleaned_malware">
+              Mã độc đã được làm sạch
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#uncleaned_malware">
+              Sự cố an toàn thông tin
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button class="btth-btn-close-popup" aria-label="Close" (click)="modal.dismiss()">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.6663 31.6663L8.33301 29.333L17.6663 19.9997L8.33301 10.6663L10.6663 8.33301L19.9997 17.6663L29.333 8.33301L31.6663 10.6663L22.333 19.9997L31.6663 29.333L29.333 31.6663L19.9997 22.333L10.6663 31.6663Z"
+            fill="#080808" />
+        </svg>
+      </button>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="tab_info" role="tabpanel">
+        <div class="modal-body">
+          <app-info-client-server-card [serial_number]="serialNumber"></app-info-client-server-card>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tab_port" role="tabpanel">
+        <div class="modal-body">
+          <app-configuration-card [serial_number]="serialNumber"></app-configuration-card>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tab_endpoint_switch" role="tabpanel">
+        <div class="modal-body">
+          <app-application-card [serial_number]="serialNumber"></app-application-card>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="cleaned_malware" role="tabpanel">
+        <div class="modal-body">
+          <app-cleaned-malware-client-server-list-card [serial_number]="serialNumber" [mainType]="mainType"
+            [subType]="subType" [regionType]="regionType" [startDate]="startDate" [endDate]="endDate"
+            [isClickTrongNgay]="isClickTrongNgay"></app-cleaned-malware-client-server-list-card>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="uncleaned_malware" role="tabpanel">
+        <div class="modal-body">
+          <app-uncleaned-malware-client-server-list-card
+            [serial_number]="serialNumber"></app-uncleaned-malware-client-server-list-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="type === 'MALWARE'">
+    <div class="modal-header">
+      <div class="d-flex overflow-auto h-55px">
+        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-bolder flex-nowrap ms-3">
+          <li class="nav-item">
+            <a class="nav-link active text-active-primary me-6" data-bs-toggle="tab" tabindex="-1"
+              href="#cleaned_malware">
+              Mã độc đã được làm sạch
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-active-primary me-6" data-bs-toggle="tab" tabindex="-1" href="#uncleaned_malware">
+              Cảnh báo an toàn thông tin
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+              <a
+                class="nav-link text-active-primary me-6"
+                data-bs-toggle="tab"
+                tabindex="-1"
+                href="#cleaned_malware"
+              >
+                Mã độc đã được làm sạch
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-active-primary me-6"
+                data-bs-toggle="tab"
+                tabindex="-1"
+                href="#uncleaned_malware"
+              >
+                Cảnh báo an toàn thông tin
+              </a>
+            </li> -->
+        </ul>
+      </div>
+      <div class="btn btn-icon btn-sm btn-active-light-primary btn-close me-2" aria-label="Close"
+        (click)="modal.dismiss()">
+        <span class="svg-icon svg-icon-2x"></span>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="cleaned_malware" role="tabpanel">
+        <div class="modal-body">
+          <app-cleaned-malware-client-server-list-card [serial_number]="serialNumber" [mainType]="mainType"
+            [subType]="subType" [regionType]="regionType" [startDate]="startDate"
+            [endDate]="endDate"></app-cleaned-malware-client-server-list-card>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="uncleaned_malware" role="tabpanel">
+        <app-uncleaned-malware-client-server-list-card
+          [serial_number]="serialNumber"></app-uncleaned-malware-client-server-list-card>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal-content"> -->
+
+<!-- </div> -->

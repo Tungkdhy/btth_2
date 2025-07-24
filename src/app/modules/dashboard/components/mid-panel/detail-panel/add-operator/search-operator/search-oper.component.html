@@ -1,0 +1,57 @@
+<div class="table-operator">
+  <form>
+    <div class="mb-3 row">
+      <label for="fileUpload" class="col-form-label">Tải lên:</label>
+      <div class="col-sm-auto">
+        <input
+          type="file"
+          class="form-control"
+          id="fileUpload"
+          placeholder="Tải lên..."
+          multiple
+          (change)="onFileChange($event)"
+        />
+      </div>
+    </div>
+  </form>
+  <div  class="table-operator-2">
+    <table
+      class=""
+      *ngIf="uploadedFiles.length > 0; else noData"
+    >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tên File</th>
+          <th scope="col">Kích thước</th>
+          <th scope="col">Kết quả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of uploadedFiles; let i = index">
+          <td scope="row">{{ i + 1 }}</td>
+          <td>{{ file.name }}</td>
+          <td>{{ file.size }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeFile(i)">
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noData>
+      <p
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+          font-size: 24px;
+        "
+      >
+        Không có file tải lên
+      </p>
+    </ng-template>
+  </div>
+</div>

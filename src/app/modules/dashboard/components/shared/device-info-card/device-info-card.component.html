@@ -1,0 +1,155 @@
+<div class="detail-device">
+  <div class="bg-group">
+    <!-- <div class="section-header d-flex justify-content-start cursor-pointer mb-5">
+    <h3 class="modal-title fw-bolder mb-0 me-2">Hồ sơ</h3>
+    <div class="rotate-180">
+      <span class="svg-icon svg-icon-3">
+        <i class="las la-angle-double-up"></i>
+      </span>
+    </div>
+  </div> -->
+    <!-- Name -->
+    <div class="info-device">
+      <div class="info-area-device">
+        <label class=" fw-bold">Tên</label>
+        <div class="form-control-plaintext">{{ device?.name }}</div>
+      </div>
+      <!-- Type -->
+      <div *ngIf="device.type === 'ROUTER'" class="info-area-device">
+        <label class=" fw-bold">Loại</label>
+        <div class="form-control-plaintext">
+          {{
+            device?.type === "ROUTER"
+              ? "Router đơn vị"
+              : device?.type === "ROUTER_BCTT"
+              ? "Router BCTT"
+              : "Router cơ yếu"
+          }}
+        </div>
+      </div>
+      <!-- Serial -->
+      <div class="info-area-device">
+        <label class="fw-bold">Serial Number</label>
+        <div class="form-control-plaintext">{{ device?.serial_number }}</div>
+      </div>
+      <!-- IP -->
+      <div class="info-area-device">
+        <label class="fw-bold">IP quản trị</label>
+        <div class="form-control-plaintext">{{ device?.management_ip }}</div>
+      </div>
+      <!-- Status -->
+      <div class="info-area-device">
+        <label class="fw-bold">Trạng thái</label>
+        <div class="form-control-plaintext">
+          {{ device?.status ? "Đang hoạt động" : "Mất kết nối" }}
+        </div>
+      </div>
+      <!-- Unit -->
+      <div class="info-area-device">
+        <label class=" fw-bold">Đơn vị</label>
+        <div class="form-control-plaintext">
+          <div>
+            {{ device?.unit_name_full?.split("\n")[0] }}
+          </div>
+          <div>
+            {{ device?.unit_name_full?.split("\n")[1] }}
+          </div>
+        </div>
+      </div>
+      <!-- Manager -->
+      <div class="info-area-device">
+        <label class="fw-bold">Loại mạng</label>
+        <div class="form-control-plaintext">
+          {{ getValueNetwork(device?.main_type) }}
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label class="fw-bold">Khu vực</label>
+        <div class="form-control-plaintext">
+          {{ getTypeRegion(device?.loploi) }}
+        </div>
+      </div>
+      <!-- Order Date -->
+      <div class="info-area-device">
+        <label class="fw-bold">Kết nối gần nhất</label>
+        <div class="form-control-plaintext">
+          {{ device?.last_active | date: "dd/MM/yyyy" }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="section-header d-flex justify-content-start cursor-pointer mb-5">
+    <h3 class="modal-title fw-bolder mb-0 me-2">Vị trí</h3>
+    <div class="rotate-180">
+      <span class="svg-icon svg-icon-3">
+        <i class="las la-angle-double-up"></i>
+      </span>
+    </div>
+  </div> -->
+
+  <!-- <div id="mgis-location" class="show">
+    <div class="row">
+      <div class="info-area-device">
+        <label class=" fw-bold ">Tòa nhà</label>
+        <div class="form-control-plaintext">{{ device.building }}</div>
+      </div>
+
+      <div class="info-area-device">
+        <label class=" fw-bold ">Tầng</label>
+        <div class="form-control-plaintext">{{ device.floor }}</div>
+      </div>
+      <div class="info-area-device">
+        <label class=" fw-bold ">Phòng</label>
+        <div class="form-control-plaintext">{{ device.room }}</div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <ng-container *ngIf="device && device.lastAuthentication">
+    <div
+      class="section-header d-flex justify-content-start cursor-pointer mb-5"
+    >
+      <h3 class="modal-title fw-bolder mb-0 me-2">Giám sát hạ tầng</h3>
+      <div class="rotate-180">
+        <span class="svg-icon svg-icon-3">
+          <i class="las la-angle-double-up"></i>
+        </span>
+      </div>
+    </div>
+    <div id="mgis_snmp_device" class="show">
+      <div class="row mb-6">
+        <div class="row">
+
+          <div class="info-area-device">
+            <label class=" fw-bold ">Mức sử dụng CPU</label>
+            <div class="form-control-plaintext">
+              {{ device.systemHealthCpu }}
+            </div>
+          </div>
+
+          <div class="info-area-device">
+            <label class=" fw-bold ">Mức sử dụng RAM</label>
+            <div class="form-control-plaintext">
+              {{ device.systemHealthMemory }}
+            </div>
+          </div>
+
+          <div class="info-area-device">
+            <label class=" fw-bold ">Nhiệt độ thiết bị</label>
+            <div class="form-control-plaintext">
+              {{ device.systemHealthTemperatures }}
+            </div>
+          </div>
+
+          <div *ngIf="device.lastAuthentication" class="info-area-device">
+            <label class=" fw-bold ">Ngày cập nhật</label>
+            <div class="form-control-plaintext">
+              {{ convertToDateFormatVI(device.lastAuthentication) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container> -->
+</div>

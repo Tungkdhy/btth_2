@@ -1,0 +1,10 @@
+<ng-container *ngIf="filteredCombinedStore$ | async as combinedStore">
+  <ng-container *ngIf="filteredCombinedStore$ && combinedStore.length > 0">
+    <div [class]="isOverview ? 'row' : 'p-2 m-5'">
+      <h2>{{ isOverview ? topTitle : getTitle(selectedFeature?.layerId) }}</h2>
+      <app-feature-stats-overlay
+        [combinedStore]="combinedStore"
+      ></app-feature-stats-overlay>
+    </div>
+  </ng-container>
+</ng-container>

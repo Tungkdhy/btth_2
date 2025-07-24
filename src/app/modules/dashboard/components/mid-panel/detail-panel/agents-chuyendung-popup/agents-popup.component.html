@@ -1,0 +1,29 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Phòng thủ mạng ></span>
+      <span class="choise-item">Máy trạm chuyên dùng</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group">
+    <div class="row">
+      <div class="card-border">
+        <h2>MMS</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataMMS"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card-border">
+        <h2>Next AV</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataNextAV"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+  </div>
+</div>

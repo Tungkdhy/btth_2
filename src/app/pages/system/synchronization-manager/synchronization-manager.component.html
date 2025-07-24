@@ -1,0 +1,269 @@
+<div class="card card-xxl-stretch mb-5 mb-xxl-8">
+  <div class="card-header">
+    <div class="card-title">
+      <!--begin::Search-->
+      <app-neun-search-widget
+        (search)="submit($event)"
+        [loading]="loading"
+      ></app-neun-search-widget>
+      <button
+        #advancedButton
+        class="ms-5 btn btn-link collapsed"
+        (click)="toggleSearchAdvanced()"
+        data-bs-toggle="collapse"
+        href="#advanced_search_form"
+        aria-expanded="false"
+      >
+        Nâng cao
+      </button>
+      <!--end::Search-->
+    </div>
+    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+      <a class="btn btn-lg btn-primary" (click)="acceptAllRecord()">
+        Initial
+      </a>
+
+      <div
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-trigger="hover"
+        title="Thêm mới"
+      >
+        <app-button-widget-add
+          *ngIf="isAccept; else acceptButton"
+          (add)="handleAdd()"
+        ></app-button-widget-add>
+
+        <ng-template #acceptButton>
+          <a class="btn btn-lg btn-primary" (click)="acceptRecord()"> Duyệt </a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="collapse" id="advanced_search_form">
+      <div class="row g-8 mb-8">
+        <div class="col-lg-6">
+          <label class="fs-6 form-label fw-bold text-dark">Đơn vị</label>
+          <app-dropdown-tree
+            *ngIf="!unitLoading"
+            [fields]="fieldUnitList"
+            (selectNode)="handleSelectUnit($event)"
+            placeholder="Tất cả"
+          ></app-dropdown-tree>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-8">
+            <div class="col-lg-6">
+              <label class="fs-6 form-label fw-bold text-dark">Hệ thống</label>
+              <select
+                #selectSystem
+                class="form-select form-select-solid form-select-lg"
+                name="system"
+                (change)="searchModel.system = selectSystem.value"
+              >
+                <option value="" selected>Tất cả</option>
+                <option value="NAC">NAC</option>
+                <option value="PRTG">PRTG</option>
+                <option value="FMS">FMS</option>
+              </select>
+            </div>
+            <div class="col-lg-6">
+              <label class="fs-6 form-label fw-bold text-dark"
+                >Trạng thái</label
+              >
+              <select
+                #selectStatus
+                class="form-select form-select-solid form-select-lg"
+                name="status"
+                (change)="searchModel.status = selectStatus.value"
+              >
+                <option value="" selected>Tất cả</option>
+                <option *ngFor="let status of statusList" [value]="status.id">
+                  {{ status.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-8">
+        <div class="col-lg-4">
+          <label class="fs-6 form-label fw-bold text-dark"
+            >Ngày thực hiện</label
+          >
+          <app-date-range-picker
+            (handleSelectDate)="selectDate($event)"
+          ></app-date-range-picker>
+        </div>
+        <div class="col-lg-4">
+          <label class="fs-6 form-label fw-bold text-dark">Bảng</label>
+          <select
+            #selectTable
+            class="form-select form-select-solid form-select-lg"
+            name="systemTable"
+            (change)="searchModel.systemTable = selectTable.value"
+          >
+            <option value="" selected>Tất cả</option>
+            <option *ngFor="let table of systemTableList" [value]="table.id">
+              {{ table.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-4">
+          <label class="fs-6 form-label fw-bold text-dark">Loại</label>
+          <div class="nav-group nav-group-fluid">
+            <!--begin::Option-->
+            <label>
+              <input
+                #radioAll
+                type="radio"
+                class="btn-check"
+                name="type"
+                value=""
+                checked="checked"
+                (click)="searchModel.type = radioAll.value"
+              />
+              <span
+                class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4"
+                >Tất cả</span
+              >
+            </label>
+            <!--end::Option-->
+            <!--begin::Option-->
+            <label>
+              <input
+                #radioClient
+                type="radio"
+                class="btn-check"
+                name="type"
+                value="CLIENT"
+                (click)="searchModel.type = radioClient.value"
+              />
+              <span
+                class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4"
+                >Client</span
+              >
+            </label>
+            <!--end::Option-->
+            <!--begin::Option-->
+            <label>
+              <input
+                #radioServer
+                type="radio"
+                class="btn-check"
+                name="type"
+                value="SERVER"
+                (click)="searchModel.type = radioServer.value"
+              />
+              <span
+                class="btn btn-sm btn-color-muted btn-active btn-active-primary fw-bold px-4"
+                >Server</span
+              >
+            </label>
+            <!--end::Option-->
+          </div>
+        </div>
+      </div>
+
+      <div class="separator separator-dashed mt-9 mb-6"></div>
+    </div>
+    <table
+      class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4 table-fix-head"
+    >
+      <thead>
+        <tr class="fw-bolder text-muted text-uppercase">
+          <th class="w-25px">
+            <div
+              class="form-check form-check-sm form-check-custom form-check-solid"
+            >
+              <input
+                #clickAllButton
+                class="form-check-input"
+                [checked]="isSelectAll"
+                type="checkbox"
+                (click)="clickAll()"
+              />
+            </div>
+          </th>
+          <th>Tên</th>
+          <th>Hành động</th>
+          <th>Bảng xử lý</th>
+          <th>Hệ thống</th>
+          <th>Trạng thái</th>
+          <th>Loại</th>
+          <th class="text-center">Xử lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of results">
+          <td>
+            <div
+              class="form-check form-check-sm form-check-custom form-check-solid"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                [checked]="data.isSelect"
+                (click)="clickCheckbox(data)"
+                [value]="data.id"
+              />
+            </div>
+          </td>
+          <td>
+            <a
+              (click)="handleEdit(data)"
+              class="text-dark fw-bolder text-hover-primary fs-6"
+            >
+              {{ data.name }}
+            </a>
+          </td>
+          <td>{{ data.code }}</td>
+          <td>{{ data.systemTable }}</td>
+          <td>{{ data.system }}</td>
+          <td [ngSwitch]="data.status">
+            <span *ngSwitchCase="'PENDING'" class="badge badge-light-primary"
+              >Chờ duyệt</span
+            >
+            <span *ngSwitchCase="'COMPLETED'" class="badge badge-light-success"
+              >Hoàn thành</span
+            >
+            <span *ngSwitchCase="'REJECT'" class="badge badge-light-warning"
+              >Từ chối</span
+            >
+            <span *ngSwitchCase="'ERROR'" class="badge badge-light-danger"
+              >Lỗi</span
+            >
+          </td>
+          <td>{{ data.type }}</td>
+          <td>
+            <div class="d-flex justify-content-center flex-shrink-0 menu-item">
+              <a
+                id="dropdownMenuHandle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                class="dropdown-toggle btn btn-bg-light btn-active-color-primary btn-sm me-1"
+              >
+                Thao tác
+              </a>
+              <app-dropdown-menu
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuHandle"
+                (delete)="handleDelete(data)"
+                (edit)="handleEdit(data)"
+              ></app-dropdown-menu>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-container *ngIf="results && results.length > 0">
+    <app-pagination-widget
+      [length]="searchModel.length"
+      (handleChangeSize)="handleChangeSize($event)"
+      (handleChangePage)="handleChangePage($event)"
+    ></app-pagination-widget>
+  </ng-container>
+</div>

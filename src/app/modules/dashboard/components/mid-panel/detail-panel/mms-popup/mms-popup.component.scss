@@ -1,0 +1,19 @@
+.detail-panel .bg-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: column; */
+  max-height: 95%;
+}
+
+.chart-part {
+  height: 87vh;
+}
+.chart-column-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+app-table-detail-1 {
+  flex: 1;
+}

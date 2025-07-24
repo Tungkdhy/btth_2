@@ -1,0 +1,81 @@
+<div class="d-flex flex-column" style="padding: 24px;width: 3840px; background-color: #f4f6f7;">
+  <app-top-panel></app-top-panel>
+  <div class="row">
+    <div *ngIf="!(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
+      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
+        (click)="selectNetwork('internet')">
+        Mạng Internet
+      </button>
+
+      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
+        (click)="selectNetwork('military')">
+        Mạng máy tính Quân sự
+      </button>
+
+      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'special' }"
+        (click)="selectNetwork('special')">
+        Mạng chuyên dụng
+      </button>
+    </div>
+    <ng-container *ngIf="selectedNetwork === 'special'; else notCd">
+      <app-mangcd></app-mangcd>
+    </ng-container>
+
+    <ng-template #notCd>
+      <ng-container *ngIf="selectedNetwork === 'military'; else other">
+        <app-mangqs></app-mangqs>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #other>
+      <!-- Còn lại -->
+      <div class="col-6">
+
+
+      </div>
+      <div class="col-6 row">
+        <div *ngIf="(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
+          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
+            (click)="selectNetwork('internet')">
+            Mạng Internet
+          </button>
+
+          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
+            (click)="selectNetwork('military')">
+            Mạng máy tính Quân sự
+          </button>
+
+          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'special' }"
+            (click)="selectNetwork('special')">
+            Mạng chuyên dụng
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="(showMap$ | async)" class="col-6">
+        <app-map-component></app-map-component>
+      </div>
+      <div *ngIf="(showMap$ | async)" class="col-6">
+        <app-tcm-map></app-tcm-map>
+      </div>
+
+      <div class="row" *ngIf="!(showMap$ | async)">
+        <div class="col-3">
+          <app-right-panel></app-right-panel>
+        </div>
+        <div class="col-9">
+          <app-left-panel></app-left-panel>
+        </div>
+      </div>
+    </ng-template>
+    <!-- <div class="col-3">
+      <app-right-panel></app-right-panel>
+    </div>
+    <div class="col-9">
+      <app-left-panel></app-left-panel>
+    </div> -->
+    <!-- <app-mangqs></app-mangqs> -->
+    <!-- <app-mangcd></app-mangcd> -->
+
+  </div>
+</div>

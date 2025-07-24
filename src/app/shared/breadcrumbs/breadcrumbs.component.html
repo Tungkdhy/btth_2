@@ -1,0 +1,25 @@
+<nav aria-label="breadcrumb">
+  <ol id="ol-breadcrumb" class="breadcrumb">
+    <li
+      *ngFor="let breadcrumb of breadcrumbs; let last = last; let i = index"
+      [ngClass]="{
+        'breadcrumb-item': true,
+        active: last && breadcrumb.id !== BreadcrumbIds.HOME
+      }"
+      [attr.aria-current]="last ? 'page' : null"
+    >
+      <a
+        *ngIf="breadcrumb.id !== BreadcrumbIds.HOME || !last"
+        (click)="onBreadcrumbClick(breadcrumb.id)"
+      >
+        {{ breadcrumb.label }}
+      </a>
+      <ng-template [ngIf]="breadcrumb.id === BreadcrumbIds.HOME && last">
+        <a (click)="onBreadcrumbClick(breadcrumb.id)">
+          {{ breadcrumb.label }}
+        </a>
+      </ng-template>
+      <ng-template #lastBreadcrumb>{{ breadcrumb.label }}</ng-template>
+    </li>
+  </ol>
+</nav>

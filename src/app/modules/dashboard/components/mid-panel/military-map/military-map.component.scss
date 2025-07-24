@@ -1,0 +1,95 @@
+.tooltip.in {
+  opacity: 1;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: white;
+}
+
+.tooltip-inner {
+  border: 2px solid white;
+}
+
+.search-area {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+.overview {
+  position: absolute;
+  top: 5em;
+  left: 0.5em;
+  max-width: 20%;
+  z-index: 7;
+}
+
+.info-panel {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  background: var(--bgColor);
+  padding: 10px;
+  z-index: 7;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+}
+
+.geojson-display-container {
+  position: absolute;
+  top: 10px; /* Khoảng cách từ trên cùng */
+  right: 10px; /* Khoảng cách từ bên phải */
+  background: white; /* Nền trắng để dễ đọc */
+  border: 1px solid #ccc; /* Đường viền */
+  padding: 10px; /* Khoảng cách bên trong */
+  border-radius: 4px; /* Bo góc */
+  z-index: 1000; /* Đảm bảo nó nằm trên bản đồ */
+}
+
+.toggle-checkbox {
+  display: none; /* Ẩn checkbox không hiển thị */
+}
+.btn-close:hover {
+  color: red; /* Thay đổi màu khi hover */
+}
+
+.content-map {
+  transition: opacity 0.3s ease;
+}
+
+.toggle-checkbox:checked ~ .content-map {
+  display: none; /* Ẩn nội dung khi checkbox được chọn */
+}
+
+.title-choise {
+  display: flex;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+h2 {
+  font-size: 3em;
+  margin: auto 0;
+}
+h1 {
+  margin: auto 0;
+}
+
+.header-militarymap {
+  margin-bottom: 1em;
+  .header-alert-map {
+    display: flex;
+  }
+}
+.close-icon {
+  font-size: 2em;
+  line-height: 0.5em;
+}
+
+.map-container {
+  width: 100%;
+}

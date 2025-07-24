@@ -1,0 +1,80 @@
+.map-legend {
+  position: absolute;
+  bottom: 4em;
+  right: 4em;
+  background-color: var(--bgColor);
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  width: 300px;
+  span {
+    flex: none;
+    font-size: 1.5em;
+  }
+  div {
+    flex: none;
+  }
+}
+
+.legend-item .line {
+  width: 30px;
+  height: 3px;
+  margin-right: 10px;
+}
+
+.legend-item .point {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+
+.legend-item .circle {
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.line.red {
+  background-color: #b22122;
+}
+
+.line.black {
+  background-color: #020202;
+}
+
+.line.green {
+  background-color: #9acd32;
+}
+
+.line.brown {
+  background-color: brown;
+}
+
+.point.red {
+  background-color: #b22122;
+  border: 2px solid #f08080;
+}
+
+.point.green {
+  background-color: #00ff00;
+  border: 2px solid #9acd32;
+}
+
+.circle.red {
+  background-color: rgb(245, 166, 35);
+}
+
+.circle.yellow {
+  background-color: rgb(255, 76, 76);
+}

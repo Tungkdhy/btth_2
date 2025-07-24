@@ -1,0 +1,496 @@
+<div class="">
+  <div class="card-title">
+    <h2>Hạ tầng công nghệ thông tin</h2>
+  </div>
+  <div class="h-95">
+    <div
+      *ngIf="subType === '728'; else elseBlock"
+      class="border-bot-table table-responsive"
+    >
+      <table
+        id="table-left-panel"
+        class="border-bot-table table-responsive table-left-panel h-100"
+      >
+        <thead>
+          <tr class="fw-bold text-gray-900">
+            <th></th>
+            <th
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              Bộ Quốc phòng
+            </th>
+            <th
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <div>Hệ thống</div>
+              <div>trọng yếu</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="tr-bg-3a">
+            <td>
+              <span class="fw-bold">Thiết bị mạng</span>
+            </td>
+            <td  class="text-center" *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'" >
+              <span class="fw-bold" style="color:green">
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  {{
+                    _getValueQSQP(deviceQSQP, "ROUTER") +
+                      _getValueQSQP(deviceQSQP, "SWITCH") +
+                      _getValueQSQP(deviceQSQP, "FIREWALL") | numberFormat
+                  }}
+                </ng-container>
+              </span>
+            </td>
+            <td  class="text-center"  *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'">
+              <span class="fw-bold" style="color:green">
+                <ng-container *ngIf="deviceTYQG | async as deviceTYQG">
+                  {{
+                    _getValueQSQP(deviceTYQG, "ROUTER") +
+                      _getValueQSQP(deviceTYQG, "SWITCH") +
+                      _getValueQSQP(deviceTYQG, "FIREWALL") | numberFormat
+                  }}
+                </ng-container>
+              </span>
+
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'ROUTER')">
+              <span [ngStyle]="{ color: isRouter ? 'green' : 'inherit' }">
+                Định tuyến, CY
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                {{ _getValueQSQP(deviceQSQP, "ROUTER") | numberFormat }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceTYQG | async as deviceTYQG">
+                {{ _getValueQSQP(deviceTYQG, "ROUTER") | numberFormat }}
+              </ng-container>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'FIREWALL')">
+              <span [ngStyle]="{ color: isFirewall ? 'green' : 'inherit' }">
+                Tường lửa
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                {{ _getValueQSQP(deviceQSQP, "FIREWALL") | numberFormat }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceTYQG | async as deviceTYQG">
+                {{ _getValueQSQP(deviceTYQG, "FIREWALL") | numberFormat }}
+              </ng-container>
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'SWITCH')">
+              <span [ngStyle]="{ color: isSwitch ? 'green' : 'inherit' }">
+                Chuyển mạch
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                {{ _getValueQSQP(deviceQSQP, "SWITCH") | numberFormat }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container *ngIf="deviceTYQG | async as deviceTYQG">
+                {{ _getValueQSQP(deviceTYQG, "SWITCH") | numberFormat }}
+              </ng-container>
+            </td>
+          </tr>
+          <tr class="tr-bg-3a">
+            <td>
+              <span class="fw-bold">Thiết bị đầu cuối</span>
+            </td>
+            <td class="text-center" *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'">
+              <span class="fw-bold" style="color:green">
+                <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  {{
+                    getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") +  getValueTypeTotal(thietBiDauCuoiQSQP, "CLIENT") +  getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER") | numberFormat
+                  }}
+                </ng-container>
+              </span>
+
+            </td>
+            <td class="text-center" *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'">
+              <span class="fw-bold" style="color:green">
+                <ng-container *ngIf="thietBiDauCuoiTYQG | async as thietBiDauCuoiTYQG">
+                  {{
+                    getValueTypeTotal(thietBiDauCuoiTYQG, "SERVER") +  getValueTypeTotal(thietBiDauCuoiTYQG, "CLIENT") +  getValueTypeTotal(thietBiDauCuoiTYQG, "OTHER") | numberFormat
+                   }}
+                </ng-container>
+              </span>
+
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'SERVER')">
+              <span [ngStyle]="{ color: isServer ? 'green' : 'inherit' }">
+                Máy chủ
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") | numberFormat
+                }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiTYQG | async as thietBiDauCuoiTYQG"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiTYQG, "SERVER") | numberFormat
+                }}
+              </ng-container>
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'CLIENT')">
+              <span [ngStyle]="{ color: isClient ? 'green' : 'inherit' }">
+                Máy trạm
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "CLIENT") | numberFormat
+                }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiTYQG | async as thietBiDauCuoiTYQG"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiTYQG, "CLIENT") | numberFormat
+                }}
+              </ng-container>
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="hover-pointer"
+              (click)="togglePopup(true, 'OTHER_DEVICE')"
+            >
+              <span [ngStyle]="{ color: isOtherDevice ? 'green' : 'inherit' }">
+                Khác
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER") | numberFormat
+                }}
+              </ng-container>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+              <ng-container
+                *ngIf="thietBiDauCuoiTYQG | async as thietBiDauCuoiTYQG"
+              >
+                {{
+                  getValueTypeTotal(thietBiDauCuoiTYQG, "OTHER") | numberFormat
+                }}
+              </ng-container>
+            </td>
+          </tr>
+          <tr class="tr-bg-3a">
+            <td>
+              <span class="fw-bold">Ứng dụng, DV</span>
+            </td>
+            <td class="text-center" *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'">
+              <span style="color:green" class="fw-bold">
+               {{(countPortalQSQP + countCommonQSQP) || 0 | numberFormat}}
+              </span>
+
+            </td>
+            <td class="text-center" *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'">
+              <span style="color:green" class="fw-bold">
+                {{ (countPortalTYQG + countCommonTYQG) || 0 | numberFormat}}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'PORTAL')">
+              <span [ngStyle]="{ color: isPortal ? 'green' : 'inherit' }">
+                Cổng TTĐT
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+                {{ countPortalQSQP || 0 }}
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+                {{ countPortalTYQG || 0 }}
+            </td>
+          </tr>
+          <tr>
+            <td class="hover-pointer" (click)="togglePopup(true, 'COMMON')">
+              <span [ngStyle]="{ color: isCommon ? 'green' : 'inherit' }">
+                Dùng chung
+              </span>
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'"
+              class="text-center"
+            >
+                {{ countCommonQSQP || 0 }}
+            </td>
+            <td
+              *ngIf="mainType === '' || mainType === 'CD' || mainType === 'INT'"
+              class="text-center"
+            >
+                {{ countCommonTYQG || 0 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="border-bot-table table-responsive">
+        <table
+          id="table-left-panel"
+          class="border-bot-table table-responsive table-left-panel h-100"
+        >
+          <thead>
+            <tr class="fw-bold text-gray-900">
+              <th></th>
+              <th *ngIf="subType === '728.724'" class="text-center">
+                Bộ Quốc Phòng
+              </th>
+              <th *ngIf="subType === '728.106'" class="text-center">
+                Hệ thống trọng yếu Quốc gia
+              </th>
+              <th
+                *ngIf="subType !== '728.106' && subType !== '728.724'"
+                class="text-center"
+              >
+                Đơn vị
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tr-bg-3a">
+              <td>
+                <span class="fw-bold">Thiết bị mạng</span>
+              </td>
+              <td  class="text-center" >
+                <span class="fw-bold" style="color:green">
+                  <ng-container *ngIf="deviceUnit | async as deviceUnit">
+                    {{
+                      _getValueQSQP(deviceUnit, "ROUTER") + _getValueQSQP(deviceUnit, "SWITCH") + _getValueQSQP(deviceUnit, "FIREWALL") | numberFormat
+                    }}
+                  </ng-container>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                class="hover-pointer"
+                class="hover-pointer"
+                (click)="togglePopup(true, 'ROUTER')"
+              >
+                <span [ngStyle]="{ color: isRouter ? 'green' : 'initial' }">
+                  Định tuyến, CY
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container *ngIf="deviceUnit | async as deviceUnit">
+                  {{ _getValueQSQP(deviceUnit, "ROUTER") | numberFormat }}
+                </ng-container>
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'FIREWALL')">
+                <span [ngStyle]="{ color: isFirewall ? 'green' : 'initial' }">
+                  Tường lửa
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container *ngIf="deviceUnit | async as deviceUnit">
+                  {{ _getValueQSQP(deviceUnit, "FIREWALL") | numberFormat }}
+                </ng-container>
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'SWITCH')">
+                <span [ngStyle]="{ color: isSwitch ? 'green' : 'initial' }">
+                  Chuyển mạch
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container *ngIf="deviceUnit | async as deviceUnit">
+                  {{ _getValueQSQP(deviceUnit, "SWITCH") | numberFormat }}
+                </ng-container>
+              </td>
+            </tr>
+
+            <tr class="tr-bg-3a">
+              <td>
+                <span class="fw-bold">Thiết bị đầu cuối</span>
+              </td>
+              <td class="text-center" >
+                <span class="fw-bold" style="color:green">
+                  <ng-container *ngIf="thietBiDauCuoiUnit | async as thietBiDauCuoiUnit">
+                    {{
+                      getValueTypeTotal(thietBiDauCuoiUnit, "SERVER") +  getValueTypeTotal(thietBiDauCuoiUnit, "CLIENT") +  getValueTypeTotal(thietBiDauCuoiUnit, "OTHER") | numberFormat
+                     }}
+                  </ng-container>
+                </span>
+
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'SERVER')">
+                <span [ngStyle]="{ color: isServer ? 'green' : 'initial' }">
+                  Máy chủ
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container
+                  *ngIf="thietBiDauCuoiUnit | async as thietBiDauCuoiUnit"
+                >
+                  {{
+                    getValueTypeTotal(thietBiDauCuoiUnit, "SERVER")
+                      | numberFormat
+                  }}
+                </ng-container>
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'CLIENT')">
+                <span [ngStyle]="{ color: isClient ? 'green' : 'initial' }">
+                  Máy trạm
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container
+                  *ngIf="thietBiDauCuoiUnit | async as thietBiDauCuoiUnit"
+                >
+                  {{
+                    getValueTypeTotal(thietBiDauCuoiUnit, "CLIENT")
+                      | numberFormat
+                  }}
+                </ng-container>
+              </td>
+            </tr>
+            <tr>
+              <td
+                class="hover-pointer"
+                (click)="togglePopup(true, 'OTHER_DEVICE')"
+              >
+                <span
+                  [ngStyle]="{ color: isOtherDevice ? 'green' : 'initial' }"
+                >
+                  Khác
+                </span>
+              </td>
+              <td class="text-center">
+                <ng-container
+                  *ngIf="thietBiDauCuoiUnit | async as thietBiDauCuoiUnit"
+                >
+                  {{
+                    getValueTypeTotal(thietBiDauCuoiUnit, "OTHER")
+                      | numberFormat
+                  }}
+                </ng-container>
+              </td>
+            </tr>
+            <tr class="tr-bg-3a">
+              <td>
+                <span class="fw-bold">Ứng dụng, DV</span>
+              </td>
+              <td class="text-center">
+                <span class="fw-bold" style="color:green">
+                 {{(countPortalUnit + countCommonUnit) || 0 | numberFormat}}
+                </span>
+
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'PORTAL')">
+                <span [ngStyle]="{ color: isPortal ? 'green' : 'initial' }">
+                  Cổng TTĐT
+                </span>
+              </td>
+              <td class="text-center">
+                  {{ countPortalUnit || 0 }}
+              </td>
+            </tr>
+            <tr>
+              <td class="hover-pointer" (click)="togglePopup(true, 'COMMON')">
+                <span [ngStyle]="{ color: isCommon ? 'green' : 'initial' }">
+                  Dùng chung
+                </span>
+              </td>
+              <td class="text-center">
+                  {{ countCommonUnit || 0 }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </div>
+</div>

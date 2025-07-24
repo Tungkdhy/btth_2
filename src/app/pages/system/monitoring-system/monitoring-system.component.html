@@ -1,0 +1,10 @@
+<app-table-widget
+  [dataList]="dataList$ | async"
+  [searchModel]="search"
+  [columnHeading]="columnHeading"
+  (add)="handleAdd()"
+  (delete)="handleDelete($event)"
+  (edit)="handleEdit($event)"
+  (search)="handleSearch($event)"
+  (handleChangePageSize)="changePageSize($event)"
+></app-table-widget>

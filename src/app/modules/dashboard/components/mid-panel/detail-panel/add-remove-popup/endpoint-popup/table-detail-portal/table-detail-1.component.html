@@ -1,0 +1,124 @@
+<div class="table-detail-panel-card table-popup-server">
+  <div class="d-flex helptool">
+    <input class="detailSearch" type="text" id="searchInput" [(ngModel)]="searchText" placeholder="Tìm kiếm" />
+    <div class="d-flex select-box-center">
+      Nguồn:
+      <select class="form-select-box-1" [(ngModel)]="source">
+        <option selected value="">Tất cả</option>
+        <option *ngIf="mainType == '' || mainType == 'QS'" value="FMS">FMS</option>
+        <option  *ngIf="mainType == '' || mainType == 'QS' || mainType == 'INT'" value="TA21">TA21</option>
+        <option  *ngIf="mainType == '' || mainType == 'QS'" value="FIDELIS">FIDELIS</option>
+        <option  *ngIf="mainType == '' || mainType == 'CD'" value="MMS">MMS</option>
+        <option  *ngIf="mainType == '' || mainType == 'CD'" value="NextAV">NextAV</option>
+        <option  *ngIf="mainType == '' || mainType == 'INT'" value="SOCI">SOC-i</option>
+        <option  *ngIf="mainType == '' || mainType == 'INT'" value="VCM">VCM</option>
+      </select>
+    </div>
+
+    <button class="detailsearchButton" (click)="search()">Tìm kiếm</button>
+    <button class="detailsearchButton" (click)="exportExcel()">Xuất excel</button>
+  </div>
+  <div class="table-detail-haft">
+    <table class="">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>IP/MAC</th>
+          <!-- <th>
+            <div>Tên</div>
+            <div>Hệ điều hành</div>
+          </th> -->
+          <th>Quản lý</th>
+          <th>Đơn vị</th>
+          <th>Nguồn</th>
+          <th class="text-start">
+            <div>Ngày tạo</div>
+          </th>
+          <th class="text-center">
+            <div>Trạng thái</div>
+          </th>
+          <th>
+            <div>Loại mạng</div>
+            <div>Quản lý</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="8" class="text-center">Không có dữ liệu</td>
+        </tr>
+        <tr
+          *ngFor="let item of dataSource; let index = index"
+        >
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+          <td  (click)="openInfoDeviceModal(item?.mac)"
+          class="hover-pointer">
+            {{ item.fms?.ip || item.ta21?.ip || item.fidelis?.ip || item.soci?.ip }}
+            <div>
+              {{ item.fms?.mac || item.ta21?.mac || item.fidelis?.mac || item.soci?.mac }}
+            </div>
+          </td>
+          <!-- <td>
+            first_install_ts
+            {{ item?.fms?.name || item?.ta21?.name || item.soci?.name }}
+            <div>{{ item.fms?.os || item.ta21?.os || item.soci?.os }}</div>
+          </td> -->
+          <td>
+            {{ item.fms?.employee_name || item.ta21?.employee_name || item.soci?.employee_name }}
+            <div>
+              {{
+                item?.fms?.employee_position || item?.ta21?.employee_position || item.soci?.employee_position
+              }}
+            </div>
+          </td>
+          <td>
+            {{ item?.unit_name_full?.split("\n")[0] || "" }}
+
+            <div>
+              {{ item?.unit_name_full?.split("\n")[1] || "" }}
+            </div>
+          </td>
+          <td>
+            {{ getSources(item?.sources) }}
+          </td>
+          <td>
+            <div>
+              {{ item?.create_at | date: "dd-MM-yyyy" }}
+            </div>
+            <div>
+              {{ item?.create_at | date: "HH:mm:ss" }}
+            </div>
+          </td>
+          <td>
+            <div
+              [ngClass]="item?.not_online ? 'noactive-status' : 'active-status'"
+            >
+              {{ item?.not_online ? "Không hoạt động" : "Đang hoạt động" }}
+            </div>
+          </td>
+          <td>
+            {{ getTypeNetwork(item?.main_type) }}
+            <div>
+              {{ getNameRegion(item?.loploi) }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="total">
+      <div>Tổng số: <span>{{total | numberFormat}}</span></div>
+    </div>
+    <div>
+      <ngb-pagination
+      [collectionSize]="total"
+      [maxSize]="5"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+    </div>
+  </div>
+</div>

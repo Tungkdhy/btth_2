@@ -1,0 +1,125 @@
+.search-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+.search-icon {
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  width: 50px;
+  height: 50px;
+  background-color: var(--bgCard);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon:hover {
+  background-color: #e0e0e0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: var(--bgGroup);
+  border: 0.1em solid var(--colorBorderGroup);
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+.search-box input {
+  margin-right: 5px;
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 14px;
+  background: var(--bgCard);
+  color: var(--colorText);
+}
+
+.search-box input:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+
+.mode-button,
+.search-button,
+.collapse-button {
+  background-color: var(--colorTitle);
+  color: white;
+  border: none;
+  border-radius: 0.3em;
+  padding: 0 10px; /* Adjust padding to fit the height */
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 38px; /* Set a fixed height */
+  line-height: 1.2; /* Adjust line-height for vertical alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  i {
+    font-size: 2rem;
+  }
+}
+
+.mode-button:hover,
+.search-button:hover,
+.collapse-button:hover {
+  background-color: var(--colorButton);
+  color: var(--colorTextButton);
+}
+
+.collapse-button {
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0;
+  border: 1px solid var(--colorBorderGroup);
+  border-radius: 0.8em;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--bgGroup);
+  max-height: 23vh;
+  overflow-y: auto;
+  li {
+    color: var(--colorText);
+  }
+}
+
+.results-list li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.results-list li:last-child {
+  border-bottom: none;
+}
+
+.results-list li:hover {
+  background-color: #f0f0f0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

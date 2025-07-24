@@ -1,0 +1,25 @@
+<div class="mt-5">
+  <h2>Biểu đồ thống kê triển khai ATTT trên thiết bị đầu cuối</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [legendSettings]="legendSettings"
+    id="chart-container"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Line"
+        xName="t"
+        yName="data"
+        fill="#FF7F50"
+        [marker]="marker"
+        columnWidth="0.25"
+        [columnSpacing]='0.2'
+        [width]="3"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

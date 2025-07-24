@@ -1,0 +1,26 @@
+<div class="contact-info-card">
+  <div class="info-row left-column">
+    <p class="title">Địa bàn:</p>
+    <p>{{ location }}</p>
+  </div>
+  <div class="info-row right-column">
+    <p class="title">Trực chỉ huy:</p>
+    <p>{{ (dutySchedule$ | async)?.commandingOfficer }}</p>
+  </div>
+  <div class="info-row"></div>
+  <div class="info-row left-column">
+    <p class="title">Trực ban trưởng:</p>
+    <p>{{ (dutySchedule$ | async)?.dutyOfficer }}</p>
+  </div>
+  <div class="info-row left-column">
+    <p class="title">Đầu mối liên hệ:</p>
+    <ng-container *ngIf="contactInformation$ | async as contact">
+      <p>
+        {{ contact.name || "" }}
+        {{ contact.name && contact.position ? " - " : "" }}
+        {{ contact.position || "" }} <br />
+        {{ contact.phone || "" }}
+      </p>
+    </ng-container>
+  </div>
+</div>

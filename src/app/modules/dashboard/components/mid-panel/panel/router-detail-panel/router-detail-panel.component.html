@@ -1,0 +1,13 @@
+<ng-container *ngIf="selectedFeature">
+  <div class="p-2 m-5">
+    <h2>Thuộc tính</h2>
+    <app-overview-tab-panel
+      [selectedFeature]="selectedFeature"
+    ></app-overview-tab-panel>
+  </div>
+
+  <!--Danh sách trực thuộc-->
+  <app-feature-detail-panel
+    [selectedFeature]="selectedFeature"
+  ></app-feature-detail-panel>
+</ng-container>

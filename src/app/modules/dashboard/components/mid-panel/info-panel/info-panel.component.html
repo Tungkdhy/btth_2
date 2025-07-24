@@ -1,0 +1,11 @@
+<div *ngIf="isVisible" class="info-panel">
+  <h2>Thuộc tính</h2>
+  <div *ngFor="let feature of features" class="feature-container">
+    <h3>{{ getName(feature.id) }}</h3>
+    <ul>
+      <li *ngFor="let key of getKeys(feature.properties)">
+        <strong>{{ key }}:</strong> {{ feature.properties[key] }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="card my-10">
+  <div class="card-header">
+    <div class="card-title">
+      <h3>Danh sách thiết bị hệ thống {{ system }}</h3>
+    </div>
+    <div class="card-toolbar">
+      <div
+        class="btn btn-icon btn-sm btn-active-light-primary btn-close me-2"
+        (click)="close()"
+      >
+        <span class="svg-icon svg-icon-2x"></span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ejs-grid
+      #grid
+      [dataSource]="device$ | async"
+      [allowPaging]="true"
+      [toolbar]="toolbarOptions"
+      [searchSettings]="searchSettings"
+      [pageSettings]="pageSettings"
+      [allowTextWrap]="true"
+    >
+      <e-columns>
+        <e-column
+          field="name"
+          headerText="Tên"
+          textAlign="Left"
+          width="100"
+        ></e-column>
+        <e-column headerText="Đơn vị" width="120" textAlign="Center">
+          <ng-template #template let-data>
+            <ng-container
+              *ngIf="
+                extractParentAndUnitName(
+                  getUnitNamePathByUnitId(data.unitId)
+                ) as unit
+              "
+            >
+              <span class="text-dark fw-bold d-block mb-1 fs-6">
+                {{ unit.unitName }}
+              </span>
+              <span class="text-muted fw-semibold text-muted d-block fs-7">
+                {{ unit.parentUnitName }}
+              </span>
+            </ng-container>
+          </ng-template>
+        </e-column>
+        <e-column
+          field="managementIp"
+          headerText="IP quản trị"
+          width="80"
+          textAlign="Center"
+        ></e-column>
+        <ng-container *ngIf="type === 'ROUTER'">
+          <e-column
+            field="category"
+            headerText="Loại"
+            width="80"
+            textAlign="Center"
+          ></e-column>
+        </ng-container>
+        <ng-container *ngIf="type === 'FIREWALL'">
+          <e-column
+            field="type"
+            headerText="Loại"
+            width="80"
+            textAlign="Center"
+          ></e-column>
+        </ng-container>
+        <ng-container *ngIf="type === 'SWITCH'">
+          <e-column headerText="Loại" width="80" textAlign="Center">
+            <ng-template #template let-data>
+              <span class="text-dark fw-bold d-block mb-1 fs-6">
+                {{ data.model }}
+              </span>
+              <span class="text-muted fw-semibold text-muted d-block fs-7">
+                {{ data.vendor }}
+              </span>
+            </ng-template>
+          </e-column>
+        </ng-container>
+        <e-column headerText="Trạng thái" width="80" textAlign="Center">
+          <ng-template #template let-data>
+            <span
+              [class]="
+                data.status === true
+                  ? 'badge badge-primary d-inline-block'
+                  : 'badge badge-danger d-inline-block'
+              "
+            >
+              {{ data.status === true ? "Bật" : "Mất kết nối" }}
+            </span>
+          </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div
+  class="table-panel-2 table-detail-panel-card malware h-100 table-popup-server detail-device"
+>
+  <div class="h-100">
+    <table class="h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên/Quản lý</th>
+          <th>IP/MAC</th>
+          <th>Kết nối</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="4" class="text-center">Không có dữ liệu</td> <!-- Số cột phải tương ứng với số tiêu đề cột -->
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+
+          <td>
+            <div>
+              {{ item?.fms?.employee_name || item?.ta21?.employee_name }}
+            </div>
+            <div>
+              {{ item?.fms?.employee_position || item?.ta21?.employee_position }}
+            </div>
+          </td>
+          <td>
+            <div>
+              {{ item?.fms?.ip || item?.ta21?.ip }}
+            </div>
+            <div>
+              {{ item?.fms?.mac || item?.ta21?.mac }}
+            </div>
+          </td>
+          <td>
+            <div>
+              {{ item?.last_active | date:'dd-mm-yyyy' }}
+            </div>
+            <div>
+              {{ item?.last_active | date:'HH:mm:ss' }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="total"
+      [maxSize]="5"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+  </div>
+
+</div>

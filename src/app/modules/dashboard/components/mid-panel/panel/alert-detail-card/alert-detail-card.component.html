@@ -1,0 +1,158 @@
+<ng-container *ngIf="infraAlertData || infoSecAlertData">
+  <div class="p-2 map-detail-alert">
+    <h2 class="title">Cảnh báo</h2>
+    <ng-container *ngIf="infraAlertData">
+      <div class="table-alert-disconnect card-border card-chart">
+        <div class="info-col">
+          <p>Đơn vị:</p>
+          <ng-container *ngIf="extractUnitName(infraAlertData.name) as name">
+            <span class="info-detail">
+              {{ name.split("\n")[0] || "" }}
+            </span>
+          </ng-container>
+        </div>
+        <div class="info-col">
+          <p>IP/ Tên miền:</p>
+          <span class="info-detail">{{ getIpFromAlert(infraAlertData) }}</span>
+        </div>
+        <div class="info-col">
+          <p>Loại:</p>
+          <span class="info-detail">{{ getType(infraAlertData) }}</span>
+        </div>
+        <div class="info-col">
+          <p>Trạng thái:</p>
+          <div class="info-detail">
+            <span>{{
+              infraAlertData.status === "up" ? "Đang hoạt động" : "Mất kết nối"
+            }}</span>
+            <em>
+              ( {{ infraAlertData.lastActive | date: "dd-MM-yyyy HH:mm:ss" }} )
+            </em>
+          </div>
+        </div>
+        <!--        <div class="info-col">-->
+        <!--          <p>Loại mạng:</p>-->
+        <!--          <div class="info-detail">-->
+        <!--            <span>{{ getTypeNetwork(infraAlertData.mainType) }}</span>-->
+        <!--            &lt;!&ndash;            <em>( {{ getRegionName(infraAlertData.core) }} )</em>&ndash;&gt;-->
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+      <div class="map-detail-alert">
+        <h2>Kết quả xử lý</h2>
+        <div class="table-alert-disconnect card-border card-chart">
+          <div class="info-col">
+            <p>Thời gian:</p>
+            <div class="info-detail">
+              <span>
+                {{ infraAlertData.remedy?.date | date: "dd-MM-yyyy HH:mm:ss" }}
+              </span>
+            </div>
+          </div>
+          <div class="info-col">
+            <p>Trạng thái:</p>
+            <div class="info-detail">
+              <span>
+                {{ infraAlertData.remedy?.status || "Chưa xử lý" }}
+              </span>
+            </div>
+          </div>
+          <!--          <div class="info-col">-->
+          <!--            <p>Người xử lý:</p>-->
+          <!--            <div class="info-detail">-->
+          <!--              <span>-->
+          <!--                {{ data?.khacfuc?.status || "Chưa xử lý" }}-->
+          <!--              </span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <div class="info-col">
+            <p>Nội dung:</p>
+            <div class="info-detail">
+              <span>
+                {{ infraAlertData.remedy?.note || "" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="infoSecAlertData">
+      <div class="table-alert-disconnect card-border card-chart">
+        <div class="info-col">
+          <p>Đơn vị:</p>
+          <span class="info-detail">
+            {{ (getUnitNameByPath(infoSecAlertData.unitPath) | async) || "" }}
+          </span>
+        </div>
+        <div class="info-col">
+          <p>IP/ MAC:</p>
+          <div class="info-detail">
+            <span>{{ infoSecAlertData.sourceIp || "" }}</span>
+            <em>{{ infoSecAlertData.sourceMac || "" }}</em>
+          </div>
+        </div>
+        <div class="info-col">
+          <p>Quản lý:</p>
+          <div class="info-detail">
+            <span>{{ infoSecAlertData.employeeName || "" }}</span>
+          </div>
+        </div>
+        <div class="info-col">
+          <p>Thời gian:</p>
+          <div class="info-detail">
+            <span>{{
+              infoSecAlertData.lastActive | date: "dd-MM-yyyy HH:mm:ss"
+            }}</span>
+          </div>
+        </div>
+        <!--        <div class="info-col">-->
+        <!--          <p>Loại mạng:</p>-->
+        <!--          <div class="info-detail">-->
+        <!--            <span>{{-->
+        <!--              getTypeNetwork(infoSecAlertData.mainType || undefined)-->
+        <!--            }}</span>-->
+        <!--            &lt;!&ndash;            <em>( {{ getRegionName(infoSecAlertData.core) }} )</em>&ndash;&gt;-->
+        <!--          </div>-->
+      </div>
+      <div class="map-detail-alert">
+        <h2>Kết quả xử lý</h2>
+        <div class="table-alert-disconnect card-border card-chart">
+          <div class="info-col">
+            <p>Thời gian:</p>
+            <div class="info-detail">
+              <span>
+                {{
+                  infoSecAlertData.remedy?.date | date: "dd-MM-yyyy HH:mm:ss"
+                }}
+              </span>
+            </div>
+          </div>
+          <div class="info-col">
+            <p>Trạng thái:</p>
+            <div class="info-detail">
+              <span>
+                {{ infoSecAlertData.remedy?.status || "Chưa xử lý" }}
+              </span>
+            </div>
+          </div>
+          <!--          <div class="info-col">-->
+          <!--            <p>Người xử lý:</p>-->
+          <!--            <div class="info-detail">-->
+          <!--              <span>-->
+          <!--                {{ data?.khacfuc?.status || "Chưa xử lý" }}-->
+          <!--              </span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <div class="info-col">
+            <p>Nội dung:</p>
+            <div class="info-detail">
+              <span>
+                {{ infoSecAlertData.remedy?.note || "" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

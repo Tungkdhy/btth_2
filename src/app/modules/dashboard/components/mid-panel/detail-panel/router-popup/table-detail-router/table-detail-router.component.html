@@ -1,0 +1,108 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex gap-6">
+    <input class="btth-search-box" type="text" id="searchInput" [(ngModel)]="searchText" placeholder="Tìm kiếm" />
+    <div class="d-flex align-items-center gap-4">
+      <div class="d-flex align-items-center gap-3">
+        <h4>Loại</h4>
+        <select class="btth-select-box" [(ngModel)]="categoryType">
+          <option selected value="">Tất cả</option>
+          <option value="ROUTER_BCTT">Định tuyến</option>
+          <option value="ROUTER_CY">Cơ yếu</option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <h4>Nguồn</h4>
+        <select class="btth-select-box" [(ngModel)]="source">
+          <option selected value="">Tất cả</option>
+          <option value="PRTG">PRTG</option>
+          <option value="HSM">HSM</option>
+          <!-- <option value="BTTH">BTTH</option> -->
+        </select>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <h4>Trạng thái</h4>
+        <select class="btth-select-box" [(ngModel)]="statusType">
+          <option selected value="">Tất cả</option>
+          <option value="true">Đang hoạt động</option>
+          <option value="false">Mất kết nối</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btth-btn active" (click)="search()">Tìm kiếm</button>
+      <button class="btth-btn btn-border" (click)="exportExcel()">Xuất excel</button>
+    </div>
+  </div>
+  <div>
+    <table class="btth-top-table table-detail-router table-popup-detail h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>IP</th>
+          <th>Loại thiết bị</th>
+          <th>Đơn vị</th>
+          <th>Nguồn</th>
+          <th>Kết nối</th>
+          <th>Trạng thái</th>
+          <th>Loại mạng, quản lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="10" class="text-center">Không có dữ liệu</td>
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>
+            <p style="font-weight: 700;">{{ (page - 1) * pageSize + index + 1 }}</p>
+          </td>
+          <td>
+            <p>{{ item?.management_ip }}</p>
+          </td>
+          <td>
+            <p>{{ getNameRouter(item?.category) }}</p>
+          </td>
+          <td>
+            <p>{{ item?.unit_name_full?.split("\n")[0] || "" }}</p>
+            <p class="td-sub-title">
+              {{
+              item?.unit_name_full?.split("\n")[1] === "Hệ thống mạng"
+              ? ""
+              : item?.unit_name_full?.split("\n")[1]
+              }}
+            </p>
+          </td>
+          <td>
+            <p>{{ item?.sources }}</p>
+          </td>
+          <td>
+            <p>
+              {{ item?.last_active | date: "dd-MM-yyyy" }}
+            </p>
+            <p class="td-sub-title">
+              {{ item?.last_active | date: "HH:mm:ss" }}
+            </p>
+          </td>
+          <td>
+            <span [ngClass]="item?.status ? 'status status-green' : 'status status-orange'">
+              {{ item?.status ? "Đang hoạt động" : "Mất kết nối" }}
+            </span>
+          </td>
+          <td>
+            <p>{{ getTypeNetwork(item?.main_type) }}</p>
+            <p class="td-sub-title">
+              {{ getRegionType(item?.loploi) }}
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h4>Tổng số: {{total | numberFormat}}</h4>
+    <div>
+      <ngb-pagination [collectionSize]="total" [maxSize]="5" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)" class="btth-pagination">
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

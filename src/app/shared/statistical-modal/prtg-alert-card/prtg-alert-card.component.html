@@ -1,0 +1,51 @@
+<div class="card shadow-sm card-hover h-xl-150px">
+  <!--begin::Body-->
+  <div
+    class="card-body card-body-custom d-flex align-items-center justify-content-center"
+  >
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-xl-6 d-flex justify-content-center align-items-center">
+          <div id="info-alert-section">
+            <!--begin::Section-->
+            <div class="d-flex flex-column my-xl-2 align-items-center">
+              <!--begin::Number-->
+              <span class="fw-semibold fs-3x text-gray-800 lh-1 ls-n2">
+                {{ deviceTotal | numberFormat }}
+              </span>
+              <!--end::Number-->
+
+              <!--begin::Follower-->
+              <div class="alert-title">
+                <span class="fw-semibold fs-6 text-gray-400">
+                  {{ name }}
+                </span>
+              </div>
+              <!--end::Follower-->
+            </div>
+            <!--end::Section-->
+
+            <!--begin::Badge-->
+            <ng-container *ngIf="deviceDown">
+              <div class="text-center">
+                <span
+                  class="badge badge-light-danger fs-2 px-xl-5 px-xxl-7 justify-content-center"
+                >
+                  <i class="ki-duotone ki-cross-circle fs-3 text-danger ms-n1"
+                    ><span class="path1"></span><span class="path2"></span
+                  ></i>
+                  {{ deviceDown | numberFormat }}
+                </span>
+              </div>
+            </ng-container>
+            <!--end::Badge-->
+          </div>
+        </div>
+        <div class="col-xl-6 d-flex justify-content-center align-items-center">
+          <span [inlineSVG]="iconUrl" class="svg-icon svg-icon-5x"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end::Body-->
+</div>

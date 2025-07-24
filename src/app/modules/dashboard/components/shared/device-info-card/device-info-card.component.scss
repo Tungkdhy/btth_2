@@ -1,0 +1,31 @@
+.bg-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-border {
+  flex: 1;
+  font-size: 3em;
+  h3 {
+    font-size: 1.5em !important;
+    margin: 0.5em !important;
+    color: var(--colorText) !important;
+  }
+}
+.info-device {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 1em;
+  font-size: 1.5em;
+  .info-area-device {
+    flex: 0 1 calc(50% - 0.5em);
+  }
+}
+
+div .form-control-plaintext {
+  padding: 0.5em;
+}

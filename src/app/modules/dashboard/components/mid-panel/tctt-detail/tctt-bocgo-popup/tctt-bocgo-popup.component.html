@@ -1,0 +1,70 @@
+<div class="detail-panel table-detail-panel-card table-popup-server">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Trinh sát, tác chiến thông tin ></span>
+      <span class="choise-item">Thông tin bóc gỡ</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group detail-body">
+    <div class="table-header">
+      <input
+        class="search-box-2"
+        type="text"
+        (input)="filteredData()"
+        [(ngModel)]="searchText"
+        placeholder="Tìm kiếm"
+      />
+      <button class="detailsearchButton">Tìm kiếm</button>
+    </div>
+    <div class="table-detail-full">
+      <table class="" style="table-layout: fixed;">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Nội dung vi phạm</th>
+            <th>Mục tiêu bảo vệ</th>
+            <th>Đường dẫn</th>
+            <th>Tương tác</th>
+            <th>Ngày phát hiện</th>
+            <th>Ngày bóc gỡ</th>
+            <th>Nền tảng</th>
+            <th>Đơn vị xử lý</th>
+            <th>Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.filteredData">
+            <td>{{ item.index }}</td>
+            <td>{{ item.noidung_vipham }}</td>
+            <td>{{ item.tenmuctieu }}</td>
+            <td [title]="item.duongdan">{{ item.duongdan }}</td>
+            <td>{{ item.tuongtac }}</td>
+            <td>{{ item.ngayphathien }}</td>
+            <td>{{ item.ngaybocgo }}</td>
+            <td>{{ item.nentang }}</td>
+            <td>
+              {{ item.donvixuly }}
+            </td>
+            <td>{{ item.trangthai }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-end total-text">
+      <div style="font-size: 30px; font-weight: 600">
+        Tổng số: {{ this.totalData }}
+      </div>
+      <ngb-pagination
+        [collectionSize]="this.updatedData.length"
+        [maxSize]="10"
+        [(page)]="this.page"
+        [pageSize]="10"
+        (pageChange)="onPageChange($event)"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

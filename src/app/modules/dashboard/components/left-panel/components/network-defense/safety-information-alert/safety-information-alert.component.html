@@ -1,0 +1,159 @@
+<div>
+  <div class="d-flex justify-content-between" style="margin-bottom: 16px;">
+    <div class="d-flex align-items-center gap-2">
+      <div class="hover-pointer" (click)="reset()">
+        <svg width="8" height="34" viewBox="0 0 8 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="8" height="34" rx="4" fill="#D2001A" />
+        </svg>
+      </div>
+      <h2 (click)="togglePopup(true, 'SAFETY_INFORMATION_ALERT')" class="hover-pointer">
+        Cảnh báo sự cố mất an toàn thông tin
+        <span *ngIf="columnName">> {{ columnName }}</span>
+      </h2>
+    </div>
+    <div style="cursor: pointer" class="d-flex align-items-center gap-2">
+      <div (click)="togglePopup(true, 'SAFETY_INFORMATION_ALERT_SECOND')">
+        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_50_11341" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+            height="25">
+            <rect y="0.5" width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_50_11341)">
+            <path
+              d="M5 21.5C4.45 21.5 3.97917 21.3042 3.5875 20.9125C3.19583 20.5208 3 20.05 3 19.5V3.5H5V19.5H21V21.5H5ZM6 18.5V9.5H10V18.5H6ZM11 18.5V4.5H15V18.5H11ZM16 18.5V13.5H20V18.5H16Z"
+              fill="#D2001A" />
+          </g>
+        </svg>
+      </div>
+      <h4 (click)="sendArrayEventMap()" style="color: rgba(58, 58, 58, 1);">
+        {{
+        countChuaXuLyChartSuCoATTT + countDangXuLyChartSuCoATTT | numberFormat
+        }}/{{ countChuaXuLyChartSuCoATTT + countDangXuLyChartSuCoATTT +
+        countDaXuLyChartSuCoATTT | numberFormat }}
+      </h4>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-4">
+    <div class="chart-info-area-left">
+      <!-- <ejs-chart style="display: block; height: 130%" [primaryXAxis]="primaryXAxis" [primaryYAxis]="primaryYAxis"
+        (pointClick)="onClickChartSuCoATTT($event)" (axisLabelClick)="axisLabelClick($event)"
+        (textRender)="onTextRender($event)">
+        <e-series-collection>
+          <e-series [dataSource]="columnData" type="Column" xName="x" yName="y" fill="#FF4C4C" [marker]="marker"
+            [columnSpacing]="0.2"></e-series>
+        </e-series-collection>
+      </ejs-chart> -->
+      <div echarts [options]="barChartOption" class="left-info-chart" [autoResize]="true"></div>
+    </div>
+    <div>
+      <ng-container *ngIf="eventListPromise | async as events" class="h-100">
+        <table class="btth-top-table table-safety-inf h-100" style="margin-bottom: 24px;">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Đơn vị</th>
+              <th>Loại</th>
+              <th>Mô tả</th>
+              <th>Thời gian phát hiện</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="events?.items?.length === 0">
+              <td colspan="6" style="text-align: center !important">
+                Không có dữ liệu
+              </td>
+              <!-- Số cột phải tương ứng với số tiêu đề cột -->
+            </tr>
+            <tr *ngFor="let event of events.items; let index = index" (click)="sendObjectEventMap(event, 'object')">
+              <td>
+                <p style="font-weight: 700;">
+                  {{ (page - 1) * pageSize + index + 1 }}
+                </p>
+              </td>
+              <td>
+                <div>
+                  <p>{{ getUnitName(event?.unit_path) || "" }}</p>
+                  <p class="td-sub-title">{{ getUnitNameParent(event?.unit_path) || "" }}</p>
+                </div>
+                <p class="td-sub-title">
+                  {{ event?.unit?.unit_name_full?.split("\n")[1] || "" }}
+                </p>
+                <ins class="status_onl"></ins>
+              </td>
+              <td>
+                <p>
+                  {{ getValueAlertType(event?.alert_type) }} ({{
+                  event?.alert_source
+                  }})
+                </p>
+                <p class="td-sub-title">
+                  {{ getValueNetwork(event?.main_type) }}
+                </p>
+              </td>
+              <td>
+                <div>
+                  <p *ngIf="event?.destination_ip && event.source_ip">
+                    {{ event.source_ip + '->'+ event .destination_ip}}
+                  </p>
+                  <p *ngIf="!event?.destination_ip && event?.source_ip">
+                    {{ event.source_ip}}
+                  </p>
+                  <p class="td-sub-title">
+                    {{ event.source_mac }}
+                  </p>
+                </div>
+              </td>
+              <td>
+                <p>{{ getLastActive(event) | date: "dd-MM-yyyy" }}</p>
+                <p class="td-sub-title">{{ getLastActive(event) | date: "HH:mm:ss" }}</p>
+              </td>
+              <td>
+                <div [ngClass]="
+                    event?.khacfuc?.status === 'Đã xử lý'
+                      ? 'status status-green'
+                      : event?.khacfuc?.status === 'Đang xử lý'
+                      ? 'status status-orange'
+                      : 'status status-red'
+                  ">
+                  {{ event?.khacfuc?.status || "Chưa xử lý" }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex gap-7 align-items-center">
+            <div class="d-flex align-items-center gap-2" (click)="onClickKetQuaXuLy('Đã xử lý')">
+              <span class="circle-icon green"></span>
+              <p style="font-weight: 700 !important"> Đã xử lý: {{
+                countDaXuLyChartSuCoATTT | numberFormat
+                }}</p>
+            </div>
+            <div class="d-flex align-items-center gap-2" (click)="onClickKetQuaXuLy('Đang xử lý')">
+              <span class="circle-icon orange"></span>
+              <p style="font-weight: 700 !important">Đang xử lý: {{
+                countDangXuLyChartSuCoATTT | numberFormat
+                }}</p>
+            </div>
+            <div class="d-flex align-items-center gap-2" (click)="onClickKetQuaXuLy('Chưa xử lý')">
+              <span class="circle-icon red"></span>
+              <p style="font-weight: 700 !important">Chưa xử lý: {{
+                countChuaXuLyChartSuCoATTT | numberFormat
+                }}</p>
+            </div>
+          </div>
+          <!-- <span>
+            <ngb-pagination [collectionSize]="events?.total" [maxSize]="5" [page]="events?.page_index"
+              [pageSize]="events?.page_size" (pageChange)="onPageChange($event)">
+            </ngb-pagination>
+          </span> -->
+          <ngb-pagination [collectionSize]="events?.total" [maxSize]="5" [page]="events?.page_index"
+            [pageSize]="events?.page_size" (pageChange)="onPageChange($event)" class="btth-pagination">
+          </ngb-pagination>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

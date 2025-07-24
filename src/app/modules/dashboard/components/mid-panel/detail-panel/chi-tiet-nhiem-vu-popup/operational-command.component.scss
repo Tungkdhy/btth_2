@@ -1,0 +1,299 @@
+.container {
+  position: absolute;
+}
+
+
+.half-part{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.bg-group{
+  max-height: 100%;;
+}
+
+.entity {
+  background-color: #ffffff;
+  border: 1px solid #d0d0d0;
+  height: 250px;
+  width: 200px;
+  margin: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.entity .header {
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 1px solid #d0d0d0;
+  cursor: move;
+}
+
+.entity .field {
+  display: flex;
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid #e7e7e7;
+}
+
+.entity .field:hover {
+  background-color: #d0d0d0;
+}
+
+.entity .field .name {
+  width: 50%;
+  text-align: left;
+}
+
+.entity .field .type {
+  width: 50%;
+  text-align: right;
+}
+
+#entity-1 {
+  left: 150px;
+  top: 150px;
+}
+
+#entity-1 {
+  left: 400px;
+  top: 500px;
+}
+.jsplumb-container {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+}
+
+.task-rectangle {
+  padding: 20px;
+  width: 614px;
+  height: 430px;
+  flex-direction: column;
+  background-color: white;
+  color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 5px;
+  margin: 20px;
+  position: absolute;
+  border: 1px solid #ccc;
+  box-shadow: inset;
+  font-size: 25px;
+}
+.jtk-connected{
+  font-size: 46px;
+  div{
+    margin-top:20px !important;
+  }
+  b{
+    font-size: 56px !important;
+  }
+}
+.hoanthanh {
+  color: green !important;
+}
+.dangthuchien {
+  color: #ffca1c !important;
+}
+.chuathuchien {
+  color: red !important;
+}
+
+
+
+.detail-panel .bg-group {
+  margin: 0em 1em 0.5em 1em;
+}
+
+.operational-command {
+  flex: 1;
+  display: flex;
+  div {
+    flex: 1;
+  }
+
+
+
+
+  #details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    div {
+      display: flex;
+      flex-direction: column;
+      margin: 0.5em;
+      .content-oc {
+        flex: 2;
+      }
+      .content-origin {
+        display: flex;
+        flex-direction: row;
+        flex: 0.25;
+      }
+      .attachment {
+        display: flex;
+        flex-direction: row;
+        div {
+          flex: 1;
+          white-space: wrap;
+        }
+        a {
+          font-size: 3em;
+        }
+      }
+      label {
+        font-size: 3em;
+        padding: 0.5em;
+      }
+      input {
+        flex: 1;
+        display: flex;
+        background: var(--bgCard);
+        font-size: 3em;
+        color: var(--colorText);
+        flex-wrap: wrap;
+        &::placeholder {
+          font-size: 1em;
+        }
+      }
+      textarea {
+        flex: 1;
+        background: var(--bgCard);
+        font-size: 3em;
+        color: var(--colorText);
+        &::placeholder {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+  #diagram {
+    div {
+      flex: 1;
+    }
+    .bg-group {
+      margin: 0.5em 0.5em 0 0.5em;
+    }
+  }
+  #detail {
+    div {
+      flex: 1;
+    }
+    .bg-group {
+      margin: 0.5em 0.5em 0 0.5em;
+      display: flex;
+      flex-direction: column;
+      div{
+        flex:none;
+      }
+      table {
+        padding: 1em;
+        flex: 1;
+        th,
+        td {
+          font-size: 2em !important;
+        }
+      }
+    }
+  }
+}
+
+.table-bordered {
+  padding: 1em;
+}
+
+.list-group-item {
+  background: var(--bgCard);
+  a {
+    color: var(--colorTitle);
+  }
+}
+
+label {
+  color: var(--colorText);
+}
+/* Tùy chỉnh vị
+trí của các task khác nếu cần */
+
+
+ul#myTab {
+  font-size: 2.7em;
+  margin: 0.5em;
+}
+
+.tab-content {
+  height: 100%; /* or a specific height, e.g., 500px */
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content > .active{
+  display: flex;
+  flex:1;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+  color: var(--colorTitle) !important;
+  background: inherit !important;
+  border-bottom: 0.1em solid var(--colorTitle);
+}
+
+
+.nav-tabs .nav-link{
+  color: var(--colorText) !important;
+}
+
+
+
+table{
+  font-size: 0.9em;
+  th{
+    &:nth-child(1){
+      width:40%;
+      text-align: left !important;
+    }
+    &:nth-child(2){
+      width:15%;
+    }
+    &:nth-child(3){
+      width:15%;
+    }
+    &:nth-child(4){
+      width:15%;
+    }
+    &:last-child{
+      width:15%;
+
+    }
+  }
+  td{
+    &:nth-child(1){
+      width:40%;
+      text-align: left !important;
+    }
+    &:nth-child(2){
+      width:15%;
+    }
+    &:nth-child(3){
+      width:15%;
+    }
+    &:nth-child(4){
+      width:15%;
+    }
+    &:last-child{
+      width:15%;
+      white-space: normal;
+      //word-wrap: break-word !important;
+      overflow-wrap: break-word !important; /* Ngắt từ nếu từ quá dài */
+      word-break: break-all !important;
+    }
+  }
+
+
+}

@@ -1,0 +1,31 @@
+<div class="mt-5">
+  <h2>Thống kê theo miền</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    id="chart-container"
+    (textRender)="onTextRender($event)">
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="add"
+        fill="#045E2B"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="remove"
+        fill="#F58501"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

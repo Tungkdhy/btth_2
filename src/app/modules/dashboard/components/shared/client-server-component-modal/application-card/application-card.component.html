@@ -1,0 +1,109 @@
+<div class="btth-table-detail-wrap">
+  <table class="btth-top-table table-popup-detail">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="!device?.fms?.software">
+        <td colspan="2" class="text-center">
+          <p>Không có dữ liệu</p>
+        </td> <!-- Số cột phải tương ứng với số tiêu đề cột -->
+      </tr>
+      <tr
+        *ngFor="let item of device?.fms?.software?.slice((pageFmc-1)*pageSizeFmc,pageFmc*pageSizeFmc); let index = index">
+        <td>
+          <p style="font-weight: 700;">{{ (pageFmc-1)*pageSizeFmc + index + 1 }}</p>
+        </td>
+        <td>
+          <p>
+            {{ getValue(item) }}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end mt-6">
+    <ngb-pagination [collectionSize]="device?.fms?.software?.length" [maxSize]="5" [(page)]="pageFmc"
+      [pageSize]="pageSizeFmc" (pageChange)="onPageChange($event)" class="btth-pagination">
+    </ngb-pagination>
+  </div>
+
+  <!--<table class="h-100">-->
+  <!--  <thead>-->
+  <!--  <tr>-->
+  <!--    <th>STT</th>-->
+  <!--    <th>Tên</th>-->
+  <!--  </tr>-->
+  <!--  </thead>-->
+  <!--  <tbody>-->
+  <!--  <tr-->
+  <!--    *ngFor="-->
+  <!--            let item of device?.fms?.software?.slice(-->
+  <!--              (pageFmc - 1) * pageSizeFmc,-->
+  <!--              pageFmc * pageSizeFmc-->
+  <!--            );-->
+  <!--            let index = index-->
+  <!--          "-->
+  <!--  >-->
+  <!--    <td>{{ (pageFmc - 1) * pageSizeFmc + index + 1 }}</td>-->
+
+  <!--    <td>-->
+  <!--      <div>-->
+  <!--        {{ getValue(item) }}-->
+  <!--      </div>-->
+  <!--    </td>-->
+  <!--  </tr>-->
+  <!--  </tbody>-->
+  <!--</table>-->
+  <!--<div class="d-flex justify-content-end p-2">-->
+  <!--  <ngb-pagination-->
+  <!--    [collectionSize]="device?.fms?.software?.length"-->
+  <!--    [maxSize]="5"-->
+  <!--    [(page)]="pageFmc"-->
+  <!--    [pageSize]="pageSizeFmc"-->
+  <!--    (pageChange)="onPageChange($event)"-->
+  <!--  >-->
+  <!--  </ngb-pagination>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="table-panel-2 table-detail-panel-card malware h-100">-->
+  <!--  <h3 class="">TA21</h3>-->
+  <!--  <div class="h-95">-->
+  <!--    <div *ngIf="device?.ta21?.software">-->
+  <!--      <table class="h-95">-->
+  <!--        <thead>-->
+  <!--        <tr>-->
+  <!--          <th>STT</th>-->
+  <!--          <th>Tên</th>-->
+  <!--        </tr>-->
+  <!--        </thead>-->
+  <!--        <tbody>-->
+  <!--        <tr-->
+  <!--          *ngFor="-->
+  <!--                let item of device?.fms?.software?.slice(-->
+  <!--                  (pageTA21 - 1) * pageSizeTA21,-->
+  <!--                  pageTA21 * pageSizeTA21-->
+  <!--                );-->
+  <!--                let index = index-->
+  <!--              "-->
+  <!--        >-->
+  <!--          <td>{{ (pageTA21 - 1) * pageSizeTA21 + index + 1 }}</td>-->
+
+  <!--          <td>-->
+  <!--            <div>-->
+  <!--              {{ getValue(item) }}-->
+  <!--            </div>-->
+  <!--          </td>-->
+  <!--        </tr>-->
+  <!--        </tbody>-->
+  <!--      </table>-->
+  <!--    </div>-->
+  <!--    <div *ngIf="!device?.ta21?.software">-->
+  <!--      <div class="header">Không có dữ liệu</div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+</div>

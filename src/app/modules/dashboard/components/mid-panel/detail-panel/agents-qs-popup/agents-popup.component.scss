@@ -1,0 +1,31 @@
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  height: 97vh;
+}
+.bg-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.row {
+  flex: 1;
+  display: flex;
+}
+.card-border {
+  margin: 1em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  app-column-chart-left-panel {
+    flex: 1;
+    height: 100%;
+  }
+}
+
+h2 {
+  margin: 1em;
+  font-size: 2.5em;
+}

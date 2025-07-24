@@ -1,0 +1,43 @@
+<div class="duty-roster-3107 btth-top-panel-card">
+  <div style="margin-bottom: 25px;">
+    <h2 class="top-green-text">Trạng thái SSCĐ và cấp độ xử trí tình huống trên KGM</h2>
+  </div>
+  <div class="overflow-auto" style="height: 234px; flex: 1">
+    <table class="btth-top-table h-100 table-combat-readiness">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>TT</th>
+          <th>51</th>
+          <th>52</th>
+          <th>53</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of combatReadinessData, let i = index">
+          <td><p style="font-weight: 700;">{{ i+1 }}</p></td>
+          <td>
+            <span class="status" [ngClass]="getStatusClass(item.btl)">
+              {{ getStatusText(item.btl, item.id) }}
+            </span>
+          </td>
+          <td>
+            <span class="status" [ngClass]="getStatusClass(item.t1)">
+              {{ getStatusText(item.t1, item.id) }}
+            </span>
+          </td>
+          <td>
+            <span class="status" [ngClass]="getStatusClass(item.t2)">
+              {{ getStatusText(item.t2, item.id) }}
+            </span>
+          </td>
+          <td>
+            <span class="status" [ngClass]="getStatusClass(item.t3)">
+              {{ getStatusText(item.t3, item.id) }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

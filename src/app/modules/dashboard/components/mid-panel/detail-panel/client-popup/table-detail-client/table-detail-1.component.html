@@ -1,0 +1,111 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex gap-6">
+    <input class="btth-search-box" type="text" id="searchInput" [(ngModel)]="searchText" placeholder="Tìm kiếm" />
+    <div class="d-flex align-items-center gap-4">
+      <div class="d-flex align-items-center gap-3">
+        <h4>Nguồn</h4>
+        <select class="btth-select-box" [(ngModel)]="selectedValues">
+          <option selected value="">Tất cả</option>
+          <option *ngIf="mainType === '' || mainType === 'QS'" value="FMS">FMS</option>
+          <option *ngIf="mainType === '' || mainType === 'QS' || mainType === 'INT'" value="TA21">TA21</option>
+          <option *ngIf="mainType === '' || mainType === 'QS'" value="FIDELIS">FIDELIS</option>
+          <option *ngIf="mainType === '' || mainType === 'CD'" value="MMS">MMS</option>
+          <option *ngIf="mainType === '' || mainType === 'CD'" value="NextAV">NextAV</option>
+          <option *ngIf="mainType === '' || mainType === 'INT'" value="SOCI">SOC-i</option>
+          <option *ngIf="mainType === '' || mainType === 'INT'" value="VCM">VCM</option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <h4>Trạng thái</h4>
+        <select class="btth-select-box" [(ngModel)]="statusType">
+          <option selected value="">Tất cả</option>
+          <option value="false">Đang hoạt động</option>
+          <option value="true">Không hoạt động</option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btth-btn active" (click)="search()">Tìm kiếm</button>
+      <button class="btth-btn btn-border" (click)="exportExcel()">Xuất excel</button>
+    </div>
+  </div>
+  <div>
+    <table class="btth-top-table table-detail-server table-popup-detail h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>IP MAC</th>
+          <th>Quản lý</th>
+          <th>Đơn vị</th>
+          <th>Nguồn</th>
+          <th>Kết nối</th>
+          <th>Trạng thái</th>
+          <th>Loại mạng, quản lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="8" class="text-center"><p>Không có dữ liệu</p></td>
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>
+            <p style="font-weight: 700;">{{ (page - 1) * pageSize + index + 1 }}</p>
+          </td>
+          <td (click)="openInfoDeviceModal(item?.mac)" class="hover-pointer">
+            <p>{{ item.fms?.ip || item.ta21?.ip || item.fidelis?.ip || item.soci?.ip }}</p>
+            <p class="td-sub-title">
+              {{ item.fms?.mac || item.ta21?.mac || item.soci?.mac }}
+            </p>
+          </td>
+          <!-- <td>
+            {{ item?.fms?.name || item?.ta21?.name || item.soci?.name }}
+            <div>{{ item.fms?.os || item.ta21?.os || item.soci?.os }}</div>
+          </td> -->
+          <td>
+            <p>{{ item.fms?.employee_name || item.ta21?.employee_name || item.soci?.employee_name }}</p>
+            <p class="td-sub-title">
+              {{
+              item?.fms?.employee_position || item?.ta21?.employee_position || item.soci?.employee_position
+              }}
+            </p>
+          </td>
+          <td>
+            <p>{{ item?.unit_name_full?.split("\n")[0] || "" }}</p>
+            <p class="td-sub-title">
+              {{ item?.unit_name_full?.split("\n")[1] || "" }}
+            </p>
+          </td>
+          <td>
+            <p>{{ getSources(item?.sources) }}</p>
+          </td>
+          <td>
+            <p>
+              {{ item?.last_active | date: "dd-MM-yyyy" }}
+            </p>
+            <p class="td-sub-title">
+              {{ item?.last_active | date: "HH:mm:ss" }}
+            </p>
+          </td>
+          <td>
+            <span [ngClass]="item?.not_online ? 'status status-orange' : 'status status-green'">
+              {{ item?.not_online ? "Không hoạt động" : "Đang hoạt động" }}
+            </span>
+          </td>
+          <td>
+            <p>{{ getTypeNetwork(item?.main_type) }}</p>
+            <p class="td-sub-title">
+              {{ getRegionType(item?.loploi) }}
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h4>Tổng số: {{total | numberFormat}}</h4>
+    <ngb-pagination [collectionSize]="total" [maxSize]="5" [(page)]="page" [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)" class="btth-pagination">
+    </ngb-pagination>
+  </div>
+
+</div>

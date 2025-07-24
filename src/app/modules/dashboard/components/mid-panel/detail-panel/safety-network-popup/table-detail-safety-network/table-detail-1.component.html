@@ -1,0 +1,87 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex gap-6">
+    <input class="btth-search-box" type="text" id="searchInput" [(ngModel)]="searchText" placeholder="Tìm kiếm" />
+    <div class="d-flex align-items-center gap-3">
+      <h4>Loại mạng</h4>
+      <select class="btth-select-box" [(ngModel)]="networkType">
+        <option selected value="">Tất cả</option>
+        <option value="ATCB">An toàn cơ bản</option>
+        <option value="ATNC">An toàn nâng cao</option>
+      </select>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <h4>Cấp độ</h4>
+      <select class="btth-select-box" [(ngModel)]="levelType">
+        <option selected value="">Tất cả</option>
+        <option value="Cấp 1">Cấp 1</option>
+        <option value="Cấp 2">Cấp 2</option>
+        <option value="Cấp 3">Cấp 3</option>
+      </select>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btth-btn active" (click)="search()">Tìm kiếm</button>
+      <button class="btth-btn btn-border" (click)="exportExcel()">Xuất excel</button>
+    </div>
+  </div>
+  <div>
+    <table class="btth-top-table table-detail-safety-network table-popup-detail h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Loại mạng</th>
+          <th>Đơn vị</th>
+          <th>Thời gian</th>
+          <th>Loại mạng, quản lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="5" class="text-center"><p>Không có dữ liệu</p></td>
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>
+            <p style="font-weight: 700;">{{ (page - 1) * pageSize + index + 1 }}</p>
+          </td>
+          <td>
+            <p>
+              {{ item?.data?.cap }}
+            </p>
+            <p class="td-sub-title">
+              {{
+              item?.data?.mang_at === "ATCB"
+              ? "An toàn cơ bản"
+              : "An toàn nâng cao"
+              }}
+            </p>
+          </td>
+          <td>
+            <p>{{ getUnitName(item?.data?.unit_id) || "" }}</p>
+            <p class="td-sub-title">
+              {{ getUnitNameParent(item?.data?.unit_id) || "" }}
+            </p>
+          </td>
+          <td>
+            <p>
+              {{ item?.data?.created_at | date: "dd-MM-yyyy" }}
+            </p>
+            <p class="td-sub-title">
+              {{ item?.data?.created_at | date: "HH:mm:ss" }}
+            </p>
+          </td>
+          <td>
+            <p>{{ getTypeNetwork(item?.data?.main_type) }}</p>
+            <p class="td-sub-title">
+              {{ getNameRegion(item?.data?.loi) }}
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h4>Tổng số: {{total | numberFormat}}</h4>
+    <ngb-pagination [collectionSize]="total" [maxSize]="5" [(page)]="page" [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)" class="btth-pagination">
+    </ngb-pagination>
+  </div>
+</div>

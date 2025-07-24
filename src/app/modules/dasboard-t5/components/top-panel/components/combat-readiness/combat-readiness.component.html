@@ -1,0 +1,38 @@
+<div class="duty-roster-3107 btth-top-panel-card">
+  <div style="margin-bottom: 25px;">
+    <h2 class="top-green-text">Trạng thái VKTB</h2>
+  </div>
+  <div class="overflow-auto" style="height: 234px; flex: 1">
+    <table class="btth-top-table h-100 table-combat-readiness">
+      <thead>
+        <tr>
+          <th style="width: 30%;"></th>
+          <th>Đang xử lý</th>
+          <th>Tổng số</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of combatReadinessData, let i = index">
+          <td>
+            <p style="font-weight: 700;">{{item.tenMang }}</p>
+          </td>
+          <td>
+
+            <p>
+              {{item.thietBi }}
+            </p>
+
+          </td>
+          <td>
+
+            <p>
+              {{ item.soLuong }}
+            </p>
+
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

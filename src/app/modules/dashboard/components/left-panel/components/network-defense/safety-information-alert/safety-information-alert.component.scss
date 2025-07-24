@@ -1,0 +1,23 @@
+.hover-pointer{
+  cursor: pointer;
+}
+.hover-pointer:hover {
+  color: green; /* Color on hover */
+}
+.chart-info-area-left{
+  width: 100%;
+  height: 280px;
+  .left-info-chart{
+    width: 100%;
+    height: 100%;
+  }
+}
+.table-safety-inf th:nth-child(1),  
+.table-safety-inf td:nth-child(1) {  
+  width: 4%;  
+}
+.td-sub-title{
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: rgba(58, 58, 58, 1) !important;
+}

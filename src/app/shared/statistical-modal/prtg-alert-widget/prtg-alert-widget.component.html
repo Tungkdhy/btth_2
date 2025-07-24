@@ -1,0 +1,245 @@
+<ng-container *ngIf="!isTopology">
+  <div class="row mb-1 d-flex justify-content-between align-items-center">
+    <div [ngClass]="isMap ? 'col-md-12' : 'col-md-6'">
+      <h3>Cảnh báo giám sát hạ tầng</h3>
+      <div [ngClass]="isMap ? 'fs-8' : 'fs-6'" class="fw-bold">
+        <span>
+          Số liệu thống kê tính đến {{ now | date: "HH:mm" }}, ngày
+          {{ now | date: "dd/MM/YYYY" }}
+        </span>
+        <app-bandwidth-area [unitId]="unitId"></app-bandwidth-area>
+      </div>
+    </div></div
+></ng-container>
+<ng-container *ngIf="!isMap && !isTopology">
+  <div class="row m-0 gy-5">
+    <ng-container
+      *ngIf="
+        {
+          all: totalDevices$ | async,
+          down: downDevices$ | async
+        } as devices;
+        else loading
+      "
+    >
+      <ng-container *ngIf="devices.all && devices.down">
+        <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+          <app-prtg-alert-card
+            iconUrl="./assets/media/svg/network-device/router-device.svg"
+            [name]="cardLabels.BRIEF.ROUTER"
+            [deviceTotal]="devices.all.routers"
+            [deviceDown]="devices.down.routers"
+            (click)="openDevicesModal(unitId, 'ROUTER', !devices.down.routers)"
+          ></app-prtg-alert-card>
+        </div>
+        <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+          <app-prtg-alert-card
+            iconUrl="./assets/media/svg/network-device/switch-device.svg"
+            [name]="cardLabels.BRIEF.SWITCH"
+            [deviceTotal]="devices.all.switches"
+            [deviceDown]="devices.down.switches"
+            (click)="openDevicesModal(unitId, 'SWITCH', !devices.down.switches)"
+          ></app-prtg-alert-card>
+        </div>
+        <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+          <app-prtg-alert-card
+            iconUrl="./assets/media/svg/network-device/firewall-device.svg"
+            [name]="cardLabels.BRIEF.FIREWALL"
+            [deviceTotal]="devices.all.firewalls"
+            [deviceDown]="devices.down.firewalls"
+            (click)="
+              openDevicesModal(unitId, 'FIREWALL', !devices.down.firewalls)
+            "
+          ></app-prtg-alert-card>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="totalEndpoint$ | async as endpoint; else loading">
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card
+          iconUrl="./assets/media/svg/network-device/client-device.svg"
+          [name]="cardLabels.BRIEF.COMPUTER"
+          [deviceTotal]="(endpoint.client ?? 0) + (endpoint.server ?? 0)"
+          (click)="openEndpointManagementModal(unitId)"
+        ></app-prtg-alert-card>
+      </div>
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card
+          iconUrl="./assets/media/svg/network-device/printer-device.svg"
+          [name]="cardLabels.BRIEF.PHOTOCOPY"
+          [deviceTotal]="endpoint.photocopy"
+          (click)="openDevicesModal(unitId, 'PHOTOCOPY')"
+        ></app-prtg-alert-card>
+      </div>
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card
+          iconUrl="./assets/media/svg/network-device/other.svg"
+          [name]="cardLabels.BRIEF.OTHERS"
+          [deviceTotal]="endpoint.others"
+          (click)="openDevicesModal(unitId, 'OTHER')"
+        ></app-prtg-alert-card>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMap">
+  <div class="row m-0 gy-2">
+    <ng-container
+      *ngIf="
+        {
+          all: totalDevices$ | async,
+          down: downDevices$ | async
+        } as devices;
+        else loading
+      "
+    >
+      <ng-container *ngIf="devices.all && devices.down">
+        <div class="col-xl-6 mb-2">
+          <app-prtg-alert-card-panel
+            iconUrl="./assets/media/svg/network-device/router-device.svg"
+            [name]="cardLabels.BRIEF.ROUTER"
+            [deviceTotal]="devices.all.routers"
+            [deviceDown]="devices.down.routers"
+            (click)="openDevicesModal(unitId, 'ROUTER', !devices.down.routers)"
+          ></app-prtg-alert-card-panel>
+        </div>
+        <div class="col-xl-6 mb-2">
+          <app-prtg-alert-card-panel
+            iconUrl="./assets/media/svg/network-device/switch-device.svg"
+            [name]="cardLabels.BRIEF.SWITCH"
+            [deviceTotal]="devices.all.switches"
+            [deviceDown]="devices.down.switches"
+            (click)="openDevicesModal(unitId, 'SWITCH', !devices.down.switches)"
+          ></app-prtg-alert-card-panel>
+        </div>
+        <div class="col-xl-6 mb-2">
+          <app-prtg-alert-card-panel
+            iconUrl="./assets/media/svg/network-device/firewall-device.svg"
+            [name]="cardLabels.BRIEF.FIREWALL"
+            [deviceTotal]="devices.all.firewalls"
+            [deviceDown]="devices.down.firewalls"
+            (click)="
+              openDevicesModal(unitId, 'FIREWALL', !devices.down.firewalls)
+            "
+          ></app-prtg-alert-card-panel>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="totalEndpoint$ | async as endpoint; else loading">
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card-panel
+          iconUrl="./assets/media/svg/network-device/client-device.svg"
+          [name]="cardLabels.BRIEF.COMPUTER"
+          [deviceTotal]="(endpoint.client ?? 0) + (endpoint.server ?? 0)"
+          (click)="openEndpointManagementModal(unitId)"
+        ></app-prtg-alert-card-panel>
+      </div>
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card-panel
+          iconUrl="./assets/media/svg/network-device/printer-device.svg"
+          [name]="cardLabels.BRIEF.PHOTOCOPY"
+          [deviceTotal]="endpoint.photocopy"
+          (click)="openDevicesModal(unitId, 'PHOTOCOPY')"
+        ></app-prtg-alert-card-panel>
+      </div>
+      <div [ngClass]="isMap ? classCardMap : classCardGeneral">
+        <app-prtg-alert-card-panel
+          iconUrl="./assets/media/svg/network-device/other.svg"
+          [name]="cardLabels.BRIEF.OTHERS"
+          [deviceTotal]="endpoint.others"
+          (click)="openDevicesModal(unitId, 'OTHER')"
+        ></app-prtg-alert-card-panel>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isTopology">
+  <div class="row m-0 gy-5">
+    <ng-container
+      *ngIf="
+        {
+          all: totalDevices$ | async,
+          down: downDevices$ | async
+        } as devices;
+        else loading
+      "
+    >
+      <ng-container *ngIf="devices.all && devices.down">
+        <div class="col-2 mb-5">
+          <app-prtg-alert-card-small
+            iconUrl="./assets/media/svg/network-device/router-device.svg"
+            [name]="cardLabels.BRIEF.ROUTER"
+            tooltipText="Thiết bị định tuyến"
+            [deviceTotal]="devices.all.routers"
+            [deviceDown]="devices.down.routers"
+            (click)="openDevicesModal(unitId, 'ROUTER', !devices.down.routers)"
+          ></app-prtg-alert-card-small>
+        </div>
+        <div class="col-2 mb-5">
+          <app-prtg-alert-card-small
+            iconUrl="./assets/media/svg/network-device/switch-device.svg"
+            [name]="cardLabels.BRIEF.SWITCH"
+            tooltipText="Thiết bị chuyển mạch"
+            [deviceTotal]="devices.all.switches"
+            [deviceDown]="devices.down.switches"
+            (click)="openDevicesModal(unitId, 'SWITCH', !devices.down.switches)"
+          ></app-prtg-alert-card-small>
+        </div>
+        <div class="col-2 mb-5">
+          <app-prtg-alert-card-small
+            iconUrl="./assets/media/svg/network-device/firewall-device.svg"
+            [name]="cardLabels.BRIEF.FIREWALL"
+            tooltipText="Thiết bị tường lửa"
+            [deviceTotal]="devices.all.firewalls"
+            [deviceDown]="devices.down.firewalls"
+            (click)="
+              openDevicesModal(unitId, 'FIREWALL', !devices.down.firewalls)
+            "
+          ></app-prtg-alert-card-small>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="totalEndpoint$ | async as endpoint; else loading">
+      <div class="col-2 mb-5">
+        <app-prtg-alert-card-small
+          iconUrl="./assets/media/svg/network-device/client-device.svg"
+          [name]="cardLabels.BRIEF.COMPUTER"
+          [tooltipText]="cardLabels.BRIEF.COMPUTER"
+          [deviceTotal]="(endpoint.client ?? 0) + (endpoint.server ?? 0)"
+          [isInfoInsecurity]="true"
+          [internetAlerts]="internetAlerts$ | async"
+          [malwareAlerts]="malwareAlerts$ | async"
+          [domainAlerts]="domainAlerts$ | async"
+          (click)="openEndpointManagementModal(unitId)"
+        ></app-prtg-alert-card-small>
+      </div>
+      <div class="col-2 mb-5">
+        <app-prtg-alert-card-small
+          iconUrl="./assets/media/svg/network-device/printer-device.svg"
+          [name]="cardLabels.BRIEF.PHOTOCOPY"
+          [tooltipText]="cardLabels.BRIEF.PHOTOCOPY"
+          [deviceTotal]="endpoint.photocopy"
+          (click)="openDevicesModal(unitId, 'PHOTOCOPY')"
+        ></app-prtg-alert-card-small>
+      </div>
+      <div class="col-2 mb-5">
+        <app-prtg-alert-card-small
+          iconUrl="./assets/media/svg/network-device/other.svg"
+          [name]="cardLabels.BRIEF.OTHERS"
+          [tooltipText]="cardLabels.FULLNAME.OTHERS"
+          [deviceTotal]="endpoint.others"
+          (click)="openDevicesModal(unitId, 'OTHER')"
+        ></app-prtg-alert-card-small>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <app-neun-loading class="d-flex justify-content-center"></app-neun-loading>
+</ng-template>

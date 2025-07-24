@@ -1,0 +1,18 @@
+.top-green-text {
+    color: var(--topGreenColor);
+}
+
+.btth-btn-duty {
+    border: 1px solid rgba(218, 221, 222, 1);
+    border-radius: 8px;
+    padding: 10px 24px;
+    min-width: 120px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #FFF;
+}
+
+.btth-btn-duty.active {
+    background-color: var(--colorButton2);
+    color: white;
+}

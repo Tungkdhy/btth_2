@@ -1,0 +1,11 @@
+<span
+  class="badge"
+  [ngClass]="{
+    'badge-success': label === 'Hoạt động' || label === 'Thấp',
+    'badge-danger': label === 'Mất kết nối' || label === 'Nguy cơ cao'|| label === 'Cao',
+    'badge-normal': label === 'Bình thường',
+    'badge-warning': label === 'Theo dõi'|| label === 'Trung bình'
+  }"
+>
+  {{ label }}
+</span>

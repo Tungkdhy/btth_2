@@ -1,0 +1,25 @@
+<ng-container *ngIf="hoverInfo">
+  <div class="card">
+    <div class="card-body mb-10">
+      <app-title-panel [selectedFeature]="hoverInfo"></app-title-panel>
+      <ng-container *ngIf="!isAccessLayer(hoverInfo.layerId); else accessLayer">
+        <app-overview-tab-panel
+          [selectedFeature]="hoverInfo"
+        ></app-overview-tab-panel>
+      </ng-container>
+
+      <ng-template #accessLayer>
+        <app-unit-strength-wrapper
+          [selectedFeature]="hoverInfo"
+        ></app-unit-strength-wrapper>
+      </ng-template>
+      <!--      <p class="card-text">-->
+      <!--        This is a wider card with supporting text below as a natural lead-in to-->
+      <!--        additional content. This content is a little bit longer.-->
+      <!--      </p>-->
+      <!--      <p class="card-text">-->
+      <!--        <small class="text-body-secondary">Last updated 3 mins ago</small>-->
+      <!--      </p>-->
+    </div>
+  </div>
+</ng-container>

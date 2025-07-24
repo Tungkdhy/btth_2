@@ -1,0 +1,83 @@
+<div class="layers-control">
+  <div class="layers-toggle" (click)="toggleLayersVisibility()">
+    <i id="icon-map" class="bi bi-layers"></i>
+  </div>
+  <div *ngIf="showLayers" class="layers-list">
+    <label>
+      <input
+        #allLayers
+        type="checkbox"
+        [checked]="checkAllLayersVisibility()"
+        (change)="toggleAllLayers(allLayers.checked)"
+      />
+      Tất cả
+    </label>
+    <div class="layer-group">
+      <h5>Cảnh báo</h5>
+      <label>
+        <input
+          #networkLayer
+          type="checkbox"
+          [(ngModel)]="networkChecked"
+          (change)="
+            setAlertLayerVisibility(AlertType.NETWORK, networkLayer.checked)
+          "
+        />
+        Mất kết nối
+      </label>
+      <label>
+        <input
+          #infoSecLayer
+          type="checkbox"
+          [(ngModel)]="infoSecChecked"
+          (change)="
+            setAlertLayerVisibility(AlertType.INFO_SEC, infoSecLayer.checked)
+          "
+        />
+        An toàn thông tin
+      </label>
+    </div>
+    <div class="layer-group">
+      <h5>Hành chính</h5>
+      <div *ngFor="let layer of administrationLayers.values()">
+        <label>
+          <input
+            #militaryLayers
+            type="checkbox"
+            [checked]="layer.getVisible()"
+            (change)="setLayerVisibility(layer, militaryLayers.checked)"
+          />
+          {{ layer.get("name") }}
+        </label>
+      </div>
+    </div>
+    <div class="layer-group">
+      <h5>Quân sự</h5>
+      <div *ngFor="let layer of militaryLayers.values()">
+        <label>
+          <input
+            #administrationLayers
+            type="checkbox"
+            [checked]="layer.getVisible()"
+            (change)="setLayerVisibility(layer, administrationLayers.checked)"
+          />
+          {{ layer.get("name") }}
+        </label>
+      </div>
+    </div>
+    <div class="layer-group">
+      <h5>Internet</h5>
+      <div *ngFor="let layer of internetLayers.values()">
+        <label>
+          <input
+            #internetLayers
+            type="checkbox"
+            [checked]="layer.getVisible()"
+            (change)="setLayerVisibility(layer, internetLayers.checked)"
+          />
+          {{ layer.get("name") }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

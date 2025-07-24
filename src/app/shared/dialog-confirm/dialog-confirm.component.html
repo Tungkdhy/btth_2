@@ -1,0 +1,14 @@
+<div class="modal-header ">
+  <h4 class="modal-title" id="modal-title">Xác nhận</h4>
+  <button type="button" class="btn-close" aria-describedby="modal-title" (click)="activeModal.close(false)"></button>
+</div>
+<div class="modal-body">
+  <p><strong> {{title}} <span class="text-primary">"{{keyword}}"</span></strong></p>
+  <p> {{description}}
+    <!--    <span class="text-danger">This operation can not be undone.</span>-->
+  </p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close(false)">Đóng</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.close(true)">Ok</button>
+</div>

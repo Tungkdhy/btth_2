@@ -1,0 +1,21 @@
+.hidden-column {
+  display: none;
+}
+
+.top-radio input[type="radio"] {
+  position: relative;
+  width: 0.8em; /* Adjust size here */
+  height: 0.8em; /* Adjust size here */
+  margin-right: 0.5em; /* Space between radio button and label */
+}
+
+.top-radio input[type="radio"] + label {
+  vertical-align: middle; /* Aligns label text vertically with the radio button */
+}
+
+.top-radio input[type="radio"] {
+  cursor: pointer;
+}
+.d-flex .select-box-center{
+  width: 600px;
+}

@@ -1,0 +1,16 @@
+<app-unit-tree-grid
+  #unitTree
+  [pageSize]="9999"
+  [height]="5000"
+  [dataSource]="units$ | async"
+  [settingColumn]="settingColumn"
+  [parentIdMapping]="parentIdMapping"
+  [idMapping]="idMapping"
+  (addItem)="handleAddItem()"
+  (editItem)="handleEditItem()"
+  (deleteItem)="handleDeleteItem()"
+  (rowSelected)="handleRowSelected($event)"
+  (rowDeselected)="handleRowDeselected()"
+  (dragAndDrop)="handleDragAndDrop($event)"
+>
+</app-unit-tree-grid>

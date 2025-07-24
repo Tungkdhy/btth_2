@@ -1,0 +1,41 @@
+<div class="mt-5">
+  <h2>Thống kê theo miền</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    id="chart-container"
+  >
+    <e-series-collection>
+      <e-series
+      [dataSource]="chartData"
+      type="Column"
+      xName="name"
+      yName="da_xu_ly"
+      fill="rgba(4, 94, 43, 1)"
+      [marker]="marker"
+      columnWidth="0.25"
+    ></e-series>
+    <e-series
+      [dataSource]="chartData"
+      type="Column"
+      xName="name"
+      yName="dang_xu_ly"
+      fill="rgba(245, 133, 1, 1)"
+      [marker]="marker"
+      columnWidth="0.25"
+    ></e-series>
+    <e-series
+      [dataSource]="chartData"
+      type="Column"
+      xName="name"
+      yName="chua_xu_ly"
+      fill="#D00B0B"
+      [marker]="marker"
+      columnWidth="0.25"
+    ></e-series>
+
+    </e-series-collection>
+  </ejs-chart>
+</div>

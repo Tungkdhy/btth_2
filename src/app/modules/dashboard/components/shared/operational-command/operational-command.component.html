@@ -1,0 +1,151 @@
+<div class="operational-command btth-top-panel-card">
+  <div class="header-container d-flex justify-content-between">
+    <div class="d-flex gap-5">
+      <h2 class="top-green-text" (click)="togglePopup(true, 'DieuHanhTrucChiTietPopup')">
+        Điều hành tác chiến
+      </h2>
+      <h2 class="total-text-color">Tổng số: {{ shiftOperation?.total_doccument || 0 }}</h2>
+    </div>
+    <div class="d-flex gap-7">
+      <ngb-pagination [collectionSize]="total" [maxSize]="1" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)" *ngIf="total >= 0" class="btth-pagination">
+      </ngb-pagination>
+      <!-- > 3 -->
+      <button type="button" (click)="togglePopup(true, 'AddOperator')" class="btth-btn"
+        style="background-color: rgba(8, 8, 8, 1); color: #FFF">
+        <svg width="1em" height="1em" fill="currentColor" class="bi bi-plus icon" viewBox="0 0 16 16">
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+        </svg>
+        Thêm mới
+      </button>
+    </div>
+  </div>
+  <!-- <div class="table-responsive">
+    <table class="h-95">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Nhiệm vụ</th>
+          <th>Người giao</th>
+          <th>Ngày giao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngIf="
+            shiftOperation?.nhiemvus && shiftOperation.nhiemvus.length > 0;
+            else noData
+          "
+        >
+          <tr *ngFor="let item of shiftOperation?.nhiemvus; let index = index">
+            <td>
+              {{ (page - 1) * pageSize + index + 1 }}
+            </td>
+            <td
+              class="cursor-pointer"
+              (click)="togglePopupChiTiet(true, 'ChiTietNhiemVuPopup', item)"
+            >
+              <span
+                class="status legend-color w-20px h-20px"
+                [ngClass]="getStatusClass(item?.DoKhan)"
+              ></span>
+              {{
+                item.NhiemVu.length > 145
+                  ? item.NhiemVu.substr(0, 145) + "..."
+                  : item.NhiemVu
+              }}
+            </td>
+            <td>{{ item?.NguoiGiao }}</td>
+            <td>{{ item?.NgayGiao }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="4" class="text-center">Không có dữ liệu</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div> -->
+  <div style="max-height: 230px; overflow: auto;">
+    <table class="btth-top-table table-operational-command h-100 ">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Nội dung</th>
+          <th>Người giao</th>
+          <th>Ngày giao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p style="font-weight: 700;">1</p>
+          </td>
+          <td>
+            <div class="d-flex w-100 gap-3 align-items-center">
+              <span class="circle-icon green"></span>
+              <p style="flex: 1;">Nhờ các đơn vị thực hiện việc xác minh nguyên nhân và làm rõ tình hình để hiểu rõ hơn
+                về sự việc đã xảy
+                ra. Điều này là cần thiết để có báo cáo cho nhiệm vụ.</p>
+            </div>
+
+          </td>
+          <td>
+            <p>V.Mạnh</p>
+          </td>
+          <td>
+            <p>3/4/2025</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-weight: 700;">2</p>
+          </td>
+          <td>
+            <div class="d-flex w-100 gap-3 align-items-center">
+              <span class="circle-icon green"></span>
+              <p style="flex: 1;">Nhờ các đơn vị thực hiện việc xác minh nguyên nhân và làm rõ tình hình để hiểu rõ hơn
+                về sự việc đã xảy
+                ra. Điều này là cần thiết để có báo cáo cho nhiệm vụ.</p>
+            </div>
+
+          </td>
+          <td>
+            <p>V.Mạnh</p>
+          </td>
+          <td>
+            <p>3/4/2025</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p style="font-weight: 700;">3</p>
+          </td>
+          <td>
+            <div class="d-flex w-100 gap-3 align-items-center">
+              <span class="circle-icon green"></span>
+              <p style="flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"
+                title="Nhờ các đơn vị thực hiện việc xác minh nguyên nhân và làm rõ tình hình để hiểu rõ hơn về sự việc đã xảy ra. Điều này là cần thiết để có báo cáo cho nhiệm vụ.">
+                Nhờ các đơn vị thực hiện việc xác minh nguyên nhân và làm rõ tình hình để hiểu rõ hơn
+                về sự việc đã xảy
+                ra. Điều này là cần thiết để có báo cáo cho nhiệm vụ. Nhờ các đơn vị thực hiện việc xác minh nguyên nhân
+                và làm rõ tình hình để hiểu rõ hơn
+                về sự việc đã xảy</p>
+            </div>
+
+          </td>
+          <td>
+            <p>V.Mạnh</p>
+          </td>
+          <td>
+            <p>3/4/2025</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <div class="d-flex justify-content-end p-2"></div> -->
+</div>
+<ng-container *ngIf="payloadData$ | async"></ng-container>

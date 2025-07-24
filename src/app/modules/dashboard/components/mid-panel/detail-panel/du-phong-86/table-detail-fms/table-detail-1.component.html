@@ -1,0 +1,31 @@
+<div class="tree-header">
+  <div class="tree-item-grid">
+    <div class="grid-cell name-cell">Tên</div>
+    <div class="grid-cell">Đơn vị</div>
+    <div class="grid-cell">T186</div>
+    <div class="grid-cell">T286</div>
+    <div class="grid-cell">T386</div>
+    <div class="grid-cell">Kho BTL</div>
+    <div class="grid-cell">Tổng</div>
+  </div>
+</div>
+
+<dx-tree-view
+  [dataSource]="dataSource"
+  [displayExpr]="displayExpr"
+  [keyExpr]="'id'"
+  [parentIdExpr]="'parent_id'"
+  (onItemClick)="onItemClick($event)"
+>
+  <div *dxTemplate="let item of 'item'" class="tree-item-container">
+    <div class="tree-item-grid">
+      <div class="grid-cell name-cell">{{ item.name }}</div>
+      <div class="grid-cell">{{ item.dvt || "-" }}</div>
+      <div class="grid-cell">{{ item.t186 }}</div>
+      <div class="grid-cell">{{ item.t286 }}</div>
+      <div class="grid-cell">{{ item.t386 }}</div>
+      <div class="grid-cell">{{ item.khobtl }}</div>
+      <div class="grid-cell">{{ item.tong }}</div>
+    </div>
+  </div>
+</dx-tree-view>

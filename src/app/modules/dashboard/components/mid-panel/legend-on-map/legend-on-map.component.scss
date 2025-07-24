@@ -1,0 +1,113 @@
+table tr td:nth-child(2),
+th:nth-child(2) {
+  text-align: right;
+}
+
+table {
+  //margin: 0.5em 1em;
+  background: var(--bgCard) !important;
+  border-radius: 1.4em;
+  border-spacing: 0;
+  border-collapse: separate;
+  width: 100%;
+
+  tr {
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: 0.8em;
+      }
+
+      td:last-child {
+        border-bottom-right-radius: 0.8em;
+      }
+    }
+  }
+  tr {
+    td {
+      border-top: 0.1em solid var(--colorBorderGroup);
+    }
+    &:first-child {
+      th:first-child {
+        border-top-left-radius: 0.8em;
+      }
+
+      th:last-child {
+        border-top-right-radius: 0.8em;
+      }
+    }
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--colorHighlight);
+  }
+
+  td {
+    background: none;
+    border: 0.1em solid var(--colorBorderGroup);
+    padding: 0.5em 1.5em;
+    font-size: 1.4em;
+    line-height: 1em;
+    font-weight: 500;
+    color: #3a3a3a;
+    vertical-align: middle;
+    border-top: none;
+    border-left: none;
+    padding-left: 1rem !important;
+    cite {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1em;
+    }
+
+    cite.yellow_odd {
+      color: #f58501;
+    }
+
+    cite.red_odd {
+      color: #d00b0b;
+    }
+
+    &:first-child {
+      font-size: 1.4em;
+      line-height: 1em;
+      border-left: 0.1em solid var(--colorBorderGroup);
+      width: 60%;
+    }
+    &:last-child {
+      color: #045e2b;
+    }
+  }
+
+  th {
+    color: #3a3a3a;
+    font-size: 1.5em;
+    line-height: 1.6em;
+    background: var(--bgCard);
+    border: 0.1em solid var(--colorBorderGroup);
+    vertical-align: middle;
+    border-left: none;
+    text-align: center;
+    &:first-child {
+      width: 50%;
+    }
+    &.text-right {
+      text-align: right;
+    }
+  }
+
+  th:first-child {
+    border-top-left-radius: 0.8em;
+    border-left: 0.1em solid var(--colorBorderGroup);
+    text-align: center;
+  }
+
+  th:last-child {
+    border-top-right-radius: 0.8em;
+  }
+}
+
+.title {
+  margin: 0.5em;
+  font-size: 2em;
+  font-weight: 300;
+}

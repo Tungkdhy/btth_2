@@ -1,0 +1,113 @@
+td,
+th {
+  text-align: left !important;
+  padding-left: 1em !important;
+}
+
+.center-aligned {
+  text-align: center !important;
+}
+
+.e-pager .e-parentmsgbar {
+  display: none !important;
+}
+
+.detail-panel-left-popup .e-grid .e-pager {
+  justify-content: right !important;
+}
+
+
+/* Override Syncfusion's default cell alignment */
+.e-grid .e-rowcell[data-colindex="3"] {
+  text-align: center !important;
+}
+
+.e-grid .e-rowcell[data-colindex="4"] {
+  text-align: center !important;
+}
+
+.e-grid .e-rowcell[data-colindex="5"] {
+  text-align: center !important;
+}
+
+.e-grid .e-rowcell[data-colindex="0"] {
+  text-align: center !important;
+  width: 100px;
+}
+
+.table-detail-full {
+
+  th,
+  td {
+    &:nth-child(3) {
+      width: 12.5%;
+      white-space: normal;
+      word-wrap: normal;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(4) {
+      max-width: 280px;
+      /* Đặt chiều rộng tối đa cho ô */
+      white-space: nowrap !important;
+      /* Không cho phép xuống dòng */
+      overflow: hidden !important;
+      /* Ẩn nội dung tràn ra ngoài */
+      text-overflow: ellipsis !important;
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(5) {
+      width: 8.5%
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(6) {
+      width: 8.5%
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(7) {
+      width: 8.5%
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(8) {
+      width: 8.5%
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(9) {
+      width: 8.5%
+    }
+  }
+
+  th,
+  td {
+    &:nth-child(10) {
+      width: 8.5%
+    }
+  }
+
+  td:nth-child(3) {}
+}
+
+.total-text {
+  display: flex !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}

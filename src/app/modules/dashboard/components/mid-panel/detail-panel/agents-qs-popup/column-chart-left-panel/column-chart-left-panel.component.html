@@ -1,0 +1,19 @@
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [id]="chartId"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="x"
+        yName="y"
+        fill="#045E2B"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

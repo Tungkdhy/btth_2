@@ -1,0 +1,6 @@
+<app-data-table
+  [data]="endpoints"
+  [config]="{ columns: columns, pageSize: 10 }"
+  (pageChange)="handlePageChange($event)"
+  (searchQuery)="handleSearchQuery($event)"
+></app-data-table>

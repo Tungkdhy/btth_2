@@ -1,0 +1,168 @@
+<div class="input-area-form">
+  <div class="duty-name">
+    <label for="exampleFormControlInput1" class="form-label"
+      >*Tên nhiệm vụ</label
+    >
+    <input
+      type="email"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="Nhập nội dung"
+      [(ngModel)]="trichYeu"
+      (ngModelChange)="updateDataTrichYeu($event)"
+    />
+  </div>
+  <div class="content-input">
+    <label for="exampleFormControlTextarea1" class="">*Nội dung</label>
+    <textarea
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      placeholder="Nhập nội dung"
+      [(ngModel)]="formData.noiDung"
+      (ngModelChange)="updateFormData()"
+    ></textarea>
+  </div>
+  <div class="information-of-duty">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="typeinfo" class="form-label">*Loại tin</label>
+        <select
+          id="typeinfo"
+          class="form-select"
+          [(ngModel)]="formData.loaiTin"
+          (ngModelChange)="updateFormData()"
+        >
+          <option selected>Lựa chọn</option>
+          <option *ngFor="let item of dsLoaiTin" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="levelurgency" class="form-label">*Độ khẩn</label>
+        <select
+          id="levelurgency"
+          class="form-select"
+          [(ngModel)]="formData.doKhan"
+          (ngModelChange)="updateFormData()"
+        >
+          <option selected>Lựa chọn</option>
+          <option *ngFor="let item of dsDoKhan" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="inforesource" class="form-label">*Nguồn tin</label>
+        <select
+          id="inforesource"
+          class="form-select"
+          [(ngModel)]="formData.nguonTin"
+          (ngModelChange)="updateFormData()"
+        >
+          <option selected>Lựa chọn</option>
+          <option *ngFor="let item of dsNguonTin" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mt-3">
+        <label for="assingnor" class="form-label">*Người giao</label>
+        <select
+          id="assingnor"
+          class="form-select"
+          [(ngModel)]="formData.nguoiGiao"
+          (ngModelChange)="updateFormData()"
+        >
+          <option selected>Lựa chọn</option>
+          <option *ngFor="let item of dsNguoiGiaoNhiemVu" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-4 mt-3">
+        <label class="form-label">*Ngày giao việc</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder=""
+            name="assignmentDate"
+            ngbDatepicker
+            #assignmentDatePicker="ngbDatepicker"
+            [(ngModel)]="formData.ngayGiaoViec"
+            (dateSelect)="onDateSelect($event, 'assignmentDate')"
+          />
+          <button
+            class="btn btn-white bi bi-calendar3"
+            (click)="assignmentDatePicker.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="col-md-4 mt-3">
+        <label class="form-label">*Hạn xử lý</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder=""
+            name="dueDate"
+            ngbDatepicker
+            #dueDatePicker="ngbDatepicker"
+            [(ngModel)]="formData.hanXuLy"
+            (dateSelect)="onDateSelect($event, 'dueDate')"
+          />
+          <button
+            class="btn btn-outline-secondary bi bi-calendar3"
+            (click)="dueDatePicker.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="vuviecnong" class="form-label">Vụ việc nóng</label>
+        <select
+          id="vuviecnong"
+          class="form-select"
+          [(ngModel)]="formData.vuviecnong"
+          (ngModelChange)="updateFormData()"
+        >
+          <option selected>Lựa chọn</option>
+          <option *ngFor="let item of dsVuViecNong" [value]="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="Message-add" class="form-label">*Tin nhắn</label>
+        <input
+          type="email"
+          class="form-control"
+          id="Message-add"
+          placeholder="Nhập nội dung"
+          [(ngModel)]="formData.tinNhan"
+          (ngModelChange)="updateFormData()"
+        />
+      </div>
+      <div class="col">
+        <label class="form-label"> Tin nội bộ</label>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            style="width: 5em"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            [(ngModel)]="formData.tinNoiBo"
+            (ngModelChange)="updateFormData()"
+          />
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

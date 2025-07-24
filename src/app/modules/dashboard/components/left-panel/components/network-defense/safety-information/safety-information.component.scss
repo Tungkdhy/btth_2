@@ -1,0 +1,26 @@
+.hover-pointer{
+  cursor: pointer;
+}
+.hover-pointer:hover {
+  color: green; /* Color on hover */
+  z-index: 1;
+}
+
+.table-safety-information th:nth-child(1),  
+.table-safety-information td:nth-child(1) {  
+  width: 28%;  
+}
+.table-safety-information th:nth-child(2),  
+.table-safety-information td:nth-child(2) {  
+  width: 31%;  
+}
+.table-safety-information th:nth-child(3),  
+.table-safety-information td:nth-child(3) {  
+  width: 31%;  
+}
+
+.table-safety-information{
+  td{
+    padding: 24px !important;
+  }
+}

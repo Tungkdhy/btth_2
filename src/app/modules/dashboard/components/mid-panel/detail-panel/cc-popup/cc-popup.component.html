@@ -1,0 +1,16 @@
+<div class="vh-100 detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái Chung > Phòng thủ mạng ></span>
+      <span class="choise-item">Danh sách C&C</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group height-group">
+    <div class="row height-table-detail-panel-card">
+      <app-table-detail-1 [tableData]="tableData"></app-table-detail-1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="">
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2" scope="col">Đơn vị</th>
+        <th rowspan="2" scope="col">TBM</th>
+        <th rowspan="2" scope="col">TBĐC</th>
+        <th colspan="2" scope="col">Cảnh báo</th>
+      </tr>
+      <tr>
+        <td
+          *ngIf="(componentEvent$ | async)?.alertType !== AlertType.INFO_SEC"
+          class="fw-bold"
+        >
+          KN
+        </td>
+        <td
+          *ngIf="(componentEvent$ | async)?.alertType !== AlertType.NETWORK"
+          class="fw-bold"
+        >
+          ATTT
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedList">
+        <td
+          class="text-hover-primary"
+          style="cursor: pointer; text-align: left"
+          (click)="zoomInToFeature(item.unitPath)"
+        >
+          <p>
+            <strong>{{ item.unitName }}</strong>
+          </p>
+          <ng-container *ngIf="item.parentName">
+            <p>
+              {{ item.parentName }}
+            </p>
+          </ng-container>
+        </td>
+        <td>
+          {{
+            item.totalNetworkDevices === 0
+              ? "-"
+              : (item.totalNetworkDevices | numberFormat)
+          }}
+        </td>
+        <td>
+          {{
+            item.totalEndpoints === 0
+              ? "-"
+              : (item.totalEndpoints | numberFormat)
+          }}
+        </td>
+        <ng-container *ngIf="componentEvent$ | async as event">
+          <td *ngIf="event.alertType !== AlertType.INFO_SEC">
+            {{
+              item.totalDisconnectedNetworkDevices === 0
+                ? "-"
+                : (item.totalDisconnectedNetworkDevices | numberFormat)
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="componentEvent$ | async as event">
+          <td *ngIf="event.alertType !== AlertType.NETWORK">
+            {{
+              item.totalSecurityViolations === 0
+                ? "-"
+                : (item.totalSecurityViolations | numberFormat)
+            }}
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <ng-container *ngIf="totalPages && totalPages > 1">
+    <div class="pagination-controls">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">
+        Trước
+      </button>
+      <span> {{ currentPage }}/{{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+        Sau
+      </button>
+    </div>
+  </ng-container>
+</div>

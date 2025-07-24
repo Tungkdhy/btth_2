@@ -1,0 +1,23 @@
+<ng-container *ngIf="eventDataPayload">
+  <div class="p-2">
+    <h2>Cảnh báo</h2>
+    <app-data-table
+      [data]="
+        eventDataPayload.subType === MapSubType.INFRASTRUCTURE_ALERT
+          ? networkInfraData
+          : secInfoData
+      "
+      [config]="{
+        columns:
+          eventDataPayload.subType === MapSubType.INFRASTRUCTURE_ALERT
+            ? networkInfrastructureColumns
+            : securityInfoColumns,
+        pageSize: 10
+      }"
+      (pageChange)="handlePageChange($event)"
+      (searchQuery)="handleSearchQuery($event)"
+      [isRowClick]="true"
+      (rowClick)="handleRowClick($event)"
+    ></app-data-table>
+  </div>
+</ng-container>

@@ -1,0 +1,422 @@
+<div>
+  <h2 style="margin-bottom: 24px;">Hạ tầng công nghệ thông tin</h2>
+  <div>
+    <table id="table-left-panel" class="btth-top-table it-infras-table h-100">
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            Quản lý, giám sát
+          </th>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <th *ngIf="isCheckEmpty(tongSo)">
+              <div>Tổng số</div>
+            </th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p class="text-bold l-green-text">Thiết bị mạng</p>
+          </td>
+          <td>
+            <div class="d-flex algin-items-center gap-2">
+              <p class="text-bold l-green-text">
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  {{
+                  _getValueQSQP(deviceQSQP, "ROUTER") +
+                  _getValueQSQP(deviceQSQP, "SWITCH") +
+                  _getValueQSQP(deviceQSQP, "FIREWALL") | numberFormat
+                  }}
+                </ng-container>
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p *ngIf="getValueTang(tangGiam,'ROUTER_ROUTER_BCTT') + getValueTang(tangGiam,'ROUTER_ROUTER_CY') - getValueGiam(tangGiam,'ROUTER_ROUTER_BCTT') - getValueGiam(tangGiam,'ROUTER_ROUTER_CY') +
+                      getValueTang(tangGiam,'FIREWALL_') - getValueGiam(tangGiam,'FIREWALL_') + getValueTang(tangGiam,'SWITCH_') - getValueGiam(tangGiam,'SWITCH_')"
+                  class="tangGiam l-green-text">
+                  ({{
+                  getValueTang(tangGiam,'ROUTER_ROUTER_BCTT') + getValueTang(tangGiam,'ROUTER_ROUTER_CY') -
+                  getValueGiam(tangGiam,'ROUTER_ROUTER_BCTT') - getValueGiam(tangGiam,'ROUTER_ROUTER_CY') +
+                  getValueTang(tangGiam,'FIREWALL_') - getValueGiam(tangGiam,'FIREWALL_') +
+                  getValueTang(tangGiam,'SWITCH_') - getValueGiam(tangGiam,'SWITCH_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <div class="d-flex algin-items-center gap-2">
+                <p class="text-bold l-green-text">
+                  {{ getValueTongSo(tongSo,mainType,"Thiết bị mạng","Định tuyến, CY") +
+                  getValueTongSo(tongSo,mainType,"Thiết bị mạng","Chuyển mạch") + getValueTongSo(tongSo,mainType,"Thiết
+                  bị mạng","Tường lửa") | numberFormat }}
+                </p>
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  <p class="tangGiam l-green-text">
+                    ({{ ( _getValueQSQP(deviceQSQP, "ROUTER") +_getValueQSQP(deviceQSQP, "SWITCH") +
+                    _getValueQSQP(deviceQSQP, "FIREWALL")) /
+                    (getValueTongSo(tongSo,mainType,"Thiết bị mạng","Định tuyến, CY") +
+                    getValueTongSo(tongSo,mainType,"Thiết bị mạng","Chuyển mạch") +
+                    getValueTongSo(tongSo,mainType,"Thiết bị mạng","Tường lửa")) * 100 | number:'1.1-1':'vi'}}%)
+                  </p>
+                </ng-container>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'ROUTER')">
+            <p [ngStyle]="{ color: isRouter ? 'green' : 'inherit' }">
+              Định tuyến, CY
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p>
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  {{ _getValueQSQP(deviceQSQP, "ROUTER") | numberFormat }}
+                </ng-container>
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p *ngIf="getValueTang(tangGiam,'ROUTER_ROUTER_BCTT') + getValueTang(tangGiam,'ROUTER_ROUTER_CY') - getValueGiam(tangGiam,'ROUTER_ROUTER_BCTT') - getValueGiam(tangGiam,'ROUTER_ROUTER_CY')"
+                  (click)="togglePopup(true, 'NETWORK_DEVICE_ADD_REMOVE','ROUTER')" class="tangGiam">
+                  ({{getValueTang(tangGiam,'ROUTER_ROUTER_BCTT') + getValueTang(tangGiam,'ROUTER_ROUTER_CY') -
+                  getValueGiam(tangGiam,'ROUTER_ROUTER_BCTT') - getValueGiam(tangGiam,'ROUTER_ROUTER_CY') |
+                  numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị mạng","Định tuyến, CY") | numberFormat }}
+              </p>
+              <!-- <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  <p class="tangGiam">
+                    ({{ (_getValueQSQP(deviceQSQP, "ROUTER") / getValueTongSo(tongSo,mainType,"Thiết bị mạng","Định tuyến, CY") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'FIREWALL')">
+            <p [ngStyle]="{ color: isFirewall ? 'green' : 'inherit' }">
+              Tường lửa
+            </p>
+          </td>
+          <td>
+            <div class="d-flex algin-items-center gap-2">
+              <p>
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  {{ _getValueQSQP(deviceQSQP, "FIREWALL") | numberFormat }}
+                </ng-container>
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p class="tangGiam" *ngIf="getValueTang(tangGiam,'FIREWALL_') - getValueGiam(tangGiam,'FIREWALL_')"
+                  (click)="togglePopup(true, 'NETWORK_DEVICE_ADD_REMOVE','FIREWALL')">
+                  ({{getValueTang(tangGiam,'FIREWALL_') - getValueGiam(tangGiam,'FIREWALL_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị mạng","Tường lửa") | numberFormat }}
+              </p>
+              <!-- <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  <p class="tangGiam">
+                    ({{ (_getValueQSQP(deviceQSQP, "FIREWALL") / getValueTongSo(tongSo,mainType,"Thiết bị mạng","Tường lửa") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'SWITCH')">
+            <p [ngStyle]="{ color: isSwitch ? 'green' : 'inherit' }">
+              Chuyển mạch
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p>
+                <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  {{ _getValueQSQP(deviceQSQP, "SWITCH") | numberFormat }}
+                </ng-container>
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p class="tangGiam" *ngIf="getValueTang(tangGiam,'SWITCH_') - getValueGiam(tangGiam,'SWITCH_')"
+                  (click)="togglePopup(true, 'NETWORK_DEVICE_ADD_REMOVE','SWITCH')">
+                  ({{getValueTang(tangGiam,'SWITCH_') - getValueGiam(tangGiam,'SWITCH_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị mạng","Chuyển mạch") | numberFormat }}
+              </p>
+              <!-- <ng-container *ngIf="deviceQSQP | async as deviceQSQP">
+                  <p class="tangGiam">
+                    ({{ (_getValueQSQP(deviceQSQP, "SWITCH") / getValueTongSo(tongSo,mainType,"Thiết bị mạng","Chuyển mạch") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td>
+            <p class="text-bold l-green-text">Thiết bị đầu cuối</p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p class="text-bold l-green-text">
+                <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") + getValueTypeTotal(thietBiDauCuoiQSQP, "CLIENT") +
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER") | numberFormat
+                  }}
+                </ng-container>
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p class="tangGiam l-green-text"
+                  *ngIf="getValueTang(tangGiam,'SERVER_') - getValueGiam(tangGiam,'SERVER_') + getValueTang(tangGiam,'CLIENT_') - getValueGiam(tangGiam,'CLIENT_') + getValueTang(tangGiam,'OTHER_') - getValueGiam(tangGiam,'OTHER_')">
+                  ({{getValueTang(tangGiam,'SERVER_') - getValueGiam(tangGiam,'SERVER_') +
+                  getValueTang(tangGiam,'CLIENT_') - getValueGiam(tangGiam,'CLIENT_') +
+                  getValueTang(tangGiam,'OTHER_') - getValueGiam(tangGiam,'OTHER_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <div class="d-flex algin-items-center gap-2">
+                <p class="text-bold l-green-text">
+                  {{ getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy chủ") +
+                  getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy trạm") + getValueTongSo(tongSo,mainType,"Thiết
+                  bị đầu cuối","Khác") | numberFormat }}
+                </p>
+
+                <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  <p class="tangGiam  l-green-text">
+                    ({{ (getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") + getValueTypeTotal(thietBiDauCuoiQSQP,
+                    "CLIENT") + getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER")) /
+                    (getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy chủ") +
+                    getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy trạm") +
+                    getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Khác")) * 100 | number:'1.1-1':'vi'}}%)
+                  </p>
+                </ng-container>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'SERVER')">
+            <p [ngStyle]="{ color: isServer ? 'green' : 'inherit' }">
+              Máy chủ
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                <p>
+                  {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") | numberFormat
+                  }}
+                </p>
+              </ng-container>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <!-- (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','SERVER')" -->
+                <p class="tangGiam" *ngIf="getValueTang(tangGiam,'SERVER_') - getValueGiam(tangGiam,'SERVER_')"
+                  (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','SERVER')">
+                  ({{getValueTang(tangGiam,'SERVER_') - getValueGiam(tangGiam,'SERVER_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy chủ") | numberFormat}}
+              </p>
+              <!-- <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  <p class="tangGiam">
+                    ({{ (getValueTypeTotal(thietBiDauCuoiQSQP, "SERVER") / getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy chủ") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'CLIENT')">
+            <p [ngStyle]="{ color: isClient ? 'green' : 'inherit' }">
+              Máy trạm
+            </p>
+          </td>
+          <td>
+            <div class="d-flex algin-items-center gap-2">
+              <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                <p>
+                  {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "CLIENT") | numberFormat
+                  }}
+                </p>
+              </ng-container>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <!-- (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','CLIENT')" -->
+                <p class="tangGiam" *ngIf="getValueTang(tangGiam,'CLIENT_') - getValueGiam(tangGiam,'CLIENT_')"
+                  (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','CLIENT')">
+                  ({{getValueTang(tangGiam,'CLIENT_') - getValueGiam(tangGiam,'CLIENT_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy trạm") | numberFormat }}
+              </p>
+              <!-- <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  <p class="tangGiam">
+                    ({{ (getValueTypeTotal(thietBiDauCuoiQSQP, "CLIENT") / getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Máy trạm") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'OTHER_DEVICE')">
+            <p [ngStyle]="{ color: isOtherDevice ? 'green' : 'inherit' }">
+              Thiết bị khác
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                <p>
+                  {{
+                  getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER") | numberFormat
+                  }}
+                </p>
+              </ng-container>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <!-- (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','OTHER')" -->
+                <p class="tangGiam" *ngIf="getValueTang(tangGiam,'OTHER_') - getValueGiam(tangGiam,'OTHER_')"
+                  (click)="togglePopup(true, 'ENDPOINT_DEVICE_ADD_REMOVE','OTHER')">
+                  ({{getValueTang(tangGiam,'OTHER_') - getValueGiam(tangGiam,'OTHER_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Khác") | numberFormat }}
+              </p>
+              <!-- <ng-container *ngIf="thietBiDauCuoiQSQP | async as thietBiDauCuoiQSQP">
+                  <p class="tangGiam">
+                    ({{ (getValueTypeTotal(thietBiDauCuoiQSQP, "OTHER") / getValueTongSo(tongSo,mainType,"Thiết bị đầu cuối","Khác") * 100) | number:'1.1-1'}}%)
+                  </p>
+                </ng-container> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td>
+            <p class="text-bold l-green-text">Ứng dụng, DV</p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p class="text-bold l-green-text">
+                {{(countPortalQSQP + countCommonQSQP) || 0 | numberFormat}}
+              </p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <p class="tangGiam text-bold l-green-text"
+                  *ngIf="getValueTang(tangGiam,'PORTAL_') - getValueGiam(tangGiam,'PORTAL_') + getValueTang(tangGiam,'COMMON_') - getValueGiam(tangGiam,'COMMON_')">
+                  ({{getValueTang(tangGiam,'PORTAL_') - getValueGiam(tangGiam,'PORTAL_') +
+                  getValueTang(tangGiam,'COMMON_') - getValueGiam(tangGiam,'COMMON_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <div class="d-flex align-items-center gap-2">
+                <p class="text-bold l-green-text">
+                  {{ getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Dùng chung") + getValueTongSo(tongSo,mainType,"Ứng
+                  dụng, DV","Cổng TTĐT") | numberFormat }}
+                </p>
+                <p class="tangGiam l-green-text">
+                  ({{ ((countPortalQSQP+countCommonQSQP) / (getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Cổng TTĐT")
+                  + getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Dùng chung")) * 100) | number:'1.1-1':'vi'}}%)
+                </p>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'PORTAL')">
+            <p [ngStyle]="{ color: isPortal ? 'green' : 'inherit' }">
+              Cổng TTĐT
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p>{{ countPortalQSQP || 0 | numberFormat }}</p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <!-- (click)="togglePopup(true, 'SERVICE_ADD_REMOVE','PORTAL')" -->
+                <p *ngIf="getValueTang(tangGiam,'PORTAL_') - getValueGiam(tangGiam,'PORTAL_')" class="tangGiam"
+                  (click)="togglePopup(true, 'SERVICE_ADD_REMOVE','PORTAL')">
+                  ({{getValueTang(tangGiam,'PORTAL_') - getValueGiam(tangGiam,'PORTAL_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>{{ getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Cổng TTĐT") | numberFormat }}</p>
+
+              <!-- <p class="tangGiam">
+                    ({{ (countPortalQSQP / getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Cổng TTĐT") * 100) | number:'1.1-1'}}%)
+                  </p> -->
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td class="hover-pointer" (click)="togglePopup(true, 'COMMON')">
+            <p [ngStyle]="{ color: isCommon ? 'green' : 'inherit' }">
+              Dùng chung
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <p>{{ countCommonQSQP || 0 | numberFormat }}</p>
+              <ng-container *ngIf="tangGiam | async as tangGiam">
+                <!-- (click)="togglePopup(true, 'SERVICE_ADD_REMOVE','COMMON')" -->
+                <p *ngIf="getValueTang(tangGiam,'COMMON_') - getValueGiam(tangGiam,'COMMON_')" class="tangGiam"
+                  (click)="togglePopup(true, 'SERVICE_ADD_REMOVE','COMMON')">
+                  ({{getValueTang(tangGiam,'COMMON_') - getValueGiam(tangGiam,'COMMON_') | numberFormat}})
+                </p>
+              </ng-container>
+            </div>
+          </td>
+          <ng-container *ngIf="tongSo | async as tongSo">
+            <td *ngIf="isCheckEmpty(tongSo)">
+              <p>
+                {{ getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Dùng chung") | numberFormat }}
+              </p>
+              <!-- <p class="tangGiam">
+                  ({{ (countCommonQSQP / getValueTongSo(tongSo,mainType,"Ứng dụng, DV","Dùng chung") * 100) | number:'1.1-1'}}%)
+                </p> -->
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+.top-green-text {
+  color: var(--topGreenColor);
+}
+.total-text-color{
+  color: rgba(83, 83, 83, 1);
+}
+.table-operational-command th:nth-child(1),  
+.table-operational-command td:nth-child(1) {  
+  width: 7.5%;  
+}
+
+.table-operational-command th:nth-child(3),
+.table-operational-command th:nth-child(4),
+.table-operational-command td:nth-child(3),
+.table-operational-command td:nth-child(4) {  
+  width: 15%;   
+}
+
+.table-operational-command th:nth-child(2),
+.table-operational-command td:nth-child(2) {  
+  width: 62.5%; 
+}
+.table-operational-command{
+  td{
+    padding: 4px 24px !important;
+  }
+}
+
+
+.e-control {
+  font-size: 1em;
+}
+
+.e-tip-content {
+  font-size: 2em;
+  padding: 0.2em;
+}

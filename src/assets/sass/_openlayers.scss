@@ -1,0 +1,184 @@
+@mixin font-size($size) {
+  font-size: $size;
+}
+
+.card-title-map {
+  @include font-size(2.5rem);
+}
+
+.card-subtitle-map {
+  @include font-size(2rem);
+}
+
+.card-text-map {
+  @include font-size(1.5rem);
+}
+
+.map {
+  position: relative;
+}
+
+.map .left-panel-map {
+  position: absolute;
+  top: 30%;
+  left: 0.5em;
+  transform: translateY(-30%);
+  background: var(--bgGroup);
+  padding: 10px;
+  border-radius: 0.8em;
+  min-width: 10%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.map .right-panel-map {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  min-width: 30%;
+  max-width: 35%;
+  background: var(--bgGroup);
+  padding: 10px;
+  border-radius: 0.8em;
+  z-index: 1000;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#ol-tooltip {
+  position: absolute;
+  //background-color: inherit;
+  background-color: #fff5f8;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  pointer-events: none;
+  white-space: nowrap;
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+.tooltip.in {
+  opacity: 1;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: white;
+}
+
+.tooltip-inner {
+  border: 2px solid white;
+}
+
+.map .ol-zoom.ol-control {
+  left: auto;
+  top: auto;
+  bottom: 0.5em;
+  right: 0.5em;
+}
+
+/* Tăng kích thước cho nút zoom-in */
+.map .ol-zoom.ol-control .ol-zoom-in {
+  font-size: 2rem;
+}
+
+/* Tăng kích thước cho nút zoom-out */
+.map .ol-zoom.ol-control .ol-zoom-out {
+  font-size: 2rem;
+}
+
+.map .ol-scale-bar {
+  top: auto;
+  left: auto;
+  bottom: 0.5em;
+  right: 5em;
+}
+
+.custom-control {
+  background-color: var(--bgGroup);
+  border-radius: 4px;
+  border: 1px solid #c7c7c7;
+  /* Thêm các thuộc tính kích thước và bao bọc */
+  display: inline-flex;
+  align-items: center; /* Canh giữa theo chiều dọc */
+  justify-content: center; /* Canh giữa theo chiều ngang */
+  padding: 8px; /* Bỏ padding nếu cần */
+}
+
+.custom-control button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* Thêm kích thước cụ thể cho button nếu cần */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-control button i {
+  font-size: 2rem;
+  color: var(--ol-subtle-foreground-color);
+  font-weight: bold;
+  /* Thêm kích thước cụ thể cho button nếu cần */
+  margin: 0; /* Đảm bảo không có khoảng cách thừa */
+}
+
+.home-control {
+  left: auto;
+  top: auto;
+  bottom: 6.5em;
+  right: 0.5em;
+}
+
+.info-control {
+  left: auto;
+  top: auto;
+  bottom: 9.2em;
+  right: 0.5em;
+}
+
+.alert-control {
+  left: auto;
+  top: auto;
+  bottom: 12em;
+  right: 0.5em;
+}
+
+.badge {
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 14px;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Orange badge */
+.badge-orange {
+  background-color: #ffa500;
+}
+
+/* Red badge */
+.badge-red {
+  background-color: #d00b0a;
+}
+
+.font-size-btn {
+  font-size: 1.5rem !important;
+}
+
+#ol-tooltip {
+  font-size: 1.5rem;
+}
+
+.ol-overlay {
+  position: absolute;
+  background-color: white;
+  //padding: 10px;
+  transform: translateX(-50%); /* Adjusts for bottom-center positioning */
+  z-index: 100;
+  width: max-content;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

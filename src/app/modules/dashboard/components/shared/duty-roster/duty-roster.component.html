@@ -1,0 +1,196 @@
+<div class="duty-roster-3107 w-100 btth-top-panel-card">
+  <div class="d-flex justify-content-between" style="margin-bottom: 24px;">
+    <div class="d-flex justify-content-between" style="width: 48%">
+      <div>
+        <h2 class="top-green-text">Kíp trực trong TT</h2>
+        <p class="top-green-text">Trực chỉ huy TT: {{ shiftInformation?.TrucChiHuy }}</p>
+      </div>
+      <div class="time-box">
+        <h1 style="color: #CB0000 !important; text-align:left">{{ currentDateTime |
+          date:'HH:mm:ss' }}</h1>
+      </div>
+    </div>
+    <div class="d-flex gap-10">
+      <div>
+        <h6 class="top-green-text">Quân số</h6>
+        <h3 style="text-align: right;" class="top-green-text">200</h3>
+      </div>
+      <div>
+        <h6 class="top-green-text">Có mặt</h6>
+        <h3 style="text-align: right;" class="top-green-text">175</h3>
+      </div>
+      <div>
+        <h6 class="top-green-text">Vắng mặt </h6>
+        <h3 style="text-align: right;" class="top-green-text">15</h3>
+      </div>
+    </div>
+  </div>
+  <!-- <div>
+          <h6>Quân số</h6><h2>{{ shiftInformation?.QuanSo }}</h2>
+        </div>
+        <div>
+          <h6>Có mặt</h6><h2>{{ shiftInformation?.CoMat }}</h2>
+        </div>
+        <div>
+          <h6>Vắng mặt </h6><h2>{{ shiftInformation?.Vang }}</h2>
+        </div> -->
+
+
+  <!-- class="table-responsive h-75" -->
+  <div>
+    <!-- <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let unit of shiftInformation?.LichTruc">
+            {{ unit?.TenDonVi === "CQ" ? "BTL" : unit?.TenDonVi }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tr-bg-3a">
+          <td scope="row" class="fw-bold">Trực CH</td>
+          <td *ngFor="let unit of shiftInformation?.LichTruc; let index = index">
+            <div *ngIf="index !== 0">
+              {{ getLastWord (extractName (unit?.TrucCH)) }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="fw-bold">Trực ban trưởng</td>
+          <td *ngFor="let unit of shiftInformation?.LichTruc">
+            {{ getLastWord (extractName (unit?.TrucBanTruong)) }}
+          </td>
+        </tr>
+        <tr class="tr-bg-3a">
+          <td class="fw-bold">Trực ban phó</td>
+          <td *ngFor="let unit of shiftInformation?.LichTruc">
+            {{ getLastWord (extractName (unit?.TrucBanPho)) }}
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+    <div class="d-flex gap-3">
+      <div class="d-flex flex-column h-100 gap-1">
+        <button 
+          *ngFor="let button of buttons; let i = index" 
+          class="btth-btn-duty" 
+          [ngClass]="{'active': activeBtnIndex === i}"
+          (click)="setActiveBtn(i)"
+        >
+          {{ button }}
+        </button>
+      </div>
+      <div class="overflow-auto" style="max-height: 202px; flex: 1">
+        <table class="btth-top-table h-100">
+          <thead>
+            <tr>
+              <th>Tiêu đề 1</th>
+              <th>Tiêu đề 2</th>
+              <th>Tiêu đề 3</th>
+              <th>Tiêu đề 4</th>
+              <th>Tiêu đề 5</th>
+              <th>Tiêu đề 6</th>
+              <th>Tiêu đề 7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>Dữ liệu 1</p>
+              </td>
+              <td>
+                <p>Dữ liệu 2</p>
+              </td>
+              <td>
+                <p>Dữ liệu 3</p>
+              </td>
+              <td>
+                <p>Dữ liệu 4</p>
+              </td>
+              <td>
+                <p>Dữ liệu 5</p>
+              </td>
+              <td>
+                <p>Dữ liệu 6</p>
+              </td>
+              <td>
+                <p>Dữ liệu 7</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Dữ liệu 8</p>
+              </td>
+              <td>
+                <p>Dữ liệu 9</p>
+              </td>
+              <td>
+                <p>Dữ liệu 10</p>
+              </td>
+              <td>
+                <p>Dữ liệu 11</p>
+              </td>
+              <td>
+                <p>Dữ liệu 12</p>
+              </td>
+              <td>
+                <p>Dữ liệu 13</p>
+              </td>
+              <td>
+                <p>Dữ liệu 14</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Dữ liệu 8</p>
+              </td>
+              <td>
+                <p>Dữ liệu 9</p>
+              </td>
+              <td>
+                <p>Dữ liệu 10</p>
+              </td>
+              <td>
+                <p>Dữ liệu 11</p>
+              </td>
+              <td>
+                <p>Dữ liệu 12</p>
+              </td>
+              <td>
+                <p>Dữ liệu 13</p>
+              </td>
+              <td>
+                <p>Dữ liệu 14</p>
+              </td>
+            </tr>
+             <tr>
+              <td>
+                <p>Dữ liệu 8</p>
+              </td>
+              <td>
+                <p>Dữ liệu 9</p>
+              </td>
+              <td>
+                <p>Dữ liệu 10</p>
+              </td>
+              <td>
+                <p>Dữ liệu 11</p>
+              </td>
+              <td>
+                <p>Dữ liệu 12</p>
+              </td>
+              <td>
+                <p>Dữ liệu 13</p>
+              </td>
+              <td>
+                <p>Dữ liệu 14</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

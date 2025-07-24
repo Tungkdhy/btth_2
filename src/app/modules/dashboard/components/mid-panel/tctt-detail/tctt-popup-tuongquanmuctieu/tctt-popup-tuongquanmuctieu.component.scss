@@ -1,0 +1,21 @@
+.table-detail-tuong-quan {
+    height: 83vh !important;
+}
+
+.table-detail-tuong-quan th:nth-child(1),
+.table-detail-tuong-quan td:nth-child(1) {
+    width: 4%;
+}
+
+.table-header {
+    .search-custom {
+        width: 1850px !important;
+    }
+
+    .custom-nentang {
+        font-size: 32px;
+        font-weight: 600;
+        margin-top: 15px;
+        margin-right: 20px;
+    }
+}

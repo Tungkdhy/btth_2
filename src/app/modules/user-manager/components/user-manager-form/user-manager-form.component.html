@@ -1,0 +1,73 @@
+<form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
+  <div class="row mb-5">
+    <label class="col-lg-4 col-form-label required fs-6" for="username">
+      Tên nhóm
+    </label>
+    <div class="col-lg-8">
+      <input
+        id="username"
+        type="text"
+        class="form-control form-control-lg form-control-solid"
+        formControlName="username"
+      />
+    </div>
+    <div
+      *ngIf="
+        userFormGroup.get('username')?.invalid &&
+        userFormGroup.get('username')?.touched
+      "
+    >
+      <span role="alert" style="color: red"> Vui lòng nhập giá trị </span>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <label class="col-lg-4 col-form-label fs-6" for="firstName"> Họ </label>
+    <div class="col-lg-8">
+      <input
+        id="firstName"
+        type="text"
+        class="form-control form-control-lg form-control-solid"
+        formControlName="firstName"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <label class="col-lg-4 col-form-label fs-6" for="lastName"> Tên </label>
+    <div class="col-lg-8">
+      <input
+        id="lastName"
+        type="text"
+        class="form-control form-control-lg form-control-solid"
+        formControlName="lastName"
+      />
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <label class="col-lg-4 fs-6 form-label fw-bold text-dark" for="enabled"
+      >Trạng thái</label
+    >
+    <div class="col-lg-8 d-flex align-items-center">
+      <div class="form-check form-check-solid form-switch fv-row">
+        <input
+          type="checkbox"
+          id="enabled"
+          formControlName="enabled"
+          class="form-check-input w-45px h-30px"
+        /><label class="form-check-label"></label>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <button
+      type="button"
+      class="btn btn-primary w-100px"
+      [disabled]="userFormGroup.invalid"
+      (click)="onSubmit()"
+    >
+      Lưu
+    </button>
+  </div>
+</form>

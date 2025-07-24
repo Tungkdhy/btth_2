@@ -1,0 +1,38 @@
+.contact-info-card {
+  background-color: var(--bgCard);
+  border-radius: 0.8em;
+  padding: 1.5em 1.5em 0.5em 1.5em;
+  display:flex;
+  flex-direction: row;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin: 0.5em 1.5em;
+}
+
+.info-row {
+  flex: 1 0 calc(50% - 2em) !important;
+  display:flex;
+  flex-direction: row;
+  font-size: 2.5em;
+}
+
+.left-column,
+.right-column {
+  flex: 1;
+}
+
+.title{
+  font-weight: bold;
+  padding-right: 0.2em;
+}
+
+.contact-info-card p{
+  line-height: 1.4em;  
+}
+
+
+.contact-info-card .right-column {
+  text-align: left;
+}
+
+

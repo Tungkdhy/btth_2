@@ -1,0 +1,65 @@
+<div *ngIf="data" class="card p-5">
+  <div class="">
+    <div class="bg-body-secondary inner-card table-it-infra-3107 wrap-box-info">
+      <div class="d-flex" style="flex-direction: column;">
+        <div class="title d-flex justify-content-center py-10" style="font-size: 36px;flex:1;">VKTB</div>
+        <table class="table gy-7 gs-7 m-0" style="flex:1 1 auto;width: 100%;">
+          <thead>
+            <tr class="d-flex">
+              <th class="table-col-1">STT</th>
+              <th  style="flex:1;" >Loại chức năng</th>
+            </tr>
+          </thead>
+          <tbody class>
+            <ng-container *ngFor="let item of legendData">
+              <tr class="d-flex" (click)="onRowClick(item)">
+                <td class="table-col-1">{{ item.sequence }}</td>
+                <td class="table-col-2">{{ item.name }}</td>
+                <td class="table-col-3">{{ item.current_force }}/{{ item.total_force }}</td>
+                <td class="table-col-4" (click)="toggleExpand(item)">
+                  {{ item.expand ? "-" : "+" }}
+                </td>
+              </tr>
+              <tr *ngIf="item.expand" class="d-flex">
+                <td class="subtable-col-1">&nbsp;</td>
+                <td style="flex:1;padding:0">
+                  <table>
+                    <thead>
+                      <tr class="d-flex">
+                        <th class="subtable-col-2">Tên</th>
+                        <th class="subtable-col-3">Công nghệ</th>
+                        <th class="subtable-col-4">Nền tảng khai thác</th>
+                        <th class="subtable-col-5">Trạng thái</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let child of item.children">
+                        <tr class="d-flex">
+                          <td class="subtable-col-2" style="text-align: justify">{{ child.name }}</td>
+                          <td class="subtable-col-3" style="text-align: justify">
+                            {{ child.technical }}
+                          </td>
+                          <td class="subtable-col-4" style="text-align: justify">
+                            {{ child.platform }}
+                          </td>
+                          <td class="subtable-col-5">
+                            <img
+                              [src]="child.status ? acceptIcon : rejectIcon"
+                              alt="Status Icon"
+                              width="26"
+                              height="26"
+                            />
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

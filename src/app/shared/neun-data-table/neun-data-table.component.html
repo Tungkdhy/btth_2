@@ -1,0 +1,295 @@
+<div class="card card-xxl-stretch mb-5 mb-xxl-8">
+  <div *ngIf="!isSelectAll; else elseBlock" class="card-header">
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <span class="svg-icon svg-icon-1 position-absolute ms-4">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              opacity="0.5"
+              x="17.0365"
+              y="15.1223"
+              width="8.15546"
+              height="2"
+              rx="1"
+              transform="rotate(45 17.0365 15.1223)"
+              fill="currentColor"
+            ></rect>
+            <path
+              d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </span>
+        <input
+          #inputElement
+          type="text"
+          data-kt-ecommerce-product-filter="searchModel"
+          class="form-control form-control-solid w-sx-3000px w-xl-400px ps-14"
+          placeholder="Tìm kiếm"
+        />
+      </div>
+      <button
+        #searchButton
+        class="btn btn-primary ms-2 me-2"
+        (click)="onSearch()"
+      >
+        Tìm kiếm
+      </button>
+      <!--      <button-->
+      <!--        #advancedButton-->
+      <!--        class="ms-5 btn btn-link collapsed"-->
+      <!--        (click)="toggleSearchAdvanced()"-->
+      <!--        data-bs-toggle="collapse"-->
+      <!--        data-bs-target="#advanced_search_form"-->
+      <!--        aria-expanded="false"-->
+      <!--        aria-controls="advanced_search_form"-->
+      <!--      >-->
+      <!--        Nâng cao-->
+      <!--      </button>-->
+      <!--end::Search-->
+    </div>
+    <div
+      *ngIf="!readonly"
+      class="card-toolbar flex-row-fluid justify-content-end gap-5"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-trigger="hover"
+      title="Thêm mới"
+    >
+      <button
+        *ngIf="showExportButton"
+        type="button"
+        class="btn btn-info d-flex align-items-center gap-2"
+        title="Click để import excel"
+        (click)="export.emit()"
+      >
+        <i
+          *ngIf="!isLoadingExport; else loading"
+          class="las la-file-excel fs-3"
+        ></i>
+        Xuất Excel
+      </button>
+      <a class="btn btn-lg btn-light-primary" (click)="add.emit()">
+        <i class="ki-duotone ki-plus"> </i>
+        Thêm mới
+      </a>
+    </div>
+  </div>
+
+  <ng-template #elseBlock>
+    <div class="card-header border-0 pt-5 d-flex justify-content-end">
+      <h3 class="card-title">
+        <span class="card-label fw-bolder fs-6 mb-1"
+          >{{ listSelect.length }} bản ghi được chọn
+        </span>
+      </h3>
+      <div
+        class="card-toolbar"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-trigger="hover"
+        title="Click to add a user"
+      >
+        <a class="btn btn-lg btn-primary"> Duyệt </a>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="card-body py-3">
+    <div class="collapse" id="advanced_search_form">
+      <div class="row g-8">
+        <div class="col-lg-4">
+          <label class="fs-6 form-label fw-bold text-dark">Đơn vị</label>
+          <app-dropdown-tree
+            id="unit-tree"
+            [fields]="treeData"
+            (selectNode)="handleSelectUnit($event)"
+            placeholder="Tất cả"
+          ></app-dropdown-tree>
+        </div>
+        <div class="col-lg-4">
+          <label class="fs-6 form-label fw-bold text-dark">Trạng thái</label>
+          <select
+            name="status"
+            [(ngModel)]="searchModel.status"
+            class="form-select form-select-solid form-select-lg"
+          >
+            <!-- <option value="0">-Select-</option> -->
+            <option value="true" selected>Bật</option>
+            <option value="false">Tắt</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="separator separator-dashed mt-9 mb-6"></div>
+    </div>
+
+    <div class="">
+      <table
+        class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4 table-fix-head"
+      >
+        <thead>
+          <tr class="fw-bolder text-muted text-uppercase">
+            <th *ngIf="!readonly" class="w-25px">
+              <div
+                class="form-check form-check-sm form-check-custom form-check-solid"
+              >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  (click)="clickAll()"
+                />
+              </div>
+            </th>
+            <ng-container *ngFor="let th of columnHeading">
+              <th>{{ th.name }}</th>
+            </ng-container>
+            <th *ngIf="!readonly" class="text-center">Xử lý</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of devices">
+            <td *ngIf="!readonly">
+              <div
+                class="form-check form-check-sm form-check-custom form-check-solid"
+              >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="data.isSelect"
+                  (click)="clickCheckbox(data)"
+                  [value]="data.uuid"
+                />
+              </div>
+            </td>
+            <ng-container *ngFor="let td of columnHeading; let i = index">
+              <td *ngIf="i === 0; else cellBlock">
+                <a
+                  (click)="readonly ? onView(data) : onEdit(data)"
+                  class="text-dark fw-bolder text-hover-primary fs-6"
+                >
+                  {{ data.hasOwnProperty(td.code) ? data[td.code] : null }}
+                </a>
+              </td>
+              <ng-template #cellBlock>
+                <td
+                  *ngIf="td.code !== 'status'; else statusBlock"
+                  class="text-dark fw-bold mb-1 fs-6"
+                >
+                  {{ data.hasOwnProperty(td.code) ? data[td.code] : null }}
+                </td>
+                <ng-template #statusBlock>
+                  <td>
+                    <span
+                      [class]="
+                        data[td.code] === true
+                          ? 'badge badge-primary'
+                          : 'badge badge-danger'
+                      "
+                    >
+                      {{ data[td.code] === true ? "Bật" : "Tắt" }}
+                    </span>
+                  </td>
+                </ng-template>
+              </ng-template>
+            </ng-container>
+            <td *ngIf="!readonly">
+              <div
+                class="d-flex justify-content-center flex-shrink-0 menu-item"
+              >
+                <!--              <ng-container *ngIf="!readonly else detail">-->
+                <a
+                  id="dropdownMenuHandle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  class="dropdown-toggle btn btn-bg-light btn-active-color-primary btn-sm me-1"
+                >
+                  Thao tác
+                </a>
+                <app-dropdown-menu
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuHandle"
+                  (delete)="onDelete(data)"
+                  (edit)="onEdit(data)"
+                  (view)="onView(data)"
+                ></app-dropdown-menu>
+                <!--              </ng-container>-->
+                <!--              <ng-template #detail>-->
+                <!--                <a class="btn btn-sm btn-secondary" (click)="viewDetailDevice(data)">Chi tiết</a>-->
+                <!--              </ng-template>-->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-container *ngIf="devices">
+    <div class="card-footer d-flex justify-content-between p-">
+      <div
+        class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
+      >
+        <div class="col-sm-12 col-md-2 fw-bold table_length">
+          <select
+            class="form-select form-select-solid"
+            style="width: auto"
+            (change)="changeSize($event)"
+          >
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10" selected>10</option>
+            <option [ngValue]="20">20</option>
+          </select>
+        </div>
+        <div class="col-sm-12 col-md-10 table_info fs-7 text-gray-600">
+          <span
+            *ngIf="
+              searchModel.length -
+                ((searchModel.page - 1) * searchModel.size + 1) <
+                searchModel.size;
+              else elseBlock
+            "
+          >
+            Hiển thị từ {{ (searchModel.page - 1) * searchModel.size + 1 }} tới
+            {{ searchModel.length }} trên tổng số {{ searchModel.length }} bản
+            ghi
+          </span>
+          <ng-template #elseBlock>
+            Hiển thị từ {{ (searchModel.page - 1) * searchModel.size + 1 }} tới
+            {{ searchModel.page * searchModel.size }} trên tổng số
+            {{ searchModel.length }} bản ghi
+          </ng-template>
+        </div>
+      </div>
+      <div
+        class="col-sm-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end"
+      >
+        <ngb-pagination
+          class="d-flex justify-content-center"
+          (pageChange)="changePageSize($event)"
+          [collectionSize]="searchModel.length"
+          [(page)]="searchModel.page"
+          [pageSize]="searchModel.size"
+          [maxSize]="searchModel.maxSize"
+          [rotate]="searchModel.rotate"
+        >
+          <ng-template ngbPaginationPrevious>{{
+            searchModel.previous
+          }}</ng-template>
+          <ng-template ngbPaginationNext>{{ searchModel.next }}</ng-template>
+          <ng-template ngbPaginationEllipsis>...</ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <app-neun-loading align="left"></app-neun-loading>
+</ng-template>

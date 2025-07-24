@@ -1,0 +1,62 @@
+<div class="mt-5">
+  <h2>Mất kết nối quá hạn</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [legendSettings]="legendSettings"
+    id="chart-container-2"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="thietbimang"
+        name="Thiết bị mạng"
+        fill="#FF5733"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="mc"
+        name="Máy chủ"
+        fill="#33C1FF"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="uddv"
+        name="Ứng dụng, dịch vụ"
+        fill="#28B463"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="htgs"
+        name="HTGS"
+        fill="#FFC300"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

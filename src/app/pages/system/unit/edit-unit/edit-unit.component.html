@@ -1,0 +1,68 @@
+<div class="card my-10">
+  <div class="card-header">
+    <div class="card-title">
+      <div class="d-flex overflow-auto">
+        <ul
+          class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-bolder flex-nowrap ms-3"
+        >
+          <li class="nav-item" *ngIf="hasRole('manager')">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['chi-tiet']"
+              routerLinkActive="active"
+            >
+              Chi tiết
+            </a>
+          </li>
+          <!--          <li class="nav-item" *ngIf="hasRole('manager')">-->
+          <!--            <a-->
+          <!--              class="nav-link text-active-primary me-6"-->
+          <!--              [routerLink]="['anh-xa']"-->
+          <!--              routerLinkActive="active"-->
+          <!--            >-->
+          <!--              Ánh xạ-->
+          <!--            </a>-->
+          <!--          </li>-->
+          <li class="nav-item" *ngIf="hasRole('manager')">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['anh-xa']"
+              routerLinkActive="active"
+            >
+              Ánh xạ
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="hasRole('manager') || hasRole('viewer')">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['so-do-mang']"
+              routerLinkActive="active"
+            >
+              Sơ đồ mạng
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="hasRole('manager') || hasRole('viewer')">
+            <a
+              class="nav-link text-active-primary me-6"
+              [routerLink]="['ban-do-so']"
+              routerLinkActive="active"
+            >
+              Bản đồ số
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-toolbar">
+      <div
+        class="btn btn-icon btn-sm btn-active-light-primary btn-close"
+        (click)="back()"
+      >
+        <span class="svg-icon svg-icon-2x"></span>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
+</div>

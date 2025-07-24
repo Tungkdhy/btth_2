@@ -1,0 +1,153 @@
+<div [id]="mapId" class="map-container map" style="height: 87.7vh;">
+  <div id="info"></div>
+  <app-search-map></app-search-map>
+
+  <ng-container *ngIf="currentTemplate === TemplateId.overview">
+    <!-- Left panel -->
+    <div *ngIf="isLeftPanelVisible" class="left-panel-map content-map">
+      <div class="header-militarymap">
+        <h2>Tác chiến thông tin</h2>
+        <button class="btn btn-light-danger" (click)="closeLeftPanel()">
+          <i class="bi bi-x font-size-btn"></i>
+        </button>
+      </div>
+      <div class="content-map">
+        <app-legend-on-map
+          [legendData]="infoWarfare$ | async"
+        ></app-legend-on-map>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div *ngIf="isRightPanelVisible" class="right-panel-map">
+      <div class="header-militarymap">
+        <h2>Phòng thủ mạng (Quân sự)</h2>
+        <button class="btn btn-light-danger" (click)="closeRightPanel()">
+          <i class="bi bi-x font-size-btn"></i>
+        </button>
+      </div>
+      <div style="margin-left: 10px">
+        <app-title-panel
+          [selectedFeature]="featureDataOnLegend"
+        ></app-title-panel>
+      </div>
+
+      <app-feature-detail-panel
+        topTitle="Tổng quan"
+        [isOverview]="true"
+        [layerId]="selectedLayerId"
+        [selectedFeature]="featureDataOnLegend"
+      ></app-feature-detail-panel>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="currentTemplate === TemplateId.detail">
+    <ng-container *ngIf="featureDataOnLegend">
+      <div class="right-panel-map">
+        <div class="d-flex justify-content-between px-10 pt-5">
+          <app-title-panel
+            [selectedFeature]="featureDataOnLegend"
+          ></app-title-panel>
+          <span>
+            <ng-container *ngIf="isAccessLayer(featureDataOnLegend?.layerId)">
+              <button
+                class="btn btn-light-info font-size-btn me-2"
+                (click)="viewUnitDetail(featureDataOnLegend)"
+              >
+                Chi tiết
+              </button>
+            </ng-container>
+
+            <button class="btn btn-light-danger" (click)="closePanel()">
+              <i class="bi bi-x font-size-btn"></i>
+            </button>
+          </span>
+        </div>
+
+        <!--Core, Boundary-->
+        <ng-container
+          *ngIf="
+            featureDataOnLegend && !isAccessLayer(featureDataOnLegend?.layerId);
+            else accessLayer
+          "
+        >
+          <app-router-detail-panel
+            [selectedFeature]="featureDataOnLegend"
+          ></app-router-detail-panel>
+        </ng-container>
+
+        <!--Access-->
+        <ng-template #accessLayer>
+          <app-contact-information-panel
+            [selectedFeature]="featureDataOnLegend"
+          ></app-contact-information-panel>
+          <app-unit-detail-panel
+            [selectedFeature]="featureDataOnLegend"
+          ></app-unit-detail-panel>
+          <app-feature-detail-panel
+            [isUnitView]="true"
+            [selectedFeature]="featureDataOnLegend"
+          ></app-feature-detail-panel>
+        </ng-template>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="currentTemplate === TemplateId.unit">
+    <ng-container *ngIf="featureDataOnLegend">
+      <div class="right-panel-map">
+        <div class="header-militarymap">
+          <app-title-panel
+            [selectedFeature]="featureDataOnLegend"
+          ></app-title-panel>
+          <span>
+            <ng-container *ngIf="isAccessLayer(featureDataOnLegend?.layerId)">
+              <button
+                class="btn btn-light-info font-size-btn me-2"
+                (click)="viewUnitDetail(featureDataOnLegend)"
+              >
+                Chi tiết
+              </button>
+            </ng-container>
+            <button class="btn btn-light-danger" (click)="closePanel()">
+              <i class="bi bi-x font-size-btn"></i>
+            </button>
+          </span>
+        </div>
+
+        <app-unit-overview-panel
+          [selectedFeature]="featureDataOnLegend"
+        ></app-unit-overview-panel>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <div id="scale-line-map"></div>
+  <ng-container *ngIf="mapOl">
+    <app-layers-control></app-layers-control>
+  </ng-container>
+  <app-info-panel [features]="infoData"></app-info-panel>
+  <app-legend-table></app-legend-table>
+  <ng-container *ngIf="showAlertListPanel">
+    <div class="left-panel-map">
+      <app-alert-list-panel
+        (moveToFeature)="selectFeature($event)"
+      ></app-alert-list-panel>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Overlay Container -->
+<div id="overlay-container" class="ol-overlay">
+  <app-device-tooltip></app-device-tooltip>
+  <!-- Insert your component here -->
+</div>
+
+<ng-container *ngIf="coreLayer$ | async"> </ng-container>
+<ng-container *ngIf="boundaryLayer$ | async"> </ng-container>
+<ng-container *ngIf="accessLayer$ | async"> </ng-container>
+<ng-container *ngIf="infoSecLayer$ | async"> </ng-container>
+<ng-container *ngIf="networkAlertLayer$ | async"> </ng-container>
+
+<ng-container *ngIf="payloadChannel$ | async"> </ng-container>
+<ng-container *ngIf="componentEvent$ | async"> </ng-container>

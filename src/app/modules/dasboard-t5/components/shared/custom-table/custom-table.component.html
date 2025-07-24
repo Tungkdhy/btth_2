@@ -1,0 +1,14 @@
+<div class="overflow-auto" style=" flex: 1">
+    <table class="btth-top-table h-100">
+        <thead *ngIf="isShowHeader">
+            <tr>
+              <th *ngFor="let column of columns">{{ column }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of data">
+              <td class="td-size" *ngFor="let column of columns">{{ row[column] }}</td>
+            </tr>
+          </tbody>
+    </table>
+  </div>

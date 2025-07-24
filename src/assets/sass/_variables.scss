@@ -1,0 +1,173 @@
+//option1
+$bgColor_option1: rgba(244, 244, 244, 1);
+$bgColor_dark: black;
+$bgColor_orange: orange;
+$cardBorderColor_option1: #505050;
+$bgGroup_option1: #f3f3f3;
+$colorBorderGroup_option1: rgba(58, 58, 58, 0.4);
+$bgCard_option1: #e0e0e0;
+$cardBorderColor_option1: #6f6f6f;
+$cardTopBorderColor_option1: #a9a521;
+$cardTopBgColor_option1: #fdfdea;
+$colorHighlight_option1: rgba(58, 58, 58, 0.1);
+$textColor_option1: black;
+$colorTitle_normal: rgba(4, 94, 43, 1);
+$colorButtonText: rgba(255, 255, 255, 1);
+$colorButton: rgba(230, 233, 235, 1);
+$colorButton2: rgba(4, 94, 43, 1);
+$bgTextCard_option1: #f5f5f5;
+//option2
+$bgColor_option2: linear-gradient(
+    110.94deg,
+    #f7f7f7 1.09%,
+    #f6f5f0 36.69%,
+    #eef5f1 100%
+  ),
+  linear-gradient(
+    0deg,
+    var(--Color-Secondary-Neutral, #ffffff),
+    var(--Color-Secondary-Neutral, #ffffff)
+  );
+$textColor_light: black;
+$textColor_dark: white;
+$textColor_orange: purple;
+$cardBorderColor_option2: rgba(239, 242, 249, 1);
+$bgGroup_option2: rgba(187, 194, 211, 1);
+$bgCard_option2: rgba(99, 128, 107, 0.1);
+$cardBorderColor_option2: rgba(219, 219, 219, 1);
+$cardTopBorderColor_option2: rgba(239, 242, 249, 1);
+$cardTopBgColor_option2: rgba(187, 194, 211, 1);
+$colorHighlight_option2: rgba(98, 128, 107, 0.1);
+
+//options3
+
+$bgColor_option3: rgba(234, 231, 224, 1);
+
+$borderColor_light: black;
+$borderColor_dark: white;
+$borderColor_orange: purple;
+$cardBorderColor_option3: rgba(4, 94, 43, 0.4);
+$bgGroup_option3: rgba(99, 128, 107, 0.1);
+$bgCard_option3: rgba(99, 128, 107, 0.1);
+$cardBorderColor_option3: rgba(219, 219, 219, 1);
+$cardTopBorderColor_option3: rgba(4, 94, 43, 0.4);
+$cardTopBgColor_option3: rgba(99, 128, 107, 0.1);
+$colorHighlight_option3: rgba(99, 128, 107, 0.1);
+$colorTable_option3: rgba(99, 128, 107, 0.1);
+
+//options4
+
+$bgColor_option4: #111315;
+
+$borderColor_light: black;
+$borderColor_dark: white;
+$borderColor_orange: purple;
+$cardBorderColor_option4: #1c232b;
+$bgGroup_option4: #1c232b;
+$bgCard_option4: #f0fdf21a;
+$cardBorderColor_option4: #f0fdf21a;
+$cardTopBorderColor_option4: #1c232b;
+$cardTopBgColor_option4: #1c232b;
+$colorHighlight_option4: #f0fdf21a;
+$colorTable_option4: #f0fdf226;
+$textColor_option4: #f0fdf2;
+$colorTitle_normal_dark: rgba(38, 193, 67, 1);
+$colorButtonTextDark: rgba(6, 45, 15, 1);
+$colorButtonDark: rgba(240, 253, 242, 0.7);
+$colorButton2_Dark: rgba(38, 193, 67, 1);
+// mixin that enables css variables in light mode
+@mixin lighten() {
+  --bgColor: #{$bgColor_option1};
+  --textColor: #{$textColor_light};
+  --borderColor: #{$borderColor_light};
+  --colorBorderGroup: #{$colorBorderGroup_option1};
+  --bgGroup: #{$bgGroup_option1};
+  --bgCard: #{$bgCard_option1};
+  --cardBorderColor: #{$cardBorderColor_option1};
+  --cardTopBorderColor: #{$cardTopBorderColor_option1};
+  --cardTopBgColor: #{$cardTopBgColor_option1};
+  --colorHighlight: #{$colorHighlight_option1};
+  --colorText: #{$textColor_option1};
+  --colorTitle: #{$colorTitle_normal};
+  --colorButton: #{$colorButton};
+  --colorTextButton: #{$colorButtonText};
+  --colorButton2: #{$colorButton2};
+  --colorTooltip: #F3F3F3;
+  --backgroundTooltip: #3A3A3A;
+  --borderTooltiptop: 8px solid #3A3A3A;
+  --headerTableColor: rgba(244, 246, 247, 1);
+  --topGreenColor:rgba(4, 94, 43, 1);
+  --bgTextCard: #{$bgTextCard_option1};
+}
+
+// mixin that enables css variables in dark mode
+@mixin darken() {
+  --bgColor: #{$bgColor_option2};
+  --textColor: #{$textColor_light};
+  --borderColor: #{$borderColor_light};
+  --colorBorderGroup: #{$cardBorderColor_option2};
+  --bgGroup: #{$bgGroup_option2};
+  --bgCard: #{$bgCard_option2};
+  --cardBorderColor: #{$cardBorderColor_option2};
+  --cardTopBorderColor: #{$cardTopBorderColor_option2};
+  --cardTopBgColor: #{$cardTopBgColor_option2};
+  --colorHighlight: #{$colorHighlight_option2};
+  --colorText: #{$textColor_option1};
+  --colorTitle: #{$colorTitle_normal};
+  --colorButton: #{$colorButton};
+  --colorTextButton: #{$colorButtonText};
+  --colorButton2: #{$colorButton2};
+  // Color for tooltip
+  --colorTooltip: #1C232B;
+  --backgroundTooltip: #F0FDF2;
+  --borderTooltiptop: 8px solid #F0FDF2;
+  // End  color for tooltip
+}
+
+// mixin that enables css variables in dark mode
+@mixin orange() {
+  --bgColor: #{$bgColor_option3};
+  --textColor: #{$textColor_light};
+  --borderColor: #{$borderColor_light};
+  --colorBorderGroup: #{$cardBorderColor_option3};
+  --bgGroup: #{$bgGroup_option3};
+  --bgCard: #{$bgCard_option3};
+  --cardBorderColor: #{$cardBorderColor_option3};
+  --cardTopBorderColor: #{$cardTopBorderColor_option3};
+  --cardTopBgColor: #{$cardTopBgColor_option3};
+  --colorHighlight: #{$colorHighlight_option3};
+  --colorText: #{$textColor_option1};
+  --colorTitle: #{$colorTitle_normal};
+  --colorButton: #{$colorButton};
+  --colorTextButton: #{$colorButtonText};
+  --colorButton2: #{$colorButton2};
+  // Color for tooltip
+  --colorTooltip: #1C232B;
+  --backgroundTooltip: #F0FDF2;
+  --borderTooltiptop: 8px solid #F0FDF2;
+  // End Color for tooltip
+}
+
+@mixin supedark() {
+  --bgColor: #{$bgColor_option4};
+  --textColor: #{$textColor_light};
+  --borderColor: #{$borderColor_light};
+  --colorBorderGroup: #{$cardBorderColor_option4};
+  --bgGroup: #{$bgGroup_option4};
+  --bgCard: #{$bgCard_option4};
+  --cardBorderColor: #{$cardBorderColor_option4};
+  --cardTopBorderColor: #{$cardTopBorderColor_option4};
+  --cardTopBgColor: #{$cardTopBgColor_option4};
+  --colorHighlight: #{$colorHighlight_option4};
+  --colorText: #{$textColor_option4};
+  --colorTitle: #{$colorTitle_normal_dark};
+  --colorButton: #{$colorButtonDark};
+  --colorTextButton: #{$colorButtonTextDark};
+  --colorButton2: #{$colorButton2_Dark};
+    // Color for tooltip
+  --colorTooltip: #1C232B;
+  --backgroundTooltip: #F0FDF2;
+  --borderTooltiptop: 8px solid #F0FDF2;
+  // End Color for tooltip
+}
+

@@ -1,0 +1,12 @@
+<div class="warning-container">
+    <h3>Cảnh báo đối tượng livestream</h3>
+    <div class="stream-item" *ngFor="let item of data">
+      <img [src]="item.avatarUrl || 'assets/avatar-placeholder.png'" alt="avatar" class="avatar" />
+      <div class="stream-info">
+        <strong>{{ item.name }}</strong>
+        <div>{{ item.datetime }}.&nbsp;&nbsp;{{ item.time }}</div>
+        <div>{{ item.views }} lượt xem &nbsp;&nbsp; {{ item.interactions }} tương tác</div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,14 @@
+<ejs-datetimepicker
+  class="form-control"
+  cssClass="datetime-custom"
+  [format]="'dd/MM/yyyy, HH:mm:ss'"
+  [allowEdit]="false"
+  locale="vi"
+  floatLabelType="Always"
+  [placeholder]="placeholder"
+  (change)="onSelectDate($event)"
+  [min]="minDate"
+  [max]="maxDate"
+  [(value)]="value"
+  [readonly]="readonly"
+></ejs-datetimepicker>

@@ -1,0 +1,35 @@
+.legend-custom {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phần tử chú thích xuống dòng nếu cần */
+  justify-content: flex-end; /* Đưa các phần tử vào góc phải */
+  margin-bottom: 10px; /* Khoảng cách giữa chú thích và bảng */
+  position: absolute; /* Đặt vị trí của phần tử tuyệt đối */
+  top: 10%; /* Khoảng cách từ trên cùng */
+  right: 2%; /* Khoảng cách từ bên phải */
+  color: black;
+  border-radius: 8px;
+}
+
+.detail-legend-custom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 40%; //case child table disappear 
+  //top: 51%; //in case child table persistence
+  right: 2%;
+  color: black;
+  border-radius: 8px;
+}
+.detail-legend-left {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  color: black;
+  border-radius: 8px;
+}

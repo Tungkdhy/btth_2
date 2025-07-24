@@ -1,0 +1,15 @@
+<ejs-dropdowntree
+  #dropDownTree
+  class="form-control form-control-lg form-control-solid fw-bold text-gray-700 fs-6"
+  [fields]="fields"
+  [placeholder]="placeholder"
+  [allowFiltering]="allowFiltering"
+  [itemTemplate]="itemTemplate"
+  [showCheckBox]="showCheckBox"
+  [filterBarPlaceholder]="filterPlaceholder"
+  filterType="Contains"
+  (select)="handleSelect($event)"
+  (change)="clearValue($event)"
+  [readonly]="readonly"
+  locale="vi"
+></ejs-dropdowntree>

@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="">
+    <thead>
+      <tr class="fw-bold">
+        <th>Tên</th>
+        <th>Số lượng</th>
+      </tr>
+    </thead>
+    <tbody class>
+      <tr *ngFor="let item of legendData">
+        <td class="fw-bold">{{ item.name }}</td>
+        <td>{{ item.count | numberFormat }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

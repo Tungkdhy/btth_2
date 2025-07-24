@@ -1,0 +1,13 @@
+<div class="viral-container">
+    <h3 class="title">Bài viết có độ lan toả</h3>
+    <div class="post-item" *ngFor="let post of posts">
+      <a href="#" class="post-title">{{ post.title }}</a>
+      <div>{{ post.date }}.&nbsp;&nbsp;{{ post.time }}</div>
+      <div>
+        <span class="highlight-viral">{{ post.likes }}</span> lượt Thích &nbsp;
+        <span class="highlight-viral">{{ post.comments }}</span> lượt Bình luận &nbsp;
+        <span class="highlight-viral">{{ post.shares }}</span> lượt chia sẻ
+      </div>
+    </div>
+  </div>
+  

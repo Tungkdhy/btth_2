@@ -1,0 +1,32 @@
+<div class="search-container" [ngClass]="{ expanded: isExpanded }">
+  <button class="search-icon" *ngIf="!isExpanded" (click)="toggleSearch()">
+    <i class="bi bi-search fs-2"></i>
+  </button>
+  <div class="search-box" *ngIf="isExpanded">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Tìm kiếm..."
+      (input)="onInputChange()"
+      (keydown.enter)="onSearch()"
+    />
+    <button class="mode-button" (click)="toggleSearchMode()">
+      {{ searchMode }}
+    </button>
+    <button class="search-button" (click)="onSearch()">Tìm kiếm</button>
+    <button class="collapse-button" (click)="handleClearSearch()">
+      <i class="bi bi-trash"></i>
+    </button>
+    <button class="collapse-button" (click)="handleCollapseSearch()">
+      <i class="bi bi-caret-up-fill"></i>
+    </button>
+  </div>
+
+  <ng-container *ngIf="isExpanded">
+    <ul *ngIf="results$ | async as results" class="results-list">
+      <li *ngFor="let result of results" (click)="goToFeature(result)">
+        {{ searchMode === "Địa danh" ? result.areaSearch : result.unitSearch }}
+      </li>
+    </ul>
+  </ng-container>
+</div>

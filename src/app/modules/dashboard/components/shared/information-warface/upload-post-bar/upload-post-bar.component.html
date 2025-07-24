@@ -1,0 +1,25 @@
+<div>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 (click)="togglePopup(true, 'KQDangTai')" [ngStyle]="{ color: isShowKQDangTai ? 'green' : 'inherit' }">
+      Kết quả đăng tải
+    </h2>
+    <h4 style="color: rgba(83, 83, 83, 1);">
+      Tổng: {{ totalCount }} bài viết, video
+    </h4>
+  </div>
+  <div style="width: 100%; height: 185px">
+    <ng-container *ngIf="uploadPostData$ | async as data">
+      <!-- <ejs-chart id="upload-post-bar-chart-container" [primaryXAxis]="uploadPostPrimaryXAxis"
+        [primaryYAxis]="uploadPostPrimaryYAxis" [title]="uploadPostTitle" class="chart-right-panel" height="240">
+        <e-series-collection>
+          <e-series [dataSource]="data" type="Bar" xName="tendonvi" yName="soluong"
+            [pointColorMapping]="uploadPostColorMapping" [marker]="Marker" columnWidth="0.75" height="100%"
+            fill="#1D85E7"></e-series>
+        </e-series-collection>
+      </ejs-chart> -->
+      <div echarts [options]="resultUploadChartOption" class="result-upload-chart" [autoResize]="true"></div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

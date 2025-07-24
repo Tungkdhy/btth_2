@@ -1,0 +1,104 @@
+<!--begin::Toolbar container-->
+<div
+  id="kt_app_toolbar_container"
+  class="app-container"
+  [ngClass]="appToolbarContainerCSSClass"
+>
+  <ng-container *ngIf="showPageTitle()">
+    <app-page-title
+      [appPageTitleDirection]="appPageTitleDirection"
+      [appPageTitleBreadcrumb]="appPageTitleBreadcrumb"
+      [appPageTitleDescription]="appPageTitleDescription"
+      class="page-title d-flex flex-wrap me-3"
+      [ngClass]="{
+        'flex-column justify-content-center':
+          appPageTitleDirection === 'column',
+        'align-items-center': appPageTitleDirection !== 'column',
+        appPageTitleCSSClass
+      }"
+    >
+    </app-page-title>
+  </ng-container>
+
+  <div class="d-flex align-items-center py-1">
+    <!-- begin::Wrapper  -->
+    <div class="me-4">
+      <!--      &lt;!&ndash; begin::Menu  &ndash;&gt;-->
+      <ng-container *ngIf="unitId$ | async as unitId">
+        <button
+          type="button"
+          class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder cursor-pointer me-2"
+          (click)="showStatistics(unitId)"
+        >
+          <span class="menu-icon">
+            <i class="las la-chart-bar fs-1 me-1"></i>
+          </span>
+          Thống kê
+        </button>
+      </ng-container>
+
+      <span class="me-0">
+        <button
+          type="button"
+          data-kt-menu-trigger="click"
+          data-kt-menu-placement="bottom-end"
+          data-kt-menu-flip="top-end"
+          class="btn btn-sm btn-flex btn-light btn-active-primary menu-dropdown fw-bolder cursor-pointer me-2"
+        >
+          <span class="menu-icon">
+            <span
+              *ngIf="exportWordLoading"
+              class="spinner-border h-15px w-15px align-middle text-gray-400 me-1"
+              role="status"
+            ></span>
+            <i
+              *ngIf="!exportWordLoading"
+              class="las la-file-import fs-1 me-1"
+            ></i>
+          </span>
+          <span>Xuất dữ liệu</span>
+          <span class="d-flex flex-center rotate-n180 ms-3">
+            <i class="ki-duotone ki-down fs-3"></i>
+          </span>
+        </button>
+
+        <div
+          data-kt-menu="true"
+          class="menu menu-sub menu-sub-dropdown"
+          data-popper-placement="bottom-end"
+        >
+          <ng-container *ngIf="unitId$ | async as unitId">
+            <div class="d-flex justify-content-center flex-column p-1">
+              <button
+                type="button"
+                class="btn btn-sm btn-light btn-active-light-primary px-10 mb-1"
+              >
+                <span class="d-flex justify-content-center">
+                  <span class="menu-icon">
+                    <i class="bi bi-file-earmark-pdf fs-3 me-2"></i>
+                  </span>
+                  Tệp PDF
+                </span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-light btn-active-light-primary px-10"
+                (click)="exportWord(unitId)"
+              >
+                <span class="d-flex justify-content-center">
+                  <span class="menu-icon">
+                    <i class="bi bi-file-earmark-word fs-3 me-2"></i>
+                  </span>
+                  Tệp Word
+                </span>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </span>
+      <!-- &lt;!&ndash; end::Menu  &ndash;&gt; -->
+    </div>
+    <!-- end::Wrapper  -->
+  </div>
+</div>
+<!--end::Toolbar container-->

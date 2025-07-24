@@ -1,0 +1,465 @@
+<div class="card h-100">
+  <div class="card-body bg-secondary h-100">
+    <h1 class="title-h1-style">Trinh sát, tác chiến thông tin</h1>
+
+    <!-- <div class="card-header p-2">
+            <ng-container *ngrxLet="{ start: startDate$, end: endDate$ } as date">
+                <app-date-time-range-picker class="flex-grow-1" [startDate]="date.start" [endDate]="date.end" (selectDate)="handleSelectDate($event)"></app-date-time-range-picker>
+            </ng-container>
+        </div>
+ -->
+
+    <div class="row bg-white">
+      <div class="row row-1 card-chart">
+        <div class="col-3 card-chart card-height">
+          <div class="card-border h-100">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left" (click)="togglePopup(true, 'SacThai')">
+                Chỉ số sắc thái
+              </h2>
+            </div>
+            <div class="row">
+              <div class="row">
+                <div>
+                  <ng-container *ngIf="nuanceData | async as data">
+                    <ejs-accumulationchart
+                      id="nuance-donut-chart"
+                      [title]="nuanceTitle"
+                      [legendSettings]="nuancelegendSettings"
+                    >
+                      <e-accumulation-series-collection>
+                        <e-accumulation-series
+                          [dataSource]="data"
+                          xName="x"
+                          yName="y"
+                          innerRadius="50%"
+                          [dataLabel]="nuanceDataLabel"
+                          [palettes]="nuanceColors"
+                          radius="90%"
+                          legendShape="Rectangle"
+                        >
+                        </e-accumulation-series>
+                      </e-accumulation-series-collection>
+                    </ejs-accumulationchart>
+                  </ng-container>
+
+                  <!--                    <ejs-accumulationchart-->
+                  <!--                      id="kgm-pie-chart-container"-->
+                  <!--                      [legendSettings]="legendSettings"-->
+                  <!--                      [title]="KGMPieTitle"-->
+                  <!--                      height="100%"-->
+                  <!--                    >-->
+                  <!--                      <e-accumulation-series-collection>-->
+                  <!--                        <e-accumulation-series-->
+                  <!--                          [dataSource]="KGMPieData"-->
+                  <!--                          xName="x"-->
+                  <!--                          yName="y"-->
+                  <!--                          radius="90%"-->
+                  <!--                          [palettes]="KGMPieColor"-->
+                  <!--                        ></e-accumulation-series>-->
+                  <!--                      </e-accumulation-series-collection>-->
+                  <!--                    </ejs-accumulationchart>-->
+                </div>
+                <!-- <div class="col-6">
+                    <ejs-accumulationchart
+                      id="btl-pie-chart-container"
+                      [legendSettings]="legendSettings"
+                      [title]="BTLPieTitle"
+                    >
+                      <e-accumulation-series-collection>
+                        <e-accumulation-series
+                          [dataSource]="KGMPieData"
+                          xName="x"
+                          yName="y"
+                          radius="90%"
+                          [palettes]="KGMPieColor"
+                        ></e-accumulation-series>
+                      </e-accumulation-series-collection>
+                    </ejs-accumulationchart>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-5 card-height card-chart">
+          <div class="card-border card-height">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left" (click)="togglePopup(true, 'ChuDeNong')">
+                Thống kê chủ đề nóng
+              </h2>
+            </div>
+            <div>
+              <ng-container *ngIf="hotTopicData | async as data">
+                <ejs-chart
+                  id="hot-topic-chart-container"
+                  [primaryXAxis]="hotTopicPrimaryXAxis"
+                  [primaryYAxis]="hotTopicPrimaryYAxis"
+                  [title]="hotTopicTitle"
+                >
+                  <e-series-collection>
+                    <e-series
+                      [dataSource]="data"
+                      type="Column"
+                      xName="name"
+                      yName="thongke"
+                      [fill]="basicColor"
+                      [marker]="hotTopicMarker"
+                    ></e-series>
+                  </e-series-collection>
+                </ejs-chart>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 card-height">
+          <div class="card-height">
+            <div class="card-chart">
+              <div class="card-border">
+                <div class="title d-flex justify-content-between">
+                  <h2
+                    class="text-left"
+                    (click)="togglePopup(true, 'KQDangTai')"
+                  >
+                    Kết quả tác chiến thông tin
+                  </h2>
+                </div>
+                <table class="table">
+                  <tbody>
+                    <tr class="fs-16 text-gray-800">
+                      <td class="border-left-primary result_finding">Bóc gỡ</td>
+                      <td class="result_finding">Cung cấp, chỉ thị</td>
+                      <td class="result_finding">Truyền thông</td>
+                    </tr>
+                    <tr class="fs-16 text-gray-800">
+                      <td>
+                        <span class="badge badge-primary font-size-badge"
+                          >18/18</span
+                        >
+                      </td>
+                      <td>
+                        <span class="badge badge-primary font-size-badge"
+                          >146</span
+                        >
+                      </td>
+                      <td>
+                        <span class="badge badge-primary font-size-badge"
+                          >17 hoạt động</span
+                        >
+                        <span class="badge badge-danger font-size-badge"
+                          >3 tạm dừng</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-chart-2">
+              <div class="card-border">
+                <div class="title d-flex justify-content-between">
+                  <h2
+                    class="text-left"
+                    (click)="togglePopup(true, 'KQDangTai')"
+                  >
+                    Kết quả đăng tải
+                  </h2>
+                </div>
+                <ejs-chart
+                  id="upload-post-bar-chart-container"
+                  [primaryXAxis]="uploadPostPrimaryXAxis"
+                  [primaryYAxis]="uploadPostPrimaryYAxis"
+                  [title]="uploadPostTitle"
+                  height="50%"
+                >
+                  <e-series-collection>
+                    <e-series
+                      [dataSource]="uploadPostData"
+                      type="Bar"
+                      xName="x"
+                      yName="y"
+                      [pointColorMapping]="uploadPostColorMapping"
+                    ></e-series>
+                  </e-series-collection>
+                </ejs-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8 card-chart card-height">
+          <div class="card-border">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left">Mục tiêu giám sát</h2>
+            </div>
+            <div class="row">
+              <div class="col-7">
+                <h3 class="text-left" (click)="togglePopup(true, 'TQBaiViet')">
+                  Tương quan bài viết
+                </h3>
+                <ng-container *ngIf="articleCorrelationData | async as data">
+                  <ejs-chart
+                    id="post-bar-chart-container"
+                    [primaryXAxis]="articleCorrelationPrimaryXAxis"
+                    [primaryYAxis]="articleCorrelationPrimaryYAxis"
+                    [palettes]="articleCorrelationPalette"
+                    [tooltip]="articleCorrelationTooltip"
+                  >
+                    <e-series-collection>
+                      <e-series
+                        [dataSource]="data"
+                        type="Bar"
+                        xName="nentang"
+                        yName="soluong"
+                        [marker]="articleCorrelationMarker"
+                        [pointColorMapping]="articleCorrelationColorMapping"
+                      ></e-series>
+                    </e-series-collection>
+                  </ejs-chart>
+                </ng-container>
+              </div>
+              <div class="col-5">
+                <h3 class="text-left" (click)="togglePopup(true, 'TQMucTieu')">
+                  Tương quan mục tiêu
+                </h3>
+                <ng-container *ngIf="relatedTargetData | async as data">
+                  <ejs-accumulationchart
+                    id="related-target-pie-chart"
+                    [enableSmartLabels]="enableSmartLabels"
+                    [title]="relatedTargetTitle"
+                    [legendSettings]="accumulationLegendSettings"
+                  >
+                    <e-accumulation-series-collection>
+                      <e-accumulation-series
+                        [dataSource]="data"
+                        xName="nentang"
+                        yName="soluong"
+                        radius="90%"
+                        innerRadius="50%"
+                        [dataLabel]="relatedTargetDataLabel"
+                        [palettes]="relatedTargetColors"
+                      >
+                      </e-accumulation-series>
+                    </e-accumulation-series-collection>
+                  </ejs-accumulationchart>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 card-chart card-height">
+          <div class="card-border">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left" (click)="togglePopup(true, 'MucTieuBaoVe')">
+                Mục tiêu bảo vệ
+              </h2>
+            </div>
+            <div class="table-responsive table-left-panel h-100">
+              <div></div>
+              <table
+                class="table table-rounded table-striped border fs-6 table-bordered table-object-def h-100"
+              >
+                <tbody>
+                  <tr>
+                    <td>Uỷ viên Bộ chính trị</td>
+                    <td>16</td>
+                  </tr>
+                  <tr>
+                    <td>Lãnh đạo quân đội</td>
+                    <td>60</td>
+                  </tr>
+                  <ng-container *ngIf="baoveData | async as dataList">
+                    <tr
+                      *ngFor="let item of dataList"
+                      (click)="sendMapEvent('', 'MAP', 'TCTT', item.name)"
+                    ></tr>
+                    <tr
+                      *ngFor="let item of dataList"
+                      (click)="sendMapEvent('', 'MAP', 'TCTT', item.name)"
+                    >
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.thongke }}</td>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <td>Dân tộc, tôn giáo</td>
+                    <td>99</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body bg-secondary">
+    <h1 class="title-h1-style">Trinh sát tác chiến mạng</h1>
+    <div class="card-body bg-white">
+      <div class="row">
+        <div class="col-3">
+          <div class="card-border p-5">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left">Mục tiêu</h2>
+              <h2 class="text-right">
+                <span style="color: green font-size-span">{{
+                  totaltargetData
+                }}</span
+                >/300
+              </h2>
+            </div>
+
+            <ng-container *ngIf="targetData | async as data">
+              <ejs-accumulationchart
+                id="target-pie-chart"
+                [title]="targetTitle"
+                [legendSettings]="targetlegendSettings"
+              >
+                <e-accumulation-series-collection>
+                  <e-accumulation-series
+                    [dataSource]="data"
+                    xName="unit_name"
+                    yName="count"
+                    innerRadius="50%"
+                    [dataLabel]="targetDataLabel"
+                    [palettes]="targetColors"
+                    radius="90%"
+                    legendShape="Rectangle"
+                  >
+                  </e-accumulation-series>
+                </e-accumulation-series-collection>
+              </ejs-accumulationchart>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="card-border p-5">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left">Lực lượng</h2>
+              <h2 class="text-right">
+                <!-- <span style="color: green font-size-span">120CB</span>/6CMF -->
+                <span style="color: green font-size-span">{{ total01 }} CB</span
+                >/{{ totalLucLuongCMF - 4 }}CMF
+              </h2>
+            </div>
+            <div>
+              <ng-container *ngIf="forceData | async as data">
+                <ejs-chart
+                  id="chart-container"
+                  [primaryXAxis]="forcePrimaryXAxis"
+                  [legendSettings]="forceLegendSettings"
+                >
+                  <e-series-collection>
+                    <!-- <e-series *ngFor="let row of dataTotal"
+                                        [dataSource]='row.data' type='StackingColumn' xName='x'
+                                        yName='y' [name]='row.seriesName'>
+                                    </e-series>   -->
+                    <e-series
+                      [dataSource]="data"
+                      type="StackingColumn"
+                      xName="x"
+                      yName="y0"
+                      name="UK"
+                      fill="#F58501"
+                      columnWidth="1"
+                      columnSpacing="0.5"
+                    ></e-series>
+                    <e-series
+                      [dataSource]="data"
+                      type="StackingColumn"
+                      xName="x"
+                      yName="y1"
+                      name="a"
+                      fill="#8b4ef5"
+                      columnWidth="1"
+                      columnSpacing="0.5"
+                    ></e-series>
+                    <e-series
+                      [dataSource]="data"
+                      type="StackingColumn"
+                      xName="x"
+                      yName="y2"
+                      name="ac"
+                      fill="#045E2B"
+                      columnWidth="1"
+                      columnSpacing="0.5"
+                    ></e-series>
+                  </e-series-collection>
+                </ejs-chart>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card-border p-5">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left">Dữ liệu thu thập</h2>
+              <h2 class="text-right">
+                <span style="color: green font-size-span"
+                  >{{ totalCollectData }}GB</span
+                >
+              </h2>
+            </div>
+            <div>
+              <ng-container *ngIf="collectData | async as data">
+                <ejs-chart
+                  id="collect-column-chart-container"
+                  [primaryXAxis]="collectPrimaryXAxis"
+                  [primaryYAxis]="collectPrimaryYAxis"
+                >
+                  <e-series-collection>
+                    <e-series
+                      [dataSource]="data"
+                      type="Column"
+                      xName="unit_name"
+                      yName="result_number"
+                      [pointColorMapping]="collectPointMapping"
+                      [marker]="collectMarker"
+                    ></e-series>
+                  </e-series-collection>
+                </ejs-chart>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card-border p-5">
+            <div class="title d-flex justify-content-between">
+              <h2 class="text-left">Kỹ thuật tác chiến</h2>
+              <h2 class="text-right">
+                <span style="color: green font-size-span">{{
+                  totalWeaponCount
+                }}</span>
+              </h2>
+            </div>
+            <div>
+              <ng-container *ngIf="warfaceData | async as data">
+                <ejs-chart
+                  id="command-column-chart-container"
+                  [primaryXAxis]="warfacePrimaryXAxis"
+                  [primaryYAxis]="warfacePrimaryYAxis"
+                  [title]="warfaceTitle"
+                >
+                  <e-series-collection>
+                    <!-- <e-series [dataSource]="data" type="Bar" xName="weapon_name" yName="count" pointColorMappingName="unit_name" [pointColorMapping]="warfacePointMapping"></e-series> -->
+                    <e-series
+                      [dataSource]="data"
+                      type="Bar"
+                      xName="unit_name"
+                      yName="count"
+                      pointColorMappingName="unit_name"
+                      [pointColorMapping]="warfacePointMapping"
+                    ></e-series>
+                  </e-series-collection>
+                </ejs-chart>
+                <div id="weaponList"></div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

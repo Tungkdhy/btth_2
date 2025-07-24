@@ -1,0 +1,24 @@
+<app-nav-tabs
+  [tabs]="tabs"
+  [activeTab]="selectedTab"
+  (tabChange)="onTabChange($event)"
+>
+  <ng-template #tab1Content>
+    <ng-container *ngIf="stats$ | async as stats">
+      <app-unit-strength-panel [statistics]="stats"></app-unit-strength-panel>
+    </ng-container>
+  </ng-template>
+  <ng-template #tab2Content>
+    <ng-container *ngIf="selectedTab === 'topology'">
+      <app-topology-wrapper-card
+        [selectedFeature]="selectedFeature"
+      ></app-topology-wrapper-card>
+    </ng-container>
+  </ng-template>
+</app-nav-tabs>
+
+<ng-container *ngIf="selectedFeature">
+  <app-feature-detail-panel
+    [selectedFeature]="selectedFeature"
+  ></app-feature-detail-panel>
+</ng-container>

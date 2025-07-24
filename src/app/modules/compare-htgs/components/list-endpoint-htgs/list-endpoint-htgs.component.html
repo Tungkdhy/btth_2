@@ -1,0 +1,24 @@
+<app-data-table-common
+  title="Danh sách thiết bị đầu cuối hệ thống {{ system.toUpperCase() }}"
+  [unitId]="id"
+  [searchModel]="search"
+  [readonly]="false"
+  [disableFunctions]="true"
+  (handleChangePageSize)="changePageSize($event)"
+  (handleChangeSize)="changeSize($event)"
+>
+  <ng-container *ngIf="device$ | async as devices; else loading">
+    <app-overview-computer-table
+      [endpoints]="devices"
+      [allowSelectRows]="false"
+      [showType]="false"
+      [readonly]="true"
+      [disableFunctions]="true"
+    ></app-overview-computer-table>
+  </ng-container>
+</app-data-table-common>
+
+<ng-template #loading>
+  <app-neun-loading></app-neun-loading>
+</ng-template>
+`

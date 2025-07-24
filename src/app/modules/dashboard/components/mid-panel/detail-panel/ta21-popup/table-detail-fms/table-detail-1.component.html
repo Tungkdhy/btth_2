@@ -1,0 +1,118 @@
+<div class="table-detail-panel-card table-popup-server">
+  <!-- <div class="d-flex helptool">
+    <input
+      class="detailSearch"
+      type="text"
+      id="searchInput"
+      placeholder="Tìm kiếm"
+    />
+    <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="statusType">
+        <option selected value="">Tất cả</option>
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Mất kết nối</option>
+      </select>
+    </div>
+
+    <button class="detailsearchButton">Tìm kiếm</button>
+  </div> -->
+  <div class="d-flex helptool">
+    <input
+      class="detailSearch"
+      type="text"
+      id="searchInput"
+      [(ngModel)]="searchText"
+      placeholder="Tìm kiếm theo từ khóa"
+    />
+    <div class="d-flex select-box-center">
+      Trạng thái:
+      <select class="form-select-box-1" [(ngModel)]="xuLyType">
+        <option selected value="">Tất cả</option>
+        <option value="Mất kết nối">Mất kết nối</option>
+        <option value="Hoạt động">Hoạt động</option>
+      </select>
+    </div>
+    <!--    <ejs-dropdownlist-->
+    <!--      [dataSource]="data"-->
+    <!--      [fields]="fields"-->
+    <!--      [placeholder]="placeholder"-->
+    <!--      (change)="onChange($event)"-->
+    <!--    >-->
+    <!--    </ejs-dropdownlist>-->
+    <!-- <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="statusType">
+        <option selected value="">Tất cả</option>
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Mất kết nối</option>
+      </select>
+    </div> -->
+
+    <button class="detailsearchButton" (click)="search()">Tìm kiếm</button>
+
+    <button class="detailsearchButton" (click)="exportExcel()">
+      Xuất excel
+    </button>
+  </div>
+  <div class="table-detail-haft">
+    <table class="">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Đơn vị quản lý</th>
+          <th>Ngày kết nối</th>
+          <th style="text-align: center">Trạng thái</th>
+          <th style="">Địa bàn</th>
+          <th style="">Kết quả xử lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+          <td>
+            <div>{{ item?.name }}</div>
+            <div>{{ item?.unit?.name }}</div>
+          </td>
+          <td class="">
+            <div>{{ getLastActive(item?.last_up).split("/")[0] || "" }}</div>
+            <div>{{ getLastActive(item?.last_up).split("/")[1] || "" }}</div>
+          </td>
+          <td>
+            <div
+              [ngClass]="
+                item?.status === 'up' ? 'active-status' : 'noactive-status'
+              "
+            >
+              {{ item?.status === "up" ? "Hoạt động" : "Mất kết nối" }}
+            </div>
+          </td>
+
+          <td style="">{{ getType(item?.unit?.region) }}</td>
+          <td>
+            <div [ngClass]="item?.status === 'up' ? 'd-none' : ''">
+              <div>- Trạng thái: {{ item?.statusServer }}</div>
+
+              <div [ngClass]="!item?.matchingStatus?.date ? 'd-none' : ''">
+                - Thời gian: {{ getLastActive(item?.matchingStatus?.date) }}
+              </div>
+              <div [ngClass]="!item?.matchingStatus?.date ? 'd-none' : ''">
+                - Thông tin: {{ item?.matchingStatus?.note }}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="total"
+      [maxSize]="5"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+  </div>
+</div>

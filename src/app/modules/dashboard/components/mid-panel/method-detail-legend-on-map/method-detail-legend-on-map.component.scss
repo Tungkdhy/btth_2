@@ -1,0 +1,126 @@
+table {
+  border-collapse: collapse !important;
+  //border: solid #0c0b0b 1px;
+  //border-radius: 6px !important;
+  //max-width: 25vw;
+  min-width: 10vw;
+  width: 100%;
+}
+.wrap-box-info table td {
+  font-size: 2rem !important;
+}
+
+table thead {
+  background-color: #f3f3f3;
+  font-weight: 400;
+  font-size: 25px;
+  padding: 15px;
+  text-wrap: pretty;
+}
+
+table tbody tr td {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 400;
+  font-size: 25px;
+  padding: 15px;
+  text-wrap: pretty;
+}
+table thead tr th {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30px;
+  font-weight: 700;
+  text-wrap: pretty;
+}
+.card {
+  padding: 5px;
+  border-radius: 16px;
+  width: 80rem;;
+}
+.inner-card {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border: solid #0c0b0b 1px !important;
+}
+.title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+}
+.green-text {
+  color: green;
+  font-weight: 700;
+}
+.wrap-text {
+  width: 450px;
+  line-height: 1;
+}
+table tbody tr:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.selected {
+  background-color: #d3d3d3;
+}
+
+.table-container {
+  flex:1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-color: rgb(94, 94, 94);
+  max-height: 700px;
+}
+.table-container table thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.table-col-1 {
+  line-height: 1.5;
+  flex-basis: 60px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.table-col-2 {
+  line-height: 1.5;
+  flex: 1;
+  overflow-wrap: break-word;
+}
+.table-col-3 {
+  line-height: 1.5;
+  flex-basis: 130px;
+  overflow-wrap: anywhere;
+}
+.table-col-4 {
+  line-height: 1.5;
+  flex-basis: 40px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.subtable-col-1 {
+  line-height: 1.5;
+  flex-basis: 60px;
+  padding: 0;
+}
+.subtable-col-2 {
+  line-height: 1.5;
+  flex:1;
+  overflow-wrap: break-word;
+}
+.subtable-col-3 {
+  line-height: 1.5;
+  flex-basis: 166px;
+}
+th:last-child {
+  padding-right: 0px !important;
+}

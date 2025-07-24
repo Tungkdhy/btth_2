@@ -1,0 +1,24 @@
+<div>
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h2 style="white-space:nowrap;">Dữ liệu thu thập</h2>
+            <p style="white-space:nowrap;  color: rgba(137, 141, 143, 1)">Từ hoạt động tấn công mạng</p>
+        </div>
+        <h4 style="white-space:nowrap;color:rgba(83, 83, 83, 1)">Tổng: {{ totalCollect2Data.toLocaleString('de-DE') }} GB</h4>
+    </div>
+    <div style="height: 316px;">
+        <ng-container *ngIf="collect2Data | async as data">
+            <!-- <ejs-chart id="collect2-column-chart-container" [primaryXAxis]="collect2PrimaryXAxis"
+                [primaryYAxis]="collect2PrimaryYAxis" [legendSettings]='legendSettings' [chartArea]='chartArea'
+                height="500" class="chart-right-panel">
+                <e-series-collection>
+                    <e-series [dataSource]="data" type="Bar" xName="name" yName="count"
+                        [pointColorMapping]="collect2PointMapping" [marker]="collect2Marker"></e-series>
+                </e-series-collection>
+            </ejs-chart> -->
+            <div echarts [options]="forceChartOption" class="force-chart"></div>
+        </ng-container>
+    </div>
+    <!-- <div style="border-radius: 2px;background-color: rgba(233, 182, 46,0.7);flex: 0 0 4px">
+    </div> -->
+</div>

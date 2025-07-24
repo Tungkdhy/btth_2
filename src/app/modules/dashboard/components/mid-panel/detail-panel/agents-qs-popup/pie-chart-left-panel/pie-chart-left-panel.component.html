@@ -1,0 +1,15 @@
+<div class="h-100 chart-center-item">
+  <ejs-accumulationchart [id]="id" [legendSettings]="legendSettings">
+    <e-accumulation-series-collection>
+      <e-accumulation-series
+        [dataSource]="pieData"
+        [dataLabel]="nuanceDataLabel"
+        [palettes]="nuanceColors"
+        radius="80%"
+        xName="x"
+        yName="y"
+        type="Pie"
+      ></e-accumulation-series>
+    </e-accumulation-series-collection>
+  </ejs-accumulationchart>
+</div>

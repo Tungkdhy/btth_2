@@ -1,0 +1,317 @@
+// Palette for warning
+$navy-alert-topology: #003049;
+$prtg-alert-topology: #ff0000;
+$orange-alert-topology: #f77f00;
+$fms-alert-topology: #f8f007;
+$fmc-alert-topology: #05ff00;
+$nac-alert-topology: #00a3ff;
+$beige-alert-topology: #eae2b7;
+
+//.alert-device-prtg {
+//  animation: blinkingPrtg 1s linear 0s infinite;
+//}
+//
+//.alert-device-fms {
+//  animation: blinkingFms 1s linear 0s infinite;
+//}
+//
+//.alert-device-prtg-fms {
+//  animation: blinkingPrtgFms 2s linear 0s infinite;
+//}
+
+@keyframes blinkingPrtg {
+  80% {
+    fill: $prtg-alert-topology;
+  }
+  100% {
+    fill: none;
+  }
+}
+
+@keyframes blinkingFms {
+  80% {
+    fill: $fms-alert-topology;
+  }
+  100% {
+    fill: none;
+  }
+}
+
+@keyframes blinkingNac {
+  80% {
+    fill: $nac-alert-topology;
+  }
+  100% {
+    fill: none;
+  }
+}
+
+@keyframes blinkingFmc {
+  80% {
+    fill: $fmc-alert-topology;
+  }
+  100% {
+    fill: none;
+  }
+}
+
+@keyframes blinkingPrtgFms {
+  30% {
+    fill: $prtg-alert-topology;
+  }
+  50% {
+    fill: none;
+  }
+  70% {
+    fill: $fms-alert-topology;
+  }
+}
+
+@mixin blinking-animation-single($name, $color, $duration) {
+  @keyframes blinking-single-#{$name} {
+    80% {
+      fill: $color;
+    }
+    100% {
+      fill: none;
+    }
+  }
+
+  animation: blinking-single-#{$name} $duration linear 0s infinite;
+}
+
+@mixin blinking-animation-double($name, $color-1, $color-2, $duration) {
+  @keyframes blinking-double-#{$name} {
+    30% {
+      fill: $color-1;
+    }
+    50% {
+      fill: none;
+    }
+    70% {
+      fill: $color-2;
+    }
+  }
+
+  animation: blinking-double-#{$name} $duration linear 0s infinite;
+}
+
+@mixin blinking-animation-triple(
+  $name,
+  $color-1,
+  $color-2,
+  $color-3,
+  $duration
+) {
+  @keyframes blinking-triple-#{$name} {
+    20% {
+      fill: $color-1;
+    }
+    30% {
+      fill: none;
+    }
+    50% {
+      fill: $color-2;
+    }
+    60% {
+      fill: none;
+    }
+    80% {
+      fill: $color-3;
+    }
+  }
+
+  animation: blinking-triple-#{$name} $duration linear 0s infinite;
+}
+
+@mixin blinking-animation-quadruple(
+  $name,
+  $color-1,
+  $color-2,
+  $color-3,
+  $color-4,
+  $duration
+) {
+  @keyframes blinking-quadruple-#{$name} {
+    10% {
+      fill: $color-1;
+    }
+    20% {
+      fill: none;
+    }
+    40% {
+      fill: $color-2;
+    }
+    50% {
+      fill: none;
+    }
+    70% {
+      fill: $color-3;
+    }
+    80% {
+      fill: none;
+    }
+    100% {
+      fill: $color-4;
+    }
+  }
+
+  animation: blinking-quadruple-#{$name} $duration linear 0s infinite;
+}
+
+// Single alert
+.alert-device-prtg {
+  @include blinking-animation-single(
+    $name: "prtg",
+    $color: $prtg-alert-topology,
+    $duration: 1s
+  );
+}
+
+.alert-device-fms {
+  @include blinking-animation-single(
+    $name: "fms",
+    $color: $fms-alert-topology,
+    $duration: 1s
+  );
+}
+
+.alert-device-fmc {
+  @include blinking-animation-single(
+    $name: "fmc",
+    $color: $fmc-alert-topology,
+    $duration: 1s
+  );
+}
+
+.alert-device-nac {
+  @include blinking-animation-single(
+    $name: "nac",
+    $color: $nac-alert-topology,
+    $duration: 1s
+  );
+}
+
+// Double alert
+.alert-device-prtg-fms {
+  @include blinking-animation-double(
+    $name: "prtg-fms",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fms-alert-topology,
+    $duration: 2s
+  );
+}
+
+.alert-device-prtg-fmc {
+  @include blinking-animation-double(
+    $name: "prtg-fmc",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fmc-alert-topology,
+    $duration: 2s
+  );
+}
+
+.alert-device-prtg-nac {
+  @include blinking-animation-double(
+    $name: "prtg-nac",
+    $color-1: $prtg-alert-topology,
+    $color-2: $nac-alert-topology,
+    $duration: 2s
+  );
+}
+
+.alert-device-fms-fmc {
+  @include blinking-animation-double(
+    $name: "fms-fmc",
+    $color-1: $fms-alert-topology,
+    $color-2: $fmc-alert-topology,
+    $duration: 2s
+  );
+}
+
+.alert-device-fms-nac {
+  @include blinking-animation-double(
+    $name: "fms-nac",
+    $color-1: $fms-alert-topology,
+    $color-2: $nac-alert-topology,
+    $duration: 2s
+  );
+}
+
+.alert-device-fmc-nac {
+  @include blinking-animation-double(
+    $name: "fmc-nac",
+    $color-1: $fmc-alert-topology,
+    $color-2: $nac-alert-topology,
+    $duration: 2s
+  );
+}
+
+// Triple alert
+
+.alert-device-prtg-fms-fmc {
+  @include blinking-animation-triple(
+    $name: "prtg-fms-fmc",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fms-alert-topology,
+    $color-3: $fmc-alert-topology,
+    $duration: 3s
+  );
+}
+
+.alert-device-prtg-fms-nac {
+  @include blinking-animation-triple(
+    $name: "prtg-fms-nac",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fms-alert-topology,
+    $color-3: $nac-alert-topology,
+    $duration: 3s
+  );
+}
+
+.alert-device-prtg-fmc-nac {
+  @include blinking-animation-triple(
+    $name: "prtg-fmc-nac",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fmc-alert-topology,
+    $color-3: $nac-alert-topology,
+    $duration: 3s
+  );
+}
+
+.alert-device-fms-fmc-nac {
+  @include blinking-animation-triple(
+    $name: "fms-fmc-nac",
+    $color-1: $fms-alert-topology,
+    $color-2: $fmc-alert-topology,
+    $color-3: $nac-alert-topology,
+    $duration: 3s
+  );
+}
+
+// Quadruple alert
+.alert-device-prtg-fms-fmc-nac {
+  @include blinking-animation-quadruple(
+    $name: "prtg-fms-fmc-nac",
+    $color-1: $prtg-alert-topology,
+    $color-2: $fms-alert-topology,
+    $color-3: $fmc-alert-topology,
+    $color-4: $nac-alert-topology,
+    $duration: 4s
+  );
+}
+
+.modal-topology .modal-dialog {
+  max-width: 90vw;
+  width: 90vw;
+  max-height: 90vh;
+  height: 90vh;
+}
+
+@mixin vh-utility($vh) {
+  .vh-#{$vh} {
+    height: #{$vh}vh;
+  }
+}
+
+@include vh-utility(70);

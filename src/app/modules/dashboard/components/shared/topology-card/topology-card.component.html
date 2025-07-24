@@ -1,0 +1,18 @@
+<div class="{{ isFullScreen ? 'diagram-space-large' : 'diagram-space-small' }}">
+  <ejs-diagram
+    #diagram
+    [id]="diagramId"
+    height="100%"
+    width="100%"
+    [nodes]="nodes"
+    [connectors]="connectors"
+    [getNodeDefaults]="getNodeDefaults"
+    [getConnectorDefaults]="getConnectorDefaults"
+    [tool]="tool"
+    [snapSettings]="snapSettings"
+    (positionChange)="nodeMoved.emit($event)"
+    (selectionChange)="handleSelectNode($event)"
+    (created)="fitToPage()"
+  ></ejs-diagram>
+</div>
+<!--(propertyChange)="nodeMoved.emit($event)"-->

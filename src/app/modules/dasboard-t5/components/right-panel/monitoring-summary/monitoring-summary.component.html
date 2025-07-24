@@ -1,0 +1,15 @@
+<div class="summary-container d-flex justify-content-between flex-wrap btthth-lr-panel-card">
+    <div class="summary-box" *ngFor="let summary of summaries">
+      <h5 class="summary-title" (click)="goTo(summary.route)">
+        {{ summary.title }}: {{ summary.total }}
+      </h5>
+  
+      <div
+        class="summary-item"
+        *ngFor="let item of summary.items"
+        (click)="goTo(summary.route)"
+      >
+        {{ item.label }}: {{ item.value }}
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Trạng thái vũ khí - trang bị ></span>
+      <span class="choise-item">NACS</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group height-group">
+    <div class="chart-part chart-group">
+      <div class="chart-pie-left card-border">
+        <app-pie-chart-left-panel
+          [pieData]="pieData"
+        ></app-pie-chart-left-panel>
+      </div>
+      <div class="chart-column-row card-border">
+        <app-column-chart-left-panel
+          (pointClicked)="handlePointClick($event)"
+          [columnData]="columnData"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+    <div class="table-part">
+      <app-table-detail-1
+        [mainType]="nacData"
+        [tableData]="tableData"
+      ></app-table-detail-1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.container {
+    display: flex;  /* Sử dụng Flexbox để các phần tử nằm ngang */
+    justify-content: space-between;  /* Căn chỉnh các phần tử cách đều nhau */
+    gap: 20px;  /* Khoảng cách giữa các phần tử */
+    flex-wrap: nowrap;
+    width: 100%;  /* Không cho phép phần tử xuống dòng */
+  }
+  
+  .item {
+    flex: 1 1 calc(33.33% - 20px);  /* Mỗi phần tử chiếm 1/3 chiều rộng của container */
+    margin: 10px;  /* Thêm khoảng cách giữa các phần tử */
+  }
+.title-boder-chart{
+  background: #F4F6F7;
+  border-radius: 12px;
+  padding:12px;
+}

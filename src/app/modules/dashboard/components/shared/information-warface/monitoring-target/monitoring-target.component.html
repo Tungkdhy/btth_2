@@ -1,0 +1,48 @@
+<div class="h-100">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex gap-2 align-items-center">
+      <svg width="8" height="27" viewBox="0 0 8 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect y="0.5" width="8" height="26" rx="4" fill="#D2001A" />
+      </svg>
+      <h2 [ngClass]="isShowMucTieuGS ? 'active' : ''">
+        Mục tiêu giám sát
+      </h2>
+    </div>
+    <button (click)="toggleState()" [ngClass]="{ selected: !isDefault }" type="button" class="btth-btn" 
+    style="background-color: rgba(8, 8, 8, 1); color: #FFF; padding: 10px 12px !important;">
+      CTBG
+    </button>
+  </div>
+  <div style="height: 320px;">
+    <ng-container *ngIf="targetCorrelationData | async as data">
+      <!-- <ejs-accumulationchart
+            class="chart-right-panel"
+            id="related-target-pie-chart"
+            [enableSmartLabels]="true"
+            [legendSettings]="accumulationLegendSettings"
+            [center]="{ x: '50%', y: '40%' }"
+            [centerLabel]="centerLabel"
+            (legendRender)="legendRender($event, data)"
+            (pointClick)="PointClick($event)"
+          >
+            <e-accumulation-series-collection>
+              <e-accumulation-series
+                [dataSource]="data"
+                xName="nentang"
+                yName="soluong"
+                radius="65%"
+                innerRadius="50%"
+                [dataLabel]="targetCorrelationDataLabel"
+                [palettes]="targetCorrelationColors"
+                [border]="border"
+                legendShape="Rectangle"
+              >
+              </e-accumulation-series>
+            </e-accumulation-series-collection>
+          </ejs-accumulationchart> -->
+      <div echarts [options]="monitoringTargetChartOption" class="monitoring-target-chart" (chartClick)="onChartClick($event)"></div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

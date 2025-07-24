@@ -1,0 +1,50 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > An toàn thông tin ></span>
+      <span class="choise-item">
+        Phân tích đánh giá
+      </span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end region-group">
+    <ul>
+      <li class="top-radio">
+        <input #day_radio type="radio" id="radio2" name="state" checked="checked" value="date"
+          (change)="changeSelect(day_radio.value)" />
+        <label for="radio2">Ngày</label>
+      </li>
+      <li class="top-radio">
+        <input #week_radio type="radio" id="radio3" name="state" value="week"
+          (change)="changeSelect(week_radio.value)" />
+        <label for="radio3">Tuần</label>
+      </li>
+      <li class="top-radio">
+        <input #month_radio type="radio" id="radio4" name="state" value="month"
+          (change)="changeSelect(month_radio.value)" />
+        <label for="radio4">Tháng</label>
+      </li>
+    </ul>
+  </div>
+  <div class="bg-group height-group">
+    <div class="chart-part chart-group">
+      <div class="card-border chart-column-row">
+        <app-column-chart-trien-khai-panel
+          [type]="type"
+          [columnData]="columnTrienKhai">
+        </app-column-chart-trien-khai-panel>
+      </div>
+    </div>
+    <div class="chart-part chart-group">
+      <div class="card-border chart-column-row">
+        <app-line-chart-ident-panel
+            [type]="type"
+            [columnData]="lineDinhDanh">
+        </app-line-chart-ident-panel>
+      </div>
+
+    </div>
+  </div>

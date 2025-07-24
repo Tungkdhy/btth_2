@@ -1,0 +1,37 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình thái chung > Trạng thái vũ khí - trang bị ></span>
+      <span class="choise-item">Máy trạm mạng quân sự</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group">
+    <div class="row">
+      <div class="card-border">
+        <h2>MiAV</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataFMS"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card-border">
+        <h2>Fidelis Agents</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataFidelis"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card-border">
+        <h2>TA21 Agents</h2>
+        <app-column-chart-left-panel
+          [columnData]="columnDataTA21"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+  </div>
+</div>

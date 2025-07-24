@@ -1,0 +1,195 @@
+<div class="modal-content">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ dataSelected ? "Chỉnh sửa thông tin" : "Thêm thông tin" }}
+    </h4>
+    <div
+      class="btn btn-icon btn-sm btn-active-light-primary btn-close"
+      (click)="back()"
+    >
+      <span class="svg-icon svg-icon-2x"></span>
+    </div>
+  </div>
+
+  <!-- Modal body-->
+  <div class="modal-body">
+    <div class="card-body">
+      <div [formGroup]="formGroup">
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="col-form-label required fw-bold fs-6"
+              ><span>Tên hệ thống</span></label
+            >
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              name="name"
+              formControlName="name"
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Vui lòng nhập giá trị',
+                control: formGroup.controls['name']
+              }"
+            ></ng-container>
+          </div>
+          <div class="col-xl-6">
+            <label class="col-form-label required fw-bold fs-6"
+              ><span>Loại hệ thống</span></label
+            >
+            <select
+              class="form-select form-select-solid form-select-lg"
+              name="type"
+              formControlName="type"
+            >
+              <option value="" selected disabled>Chọn loại</option>
+              <option *ngFor="let type of typeMonitoring" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Vui lòng nhập giá trị',
+                control: formGroup.controls['type']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="col-form-label required fw-bold fs-6"
+              ><span>Tên tài khoản</span></label
+            >
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Tên tài khoản"
+              name="username"
+              formControlName="username"
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Vui lòng nhập giá trị',
+                control: formGroup.controls['username']
+              }"
+            ></ng-container>
+          </div>
+          <div class="col-xl-6">
+            <label class="col-form-label required fw-bold fs-6"
+              ><span>Mật khẩu</span></label
+            >
+            <input
+              type="password"
+              class="form-control form-control-lg form-control-solid"
+              name="password"
+              formControlName="password"
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Vui lòng nhập giá trị',
+                control: formGroup.controls['password']
+              }"
+            ></ng-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="col-form-label required fw-bold fs-6"
+              ><span>Đường link API</span></label
+            >
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid"
+              placeholder="Đường link API"
+              name="linkAPI"
+              formControlName="linkAPI"
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'pattern',
+                message: 'Vui lòng nhập số hợp lệ',
+                control: formGroup.controls['linkAPI']
+              }"
+            ></ng-container>
+          </div>
+
+          <div class="col-xl-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              >Ngày nhập</label
+            >
+            <app-date-time-picker
+              formControlName="orderDate"
+            ></app-date-time-picker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div *ngIf="!dataSelected">
+      <button type="button" class="btn btn-secondary me-2" (click)="reset()">
+        Đặt lại
+      </button>
+      <ng-container>
+        <button
+          #buttonSubmitMore
+          class="btn btn-primary"
+          [disabled]="isLoading"
+          (click)="submitMore()"
+        >
+          Nhập tiếp
+          <ng-container *ngIf="isLoading && buttonSubmitMore.onclick">
+            <span class="indicator-progress" [style.display]="'block'">
+              Vui lòng đợi...{{ " " }}
+              <span
+                class="spinner-border spinner-border-sm align-middle ms-2"
+              ></span>
+            </span>
+          </ng-container>
+        </button>
+      </ng-container>
+    </div>
+    <button
+      #buttonSubmit
+      class="btn btn-primary"
+      [disabled]="isLoading"
+      (click)="confirm()"
+    >
+      Lưu
+      <ng-container *ngIf="isLoading && buttonSubmit.onclick">
+        <span class="indicator-progress" [style.display]="'block'">
+          Vui lòng đợi...{{ " " }}
+          <span
+            class="spinner-border spinner-border-sm align-middle ms-2"
+          ></span>
+        </span>
+      </ng-container>
+    </button>
+  </div>
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <span role="alert" style="color: red">
+      {{ message }}
+    </span>
+  </ng-container>
+</ng-template>

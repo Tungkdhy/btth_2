@@ -1,0 +1,45 @@
+<div class="py-3">
+  <ng-container *ngIf="allowToggleStatus">
+    <div class="menu-item px-3">
+      <a class="menu-link px-3 cursor-pointer" (click)="toggleStatus.emit()">
+        <span class="menu-icon">
+          <i
+            [class]="
+              currentStatus ? 'las la-toggle-on fs-1' : 'las la-toggle-off fs-1'
+            "
+          ></i>
+        </span>
+        <span class="menu-title">{{
+          currentStatus ? "Vô hiệu hóa" : "Kích hoạt"
+          }}</span>
+      </a>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="allowViewDetail">
+    <div class="menu-item px-3">
+      <a class="menu-link px-3 cursor-pointer" (click)="view.emit($event)">
+        <span class="menu-icon"> <i class="las la-file-alt fs-1"></i> </span>
+        <span class="menu-title">Chi tiết</span>
+      </a>
+    </div>
+  </ng-container>
+
+  <div class="menu-item px-3">
+    <a class="menu-link px-3 cursor-pointer" (click)="edit.emit($event)">
+      <span class="menu-icon">
+        <i class="las la-edit fs-1"></i>
+      </span>
+      <span class="menu-title">Chỉnh sửa</span>
+    </a>
+  </div>
+
+  <div class="menu-item px-3">
+    <a class="menu-link px-3 cursor-pointer" (click)="delete.emit($event)">
+      <span class="menu-icon">
+        <i class="las la-trash fs-1"></i>
+      </span>
+      <span class="menu-title">Xóa</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center">
+    <h3 class="card-title fw-bolder fs-2 m-0">Thống kê</h3>
+    <div class="card-toolbar">
+      <div
+        class="btn btn-icon btn-sm btn-active-light-primary btn-close me-2"
+        (click)="handleClose()"
+      >
+        <span class="svg-icon svg-icon-2x"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <app-statistical-modal-content
+      [unitId]="unitId"
+    ></app-statistical-modal-content>
+  </div>
+</div>

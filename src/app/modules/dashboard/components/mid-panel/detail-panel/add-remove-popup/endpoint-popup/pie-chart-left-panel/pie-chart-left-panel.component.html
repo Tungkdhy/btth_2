@@ -1,0 +1,21 @@
+<div>
+  <h2>Thống kê theo loại sự kiện</h2>
+</div>
+<div class="h-100 chart-center-item">
+  <ejs-accumulationchart
+        [id]="id"
+        [legendSettings]="legendSettings"
+        (textRender)="onTextRender($event)">
+    <e-accumulation-series-collection>
+      <e-accumulation-series
+        [dataSource]="pieData"
+        [dataLabel]="nuanceDataLabel"
+        [palettes]="nuanceColors"
+        radius="50%"
+        xName="x"
+        yName="y"
+        type="Pie"
+      ></e-accumulation-series>
+    </e-accumulation-series-collection>
+  </ejs-accumulationchart>
+</div>

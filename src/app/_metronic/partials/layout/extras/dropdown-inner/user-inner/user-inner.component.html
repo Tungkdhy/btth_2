@@ -1,0 +1,163 @@
+<!--&lt;!&ndash;<ng-container >&ndash;&gt;-->
+<!--<ng-container *ngIf="user">-->
+<!--  <div class="menu-item px-3">-->
+<!--    <div class="menu-content d-flex align-items-center px-3">-->
+<!--      <div class="symbol symbol-50px me-5">-->
+<!--        &lt;!&ndash;        <img alt="Logo" [src]="_user.pic" />&ndash;&gt;-->
+<!--      </div>-->
+
+<!--      <div class="d-flex flex-column">-->
+<!--        <div class="fw-bolder d-flex align-items-center fs-5">-->
+<!--          {{ user.preferredUsername }}-->
+<!--        </div>-->
+<!--        <a class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer">-->
+<!--          &lt;!&ndash;          {{ _user.email }}&ndash;&gt;-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-container>-->
+
+<!--<div class="separator my-2"></div>-->
+
+<!--<div *ngIf="hasMenuAllow('Bản đồ')" class="menu-item px-5 my-1">-->
+<!--  <a-->
+<!--    routerLink="/ban-do"-->
+<!--    routerLinkActive="true"-->
+<!--    [queryParams]="{ id: unitId }"-->
+<!--    class="menu-link px-5 fw-semibold fs-6"-->
+<!--  >-->
+<!--    Bản đồ-->
+<!--  </a>-->
+<!--</div>-->
+
+<!--<div *ngIf="hasMenuAllow('Hồ sơ mạng')" class="menu-item px-5 my-1">-->
+<!--  <a-->
+<!--    routerLink="/ho-so-mang"-->
+<!--    [state]="{ type: typeDeviceRouter }"-->
+<!--    [queryParams]="{ id: unitId }"-->
+<!--    routerLinkActive="true"-->
+<!--    class="menu-link px-5 fw-semibold fs-6"-->
+<!--  >-->
+<!--    Hồ sơ mạng-->
+<!--  </a>-->
+<!--</div>-->
+
+<!--<div *ngIf="hasMenuAllow('Hệ thống')" class="menu-item px-5 my-1">-->
+<!--  <a-->
+<!--    routerLink="/he-thong"-->
+<!--    routerLinkActive="true"-->
+<!--    class="menu-link px-5 fw-semibold fs-6"-->
+<!--  >-->
+<!--    Quản trị hệ thống-->
+<!--  </a>-->
+<!--</div>-->
+
+<!--<div class="separator my-2"></div>-->
+
+<!--&lt;!&ndash;<div class="menu-item px-5 my-1">&ndash;&gt;-->
+<!--&lt;!&ndash;  <a class="menu-link px-5"> Thông tin cá nhân </a>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<div class="menu-item px-5 my-1" (click)="openDialogChangePassword()">-->
+<!--  <a href="javascript:void(0)" class="menu-link px-5"> Đổi mật khẩu </a>-->
+<!--</div>-->
+
+<!--<div class="menu-item px-5">-->
+<!--  <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Đăng xuất </a>-->
+<!--</div>-->
+<!--&lt;!&ndash;</ng-container>&ndash;&gt;-->
+
+<!---->
+
+<!--<ng-container >-->
+<ng-container *ngIf="user">
+  <div class="menu-item px-3">
+    <div class="menu-content d-flex align-items-center px-3">
+      <div class="symbol symbol-50px me-5">
+        <!--        <img alt="Logo" [src]="_user.pic" />-->
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="fw-bolder d-flex align-items-center fs-5">
+          {{ user.preferredUsername }}
+        </div>
+        <a class="fw-bold text-muted text-hover-primary fs-7 cursor-pointer">
+          <!--          {{ _user.email }}-->
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div class="separator my-2"></div>
+
+<ng-container *ngIf="unitId$ | async as unitId">
+  <div *ngIf="hasMenuAllow(menu.MAP)" class="menu-item px-5 my-1">
+    <a
+      [routerLink]="convertToUrl(menu.MAP)"
+      [queryParams]="{ id: unitId }"
+      routerLinkActive="true"
+      class="menu-link px-5 fw-semibold fs-6"
+    >
+      {{ menu.MAP }}
+    </a>
+  </div>
+
+  <div *ngIf="hasMenuAllow(menu.DEVICE_MANAGEMENT)" class="menu-item px-5 my-1">
+    <a
+      [routerLink]="convertToUrl(menu.DEVICE_MANAGEMENT)"
+      [queryParams]="{ id: unitId }"
+      routerLinkActive="true"
+      class="menu-link px-5 fw-semibold fs-6"
+    >
+      {{ menu.DEVICE_MANAGEMENT }}
+    </a>
+  </div>
+
+  <div *ngIf="hasMenuAllow(menu.STATISTIC)" class="menu-item px-5 my-1">
+    <a
+      [routerLink]="convertToUrl(menu.STATISTIC)"
+      [queryParams]="{ id: unitId }"
+      routerLinkActive="true"
+      class="menu-link px-5 fw-semibold fs-6"
+    >
+      {{ menu.STATISTIC }}
+    </a>
+  </div>
+</ng-container>
+
+<div *ngIf="hasMenuAllow(menu.SYSTEM)" class="menu-item px-5 my-1">
+  <a
+    [routerLink]="convertToUrl(menu.SYSTEM)"
+    routerLinkActive="true"
+    class="menu-link px-5 fw-semibold fs-6"
+  >
+    {{ menu.SYSTEM }}
+  </a>
+</div>
+
+
+<div *ngIf="hasMenuAllow(menu.TOOLS)" class="menu-item px-5 my-1">
+  <a
+    [routerLink]="convertToUrl(menu.TOOLS)"
+    routerLinkActive="true"
+    class="menu-link px-5 fw-semibold fs-6"
+  >
+    {{ menu.TOOLS }}
+  </a>
+</div>
+<div class="separator my-2"></div>
+
+<!--<div class="menu-item px-5 my-1">-->
+<!--  <a class="menu-link px-5"> Thông tin cá nhân </a>-->
+<!--</div>-->
+
+<div class="menu-item px-5 my-1" (click)="openDialogChangePassword()">
+  <a href="javascript:void(0)" class="menu-link px-5"> Đổi mật khẩu </a>
+</div>
+
+<div class="menu-item px-5">
+  <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Đăng xuất </a>
+</div>
+<!--</ng-container>-->

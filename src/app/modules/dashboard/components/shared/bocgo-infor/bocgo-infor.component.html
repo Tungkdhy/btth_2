@@ -1,0 +1,88 @@
+<div class="">
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row !important;
+      width: 100%;
+    "
+  >
+    <div class="date-select-wrapper" style="width: 50% !important;">
+      <select
+        id="filter"
+        class="select-input search-box-2"
+        [(ngModel)]="selectedDateOption"
+        style="width: 320px !important;"
+        (change)="onOptionChange($event)"
+      >
+        <option *ngFor="let option of dateOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="table-header" style="width: 50% !important;">
+      <input
+        class="search-box-2"
+        type="text"
+        (input)="filteredData()"
+        [(ngModel)]="searchText"
+        placeholder="Tìm kiếm"
+        style="width: 100%"
+      />
+      <button class="detailsearchButton">Tìm kiếm</button>
+    </div>
+  </div>
+
+  <div
+    class="table-popup-server-2 table-detail-full"
+    *ngIf="this.filteredData.length > 0"
+  >
+    <table class="">
+      <thead>
+        <tr>
+          <th style="width: 50px">STT</th>
+          <th>Nội dung</th>
+          <th style="max-width: 100px !important">Đường dẫn</th>
+          <th>Ngày phát hiện</th>
+          <th>Ngày bóc gỡ</th>
+          <th>Đơn vị xử lý</th>
+          <th>Trạng thái</th>
+          <th>Nền tảng</th>
+          <th>Tương tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.filteredData">
+          <td>{{ item.index }}</td>
+          <td>{{ item.noidung_vipham }}</td>
+          <td style="max-width: 100px !important" [title]="item.duongdan">
+            {{ item.duongdan }}
+          </td>
+          <td>{{ item.ngayphathien }}</td>
+          <td>{{ item.ngaybocgo }}</td>
+          <td>{{ item.donvixuly }}</td>
+          <td>{{ item.trangthai }}</td>
+          <td>{{ item.nentang }}</td>
+          <td>{{ item.tuongtac }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="this.filteredData.length > 0">
+    <div style="font-size: 30px; font-weight: 600">
+      Tổng số: {{ totalData }}
+    </div>
+    <ngb-pagination
+      [collectionSize]="this.tableData.length"
+      [maxSize]="10"
+      [(page)]="this.page"
+      [pageSize]="10"
+      (pageChange)="onPageChange($event)"
+    >
+    </ngb-pagination>
+  </div>
+  <div class="nodata" *ngIf="this.filteredData.length === 0">
+    Chưa có dữ liệu hiển thị
+  </div>
+</div>

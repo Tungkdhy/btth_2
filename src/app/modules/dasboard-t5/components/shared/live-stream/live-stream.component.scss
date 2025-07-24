@@ -1,0 +1,36 @@
+.warning-container {
+    // background: #fefcf5;
+    padding:0 16px;
+    // border: 1px solid #ccc;
+    // max-width: 320px;
+    // font-family: Arial, sans-serif;
+  
+    .title {
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+  
+    .stream-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+  
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ccc;
+        margin-right: 10px;
+      }
+  
+      .stream-info {
+        font-size: 14px;
+        color: #333;
+  
+        strong {
+          display: block;
+          font-weight: bold;
+        }
+      }
+    }
+  }

@@ -1,0 +1,10 @@
+<ng-container *ngIf="combinedStore$ | async as combinedStore">
+  <ng-container *ngIf="combinedStore$ && combinedStore.length > 0">
+    <div class="p-2 m-5">
+      <h2>Danh sách đơn vị</h2>
+      <app-feature-stats-overlay
+        [combinedStore]="combinedStore"
+      ></app-feature-stats-overlay>
+    </div>
+  </ng-container>
+</ng-container>

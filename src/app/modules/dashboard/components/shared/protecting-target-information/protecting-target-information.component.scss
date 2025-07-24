@@ -1,0 +1,46 @@
+.modal-full {
+  flex: 1;
+  display: flex;
+}
+
+.infor-right {
+  .statistic-top {
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 1:2 ratio */
+    gap: 0.6em;
+    height: 100%;
+
+    .title {
+      font-size: 2em;
+      font-weight: 600;
+    }
+  }
+
+  .statistic-below {
+    .title {
+      font-size: 2em;
+      font-weight: 600;
+    }
+  }
+}
+
+.card-border>div {
+  padding: 0.5em;
+}
+
+.date-select-wrapper {
+  width: 100% !important;
+  float: right;
+  margin-top: 15px;
+
+  .select-input {
+    width: 200px !important;
+    font-size: 24px;
+  }
+}
+
+.chart-right-panel {
+  height: 330px !important;
+}

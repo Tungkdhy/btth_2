@@ -1,0 +1,88 @@
+.card .bg-btth {
+  background-color: #ffffff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6.2em;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  font-weight: bold;
+  color: #045e2b;
+  margin-right: 20px;
+}
+
+.region-group {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: var(--colorText);
+  line-height: 2em;
+}
+
+.region-group label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.region-group input[type="radio"] {
+  margin-right: 5px;
+  accent-color: #045e2b;
+}
+
+.time-group {
+  display: flex;
+  align-items: center;
+  width: 20vw;
+}
+
+.date-input {
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid var(--colorBorderGroup);
+  font-size: 1.5em;
+  border-radius: 4px;
+}
+
+.date-input::placeholder {
+  color: #aaa;
+}
+.nav-tabs .nav-link {
+  color: #3a3a3a;
+}
+.nav-tabs .nav-link.active {
+  color: #045e2b;
+}
+
+.nav-tabs .nav-link.active::after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid #045e2b;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.mid {
+  height: 97vh;
+}
+.e-grid {
+  padding: 0 1em;
+}
+.right-header .header-left .region-group {
+  flex: none;
+}

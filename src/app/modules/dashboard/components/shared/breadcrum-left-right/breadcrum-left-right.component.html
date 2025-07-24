@@ -1,0 +1,11 @@
+<div class="d-flex gap-3 breadcrum-left-right">
+    <h1>Hình thái chung</h1>
+    <h1>></h1>
+    <h1 [ngClass]="{ 'active-item': titleLevel2 === '' }">{{titleLevel1}}</h1>
+    <h1 *ngIf="titleLevel2 !== ''">></h1>
+    <h1 [ngClass]="{ 'active-item': titleLevel2 !== '' && titleLevel3 ==='' }">{{titleLevel2}}</h1>
+    <h1 *ngIf="titleLevel3 !== ''">></h1>
+    <h1 *ngIf="titleLevel3 !== ''" class="active-item">
+        {{ titleLevel3 }}
+    </h1>
+</div>

@@ -1,0 +1,25 @@
+<div class="header-alert-map">
+  <ng-container *ngIf="selectedFeature?.icon">
+    <img
+      [src]="selectedFeature?.icon"
+      alt="icon-unit"
+      width="70"
+      height="70"
+      class="me-5"
+    />
+  </ng-container>
+  <div>
+    <h2>
+      <ng-container *ngIf="selectedFeature?.name">
+        <strong>{{ selectedFeature?.name }}</strong>
+      </ng-container>
+    </h2>
+    <ng-container *ngIf="isAccessLayer(selectedFeature?.layerId)">
+      <ng-container *ngIf="unitPathToParent$ | async as path">
+        <h3>
+          <strong>{{ path }}</strong>
+        </h3>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

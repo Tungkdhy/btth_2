@@ -1,0 +1,94 @@
+<div class="modal-content">
+  <div class="modal-full">
+    <div class="modal-header">
+      <div class="btn" aria-label="Close" (click)="modal.dismiss()">X</div>
+    </div>
+    <div class="modal-body d-flex overflow-auto">
+      <div
+        class="table-panel-2 table-detail-panel-card malware h-100 table-popup-server detail-device"
+      >
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th class="text-start">Thời gian</th>
+              <th>Địa bàn</th>
+              <th>Nguyên nhân/Kết quả</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="dataSource?.length === 0">
+              <td colspan="7" class="text-center">Không có dữ liệu</td>
+            </tr>
+            <tr *ngFor="let item of dataSource; let index = index">
+              <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+              <td>
+                {{ item?.date | date: "dd-MM-yyyy HH:mm:ss"}}
+              </td>
+              <td>
+                {{ getRegionType(item?.loploi) }}
+              </td>
+              <td>
+                  {{item?.note}}
+              </td>
+              <td>
+                {{item?.status}}
+            </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end p-2">
+          <ngb-pagination
+            [collectionSize]="total"
+            [maxSize]="5"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="onPageChange($event)"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+
+      <!-- <div class="detail-device">
+        <div class="bg-group">
+          <div class="info-device">
+            <div class="info-area-device">
+              <label class="fw-bold">Mô tả hành vi Copy File</label>
+              <div class="form-control-plaintext">{{ info?.copy_file }}</div>
+            </div>
+
+            <div class="info-area-device">
+              <label class="fw-bold">Mô tả hành vi tạo khóa</label>
+              <div class="form-control-plaintext">{{ info?.creat_reg }}</div>
+            </div>
+
+            <div class="info-area-device">
+              <label class="fw-bold">Mô tả hành vi với USB</label>
+              <div class="form-control-plaintext">
+                {{ info?.usb }}
+              </div>
+            </div>
+
+            <div class="info-area-device">
+              <label class="fw-bold">Thu thập thông tin máy tính</label>
+              <div class="form-control-plaintext">{{ info?.collect }}</div>
+            </div>
+
+            <div class="info-area-device">
+              <label class="fw-bold">Đánh cắp dữ liệu</label>
+              <div class="form-control-plaintext">{{ info?.steal }}</div>
+            </div>
+
+            <div class="info-area-device">
+              <label class="fw-bold">Máy chủ điều khiển</label>
+              <div class="form-control-plaintext">
+                {{ info?.remote_addr }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

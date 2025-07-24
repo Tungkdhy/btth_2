@@ -1,0 +1,6 @@
+<div   [ngClass]="borderClass">
+<app-static-information
+  (popupToggled)="onPopupToggled($event)"
+></app-static-information>
+<ng-container *ngIf="payloadData$ | async"> </ng-container>
+</div>

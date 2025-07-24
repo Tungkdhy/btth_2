@@ -1,0 +1,79 @@
+<div class="form-input">
+  <table class="">
+    <thead>
+      <tr>
+        <th>
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="checkboxNoLabel"
+              value=""
+              aria-label="..."
+            />
+          </div>
+        </th>
+        <th>Tên đơn vị</th>
+        <th>Tên nhiêm vụ</th>
+        <th>Hạn xử lý</th>
+        <th>Xử lý chính</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dsDonViNhanNhiemVu">
+        <td>
+          <div>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="item.isChecked"
+              (change)="updateTrichYeu(item)"
+            />
+          </div>
+        </td>
+        <td>{{ item.name }}</td>
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [id]="'task_' + item.id"
+            [(ngModel)]="item.task"
+            (ngModelChange)="updateTrichYeu(item)"
+            [placeholder]="item.isChecked ? trichYeu : ''"
+            [value]="item.isChecked ? trichYeu : ''"
+          />
+        </td>
+        <td>
+          <!-- <input type="text" class="form-control" [id]="'deadline_' + item.id" [(ngModel)]="item.deadline" (ngModelChange)="updateTrichYeu(item)" [placeholder]="item.isChecked ? hanXuLy : ''" [value]="item.isChecked ? hanXuLy : ''"/> -->
+          <div class="input-group">
+            <input
+              class="form-control custom-datepicker-input"
+              [placeholder]="item.isChecked ? hanXuLy : ''"
+              [value]="item.isChecked ? hanXuLy : ''"
+              name="dueDate"
+              ngbDatepicker
+              #dueDatePicker="ngbDatepicker"
+              [(ngModel)]="item.deadline"
+              (dateSelect)="onDateSelect($event, 'dueDate')"
+            />
+            <button
+              class="btn btn-outline-secondary bi bi-calendar3"
+              (click)="dueDatePicker.toggle()"
+              type="button"
+            ></button>
+          </div>
+        </td>
+        <td>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            [id]="'xuLiChinh' + item.id"
+            [(ngModel)]="item.xuLiChinh"
+            (ngModelChange)="updateTrichYeu(item)"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

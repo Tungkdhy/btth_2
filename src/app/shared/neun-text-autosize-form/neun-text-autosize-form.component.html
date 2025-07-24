@@ -1,0 +1,11 @@
+<ejs-textbox
+  #default
+  [multiline]="true"
+  class="form-control form-control-solid form-control-lg"
+  [value]="value"
+  [readonly]="readonly"
+  [placeholder]="placeholder"
+  (created)="createHandler()"
+  (input)="inputHandler()"
+  (change)="onChangeText($event)"
+></ejs-textbox>

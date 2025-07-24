@@ -1,0 +1,30 @@
+<div class="btth-lr-panel-card">
+  <div class="d-flex justify-content-between">
+    <h2>Tỉ lệ tin tiêu cực</h2>
+    <div class="d-flex gap-6 align-items-center">
+      <label class="d-flex gap-2 align-items-center">
+        <input type="radio" name="option" value="1" [(ngModel)]="selectedOption" (change)="handleRadioChange('1')"/>
+        <h4 style="color: rgba(83, 83, 83, 1);">Theo ngày</h4>
+      </label>
+      <label class="d-flex gap-2 align-items-center">
+        <input type="radio" name="option" value="2" [(ngModel)]="selectedOption" (change)="handleRadioChange('2')" />
+        <h4 style="color: rgba(83, 83, 83, 1);">Theo khoảng</h4>
+      </label>
+    </div>
+  </div>
+
+  <ng-container *ngIf="chartData as data">
+    <!-- <ejs-chart id="chart-container" class="chart-right-panel" [primaryXAxis]="primaryXAxisLine"
+      [primaryYAxis]="primaryYAxisLine" [title]="titleLine" (textRender)="textRender($event)">
+      <e-series-collection>
+        <e-series [dataSource]="data" type="Line" xName="ngay" yName="tile" [marker]="markerLine" fill="red"
+          width="1"></e-series>
+      </e-series-collection>
+    </ejs-chart> -->
+    <div style="height: 372px;">
+      <div echarts [options]="lineChartOption" class="line-bv-tieu-cuc"></div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

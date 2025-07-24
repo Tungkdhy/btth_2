@@ -1,0 +1,23 @@
+<div class="btth-top-panel">
+  <div class="d-flex gap-6" style="padding: 32px 0;">
+    <div class="col">
+      <app-duty-roster></app-duty-roster>
+    </div>
+    <!--    <div class="col">-->
+    <!--      <app-military-strength></app-military-strength>-->
+    <!--    </div>-->
+    <div class="col">
+      <app-operational-command
+        (popupToggled)="onPopupToggled($event)"
+      ></app-operational-command>
+    </div>
+    <div class="col">
+      <app-combat-readiness></app-combat-readiness>
+    </div>
+    <div class="col">
+      <app-weapons-status
+        (popupToggled)="onPopupToggled($event)"
+      ></app-weapons-status>
+    </div>
+  </div>
+</div>

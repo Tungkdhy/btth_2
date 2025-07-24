@@ -1,0 +1,35 @@
+<div
+  class="layer-control-card"
+  (mouseover)="showOptions = true"
+  (mouseleave)="showOptions = false"
+>
+  <img
+    src="assets/media/svg/map/layers-switcher.png"
+    alt="Layers"
+    class="layer-icon"
+  />
+  <div
+    class="layer-options-card"
+    (mouseenter)="showOptions = true"
+    (mouseleave)="showOptions = false"
+    *ngIf="showOptions"
+  >
+    <div
+      class="layer-option"
+      *ngFor="let item of layersSwitcher; let i = index"
+      [class.active]="activeLayer === item.layer"
+      (click)="selectLayer(item.layer)"
+    >
+      <img [src]="item.iconUrl" [alt]="item.name" />
+      <span>{{ item.name }}</span>
+    </div>
+    <div
+      class="layer-option"
+      [class.active]="activeLayer === null"
+      (click)="selectLayer(null)"
+    >
+      <img src="assets/media/svg/map/layers-switcher.png" alt="All Layers" />
+      <span>Tất cả</span>
+    </div>
+  </div>
+</div>

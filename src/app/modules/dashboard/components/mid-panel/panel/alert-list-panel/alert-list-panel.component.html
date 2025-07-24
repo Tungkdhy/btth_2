@@ -1,0 +1,47 @@
+<h2>Cảnh báo</h2>
+<app-nav-tabs
+  [tabs]="tabs"
+  [activeTab]="selectedTab"
+  (tabChange)="onTabChange($event)"
+>
+  <ng-template #tab1Content>
+    <ng-container *ngIf="alertDisconnected$ | async as disconnected">
+      <ng-container *ngIf="disconnected.length > 0; else nothing">
+        <app-data-table
+          id="disconnected"
+          [data]="disconnected"
+          [totalItems]="alertDisconnectedTotal$ | async"
+          [config]="{
+            columns: alertColumns,
+            pageSize: 10
+          }"
+          [isRowClick]="true"
+          (rowClick)="handleRowClick($event)"
+        ></app-data-table>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+  <ng-template #tab2Content>
+    <ng-container *ngIf="alertSecurity$ | async as sec">
+      <ng-container *ngIf="sec.length > 0; else nothing">
+        <app-data-table
+          id="security"
+          [data]="sec"
+          [totalItems]="alertSecurityTotal$ | async"
+          [config]="{
+            columns: secColumns,
+            pageSize: 10
+          }"
+          [isRowClick]="true"
+          (rowClick)="handleRowClick($event)"
+        ></app-data-table>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+</app-nav-tabs>
+
+<ng-template #nothing>
+  <div class="text-center">
+    <p>Không có dữ liệu</p>
+  </div>
+</ng-template>

@@ -1,0 +1,94 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Phòng Thủ Mạng > </span>
+      <span class="choise-item">Hệ thống CT86</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group">
+    \
+    <div class="chart-part chart-group">
+      <div class="chart-pie-left card-border">
+        <h2>Trạng thái BOT</h2>
+        <ejs-accumulationchart
+          id="ct86-donut-chart"
+          [title]="ct86Title"
+          [legendSettings]="ct86legendSettings"
+          [center]="{ x: '50%', y: '50%' }"
+          [centerLabel]="centerLabel"
+          width="100%"
+          height="100%"
+        >
+          <e-accumulation-series-collection>
+            <e-accumulation-series
+              [dataSource]="chartData"
+              xName="unitName"
+              yName="thongke"
+              innerRadius="50%"
+              [dataLabel]="ct86DataLabel"
+              [palettes]="ct86Colors"
+              radius="80%"
+              legendShape="Rectangle"
+            >
+            </e-accumulation-series>
+          </e-accumulation-series-collection>
+        </ejs-accumulationchart>
+      </div>
+      <div class="chart-column-row card-border">
+        <app-column-chart-left-panel
+          [columnData]="columnData"
+        ></app-column-chart-left-panel>
+      </div>
+    </div>
+
+    <div class="table-part table-detail-haft">
+      <table class="">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Địa chỉ IP</th>
+            <th>Kết nối</th>
+            <th class="text-center">Trạng thái</th>
+            <th>Địa bàn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tableData; let index = index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ item?.ip }}</td>
+
+            <td>
+              {{
+                item?.thoigiangannhat
+                  ? formatDate(item?.thoigiangannhat)
+                  : "Không có dữ liệu"
+              }}
+            </td>
+            <td>
+              <div
+                [ngClass]="
+                  item?.trangthai === 'up' ? 'active-status' : 'noactive-status'
+                "
+              >
+                {{ item?.trangthai === "up" ? "Hoạt động" : "Không hoạt động" }}
+              </div>
+            </td>
+            <td>{{ transformUnitName(item?.donvi) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end p-2">
+        <ngb-pagination
+          [collectionSize]="total"
+          [maxSize]="100"
+          [(page)]="page"
+          [pageSize]="pageSize"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

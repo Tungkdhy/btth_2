@@ -1,0 +1,50 @@
+<div class="mt-5">
+  <h2>Thống kê tình trạng còn tồn</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [legendSettings]="legendSettings"
+    id="chart-container"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="trong_x"
+        name="Trong {{getType(type)}}"
+        fill="#FF7F50"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="homqua_x"
+        name="{{getTypeUpcase(type)}} trước"
+        fill="#FFD700"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="name"
+        yName="con_ton"
+        name="Còn tồn"
+        fill="#FF4500"
+        [marker]="marker"
+        columnWidth="0.5"
+        [columnSpacing]='0.2'
+        [legendShape]="'Square'"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

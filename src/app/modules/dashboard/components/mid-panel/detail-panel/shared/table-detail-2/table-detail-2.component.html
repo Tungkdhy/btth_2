@@ -1,0 +1,46 @@
+<table class="table table-border">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Loại mạng</th>
+      <th scope="col">Đơn vị</th>
+      <th scope="col">IP/M AC</th>
+      <th scope="col">Ngày kết nối</th>
+      <th scope="col">Trạng 太</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <th scope="row">{{ item.id }}</th>
+      <td>
+        {{ item.name }}
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination
+    [collectionSize]="collectionSize"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="refreshData()"
+  >
+  </ngb-pagination>
+
+  <select
+    class="form-select"
+    style="width: auto"
+    [(ngModel)]="pageSize"
+    (ngModelChange)="refreshData()"
+  >
+    <option [ngValue]="2">2 items per page</option>
+    <option [ngValue]="4">4 items per page</option>
+    <option [ngValue]="6">6 items per page</option>
+  </select>
+</div>

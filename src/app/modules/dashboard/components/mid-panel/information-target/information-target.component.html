@@ -1,0 +1,41 @@
+<div *ngIf="data" class="card p-5">
+  <div class="">
+    <div class="bg-body-secondary inner-card table-it-infra-3107 wrap-box-info">
+      <div>
+        <div class="title d-flex justify-content-center py-10">
+          {{ data.name }}
+        </div>
+        <table class="table gy-7 gs-7 fs-1 m-0">
+          <tbody class>
+            <ng-container>
+              <tr>
+                <td>Tên miền</td>
+                <td>{{ data.domain }}</td>
+              </tr>
+              <tr>
+                <td>IP</td>
+                <td>{{ data.ip }}</td>
+              </tr>
+              <tr>
+                <td>Loại</td>
+                <td>{{ data.service_type }}</td>
+              </tr>
+              <tr>
+                <td>Tổ chức</td>
+                <td>{{ data.organization }}</td>
+              </tr>
+              <!-- <tr>
+                <td>Báo cáo</td>
+                <td>{{ data.count + " " + data.post_fix }}</td>
+              </tr> -->
+              <tr>
+                <td>Mô tả</td>
+                <td class="wrap-text">{{ data.des }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

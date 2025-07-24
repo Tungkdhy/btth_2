@@ -1,0 +1,32 @@
+<div class="mt-5">
+  <h2>Thống kê theo nguồn</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    (textRender)="onTextRender($event)"
+    id="chart-container"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="source"
+        yName="add"
+        fill="#045E2B"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+      <e-series
+        [dataSource]="chartData"
+        type="Column"
+        xName="source"
+        yName="remove"
+        fill="#F58501"
+        [marker]="marker"
+        columnWidth="0.25"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

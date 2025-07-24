@@ -1,0 +1,33 @@
+<div id="duphong86Chart">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [title]="chartTitle"
+  >
+    <e-series-collection>
+      <e-series
+        *ngFor="let category of categories; let i = index"
+        [dataSource]="chartData"
+        type="StackingColumn"
+        xName="name"
+        yName="{{ category.field }}"
+        name="{{ category.label }}"
+        [marker]="{
+          dataLabel: {
+            visible: true,
+            position: 'left',
+            font: {
+              fontWeight: '600',
+              color: '#ffffff'
+            }
+          }
+        }"
+        [fill]="getColor(i)"
+        columnSpacing="0.1"
+        [columnWidth]="0.7"
+      >
+        >
+      </e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

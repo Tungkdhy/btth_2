@@ -1,0 +1,25 @@
+<div>
+  <!-- <ejs-chart
+      id="hot-topic-chart-container"
+      class="chart-right-panel"
+      [primaryXAxis]="chartPrimaryXAxis"
+      [primaryYAxis]="chartPrimaryYAxis"
+      [title]="chartTitle"
+    >
+      <e-series-collection>
+        <e-series
+          [dataSource]="statisticData"
+          type="Column"
+          xName="tentinhthanh"
+          yName="soluong"
+          columnWidth="0.5"
+          [pointColorMapping]="chartPointMapping"
+          [marker]="chartMarker"
+        ></e-series>
+      </e-series-collection>
+    </ejs-chart> -->
+  <div style="height: 580px;">
+    <div echarts [options]="diemNongBarChartOption" class="diemNong-bar-chart-popup" [autoResize]="true"></div>
+  </div>
+  <!-- form insert -->
+</div>

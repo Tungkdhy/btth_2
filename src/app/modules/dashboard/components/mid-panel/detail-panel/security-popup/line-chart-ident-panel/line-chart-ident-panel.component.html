@@ -1,0 +1,34 @@
+<div class="mt-5">
+  <h2>Biểu đồ thống kê thiết bị định danh</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    id="id"
+    >
+    <e-series-collection>
+      <e-series
+        [dataSource]='chartDataIdent'
+        type='Line'
+        xName="first_install_date"
+        yName="tong"
+        [marker]="marker"
+        fill="green"
+        [width]="3"
+      >
+      </e-series>
+      <!-- <e-series
+        [dataSource]='chartDataUnIdent'
+        type='Line'
+        xName="first_install_date"
+        yName="tong"
+        [marker]="marker"
+        name="Chưa định danh"
+        fill="#FF5733"
+        [width]="3"
+      >
+      </e-series> -->
+    </e-series-collection>
+  </ejs-chart>
+</div>

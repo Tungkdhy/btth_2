@@ -1,0 +1,32 @@
+<div class="vh-100 detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Phòng Thủ Mạng ></span>
+      <span class="choise-item">Thiết Bị Định Tuyến, Cơ Yếu</span>
+    </div>
+    <!--          <div class="close-button-item">-->
+    <!--            <span (click)="togglePopup(false)" class="close-icon">X</span>-->
+    <!--          </div>-->
+  </div>
+  <div class="bg-group height-group">
+    <div class="row h-45 chart-group">
+      <div class="col-4 h-100">
+        <div class="card-border h-100">
+          <app-statistic-pie-chart-popup
+            [pieData]="pieData"
+          ></app-statistic-pie-chart-popup>
+        </div>
+      </div>
+      <div class="col-8 h-100">
+        <div class="card-border h-100">
+          <app-column-chart-left-panel
+            [columnData]="columnData"
+          ></app-column-chart-left-panel>
+        </div>
+      </div>
+    </div>
+    <div class="row height-table-detail-panel-card">
+      <app-table-detail-1></app-table-detail-1>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="btth-lr-panel-card">
+  <div class="d-flex justify-content-between">
+    <h2
+      (click)="togglePopup(true, 'ChuDeNong')"
+      [ngStyle]="{ color: isShowChuDeNong ? 'green' : 'inherit' }"
+    >
+      Chủ đề nóng
+    </h2>
+    <h4 style="color: rgba(83, 83, 83, 1);;">Tổng: {{ totalCollectData }} tin bài</h4>
+  </div>
+  <div style="height: 372px;">
+    <!-- <ejs-chart
+      id="hot-topic-chart-container"
+      class="chart-right-panel"
+      [primaryXAxis]="hotTopicPrimaryXAxis"
+      [primaryYAxis]="hotTopicPrimaryYAxis"
+      [title]="hotTopicTitle"
+    >
+      <e-series-collection>
+        <e-series
+          [dataSource]="thongKeChuDeNong$ | async"
+          type="Column"
+          xName="name"
+          yName="thongke"
+          columnWidth="0.5"
+          [pointColorMapping]="hotTopicPointMapping"
+          [marker]="hotTopicMarker"
+          [border]="border"
+        ></e-series>
+      </e-series-collection>
+    </ejs-chart> -->
+    <div echarts [options]="hotTopicChartOption" class="hot-topic-chart" [autoResize]="true"></div>
+  </div>
+
+  <!-- form insert -->
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

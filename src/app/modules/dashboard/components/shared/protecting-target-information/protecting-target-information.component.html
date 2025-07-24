@@ -1,0 +1,142 @@
+<div class="infor-right">
+  <div class="date-select-wrapper">
+    <select
+      id="filter"
+      class="select-input search-box-2"
+      [(ngModel)]="selectedDateOption"
+      (change)="onOptionChange($event)"
+    >
+      <option *ngFor="let option of dateOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+  <div class="statistic-top">
+    <div class="card-border">
+      <div>
+        <div
+          class="d-flex justify-content-between"
+          style="flex-direction: row !important"
+        >
+          <div class="title">Sắc thái bài viết</div>
+          <div
+            style="
+              display: flex;
+              justify-content: right;
+              flex-direction: row !important;
+              gap: 1em;
+              font-size: 2em;
+              margin-bottom: 1em;
+              align-items: center;
+            "
+          >
+            <label>
+              <input
+                type="radio"
+                name="option4"
+                value="platform"
+                [(ngModel)]="selectedSystem"
+                (change)="handleRadioChange('platform')"
+              />
+              Platform
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="option4"
+                value="spyder"
+                [(ngModel)]="selectedSystem"
+                (change)="handleRadioChange('spyder')"
+              />
+              Spyder
+            </label>
+          </div>
+        </div>
+        <div class="card-border">
+          <div class="chart-pie-simple nuace-chart">
+            <ng-container *ngIf="this.donutChartData?.data">
+              <ejs-accumulationchart
+                class="chart-right-panel"
+                [title]="donutTitle"
+                [legendSettings]="donutlegendSettings"
+                [center]="{ x: '50%', y: '50%' }"
+                [centerLabel]="centerLabel"
+              >
+                <e-accumulation-series-collection>
+                  <e-accumulation-series
+                    [dataSource]="donutChartData?.data"
+                    xName="x"
+                    yName="y"
+                    innerRadius="50%"
+                    [dataLabel]="donutDataLabel"
+                    [palettes]="donutColors"
+                    radius="80%"
+                    legendShape="Rectangle"
+                  >
+                  </e-accumulation-series>
+                </e-accumulation-series-collection>
+              </ejs-accumulationchart>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-border">
+      <div>
+        <div class="title">Nền tảng</div>
+        <ng-container *ngIf="donutMonitorChartData">
+          <ejs-accumulationchart
+            class="chart-right-panel"
+            id="related-target-pie-chart"
+            [enableSmartLabels]="enableSmartLabels"
+            [legendSettings]="accumulationLegendSettings"
+            [center]="{ x: '50%', y: '40%' }"
+            [centerLabel]="targetCenterLabel"
+            (legendRender)="legendRender($event, donutMonitorChartData)"
+          >
+            <e-accumulation-series-collection>
+              <e-accumulation-series
+                [dataSource]="donutMonitorChartData"
+                xName="nentang"
+                yName="tongtinbai"
+                radius="70%"
+                innerRadius="50%"
+                [dataLabel]="targetCorrelationDataLabel"
+                [palettes]="targetColors"
+                [border]="border"
+                legendShape="Rectangle"
+              >
+              </e-accumulation-series>
+            </e-accumulation-series-collection>
+          </ejs-accumulationchart>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="card-border">
+    <div class="statistic-below">
+      <div class="title">Diễn biến tin tiêu cực</div>
+      <ng-container class="h-67" *ngIf="this.lineChartData.length > 0">
+        <ejs-chart
+          id="chart-container"
+          class="chart-right-panel"
+          [primaryXAxis]="primaryXAxisLine"
+          [primaryYAxis]="primaryYAxisLine"
+          [title]="titleLine"
+        >
+          <e-series-collection>
+            <e-series
+              [dataSource]="this.lineChartData"
+              type="Line"
+              xName="ngay"
+              yName="soluong"
+              [marker]="markerLine"
+              fill="red"
+              width="1"
+            ></e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </ng-container>
+    </div>
+  </div>
+</div>

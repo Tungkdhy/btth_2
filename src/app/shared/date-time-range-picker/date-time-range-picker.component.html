@@ -1,0 +1,52 @@
+<ejs-daterangepicker
+  class="form-control flex-grow-1"
+  cssClass="datetime-custom"
+  [format]="'dd/MM/yyyy, HH:mm:ss'"
+  locale="vi"
+  floatLabelType="Always"
+  [placeholder]="placeholder"
+  [value]="[startDate, endDate]"
+  [zIndex]="zIndex"
+  (change)="onSelectDate($event)"
+  [max]="today.endDate"
+>
+  <e-presets>
+    <e-preset
+      label="Hôm nay"
+      [start]="today.startDate"
+      [end]="today.endDate"
+    ></e-preset>
+    <e-preset
+      label="Tuần này"
+      [start]="thisWeek.startDate"
+      [end]="thisWeek.endDate"
+    ></e-preset>
+    <e-preset
+      label="Tuần trước"
+      [start]="lastWeek.startDate"
+      [end]="lastWeek.endDate"
+    ></e-preset>
+    <e-preset
+      label="Tháng này"
+      [start]="thisMonth.startDate"
+      [end]="thisMonth.endDate"
+    ></e-preset>
+    <e-preset
+      label="Tháng trước"
+      [start]="lastMonth.startDate"
+      [end]="lastMonth.endDate"
+    ></e-preset>
+    <e-preset
+      label="Năm nay"
+      [start]="thisYear.startDate"
+      [end]="thisYear.endDate"
+    ></e-preset>
+    <e-preset
+      label="Năm trước"
+      [start]="lastYear.startDate"
+      [end]="lastYear.endDate"
+    ></e-preset>
+  </e-presets>
+</ejs-daterangepicker>
+
+<ng-container *ngIf="date$ | async"></ng-container>

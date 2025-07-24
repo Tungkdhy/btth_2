@@ -1,0 +1,10 @@
+<ng-container *ngIf="unitId">
+  <div class="row">
+    <app-prtg-alert-widget [unitId]="unitId"></app-prtg-alert-widget>
+  </div>
+  <!-- Separator -->
+  <div class="separator my-5"></div>
+  <div class="row">
+    <app-fms-alert-card [unitId]="unitId"></app-fms-alert-card>
+  </div>
+</ng-container>

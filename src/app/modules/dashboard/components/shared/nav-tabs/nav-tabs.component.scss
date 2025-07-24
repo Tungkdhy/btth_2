@@ -1,0 +1,21 @@
+.nav-tabs-windown {
+  border: 0.1em solid var(--colorBorderGroup);
+  padding: 0.5em;
+  border-radius: 0.8em;
+  margin: 2em 1.5em 0;
+
+  a.nav-link.active {
+    color: var(--colorTitle) !important;
+    cursor: pointer;
+  }
+  a.nav-link {
+    color: var(--colorText) !important;
+    font-size: 2em;
+    cursor: pointer;
+  }
+  .tab-content {
+    margin-top: 0.5em;
+    background: var(--bgCard);
+    border-radius: 0.8em;
+  }
+}

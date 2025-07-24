@@ -1,0 +1,81 @@
+.table-part {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  font-size: 1em;
+
+  table {
+    flex: 1;
+  }
+}
+
+.detail-panel table th:first-child {
+  width: 10%;
+}
+
+.detail-panel table th {
+  border: 0.05em solid var(--colorBorderGroup);
+}
+
+.detail-panel table th:first-child {
+  border-left: 0.05em solid var(--colorBorderGroup);
+}
+
+ul#myTab {
+  font-size: 2.5em;
+  margin: 0.5em;
+}
+
+.tab-content {
+  height: 100%; /* or a specific height, e.g., 500px */
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content > .active {
+  display: flex;
+  flex: 1;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: var(--colorTitle) !important;
+  background: inherit !important;
+  border-bottom: 0.1em solid var(--colorTitle);
+}
+
+.nav-tabs .nav-link {
+  color: var(--colorText) !important;
+}
+
+td,
+th {
+  text-align: left !important;
+  padding-left: 1rem !important;
+}
+.detail-panel table th:first-child{
+  padding: 1rem !important;
+}
+
+
+.table-detail-dieuhanhtruc {
+  th:nth-child(1) {
+    white-space: nowrap;
+  }
+  td:nth-child(1) {
+    white-space: nowrap;
+  }
+}
+
+
+
+.table-2{
+    th{
+      &:first-child{
+        width: 55% !important;
+      }
+      &:nth-child(2),
+      &:nth-child(3){
+        width:15%;
+      }}
+}

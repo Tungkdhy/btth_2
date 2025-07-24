@@ -1,0 +1,98 @@
+<div class="topology-container" >
+  <div class="sidebar">
+    <h3>Cây đơn vị</h3>
+    <!-- Angular Syncfusion TreeView Component -->
+    <ng-container *ngIf="tree$ | async as tree">
+      <ejs-treeview
+        id="treeelement"
+        [fields]="treeViewFields"
+        (nodeSelected)="handleSelected($event)"
+      ></ejs-treeview>
+    </ng-container>
+  </div>
+  <div class="main-content">
+    <div class="tools">
+      <h3>Công cụ</h3>
+      <div class="form-group">
+        <label for="networkType">Hệ thống</label>
+        <select
+          #selectSystem
+          id="systemType"
+          [(ngModel)]="selectedSystemType"
+          (change)="onSystemTypeChange(selectSystem.value)"
+          class="form-control"
+        >
+          <option [value]="MonitoringSystemType.NAC">NACS</option>
+          <option [value]="MonitoringSystemType.NMS">NMS</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="networkType">Loại mạng</label>
+        <select
+          #selectElement
+          id="networkType"
+          [(ngModel)]="selectedNetworkType"
+          (change)="onNetworkTypeChange(selectElement.value)"
+          class="form-control"
+        >
+          <option [value]="MainType.MILITARY">Quân sự</option>
+          <option [value]="MainType.INTERNET">Internet</option>
+          <option [value]="MainType.CD">Chuyên dùng</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit" (click)="onSubmit()">
+        Lưu tọa độ
+      </button>
+    </div>
+    <div class="content-row">
+      <div class="diagram">
+        <h3>Cấu trúc mạng</h3>
+        <ng-container *ngIf="selectedNode">
+          <h4>{{ selectedNode.text }}</h4>
+        </ng-container>
+        <!-- Angular Syncfusion Diagram Component -->
+        <ng-container *ngIf="topology$ | async as topology">
+          <div
+            class="network-structure"
+            *ngIf="topology && topology.nodes && topology.nodes.length > 0"
+          >
+            <app-topology-card
+              [topologyData]="topology"
+              [isView]="false"
+              (nodeMoved)="handleNodeMoved($event)"
+            ></app-topology-card>
+          </div>
+        </ng-container>
+      </div>
+      <div class="result">
+        <h3>Kết quả:</h3>
+        <form [formGroup]="coordinateForm">
+          <div formArrayName="nodeCoordinates">
+            <div
+              class="node-coordinate"
+              *ngFor="
+                let node of nodeCoordinatesFormArray.controls;
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <input readonly formControlName="id" placeholder="Node ID" />
+                <input readonly formControlName="name" placeholder="Name" />
+                <input
+                  readonly
+                  formControlName="x"
+                  placeholder="X coordinate"
+                />
+                <input
+                  readonly
+                  formControlName="y"
+                  placeholder="Y coordinate"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

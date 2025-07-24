@@ -1,0 +1,58 @@
+<div class="mt-5">
+  <h2>Tương quan mất kết nối</h2>
+</div>
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    [legendSettings]="legendSettings"
+    id="chart-container-3"
+  >
+    <e-series-collection>
+      <e-series
+        id="1"
+        [dataSource]='chartDataNetworkDevice'
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Thiết bị mạng"
+        [width]="3"
+        fill="#FF5733">
+      </e-series>
+      <e-series
+      id="2"
+        [dataSource]="chartDataServer"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="Máy chủ"
+        fill="#33C1FF"
+        [width]="3"
+      ></e-series>
+      <e-series
+      id="3"
+        [dataSource]="chartDataUDDV"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="ƯD dịch vụ"
+        fill="#28B463"
+        [width]="3"
+      ></e-series>
+      <e-series
+      id="4"
+        [dataSource]="chartDataServerMonitor"
+        type='Line'
+        xName="last_active_date"
+        yName="tong"
+        [marker]="marker"
+        name="HTGS"
+        fill="#FFC300"
+        [width]="3"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>

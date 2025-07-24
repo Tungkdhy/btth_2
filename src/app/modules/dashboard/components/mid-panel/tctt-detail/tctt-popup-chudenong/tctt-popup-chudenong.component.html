@@ -1,0 +1,456 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex justify-content-between">
+    <app-breadcrum-left-right titleLevel1="Trinh sát tác chiến thông tin"
+      titleLevel2="Chủ đề nóng"></app-breadcrum-left-right>
+    <div class="d-flex gap-2 align-items-center" style="line-height: 65px;">
+      <h4>Đóng</h4>
+      <button (click)="togglePopup(false)" style="border: none; padding: 0; outline: none; background: none;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.6663 31.6663L8.33301 29.333L17.6663 19.9997L8.33301 10.6663L10.6663 8.33301L19.9997 17.6663L29.333 8.33301L31.6663 10.6663L22.333 19.9997L31.6663 29.333L29.333 31.6663L19.9997 22.333L10.6663 31.6663Z"
+            fill="#080808" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="d-flex gap-6" style="max-width: 100%;">
+      <div class="hot-topic-sidebar col-3">
+        <ejs-treeview #chuDeTreeview id="chuDe" cssClass="treeview" [fields]="{
+            dataSource: this.treeData,
+            id: 'id',
+            text: 'name',
+            child: 'children'
+          }" (nodeSelected)="onNodeSelected($event)" *ngIf="this.treeData.length > 0">
+        </ejs-treeview>
+
+        <ejs-treeview #diemTinTreeview id="diemTin" cssClass="treeview" [fields]="{
+            dataSource: this.treeData1,
+            id: 'id',
+            text: 'name',
+            child: 'children'
+          }" (nodeSelected)="onNodeDiemTinSelected($event)" *ngIf="this.treeData1.length > 0"></ejs-treeview>
+      </div>
+      <div class="btth-lr-panel-card table-part-tree-view" style="display: flex; flex: 1">
+        <!-- <div class="right-detail-panel d-flex flex-column align-item-between table-hot-topic w-100">
+        </div> -->
+          <div *ngIf="
+              this.diemTinDetailsTree.length > 0 || this.diemTinTopic.length > 0
+            " class="w-100">
+            <!-- <div style="
+                text-align: center;
+                width: 100%;
+                font-size: 40px;
+                font-weight: 600;
+              "></div> -->
+            <div class="diem-tin-ngay-container">
+              <ejs-treeview class="column" id="chiTietDiemTin" *ngIf="
+                  this.selectedStart === this.selectedEnd &&
+                  this.diemTinDetailsTree.length > 0
+                " cssClass="treeview" [fields]="{
+                  dataSource: this.diemTinDetailsTree,
+                  id: 'id',
+                  text: 'noidung',
+                  child: 'children'
+                }" [nodeTemplate]="nodeTemplate"></ejs-treeview>
+            </div>
+            <!-- //////////////////////////// -->
+            <div *ngIf="
+                this.diemTinTopic.length > 0 &&
+                this.selectedStart !== this.selectedEnd
+              " class="d-flex flex-column gap-6 h-100">
+              <div>
+                <table class="btth-top-table table-detail-chudenong">
+                  <thead>
+                    <tr>
+                      <th>Ngày</th>
+                      <th>Tổng Quan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of this.filteredDiemTinData">
+                      <td><p>{{ item.ngay }}</p></td>
+                      <td><p>{{ item.tongquan }}</p></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="d-flex justify-content-end">
+                <ngb-pagination [collectionSize]="this.diemTinTopic.length" [maxSize]="10" [(page)]="this.pageDiemTin"
+                  [pageSize]="10" (pageChange)="onPageDiemTinChange($event)" class="btth-pagination">
+                </ngb-pagination>
+              </div>
+            </div>
+
+            <!-- ///////////////////// -->
+          </div>
+          <div *ngIf="
+              this.diemTinDetailsTree.length === 0 &&
+              this.diemTinTopic.length === 0 &&
+              this.detailTopic.length === 0 &&
+              (this.selectedChude || this.selectedDiemTin)
+            " style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              text-align: center;
+              font-size: 40px;
+            ">
+            Không có dữ liệu hiển thị
+          </div>
+          <div class="d-flex justify-content-around" *ngIf="this.detailTopic.length > 0"
+            style="height: 7rem !important">
+            <div class="boxTotal">
+              <span>Tổng số tin bài</span>
+              <div>
+                {{
+                this.detailTopic.length > 1
+                ? formatNumberWithDotLocal(this.totalTinBai) || 0
+                : formatNumberWithDotLocal(
+                this.detailTopic[0]?.tongtinbai
+                ) || 0
+                }}
+                <span style="font-size: 1em">
+                  {{
+                  this.detailTopic.length === 1
+                  ? this.detailTopic[0]?.tongtinbaihomtruoc > 0
+                  ? "(" +
+                  "+" +
+                  this.detailTopic[0]?.tongtinbaihomtruoc +
+                  ")"
+                  : this.detailTopic[0]?.tongtinbaihomtruoc < 0 ? "(-" + this.detailTopic[0]?.tongtinbaihomtruoc * -1
+                    + ")" : "" : "" }} </span>
+              </div>
+            </div>
+            <div class="boxTotal">
+              <span>Tổng Tiêu Cực</span>
+              <div>
+                {{
+                this.detailTopic.length > 1
+                ? formatNumberWithDotLocal(this.totalTieuCuc) || 0
+                : formatNumberWithDotLocal(
+                this.detailTopic[0]?.tongtieucuc
+                ) || 0
+                }}
+                <span style="font-size: 1em" [ngStyle]="{
+                    color:
+                      this.detailTopic.length === 1
+                        ? this.detailTopic[0]?.tongtieucuchomtruoc > 0
+                          ? 'red'
+                          : this.detailTopic[0]?.tongtieucuchomtruoc < 0
+                          ? 'green'
+                          : 'blue'
+                        : ''
+                  }">{{
+                  this.detailTopic.length === 1 &&
+                  this.selectedStart === this.selectedEnd
+                  ? this.detailTopic[0]?.tongtieucuchomtruoc > 0
+                  ? "(" +
+                  "+" +
+                  this.detailTopic[0]?.tongtieucuchomtruoc +
+                  ")"
+                  : this.detailTopic[0]?.tongtieucuchomtruoc < 0 ? "(-" + this.detailTopic[0]?.tongtieucuchomtruoc * -1
+                    + ")" : "" : "" }}</span>
+              </div>
+            </div>
+            <div class="boxTotal">
+              <span>Tổng Tương tác</span>
+              <div>
+                {{
+                this.detailTopic.length > 1
+                ? formatNumberWithDotLocal(this.totalTuongTac) || 0
+                : formatNumberWithDotLocal(
+                this.detailTopic[0]?.tongtuongtac
+                ) || 0
+                }}
+              </div>
+            </div>
+          </div>
+          <ejs-tab id="element" *ngIf="
+              this.diemTinDetailsTree.length === 0 &&
+              this.diemTinTopic.length === 0 &&
+              this.detailTopic.length > 0
+            ">
+            <e-tabitems style="height: 100%">
+              <e-tabitem *ngIf="this.detailTopic.length > 0">
+                <ng-template #headerText>
+                  <div>Thông tin chung</div>
+                </ng-template>
+                <ng-template #content class="content">
+                  <div *ngIf="
+                      (this.detailTopic[0]?.tongquan === null ||
+                        this.detailTopic[0]?.tongquan === undefined ||
+                        !this.detailTopic[0]?.tongquan) &&
+                      (this.detailTopic[0]?.tongquantieucuc === null ||
+                        this.detailTopic[0]?.tongquantieucuc === undefined ||
+                        !this.detailTopic[0]?.tongquantieucuc) &&
+                      (this.detailTopic[0]?.note === null ||
+                        this.detailTopic[0]?.note === undefined ||
+                        !this.detailTopic[0]?.note)
+                    " style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      height: 100vh;
+                      text-align: center;
+                      font-size: 40px;
+                    ">
+                    Không có dữ liệu hiển thị
+                  </div>
+                  <div *ngIf="
+                      this.detailTopic.length === 1 &&
+                      this.selectedStart === this.selectedEnd
+                    " class="d-flex flex-column w-100" style="font-size: 36px">
+                    <div style="
+                        text-align: center;
+                        width: 100%;
+                        font-size: 40px;
+                        font-weight: 600;
+                        margin-top: 10px;
+                      "></div>
+                    <div class="d-flex flex-row p-2 bg-secondary w-100" *ngIf="
+                        this.detailTopic[0]?.tongquan !== null &&
+                        this.detailTopic[0]?.tongquan !== undefined &&
+                        this.detailTopic[0]?.tongquan
+                      " style="
+                        border: 1px solid black;
+                        padding: 6px;
+                        background-color: white;
+                        margin: 6px;
+                      ">
+                      <div class="p-2 flex-fill col-4">
+                        <p class="fw-bold">Tổng quan</p>
+                      </div>
+                      <div class="p-2 flex-fill col-8" style="line-height: 1.3">
+                        <p>
+                          {{
+                          this.detailTopic[0]?.tongquan
+                          ? convertData(this.detailTopic[0]?.tongquan)
+                          : "Hiện chưa có dữ liệu"
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row p-2 bg-secondary w-100" *ngIf="
+                        this.detailTopic[0]?.tongquantieucuc !== null &&
+                        this.detailTopic[0]?.tongquantieucuc !== undefined &&
+                        this.detailTopic[0]?.tongquantieucuc
+                      " style="
+                        border: 1px solid black;
+                        padding: 6px;
+                        background-color: white;
+                        margin: 6px;
+                      ">
+                      <div class="p-2 flex-fill col-4">
+                        <p class="fw-bold">Thông tin tiêu cực</p>
+                      </div>
+                      <div class="p-2 flex-fill col-8" style="white-space: pre-wrap; line-height: 1.5">
+                        <p>
+                          {{
+                          this.detailTopic[0]?.tongquantieucuc
+                          ? convertData(
+                          this.detailTopic[0]?.tongquantieucuc
+                          )
+                          : "Hiện chưa có dữ liệu"
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row p-2 bg-secondary w-100" *ngIf="
+                        this.detailTopic[0]?.note !== null &&
+                        this.detailTopic[0]?.note !== undefined &&
+                        this.detailTopic[0]?.note
+                      " style="
+                        border: 1px solid black;
+                        padding: 6px;
+                        background-color: white;
+                        margin: 6px;
+                      ">
+                      <div class="p-2 flex-fill col-4">
+                        <p class="fw-bold">Ghi chú</p>
+                      </div>
+                      <div class="p-2 flex-fill col-8" style="line-height: 1.3">
+                        <p>
+                          {{
+                          this.detailTopic[0]?.note
+                          ? this.detailTopic[0]?.note
+                          : "Hiện chưa có dữ liệu"
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="
+                      flex: 1 !important;
+                      display: flex;
+                      flex-direction: column;
+                    " *ngIf="
+                      this.detailTopic.length > 0 &&
+                      this.selectedStart !== this.selectedEnd
+                    " class="table-rows">
+                    <table class="">
+                      <thead>
+                        <tr>
+                          <th>Ngày</th>
+                          <th>Tổng Quan</th>
+                          <th>Thông Tin Tiêu Cực</th>
+                          <th>Tổng Tin Bài</th>
+                          <th>Tổng Tiêu Cực</th>
+                          <th>Tổng Tương Tác</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of this.filteredDetailTopicData">
+                          <td>{{ item.ngay }}</td>
+                          <td>{{ item.tongquan }}</td>
+                          <td>{{ item.tongquantieucuc }}</td>
+                          //////////////////<td>{{ item.note }}</td> ////////////////////////////
+                          <td>{{ item.tongtinbai ? item.tongtinbai : 0 }}</td>
+                          <td>{{ item.tongtieucuc ? item.tongtieucuc : 0 }}</td>
+                          <td>
+                            {{ item.tongtuongtac ? item.tongtuongtac : 0 }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="d-flex justify-content-end" *ngIf="
+                      this.detailTopic.length > 1 &&
+                      this.selectedStart !== this.selectedEnd
+                    ">
+                    <ngb-pagination [collectionSize]="this.detailTopic.length" [maxSize]="5" [(page)]="this.page"
+                      [pageSize]="5" (pageChange)="onPageChange($event)">
+                    </ngb-pagination>
+                  </div>
+                  <div class="hot-event" *ngIf="this.suViecDangChuY.length > 0">
+                    <div class="title">Sự việc đáng chú ý</div>
+                    <div style="
+                        flex: 1 !important;
+                        display: flex;
+                        flex-direction: column;
+                      " class="table-rows">
+                      <table class="">
+                        <thead>
+                          <tr>
+                            <th style="width: 100px">STT</th>
+
+                            <th>Tên chủ đề</th>
+
+                            <th style="width: 350px !important">Tổng quan</th>
+
+                            <th>Thông tin tiêu cực</th>
+
+                            <th style="width: 1000px">Ghi chú</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr *ngFor="let item of suViecDangChuY">
+                            <td>{{ item.index }}</td>
+
+                            <td>{{ item.tenchude }}</td>
+
+                            <td>
+                              {{ item.tongquan }}
+                            </td>
+
+                            <td>{{ item.tongquantieucuc }}</td>
+
+                            <td>
+                              <span class="truncated-text" *ngIf="!item.showFullNote">{{ getTruncatedText(item.note, 25)
+                                }}</span>
+
+                              <span class="truncated-text" *ngIf="item.showFullNote">{{ item.note }}</span>
+                              <button *ngIf="isTextTruncated(item.note, 25)" class="truncated-btn"
+                                (click)="item.showFullNote = !item.showFullNote">
+                                {{ item.showFullNote ? "Thu gọn" : "Xem thêm" }}
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ng-template>
+              </e-tabitem>
+              <e-tabitem *ngIf="this.detailNegativeTopic.length > 0">
+                <ng-template #headerText>
+                  <div>Bài viết tiêu cực</div>
+                </ng-template>
+                <ng-template #content>
+                  <div>
+                    <input class="search-box-2" type="text" (input)="filteredDetailTieuCucData()"
+                      [(ngModel)]="searchText" placeholder="Tìm kiếm" />
+                  </div>
+                  <div class="table-detail-full-5" style="display: flex; flex: 1 !important">
+                    <table class="">
+                      <thead>
+                        <tr>
+                          <th style="width: 100px">STT</th>
+                          <th>Chủ đề</th>
+                          <th>Thông tin tiêu cực</th>
+                          <th>Đường dẫn</th>
+                          <th>Đối tượng</th>
+                          <th style="width: 150px !important">
+                            Ngày <br />đăng tải
+                          </th>
+                          <th>Ngày <br />phát hiện</th>
+                          <th>Nền tảng</th>
+                          <th>Tương tác</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of this.filteredDetailTieuCucData">
+                          <td>{{ item.index }}</td>
+                          <td>{{ item.chude }}</td>
+                          <td>{{ item.thongtintieucuc }}</td>
+                          <td>
+                            <a [href]="item.duongdan" target="_blank">{{
+                              item.duongdan
+                              }}</a>
+                          </td>
+                          <td>{{ item.doituong }}</td>
+                          <td style="width: 150px !important">
+                            {{ item.ngaydangtai }}
+                          </td>
+                          <td>{{ item.ngayphathien }}</td>
+                          <td>{{ item.nentang }}</td>
+                          <td>{{ item.tuongtac }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <ngb-pagination [collectionSize]="this.detailNegativeTopic.length" [maxSize]="5"
+                      [(page)]="this.pageTieuCuc" [pageSize]="5" (pageChange)="onPageChange($event)">
+                    </ngb-pagination>
+                  </div>
+                </ng-template>
+              </e-tabitem>
+            </e-tabitems>
+          </ejs-tab>
+      </div>
+      <!-- <div class="card-border table-part-tree-view" style="display: flex">
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>
+<ng-template #nodeTemplate let-data>
+  <div class="custom-node">
+    <ng-container *ngIf="data.isChild; else parentNode">
+      {{ data.noidung }}
+    </ng-container>
+    <ng-template #parentNode>
+      <div class="parent-node">
+        <div class="content" [ngClass]="{ title: data.children.length > 0 || data.picture }">
+          {{ data.noidung }}
+        </div>
+        <img *ngIf="data.picture" class="image" src="data:image/png;base64,{{ data.picture }}"
+          style="width: 100% !important" />
+      </div>
+    </ng-template>
+  </div>
+</ng-template>

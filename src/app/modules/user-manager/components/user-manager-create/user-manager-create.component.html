@@ -1,0 +1,17 @@
+<div class="card">
+  <!-- Modal Header -->
+  <div class="card-header">
+    <h4 class="card-title">Thêm mới</h4>
+    <div class="card-toolbar">
+      <div
+        class="btn btn-icon btn-sm btn-active-light-primary btn-close"
+        (click)="onClose()"
+      >
+        <span class="svg-icon svg-icon-2x"></span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <app-user-manager-form (done)="onClose()"></app-user-manager-form>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="h-100">
+  <div class="d-flex gap-2 align-items-center">
+    <svg width="8" height="27" viewBox="0 0 8 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="0.5" width="8" height="26" rx="4" fill="#045E2B" />
+    </svg>
+    <h2 [ngClass]="isShowMucTieuBV ? 'active' : ''" style="color: rgba(83, 83, 83, 1);">Mục tiêu bảo vệ</h2>
+  </div>
+  <div class="table-protecting-target" style="height: 320px;">
+    <ng-container *ngIf="baoveData | async as data; else noData">
+      <!-- <ejs-accumulationchart class="chart-right-panel" [enableSmartLabels]="true" [title]="relatedTargetTitle"
+        [legendSettings]="accumulationLegendSettings" [center]="{ x: '50%', y: '40%' }"
+        (legendRender)="legendRender($event, data)" (pointClick)="PointClick($event)" [centerLabel]="centerLabel">
+        <e-accumulation-series-collection>
+          <e-accumulation-series [dataSource]="data" xName="name" yName="thongke" radius="70%" innerRadius="50%"
+            [dataLabel]="baoveDataLabel" [palettes]="baoveColors" [border]="border" legendShape="Rectangle">
+          </e-accumulation-series>
+        </e-accumulation-series-collection>
+      </ejs-accumulationchart> -->
+      <div echarts [options]="protectTargetChartOption" class="protect-target-chart"
+        (chartClick)="onChartClick($event)"></div>
+    </ng-container>
+    <ng-template #noData>
+      <p>No data available</p>
+    </ng-template>
+  </div>
+</div>
+
+<ng-container *ngIf="date$ | async"></ng-container>

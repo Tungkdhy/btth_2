@@ -1,0 +1,6 @@
+<img
+  *ngIf="unit.iconId"
+  [alt]="'icon-' + unit.name"
+  class="h-25px logo"
+  [src]="getUnitIconById(unit.iconId)"
+/>

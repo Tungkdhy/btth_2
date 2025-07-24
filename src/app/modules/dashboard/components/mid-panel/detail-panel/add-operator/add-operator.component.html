@@ -1,0 +1,42 @@
+<div class="detail-panel-left-popup">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Điều hành tác chiến></span>
+      <span class="choise-item">Thêm mới điều hành tác chiến</span>
+    </div>
+    <div class="cursor-pointer" (click)="togglePopup(false)">
+      <span>X</span>
+    </div>
+  </div>
+  <div class="body-group bg-group">
+    <div class="input-area">
+      <app-form-input-opera
+        (formDataOperaChange)="handleFormDataOperaChange($event)"
+        [trichYeu]="trichYeu"
+        (trichYeuChange)="onTrichYeuChange($event)"
+        (ngayGiaoViecChange)="onNgayGiaoViecChange($event)"
+        (hanXuLyChange)="onHanXuLyChange($event)"
+      ></app-form-input-opera>
+
+      <app-search-operator
+        (filesUploaded)="handleUploadedFiles($event)"
+      ></app-search-operator>
+    </div>
+    <div class="list-area">
+      <app-form
+        (formDataTableChanged)="handleFormDataTableChanged($event)"
+        [trichYeu]="trichYeu"
+        [ngayGiaoViec]="ngayGiaoViec"
+        [hanXuLy]="hanXuLy"
+      >
+      </app-form>
+
+
+      <div class="d-flex justify-content-center">
+        <button type="button" (click)="onSaveClick()">Ghi</button>
+      </div>
+
+      <!--        <app-search-oper></app-search-oper>-->
+    </div>
+  </div>
+</div>

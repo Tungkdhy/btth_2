@@ -1,0 +1,155 @@
+<div class="table-detail-panel-card malware">
+  <div class="d-flex helptool">
+    <input
+      class="detailSearch"
+      type="text"
+      id="searchInput"
+      [(ngModel)]="searchText"
+      placeholder="Tìm kiếm theo từ khóa"
+    />
+    <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="columnType">
+        <option selected value="">Tất cả</option>
+        <option value="device_ROUTER_ROUTER_BCTT">Định tuyến</option>
+        <option value="device_ROUTER_ROUTER_CY">Cơ yếu</option>
+        <option value="device_SWITCH_">Chuyển mạch</option>
+        <option value="device_FIREWALL_">Tường lửa</option>
+        <option value="server_monitor">Hệ thống giám sát</option>
+        <option value="device_SERVER_">Máy chủ</option>
+        <option value="service_PORTAL">Cổng TTĐT</option>
+        <option value="service_COMMON">Ứng dụng dùng chung</option>
+      </select>
+    </div>
+    <div class="d-flex select-box-center">
+      Trạng thái xử lý:
+      <select class="form-select-box-1" [(ngModel)]="xuLyType">
+        <option selected value="">Tất cả</option>
+        <option value="Đã xử lý">Đã xử lý</option>
+        <option value="Chưa xử lý">Chưa xử lý</option>
+        <option value="Đang xử lý">Đang xử lý</option>
+      </select>
+    </div>
+    <!--    <ejs-dropdownlist-->
+    <!--      [dataSource]="data"-->
+    <!--      [fields]="fields"-->
+    <!--      [placeholder]="placeholder"-->
+    <!--      (change)="onChange($event)"-->
+    <!--    >-->
+    <!--    </ejs-dropdownlist>-->
+    <!-- <div class="d-flex select-box-center">
+      Loại cảnh báo:
+      <select class="form-select-box-1" [(ngModel)]="statusType">
+        <option selected value="">Tất cả</option>
+        <option value="true">Đang hoạt động</option>
+        <option value="false">Mất kết nối</option>
+      </select>
+    </div> -->
+
+    <button class="detailsearchButton" (click)="search()">Tìm kiếm</button>
+
+    <button class="detailsearchButton" (click)="exportExcel()">
+      Xuất excel
+    </button>
+  </div>
+  <div class="table-detail-haft">
+    <table class="h-100">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Loại cảnh báo</th>
+          <th>Mô tả</th>
+          <th>Đơn vị</th>
+          <th>Kết nối<br/>gần nhất</th>
+          <th>
+            <div>Loại mạng</div>
+            <div>Quản lý</div>
+          </th>
+          <th>Kết quả xử lý</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="dataSource?.length === 0">
+          <td colspan="7" class="text-center">Không có dữ liệu</td>
+        </tr>
+        <tr *ngFor="let item of dataSource; let index = index">
+          <td>{{ (page - 1) * pageSize + index + 1 }}</td>
+          <td>
+
+              {{ getTypeSys(item?.sys) }}
+            <div>
+              {{ item?.sys == "server_monitor" ? getType(item?.type) : "" }}
+            </div>
+          </td>
+          <td>
+            {{ getIpTenMien(item) }}
+            <div>
+              {{
+                item?.type == "COMMON" || item?.type == "PORTAL"
+                  ? item?.name
+                  : ""
+              }}
+              <div *ngIf="item?.sys == 'server_monitor'">
+                {{ getDescriptionSystemMonitor(item) }}
+              </div>
+            </div>
+          </td>
+          <td>
+            {{ getUnitName(item?.unit_path) || "" }}
+            <div>
+              {{ getUnitNameParent(item?.unit_path) || "" }}
+            </div>
+          </td>
+          <td>
+            <div>
+              {{ item?.last_active | date: "dd-MM-yyyy" }}
+            </div>
+            <div>
+                {{ item?.last_active | date: "HH:mm:ss" }}
+            </div>
+          </td>
+          <td>
+            {{ getTypeNetwork(item?.main_type) }}
+            <div>
+              {{ getRegionType(item?.loploi) }}
+            </div>
+          </td>
+          <!-- <td (click)="openProcessDetailModal(item?.id,item?.sys)"> -->
+          <td>
+            <div *ngIf="item?.khacfuc?.status == 'Đã xử lý'">
+              <div>
+                <b>Thời gian phát hiện:</b> {{ item?.khacfuc?.date_detect | date: "dd-MM-yyyy HH:mm:ss" }}
+              </div>
+              <div>
+                <b>Thời gian khắc phục:</b> {{ item?.khacfuc?.date | date: "dd-MM-yyyy HH:mm:ss" }}
+              </div>
+            </div>
+            <div>
+              <b>Trạng thái:</b> {{ item?.khacfuc?.status || "Chưa xử lý" }}
+            </div>
+            <div *ngIf="item?.khacfuc?.status == 'Đã xử lý' || item?.khacfuc?.status == 'Đang xử lý'">
+              <b>Nội dung:</b> {{ item?.khacfuc?.note }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div class="total">
+      <div>
+        Tổng số: <span class="fw-bold">{{ total | numberFormat }}</span>
+      </div>
+    </div>
+    <div>
+      <ngb-pagination
+        [collectionSize]="total"
+        [maxSize]="5"
+        [(page)]="page"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="duty-roster-3107 w-100 btth-top-panel-card">
+    <div class="d-flex justify-content-between" style="margin-bottom: 24px;">
+      <div class="d-flex justify-content-between" style="width: 48%">
+        <div>
+          <h2 class="top-green-text">Kíp trực: 29/04/2025</h2>
+          <!-- <p class="top-green-text">Trực chỉ huy TT: </p> -->
+        </div>
+        <!-- <div class="time-box">
+          <h1 style="color: #CB0000 !important; text-align:left">{{ currentDateTime | date:'HH:mm:ss' }}</h1>
+        </div> -->
+      </div>
+      <div class="d-flex gap-10">
+        <div>
+          <h6 class="top-green-text">Quân số</h6>
+          <h3 style="text-align: right;" class="top-green-text">200</h3>
+        </div>
+        <div>
+          <h6 class="top-green-text">Có mặt</h6>
+          <h3 style="text-align: right;" class="top-green-text">175</h3>
+        </div>
+        <div>
+          <h6 class="top-green-text">Vắng mặt </h6>
+          <h3 style="text-align: right;" class="top-green-text">15</h3>
+        </div>
+      </div>
+    </div>
+    <!-- <div>
+            <h6>Quân số</h6><h2>{{ shiftInformation?.QuanSo }}</h2>
+          </div>
+          <div>
+            <h6>Có mặt</h6><h2>{{ shiftInformation?.CoMat }}</h2>
+          </div>
+          <div>
+            <h6>Vắng mặt </h6><h2>{{ shiftInformation?.Vang }}</h2>
+          </div> -->
+  
+  
+    <!-- class="table-responsive h-75" -->
+    <div>
+        <app-custom-table [columns]="['Mô tả', 'Chức vụ', 'Cấp bậc','Tên']" [data]="lichtruc" [isShowHeader]="false"></app-custom-table>
+     </div>
+</div>

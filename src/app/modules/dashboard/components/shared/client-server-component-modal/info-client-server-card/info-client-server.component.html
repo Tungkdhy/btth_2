@@ -1,0 +1,133 @@
+<div class="detail-device">
+  <div class="btth-info-popup">
+    <h3 style="margin-bottom: 12px;">Thông tin tổng quan</h3>
+    <div class="info-device-wrap">
+      <div class="info-area-device">
+        <label>Tên</label>
+        <div class="form-control-plaintext">
+          <p>{{ device?.fms?.name || device?.ta21?.name }}</p>
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label>Đơn vị</label>
+        <div class="form-control-plaintext">
+          <p>
+            {{ device?.unit_name_full?.split("\n")[0] }}
+          </p>
+          <p>
+            {{ device?.unit_name_full?.split("\n")[1] }}
+          </p>
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label>Mac</label>
+        <div class="form-control-plaintext">
+          <p>{{ device?.mac }}</p>
+        </div>
+      </div>
+      <div class="info-area-device">
+        <label class="fw-bold">Quản lý</label>
+        <div class="form-control-plaintext">
+          <p>
+            {{ device.fms?.employee_name || device.ta21?.employee_name || device.soci?.employee_name }}
+          </p>
+          <p>
+            {{ device.fms?.employee_position || device.ta21?.employee_position || device.soci?.employee_position }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name -->
+
+  <!-- Type -->
+  <div *ngIf="device?.fms">
+    <div class="btth-info-popup">
+      <h3 style="margin-bottom: 12px;">FMS</h3>
+      <div class="info-device-wrap">
+        <div class="info-area-device">
+          <label>IP</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.fms?.ip }}</p>
+          </div>
+        </div>
+        <!-- Serial -->
+
+        <!-- IP -->
+        <div class="info-area-device">
+          <label>Phiên bản</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.fms?.version }}</p>
+          </div>
+        </div>
+        <!-- Status -->
+        <div class="info-area-device">
+          <label>Cập nhật gần nhất</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.fms?.create_at | date: "dd/MM/yyyy" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="device?.ta21">
+    <div class="btth-info-popup">
+      <h3 style="margin-bottom: 12px;">TA21</h3>
+      <div class="info-device-wrap">
+        <div class="info-area-device">
+          <label>IP</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.ta21?.ip }}</p>
+          </div>
+        </div>
+        <!-- Serial -->
+
+        <!-- IP -->
+        <div class="info-area-device">
+          <label>Phiên bản</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.ta21?.version }}</p>
+          </div>
+        </div>
+        <!-- Status -->
+        <div class="info-area-device">
+          <label>Cập nhật gần nhất</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.ta21?.create_at | date: "dd/MM/yyyy" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="device?.soci">
+    <div class="btth-info-popup">
+      <h3 style="margin-bottom: 12px;">SOC-i</h3>
+      <div class="info-device-wrap">
+        <div class="info-area-device">
+          <label>IP</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.soci?.ip }}</p>
+          </div>
+        </div>
+        <!-- Serial -->
+
+        <!-- IP -->
+        <div class="info-area-device">
+          <label>Phiên bản</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.soci?.version }}</p>
+          </div>
+        </div>
+        <!-- Status -->
+        <div class="info-area-device">
+          <label>Cập nhật gần nhất</label>
+          <div class="form-control-plaintext">
+            <p>{{ device?.soci?.create_at | date: "dd/MM/yyyy" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

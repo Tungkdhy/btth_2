@@ -1,0 +1,88 @@
+<div [id]="mapId" class="vh-100" style="position: relative">
+  <div id="info"></div>
+</div>
+<ng-container *ngIf="data">
+  <div id="device-legend" class="legend-custom">
+    <app-tcm-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="data"
+      [description]="description"
+    ></app-tcm-legend-on-map>
+  </div>
+</ng-container>
+<ng-container *ngIf="detail">
+  <div
+    id="device-detail-legend"
+    class="detail-legend-custom"
+    style="min-width: 30%"
+  >
+    <app-tcm-detail-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="detail"
+    ></app-tcm-detail-legend-on-map>
+  </div>
+</ng-container>
+<ng-container *ngIf="target_category">
+  <div
+    id="device-target-legend"
+    class="detail-legend-custom"
+  >
+    <app-target-detail-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="target_category"
+    ></app-target-detail-legend-on-map>
+  </div>
+</ng-container>
+<ng-container *ngIf="data_category">
+  <div
+    id="device-data-legend"
+    class="detail-legend-custom"
+    style="min-width: 30%"
+  >
+    <app-data-detail-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="data_category"
+    ></app-data-detail-legend-on-map>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="vktb_category">
+  <div
+    id="device-vktb-legend"
+    class="detail-legend-custom"
+    style="min-width: 30%"
+  >
+    <app-vktb-detail-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="vktb_category"
+    ></app-vktb-detail-legend-on-map>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="kttc_category">
+  <div
+    id="device-kttc-legend"
+    class="detail-legend-custom"
+    style="min-width: 30%"
+  >
+    <app-method-detail-legend-on-map
+      (goBack)="handleGoBack()"
+      [legendData]="kttc_category"
+    ></app-method-detail-legend-on-map>
+  </div>
+</ng-container>
+<ng-container *ngIf="true">
+  <div
+    id="device-information-legend"
+    class="detail-legend-left"
+  >
+    <app-information-target
+      (goBack)="handleGoBack()"
+      [detail]="information_target"
+    ></app-information-target>
+  </div>
+</ng-container>
+<ng-container *ngIf="noLegendPromise | async"> </ng-container>
+
+<ng-container *ngIf="channel$ | async"> </ng-container>
+<ng-container *ngIf="test$ | async"> </ng-container>

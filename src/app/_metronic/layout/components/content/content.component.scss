@@ -1,0 +1,15 @@
+:host {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
+}
+
+.app-container:has(app-main-dmap.digital-map-container),
+.app-container:has(app-topology .topology-container),
+{
+  padding: 0 !important;
+}
+
+

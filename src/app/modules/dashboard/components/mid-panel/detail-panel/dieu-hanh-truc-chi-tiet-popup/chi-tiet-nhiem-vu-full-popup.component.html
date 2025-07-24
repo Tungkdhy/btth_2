@@ -1,0 +1,211 @@
+<div class="detail-panel">
+  <div class="header detail-header">
+    <div>
+      <span>Hình Thái Chung > Điều hành tác chiến ></span>
+      <span class="choise-item"> Nhiệm vụ</span>
+    </div>
+    <div class="close-button-item">
+      <span (click)="togglePopup(false)" class="close-icon">X</span>
+    </div>
+  </div>
+  <div class="bg-group height-group">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="daily-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#daily"
+          type="button"
+          role="tab"
+          aria-controls="daily"
+          aria-selected="true"
+        >
+          Nhiệm vụ ngày
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="planned-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#planned"
+          type="button"
+          role="tab"
+          aria-controls="planned"
+          aria-selected="false"
+        >
+          Lịch công tác trong ngày
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="weekly-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#weekly"
+          type="button"
+          role="tab"
+          aria-controls="weekly"
+          aria-selected="false"
+        >
+          Lịch công tác trong tuần
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" style="overflow: scroll" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="daily"
+        role="tabpanel"
+        aria-labelledby="daily-tab"
+      >
+        <ng-container *ngFor="let data of tableDataHangNgay">
+          <div class="table-part table-detail-dieuhanhtruc">
+            <table>
+              <thead>
+                <tr>
+                  <th>Đơn vị</th>
+                  <th>Nhiệm vụ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tất cả</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.all">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm 186</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t1">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm 286</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t2">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm 386</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t3">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm 586</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t5">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm dữ liệu</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t6">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Trung tâm TC-ĐL-CL</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.t7">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Viện 486</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let item of data.v4">{{ item?.noidung }}</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="planned"
+        role="tabpanel"
+        aria-labelledby="planned-tab"
+      >
+        <ng-container *ngFor="let data of tableDataDuKien">
+          <div class="table-part table-2">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nội dung công việc</th>
+                  <th>Thành phần</th>
+                  <th>Địa điểm</th>
+                  <th>Chủ trì</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data.all">
+                  <td>{{ item?.noidung }}</td>
+                  <td>{{ item?.thanhfan }}</td>
+                  <td>{{ item?.diadiem }}</td>
+                  <td>{{ item?.chutri }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="weekly"
+        role="tabpanel"
+        aria-labelledby="weekly-tab"
+      >
+        <div class="table-part table-3">
+          <table>
+            <thead>
+              <tr>
+                <th>Thời gian</th>
+                <th>Nội dung công việc</th>
+                <th>Thành phần</th>
+                <th>Địa điểm</th>
+                <th>Chủ trì</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let data of tableDataTuan">
+                <tr>
+                  <td [attr.rowspan]="data.all.length + 1">
+                    <strong>{{ formatDateWithDay(data.created_at)[0] }}</strong>
+                    <br />
+                    {{ formatDateWithDay(data.created_at)[1] }}
+                  </td>
+                </tr>
+                <tr *ngFor="let item of data.all">
+                  <td>{{ item.noidung }}</td>
+                  <td>{{ item.thanhfan }}</td>
+                  <td>{{ item.diadiem }}</td>
+                  <td>{{ item.chutri }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

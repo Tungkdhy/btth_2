@@ -1,0 +1,85 @@
+<div class="chart-column">
+  <ejs-chart
+    [primaryXAxis]="primaryXAxis"
+    [primaryYAxis]="primaryYAxis"
+    id="chart-container"
+    (pointClick)="onPointClick($event)"
+  >
+    <e-series-collection>
+      <e-series
+        [dataSource]="chartDataUp"
+        type="Column"
+        xName="cap"
+        yName="count"
+        fill="#045E2B"
+        [marker]="marker"
+        columnWidth="0.25"
+        spacing="0.2"
+      ></e-series>
+      <e-series
+        [dataSource]="chartDataDown"
+        type="Column"
+        xName="cap"
+        yName="count"
+        fill="red"
+        [marker]="marker"
+        columnWidth="0.25"
+        spacing="0.2"
+      ></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>
+<!--<div class="h-100 card-border mar-5">-->
+<!--  <ejs-chart-->
+<!--    class="h-100"-->
+<!--    style="display: block"-->
+<!--    [primaryXAxis]="primaryXAxis"-->
+<!--    [primaryYAxis]="primaryYAxis"-->
+<!--    [legendSettings]="legendSettings"-->
+<!-- -->
+<!--  >-->
+<!--    <e-series-collection>-->
+<!--      <e-series-->
+<!--        stackingGroup="device"-->
+<!--        [dataSource]="disconnectedDevice"-->
+<!--        type="StackingColumn"-->
+<!--        xName="x"-->
+<!--        yName="y"-->
+<!--        name="Thiết bị"-->
+<!--        fill="#16C8C7"-->
+<!--        width="2"-->
+<!--        [marker]="marker"-->
+<!--      ></e-series>-->
+<!--      <e-series stackingGroup="device" [dataSource]='disconnectedDeviceDaXuLy' type='StackingColumn' xName='x' yName='y' name=''-->
+<!--                fill='#A2E9E9' width='2' [marker]='marker'></e-series>-->
+
+<!--      <e-series-->
+<!--        stackingGroup="service"-->
+<!--        [dataSource]="disconnectedService"-->
+<!--        type="StackingColumn"-->
+<!--        xName="x"-->
+<!--        yName="y"-->
+<!--        name="Ứng dụng, dịch vụ"-->
+<!--        fill="#1D85E7"-->
+<!--        width="2"-->
+<!--        [marker]="marker"-->
+<!--      ></e-series>-->
+<!--      <e-series stackingGroup="service" [dataSource]='disconnectedServiceDaXuLy' type='StackingColumn' xName='x' yName='y' name=''-->
+<!--                fill='#A5CEF5' width='2' [marker]='marker'></e-series>-->
+
+<!--      <e-series-->
+<!--        stackingGroup="server_monitor"-->
+<!--        [dataSource]="disconnectedSystemMoritor"-->
+<!--        type="StackingColumn"-->
+<!--        xName="x"-->
+<!--        yName="y"-->
+<!--        name="Hệ thống giám sát"-->
+<!--        width="2"-->
+<!--        fill="#045E2B"-->
+<!--        [marker]="marker"-->
+<!--      ></e-series>-->
+<!--      <e-series stackingGroup="server_monitor" [dataSource]='disconnectedSystemMoritorDaXuLy' type='StackingColumn' xName='x' yName='y' name=''-->
+<!--                width='2' fill='#9BBFAA'></e-series>-->
+<!--    </e-series-collection>-->
+<!--  </ejs-chart>-->
+<!--</div>-->

@@ -1,0 +1,109 @@
+<div class="d-flex flex-column gap-6">
+  <div class="d-flex justify-content-between">
+    <app-breadcrum-left-right titleLevel1="Trinh sát tác chiến thông tin" titleLevel2="Chỉ số sắc thái"></app-breadcrum-left-right>
+    <div class="d-flex gap-2 align-items-center" style="line-height: 65px;">
+      <h4>Đóng</h4>
+      <button (click)="togglePopup(false)" style="border: none; padding: 0; outline: none; background: none;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.6663 31.6663L8.33301 29.333L17.6663 19.9997L8.33301 10.6663L10.6663 8.33301L19.9997 17.6663L29.333 8.33301L31.6663 10.6663L22.333 19.9997L31.6663 29.333L29.333 31.6663L19.9997 22.333L10.6663 31.6663Z"
+            fill="#080808" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-6">
+    <div class="btth-lr-panel-card">
+      <h2>Chỉ số sắc thái Platform</h2>
+      <div style="height: 642px;">
+        <!-- <ejs-chart
+          id="chart-container"
+          [primaryXAxis]="primaryXAxis"
+          [primaryYAxis]="primaryYAxis"
+          [legendSettings]="legendSettings"
+          (textRender)="textRender($event)"
+        >
+          <e-series-collection>
+            <e-series
+              [dataSource]="chartPlatformData"
+              type="Column"
+              xName="name"
+              yName="platform_tichcuc"
+              name="Tích cực"
+              fill="#045E2B"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+            <e-series
+              [dataSource]="chartPlatformData"
+              type="Column"
+              xName="name"
+              yName="platform_trungtinh"
+              name="Trung tính"
+              fill="#1D85E7"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+            <e-series
+              [dataSource]="chartPlatformData"
+              type="Column"
+              xName="name"
+              yName="platform_tieucuc"
+              name="Cần xác minh"
+              fill="#D00B32"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+          </e-series-collection>
+        </ejs-chart> -->
+        <div echarts [options]="sacThaiPlatformChartOption" class="popup-right-chart" [autoResize]="true"></div>
+      </div>
+    </div>
+    <div class="btth-lr-panel-card">
+      <h2>Chỉ số sắc thái Spyder</h2>
+      <div style="height: 642px;">
+        <!-- <ejs-chart
+          [primaryXAxis]="primaryXAxis"
+          [primaryYAxis]="primaryYAxis"
+          [legendSettings]="legendSettings"
+          [title]="title"
+          (textRender)="textRender($event)"
+        >
+          <e-series-collection>
+            <e-series
+              [dataSource]="chartSpyderData"
+              type="Column"
+              xName="name"
+              yName="spyder_tichcuc"
+              name="Tích cực"
+              fill="#045E2B"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+            <e-series
+              [dataSource]="chartSpyderData"
+              type="Column"
+              xName="name"
+              yName="spyder_trungtinh"
+              name="Trung tính"
+              fill="#1D85E7"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+            <e-series
+              [dataSource]="chartSpyderData"
+              type="Column"
+              xName="name"
+              yName="spyder_tieucuc"
+              name="Cần xác minh"
+              fill="#D00B32"
+              [marker]="sacThaiMarker"
+              columnWidth="0.5"
+            ></e-series>
+          </e-series-collection>
+        </ejs-chart> -->
+        <div echarts [options]="sacThaiChartSpyderOption" class="popup-right-chart" [autoResize]="true"></div>
+      </div>
+    </div>
+  </div>
+</div>
