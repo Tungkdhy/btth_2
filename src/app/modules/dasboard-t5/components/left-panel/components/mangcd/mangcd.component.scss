@@ -1,5 +1,59 @@
-.text-class{
+.mangcd-component {
+  .text-class {
     font-size: 15px;
     font-weight: 700;
     padding-left: 10px;
+  }
+  .info-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 0 64px;
+    margin-top: 16px;
+    .card {
+      background-color: #e9f3ee;
+      border-radius: 10px;
+      padding: 8px 24px;
+      text-align: center;
+      min-width: 100px;
+      width: 100%;
+
+      .label {
+        font-weight: 500;
+        color: #0f3c2d;
+        font-size: 20px;
+      }
+
+      .value {
+        font-weight: 700;
+        color: #0f3c2d;
+        font-size: 20px;
+        //   margin-top: 4px;
+      }
+    }
+  }
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .red {
+    background-color: #f44336;
+  }
+
+  .yellow {
+    background-color: #ff9800;
+  }
+
+  .green {
+    background-color: #4caf50;
+  }
+}
+::ng-deep .custom-range-border .ant-picker {
+  border: 2px solid #595959 !important;
+}
+::ng-deep app-mangcd .table-wrapper {
+  max-height: 660px !important;
 }
