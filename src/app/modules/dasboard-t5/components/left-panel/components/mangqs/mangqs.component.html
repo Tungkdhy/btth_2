@@ -11,6 +11,7 @@
         nzSize="large"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
+        [nzShowTime]="true"
       ></nz-range-picker>
     </div>
     <div class="row">
@@ -27,12 +28,6 @@
           <app-stack-chart-hori
             [config]="stackChartConfig"
           ></app-stack-chart-hori>
-          <!-- <div class="col">
-                        <app-table-ptm [headers]="['Website Internet', 'Thời gian']" [fields]="['website', 'time']"
-                            [data]="tableData1">
-                        </app-table-ptm>
-
-                    </div> -->
         </div>
       </div>
 
@@ -62,7 +57,7 @@
           [title]="'Kết quả săn tìm mối nguy cơ'"
           [subTitle]="'Tổng: 361 TB/12 loại MĐ'"
         ></app-header-chart>
-        <div class="row">
+        <div class="row mt-4">
           <div class="col-12">
             <app-table-ptm
               [headers]="['STT', 'Mã độc', 'Số lượng']"
@@ -145,7 +140,7 @@
             </div>
           </div>
           <div>
-            <div class="row">
+            <div class="row mt-4">
               <div class="col-12">
                 <app-table-ptm
                   [headers]="['STT', 'Mã độc', 'Số lượng']"
