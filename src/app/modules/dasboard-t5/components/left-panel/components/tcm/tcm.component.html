@@ -1,9 +1,8 @@
 <div class="d-flex flex-column gap-6 h-100 ">
-
+  <!-- Mạng internet -->
   <div class=" row h-100 btth-lr-panel-card" style="max-width: 100%; margin-left: 12px;">
     <div class="d-flex align-items-center gap-6 justify-content-between" style="padding-bottom:12px;">
-      <h3 style="white-space: nowrap">Tác chiến mạng</h3>
-      <!-- <p style="white-space: nowrap; color: rgba(137, 141, 143, 1)">Đang khai thác</p> -->
+      <h3 style="white-space: nowrap">Tấn công mạng</h3>
       <div class="d-flex align-items-center gap-3">
         <button (click)="toggleMap()" type="button" class="btth-btn"
           style="background-color: rgba(8, 8, 8, 1); color: #FFF">
@@ -26,20 +25,18 @@
       </div>
     </div>
 
-    <!-- Các phần tử col-3 sẽ không bị xuống dòng nếu chiều rộng đủ -->
+    <!-- Mục tiêu tác chiến -->
     <div class="col-4 h-100 ">
       <div style="margin-right: 12px;">
         <app-header-chart-v2 [title]="stackChartHoriConfig.title" [subTitle]="'Tổng: 44/123'"></app-header-chart-v2>
-
         <div class="row">
           <div class="col-12">
             <app-stack-chart-hori [config]="stackChartHoriConfig"></app-stack-chart-hori>
           </div>
-
         </div>
-
       </div>
     </div>
+    <!-- Lỗ hổng bảo mật - Mã khai thác -->
     <div class="col-4 h-100 ">
       <div style="margin-right: 12px;">
         <app-header-chart-v2 [title]="stackChartHoriPOC.title" [subTitle]="'Tổng: 86/102'"></app-header-chart-v2>
@@ -52,28 +49,31 @@
 
       </div>
     </div>
-    <div class="col-4 h-100" style=>
+    <!-- Biểu đồ khai thác -->
+    <div class="col-4 h-100">
       <div style="margin-right: 12px;">
         <app-header-chart-v2 [title]="stackChartConfig.title" [subTitle]="'Tổng: 44/123'"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig"></app-stack-chart>
       </div>
     </div>
+    <!--Dữ liệu thu thập -->
     <div class="col-4 h-100">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="'Dữ liệu thu thập'" [subTitle]="nonStackChartConfig?.subTitle"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="'Dữ liệu thu thập'"
+          [subTitle]="nonStackChartConfig?.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
       </div>
     </div>
+    <!-- Báo cáo chuyên sâu -->
     <div class="col-4 h-100">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartConfig2.title" [subTitle]="stackChartConfig2?.subTitle"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartConfig2.title"
+          [subTitle]="stackChartConfig2?.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig2"></app-stack-chart>
       </div>
     </div>
+    <!-- Danh sách báo cáo chuyên sâu -->
     <div class="col-4 h-100">
-      <!-- <div style="margin-right: 12px;">
-        <app-stack-chart [config]="stackChartConfig2"></app-stack-chart>
-      </div> -->
       <app-header-chart-v2 [title]="'Danh sách báo cáo chuyên sâu'" [title]="'Danh sách báo cáo chuyên sâu'"
         [sourceOptions]="[
     { label: 'Cấp 1', color: '#219653' },
