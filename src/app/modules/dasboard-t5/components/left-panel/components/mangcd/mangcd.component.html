@@ -1,6 +1,206 @@
-<div class="d-flex flex-column gap-6">
-    <div class="row btth-lr-panel-card" style="margin-left:0px;margin-right: 0;">
-       Mạng chuyên dụng
+<div class="mangcd-component d-flex flex-column gap-6">
+  <!-- Mạng Văn phòng Quốc Hội  -->
+  <div class="row btth-lr-panel-card" style="margin-left: 0px; margin-right: 0">
+    <div
+      class="d-flex justify-content-between align-items-center"
+      style="padding-bottom: 12px"
+    >
+      <h3 style="white-space: nowrap">Văn phòng Quốc Hội</h3>
+      <nz-range-picker
+        class="custom-range-picker"
+        nzSize="large"
+        [(ngModel)]="date"
+        (ngModelChange)="onChange($event)"
+      ></nz-range-picker>
     </div>
+    <div class="row">
+      <div class="col-3">
+        <app-header-chart
+          [title]="'Hạ tầng công nghệ thông tin'"
+          [subTitle]="'Tổng: 86/102'"
+        ></app-header-chart>
+        <div class="info-cards">
+          <div class="card" *ngFor="let item of data">
+            <div class="label">{{ item.label }}</div>
+            <div class="value">{{ item.value }}</div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 16px">
+          <app-stack-chart-hori
+            [config]="stackChartConfig"
+          ></app-stack-chart-hori>
+        </div>
+      </div>
 
+      <div class="col-3">
+        <app-header-chart
+          [title]="'Cảnh báo ATTT'"
+          [subTitle]="'Tổng: 422/500 Thiết bị'"
+        ></app-header-chart>
+        <div class="row">
+          <div class="col-12">
+            <app-pie-chart [config]="chartConfig"></app-pie-chart>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row align-items-center mb-2">
+          <!-- Cột trái -->
+          <div class="col">
+            <app-header-chart
+              [title]="'Sự cố an toàn thông tin'"
+            ></app-header-chart>
+          </div>
+
+          <!-- Cột phải -->
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-3">
+              <span class="d-flex align-items-center">
+                <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
+              </span>
+              <span class="d-flex align-items-center">
+                <span class="dot yellow me-1"></span>
+                {{ countByLevel("Trung bình") }}
+              </span>
+              <span class="d-flex align-items-center">
+                <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <app-table-ptm
+              [headers]="[
+                'STT',
+                'Mac nguồn',
+                'IP nguồn',
+                'IP đích',
+                'Số lượng',
+                'Cảnh báo',
+                'Thời gian',
+                'Mức độ'
+              ]"
+              [fields]="[
+                'stt',
+                'mac_nguon',
+                'ip_nguon',
+                'ip_dich',
+                'so_luong',
+                'canh_bao',
+                'thoi_gian',
+                'muc_do'
+              ]"
+              [data]="tableData"
+            >
+            </app-table-ptm>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mạng Văn Phòng Chính Phủ -->
+  <div class="row btth-lr-panel-card" style="margin-left: 0px; margin-right: 0">
+    <div
+      class="d-flex justify-content-between align-items-center"
+      style="padding-bottom: 12px"
+    >
+      <h3 style="white-space: nowrap">Văn phòng Chính Phủ</h3>
+      <nz-range-picker
+        class="custom-range-picker"
+        nzSize="large"
+        [(ngModel)]="date"
+        (ngModelChange)="onChange($event)"
+      ></nz-range-picker>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <app-header-chart
+          [title]="'Hạ tầng công nghệ thông tin'"
+          [subTitle]="'Tổng: 86/102'"
+        ></app-header-chart>
+        <div class="info-cards">
+          <div class="card" *ngFor="let item of data">
+            <div class="label">{{ item.label }}</div>
+            <div class="value">{{ item.value }}</div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 16px">
+          <app-stack-chart-hori
+            [config]="stackChartConfig"
+          ></app-stack-chart-hori>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <app-header-chart
+          [title]="'Cảnh báo ATTT'"
+          [subTitle]="'Tổng: 422/500 Thiết bị'"
+        ></app-header-chart>
+        <div class="row">
+          <div class="col-12">
+            <app-pie-chart [config]="chartConfig"></app-pie-chart>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row align-items-center mb-2">
+          <!-- Cột trái -->
+          <div class="col">
+            <app-header-chart
+              [title]="'Sự cố an toàn thông tin'"
+            ></app-header-chart>
+          </div>
+
+          <!-- Cột phải -->
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-3">
+              <span class="d-flex align-items-center">
+                <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
+              </span>
+              <span class="d-flex align-items-center">
+                <span class="dot yellow me-1"></span>
+                {{ countByLevel("Trung bình") }}
+              </span>
+              <span class="d-flex align-items-center">
+                <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <app-table-ptm
+              [headers]="[
+                'STT',
+                'Mac nguồn',
+                'IP nguồn',
+                'IP đích',
+                'Số lượng',
+                'Cảnh báo',
+                'Thời gian',
+                'Mức độ'
+              ]"
+              [fields]="[
+                'stt',
+                'mac_nguon',
+                'ip_nguon',
+                'ip_dich',
+                'so_luong',
+                'canh_bao',
+                'thoi_gian',
+                'muc_do'
+              ]"
+              [data]="tableData"
+            >
+            </app-table-ptm>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
