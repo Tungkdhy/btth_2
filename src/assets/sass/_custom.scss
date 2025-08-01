@@ -179,7 +179,7 @@ h2 {
 p {
   font-size: 22px !important;
   font-weight: 500 !important;
-  line-height: 130% !important;
+  line-height: 100% !important;
   margin: 0 !important;
   // white-space: nowrap;
   // overflow: hidden;
@@ -210,7 +210,7 @@ h6 {
 
 .btth-top-table {
   margin: 0;
-  border-radius: 0.8em !important;
+  border-radius: 0.4em !important;
   border-spacing: 0;
   border-collapse: separate;
   width: 100%;
@@ -218,32 +218,32 @@ h6 {
   th,
   td {
     border: 1px solid rgba(230, 233, 235, 1);
-    padding: 12px 24px;
+    padding: 4px 16px;
     text-align: left;
   }
 
   th {
-    font-size: 18px !important;
+    font-size: 22px !important;
     font-weight: 700;
     background-color: var(--headerTableColor);
   }
 
   th:first-child {
-    border-top-left-radius: 0.8em;
+    border-top-left-radius: 0.4em;
   }
 
   th:last-child {
-    border-top-right-radius: 0.8em;
+    border-top-right-radius: 0.4em;
   }
 
   tr {
     &:last-child {
       td:first-child {
-        border-bottom-left-radius: 0.8em;
+        border-bottom-left-radius: 0.4em;
       }
 
       td:last-child {
-        border-bottom-right-radius: 0.8em;
+        border-bottom-right-radius: 0.4em;
       }
     }
   }

@@ -40,7 +40,7 @@ export class PieChartComponent implements OnChanges {
       data: ['Jan', 'Feb', 'Mar'],
       axisLine: { show: false }, // Ẩn đường trục X
       axisTick: { show: false }, // Ẩn vạch nhỏ trên trục X
-      axisLabel: { show: true, fontSize: 20, fontWeight: 500, color: '#000' },
+      axisLabel: { show: true, fontSize: 22, fontWeight: 500, color: '#000' },
     },
     yAxis: {
       type: 'value'
@@ -59,7 +59,7 @@ export class PieChartComponent implements OnChanges {
         label: {
           show: true,
           position: 'top',
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 500,
           color: '#000'
         },
@@ -82,7 +82,7 @@ export class PieChartComponent implements OnChanges {
         left: 'center',
         // bottom: 0, // 👈 đặt xuống dưới biểu đồ
         textStyle: {
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 'bold'
         }
       },
@@ -100,11 +100,11 @@ export class PieChartComponent implements OnChanges {
           const percent = Math.round(params.percent); // 👈 Làm tròn đến hàng đơn vị
           return `${value}\n${percent}%`;
         }, // 👈 chính là dòng này hiển thị dữ liệu
-        fontSize: 20 // (optional) tăng size cho dễ nhìn
+        fontSize: 22 // (optional) tăng size cho dễ nhìn
       },
       labelLine: {
         show: true,
-        length: 20,
+        length: 22,
         length2: 10,
         lineStyle: {
           width: 1,
@@ -119,7 +119,7 @@ export class PieChartComponent implements OnChanges {
         itemHeight: 14,
         // itemGap: 40,
         textStyle: {
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 500
         },
         icon: 'circle',
@@ -143,7 +143,7 @@ export class PieChartComponent implements OnChanges {
           label: {
             show: true,
             position: this.config.showLabelInside === false ? 'outer' : 'inside',
-            fontSize: 20,
+            fontSize: 22,
           },
           labelLayout: {
             hideOverlap: true
@@ -161,8 +161,8 @@ export class PieChartComponent implements OnChanges {
             text: this.config.data.reduce((accumulator: any, currentValue) => accumulator + currentValue.value, 0),
             // textAlign: 'center',
             fill: '#000',
-            fontSize: 40,
-            fontWeight: 700
+            fontSize: 36,
+            fontWeight: 500
           }
         }
       ]

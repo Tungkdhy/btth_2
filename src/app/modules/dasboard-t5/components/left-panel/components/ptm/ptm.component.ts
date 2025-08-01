@@ -70,10 +70,10 @@ export class PtmComponent {
   ]
   stackChartConfig = {
     title: 'Biểu đồ khai thác',
-    categories: ['Quân khu 5', 'Quân khu 2', 'TC CNQP','BTL BĐBP','QC PKKQ','QCHQ'],
+    categories: ['QK5', 'QK2', 'CNQP','BTL BĐBP','PKKQ','QCHQ','QK7','TTLL','TCCT'],
     series: [
-      { name: 'Thiết bị', data: [120, 132, 101,90,102,105], color: 'rgba(28, 155, 83, 1)' },
-      { name: 'Cảnh báo', data: [220, 182, 191,200,187,210], color: '#fcd200' },
+      { name: 'Thiết bị', data: [120, 132, 101,90,102,105,60,77,38], color: '#128040ff' },
+      { name: 'Cảnh báo', data: [220, 182, 191,200,187,210,199,190,180], color: '#E74C3C' },
 
     ],
     height: '360px',
@@ -100,10 +100,11 @@ export class PtmComponent {
   };
   chartConfig: PipeChartConfig = {
     data: [
-      { value: 41.7, name: 'Tên miền độc hại', itemStyle: { color: 'rgba(28, 155, 83, 1)' } },
-      { value: 29.2, name: 'Mã độc', itemStyle: { color: 'rgba(52, 131, 251, 1)' } },
-      { value: 12.8, name: 'IP độc hại', itemStyle: { color: 'rgba(210, 0, 26, 1)' } },
-      { value: 16.7, name: 'Vi phạm chính sách', itemStyle: { color: 'yellow' } },
+      { value: 41.7, name: 'File', itemStyle: { color: '#1C9B53' } },
+      { value: 29.2, name: 'Socket', itemStyle: { color: '#3483FB' } },
+      { value: 12.8, name: 'Registry', itemStyle: { color: '#FEB42C' } },
+      { value: 14.7, name: 'HTTP', itemStyle: { color: '#EF3E2E' } },
+      { value: 4, name: 'Flow', itemStyle: { color: '#898d8f' } },
     ],
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
