@@ -39,3 +39,9 @@
 ::ng-deep app-mangqs .table-wrapper {
   max-height: 660px !important;
 }
+
+::ng-deep app-mangqs .table-cell {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: "Inter";
+}

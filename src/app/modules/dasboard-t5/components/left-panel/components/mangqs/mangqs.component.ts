@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
 import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
-import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';
 import { StackChartConfig } from '../../../shared/stack-chart/stack-chart.config';
-import { StackChartHori } from '../../../shared/stack-chart-hori/stack-chart-hori.component';
+import { StackChartHori } from './stack-chart-hori/stack-chart-hori.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { FormsModule } from '@angular/forms';
@@ -67,11 +67,29 @@ export class MangqsComponent {
     // { connect: '86.36.123.10:8000', bytes: '80' },
   ];
   stackChartConfig = {
+    fontFamily: 'Roboto, sans-serif', // Thay font tại đây
+    toolbar: { show: false },
+    dataLabels: {
+      style: {
+        fontSize: '14px',
+        fontWeight: 'bold',
+        colors: ['#333'],
+      },
+    },
+    xaxis: {
+      labels: {
+        style: {
+          fontSize: '12px',
+          fontFamily: 'Roboto',
+          colors: 'red',
+        },
+      },
+    },
     title: 'Biểu đồ khai thác',
     categories: ['BĐBP', 'QCHQ', 'QC PKKQ'], // label của các cột
     series: [
       {
-        name: 'Máy Tính',
+        name: 'Thiết bị',
         data: [120, 220, 300], // 3 giá trị tương ứng với 'Thiết bị', 'Cảnh báo', 'Loại 3'
         color: 'rgb(28, 155, 83)',
       },
