@@ -1,42 +1,114 @@
-<div class="duty-roster-3107 w-100 btth-top-panel-card">
-    <div class="d-flex justify-content-between" style="margin-bottom: 24px;">
-      <div class="d-flex justify-content-between" style="width: 48%">
-        <div>
-          <h2 class="top-green-text">Kíp trực: 29/04/2025</h2>
-          <!-- <p class="top-green-text">Trực chỉ huy TT: </p> -->
-        </div>
-        <!-- <div class="time-box">
-          <h1 style="color: #CB0000 !important; text-align:left">{{ currentDateTime | date:'HH:mm:ss' }}</h1>
-        </div> -->
-      </div>
-      <div class="d-flex gap-10">
-        <div>
-          <h6 class="top-green-text">Quân số</h6>
-          <h3 style="text-align: right;" class="top-green-text">200</h3>
-        </div>
-        <div>
-          <h6 class="top-green-text">Có mặt</h6>
-          <h3 style="text-align: right;" class="top-green-text">175</h3>
-        </div>
-        <div>
-          <h6 class="top-green-text">Vắng mặt </h6>
-          <h3 style="text-align: right;" class="top-green-text">15</h3>
-        </div>
-      </div>
+<div class="operational-command btth-top-panel-card">
+  <div class="header-container d-flex justify-content-between">
+    <div class="d-flex gap-5">
+      <h2 class="top-green-text" (click)="togglePopup(true, 'DieuHanhTrucChiTietPopup')">
+        Điều hành tác chiến
+      </h2>
+      <h2 class="total-text-color">Tổng số: 81</h2>
     </div>
-    <!-- <div>
-            <h6>Quân số</h6><h2>{{ shiftInformation?.QuanSo }}</h2>
-          </div>
-          <div>
-            <h6>Có mặt</h6><h2>{{ shiftInformation?.CoMat }}</h2>
-          </div>
-          <div>
-            <h6>Vắng mặt </h6><h2>{{ shiftInformation?.Vang }}</h2>
-          </div> -->
-  
-  
-    <!-- class="table-responsive h-75" -->
-    <div>
-        <app-custom-table [columns]="['Mô tả', 'Chức vụ', 'Cấp bậc','Tên']" [data]="lichtruc" [isShowHeader]="false"></app-custom-table>
-     </div>
+    <div class="d-flex gap-7">
+      <ngb-pagination [collectionSize]="total" [maxSize]="1" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)" *ngIf="total >= 0" class="btth-pagination">
+      </ngb-pagination>
+      <!-- > 3 -->
+      <button type="button" (click)="togglePopup(true, 'AddOperator')" class="btth-btn"
+        style="background-color: rgba(8, 8, 8, 1); color: #FFF">
+        <svg width="1em" height="1em" fill="currentColor" class="bi bi-plus icon" viewBox="0 0 16 16">
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+        </svg>
+        Thêm mới
+      </button>
+    </div>
+  </div>
+  <!-- <div class="table-responsive">
+    <table class="h-95">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Nhiệm vụ</th>
+          <th>Người giao</th>
+          <th>Ngày giao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngIf="
+            shiftOperation?.nhiemvus && shiftOperation.nhiemvus.length > 0;
+            else noData
+          "
+        >
+          <tr *ngFor="let item of shiftOperation?.nhiemvus; let index = index">
+            <td>
+              {{ (page - 1) * pageSize + index + 1 }}
+            </td>
+            <td
+              class="cursor-pointer"
+              (click)="togglePopupChiTiet(true, 'ChiTietNhiemVuPopup', item)"
+            >
+              <span
+                class="status legend-color w-20px h-20px"
+                [ngClass]="getStatusClass(item?.DoKhan)"
+              ></span>
+              {{
+                item.NhiemVu.length > 145
+                  ? item.NhiemVu.substr(0, 145) + "..."
+                  : item.NhiemVu
+              }}
+            </td>
+            <td>{{ item?.NguoiGiao }}</td>
+            <td>{{ item?.NgayGiao }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td colspan="4" class="text-center">Không có dữ liệu</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div> -->
+  <div style="height: 216px; overflow: auto;">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Nhiệm vụ</th>
+          <th>Người giao</th>
+          <th>Ngày giao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>
+            <span class="dot orange"></span>
+            Trinh sát, giám sát thông tin liên quan A80
+          </td>
+          <td>PTL VQ.Tiến</td>
+          <td>17/07/2025</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>
+            <span class="dot green"></span>
+            Đánh giá năng lực tác chiến KGM của quân đội Cam...
+          </td>
+          <td>PTMT PH.An</td>
+          <td>16/07/2025</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>
+            <span class="dot green"></span>
+            Xây dựng tham luận hội thảo KH về NTTT của Đảng
+          </td>
+          <td>PCHT-TMT</td>
+          <td>10/07/2025</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <!-- <div class="d-flex justify-content-end p-2"></div> -->
 </div>

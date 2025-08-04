@@ -23,10 +23,10 @@ export class PieChartComponent implements OnChanges {
   }
   hotTopicChartOption: EChartsOption = {
     grid: {
-      left: '5px',
-      right: 0,
-      top: '5%',
-      bottom: 0,
+      left: '0',
+      right: '12px',
+      top: '20%',
+      // bottom: 0,
       containLabel: true
     },
     tooltip: {
@@ -54,7 +54,7 @@ export class PieChartComponent implements OnChanges {
           { value: 30, name: 'Trung lập', itemStyle: { color: 'rgba(52, 131, 251, 1)' } },
           { value: 40, name: 'Cần xác minh', itemStyle: { color: 'rgba(210, 0, 26, 1)' } },
         ],
-        barWidth: '50%',
+        // barWidth: '50%',
 
         label: {
           show: true,
@@ -79,7 +79,7 @@ export class PieChartComponent implements OnChanges {
     this.pieChartOptions = {
       title: {
         text: this.config.title || '',
-        left: 'center',
+        // left: 'center',
         // bottom: 0, // 👈 đặt xuống dưới biểu đồ
         textStyle: {
           fontSize: 22,
@@ -94,7 +94,7 @@ export class PieChartComponent implements OnChanges {
       label: {
         show: true,
         position: 'outside',
-        formatter: function (params:any) {
+        formatter: function (params: any) {
           console.log(params);
           const value = params.value;
           const percent = Math.round(params.percent); // 👈 Làm tròn đến hàng đơn vị
@@ -112,9 +112,11 @@ export class PieChartComponent implements OnChanges {
       },
       legend: {
         show: this.config.legend,
-        orient: 'horizontal',
-        left: 'center',
-        bottom: '15',
+        // orient: 'horizontal',
+        orient: this.config.legendPosition === "left" ? 'vertical':"horizontal", // legend dọc
+        left: this.config.legendPosition === "left" ? '20%' : 'center', // căn trái nếu là vertical
+        // left: 'center',
+        bottom: this.config.legendPosition === "left" ? "40%" : '0',
         itemWidth: 14,
         itemHeight: 14,
         // itemGap: 40,
@@ -139,7 +141,7 @@ export class PieChartComponent implements OnChanges {
           radius: this.config.radius || '50%',
           avoidLabelOverlap: true,
 
-          center: ['50%', '50%'],
+          center: this.config.legendPosition === "left" ? ['65%', '50%'] : ['50%', '50%'], // căn giữa nếu là horizontal
           label: {
             show: true,
             position: this.config.showLabelInside === false ? 'outer' : 'inside',
@@ -155,7 +157,7 @@ export class PieChartComponent implements OnChanges {
       graphic: [
         {
           type: 'text',
-          left: 'center',
+          left: this.config.legendPosition === "left" ? '60%' : 'center',
           top: 'middle',
           style: {
             text: this.config.data.reduce((accumulator: any, currentValue) => accumulator + currentValue.value, 0),

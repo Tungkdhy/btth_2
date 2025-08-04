@@ -435,7 +435,15 @@ h6 {
   border-radius: 1.5rem;
   border-style: hidden;
 }
-
+.row {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
 .row-1 {
   height: 33%;
 }
@@ -1592,8 +1600,33 @@ text {
 #post-bar-chart-container {
   height: 80% !important;
 }
+::ng-deep .ant-picker {
+  border-radius: 8px !important; /* hoặc 12px, 50% nếu muốn bo tròn cực đại */
+}
+.ant-picker-range{
+  border-radius: 8px !important; /* hoặc 12px, 50% nếu muốn bo tròn cực đại */
+}
+.ant-picker {
+   font-family: "Inter", sans-serif !important;
+  font-size: 22px !important; /* input hiển thị ngày tháng */
+}
 
-// .right-panel {
+/* Chỉnh font-size khi mở lịch */
+.ant-picker-panel {
+  font-size: 22px !important;
+  font-family: "Inter", sans-serif !important; /* Đảm bảo font chữ giống với input */
+}
+
+/* Chỉnh font-size cho từng ô ngày */
+.ant-picker-cell-inner {
+  font-size: 22px !important;
+   font-family: "Inter", sans-serif !important;
+}
+// .ant-picker-large .ant-picker-input>input{
+//   font-size: 22px !important; /* input hiển thị ngày tháng */
+//   font-family: "Inter", sans-serif !important; /* Đảm bảo font chữ giống với input */ 
+// }
+// // .right-panel {
 //   .right-header.row {
 //     margin: 0 0 0 0 !important;
 //     flex: none;

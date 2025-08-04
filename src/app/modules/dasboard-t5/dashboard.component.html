@@ -1,10 +1,13 @@
-<div class="d-flex flex-column" style="padding: 24px;width: 3840px; background-color: #f4f6f7;">
+<div class="d-flex flex-column" style="padding: 18px 20px;width: 3826px; background-color: #f4f6f7;">
   <app-top-panel></app-top-panel>
   <div class="row">
     <div *ngIf="!(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
-      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
+      <button type="button" class="btth-btn" style="padding-right: 8px;" [ngClass]="{ active: selectedNetwork === 'internet' }"
         (click)="selectNetwork('internet')">
         Mạng Internet
+        <button (click)="hideTCM()">
+          <i class="bi bi-arrow-repeat reload-icon"></i>
+        </button>
       </button>
 
       <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
@@ -29,15 +32,22 @@
 
     <ng-template #other>
       <!-- Còn lại -->
-      <div class="col-6">
-
+      <div *ngIf="(showMap$ | async)" class="col-6">
+        <div class="section-title">
+          <span (click)="toggleMap()" class="close-icon1">✕</span>
+          <span class="title-text">Hình thái chung</span>
+        </div>
 
       </div>
-      <div class="col-6 row">
+
+      <div class="col-6 row gap-6">
         <div *ngIf="(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
           <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
             (click)="selectNetwork('internet')">
             Mạng Internet
+            <!-- <button >
+              <i class="bi bi-arrow-repeat reload-icon"></i>
+            </button> -->
           </button>
 
           <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
@@ -60,12 +70,47 @@
       </div>
 
       <div class="row" *ngIf="!(showMap$ | async)">
-        <div class="col-3">
-          <app-right-panel></app-right-panel>
+        <div class="row gutter-12">
+          <ng-container *ngIf="!isHideTCM; else hideTCM">
+            <!-- app-ts bên trái -->
+            <div @slideLeftFade class="col-3">
+              <!-- <div class="row"> -->
+
+              <app-ts></app-ts>
+              <!-- </div> -->
+            </div>
+
+            <!-- app-ptm + app-tcm bên phải -->
+            <div class="col-9">
+              <div class="row gap-8">
+                <div class="col-12" @slideFade>
+
+                  <app-ptm></app-ptm>
+
+                </div>
+                <div @slideLeftFadeTCM class="col-12">
+
+                  <app-tcm></app-tcm>
+
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Khi isHideTCM = true: ts nằm dưới ptm -->
+          <ng-template #hideTCM>
+            <div class="col-12">
+              <div style="margin-left: -24px;" class="border">
+                <app-ptm></app-ptm>
+              </div>
+            </div>
+            <div class="col-12">
+              <app-ts-2></app-ts-2>
+            </div>
+          </ng-template>
         </div>
-        <div class="col-9">
-          <app-left-panel></app-left-panel>
-        </div>
+
+
       </div>
     </ng-template>
     <!-- <div class="col-3">

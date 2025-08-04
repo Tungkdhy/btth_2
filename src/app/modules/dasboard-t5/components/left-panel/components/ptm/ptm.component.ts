@@ -15,20 +15,11 @@ import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.
   templateUrl: './ptm.component.html',
   styleUrls: ['./ptm.component.scss'],
   standalone: true,
-  imports: [
-    TablePtmComponent,
-    FormsModule,
-    NzDatePickerModule,
-    StackChartHori,
-    StackChart,
-    PieChartComponent,
-    HeaderChartComponent,
-    CommonModule,
-  ],
+  imports: [TablePtmComponent,FormsModule,NzDatePickerModule,StackChartHori, StackChart, PieChartComponent, HeaderChartComponent,CommonModule],
 })
 export class PtmComponent {
-  date = null;
-  data = [
+    date = null
+    data = [
     { label: 'Thiết bị', value: 12000 },
     { label: 'Máy tính', value: 14000 },
     { label: 'EDR', value: 1500 },
@@ -36,86 +27,22 @@ export class PtmComponent {
   ];
 
   tableData = [
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
-    {
-      website: 'htt2.bt186.bqp',
-      'thời gian': '03/05/2025 15:10:46',
-      'trạng thái': 'Hoạt động',
-    },
-    {
-      website: 'mail.bqp',
-      'thời gian': '04/05/2025 16:20:05',
-      'trạng thái': 'Theo dõi',
-    },
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
-    {
-      website: 'htt2.bt186.bqp',
-      'thời gian': '03/05/2025 15:10:46',
-      'trạng thái': 'Bình thường',
-    },
-    {
-      website: 'mail.bqp',
-      'thời gian': '04/05/2025 16:20:05',
-      'trạng thái': 'Theo dõi',
-    },
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
-    {
-      website: 'htt2.bt186.bqp',
-      'thời gian': '03/05/2025 15:10:46',
-      'trạng thái': 'Bình thường',
-    },
-    {
-      website: 'mail.bqp',
-      'thời gian': '04/05/2025 16:20:05',
-      'trạng thái': 'Theo dõi',
-    },
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
-    {
-      website: 'htt2.bt186.bqp',
-      'thời gian': '03/05/2025 15:10:46',
-      'trạng thái': 'Bình thường',
-    },
-    {
-      website: 'mail.bqp',
-      'thời gian': '04/05/2025 16:20:05',
-      'trạng thái': 'Theo dõi',
-    },
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
-    {
-      website: 'htt2.bt186.bqp',
-      'thời gian': '03/05/2025 15:10:46',
-      'trạng thái': 'Bình thường',
-    },
-    {
-      website: 'mail.bqp',
-      'thời gian': '04/05/2025 16:20:05',
-      'trạng thái': 'Theo dõi',
-    },
-    {
-      website: 'quanlyvanban.bqp',
-      'thời gian': '01/05/2025 12:00:45',
-      'trạng thái': 'Mất kết nối',
-    },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" },
+    { website: 'htt2.bt186.bqp', 'thời gian': '03/05/2025 15:10:46', 'trạng thái': "Hoạt động" },
+    { website: 'mail.bqp', 'thời gian': '04/05/2025 16:20:05', 'trạng thái': "Theo dõi" },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" },
+    { website: 'htt2.bt186.bqp', 'thời gian': '03/05/2025 15:10:46', 'trạng thái': "Bình thường" },
+    { website: 'mail.bqp', 'thời gian': '04/05/2025 16:20:05', 'trạng thái': "Theo dõi" },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" },
+    { website: 'htt2.bt186.bqp', 'thời gian': '03/05/2025 15:10:46', 'trạng thái': "Bình thường" },
+    { website: 'mail.bqp', 'thời gian': '04/05/2025 16:20:05', 'trạng thái': "Theo dõi" },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" },
+    { website: 'htt2.bt186.bqp', 'thời gian': '03/05/2025 15:10:46', 'trạng thái': "Bình thường" },
+    { website: 'mail.bqp', 'thời gian': '04/05/2025 16:20:05', 'trạng thái': "Theo dõi" },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" },
+    { website: 'htt2.bt186.bqp', 'thời gian': '03/05/2025 15:10:46', 'trạng thái': "Bình thường" },
+    { website: 'mail.bqp', 'thời gian': '04/05/2025 16:20:05', 'trạng thái': "Theo dõi" },
+    { website: 'quanlyvanban.bqp', 'thời gian': '01/05/2025 12:00:45', 'trạng thái': "Mất kết nối" }
   ];
 
   tableDataHunting = [
@@ -135,69 +62,41 @@ export class PtmComponent {
     { network: '86.36.123.10:4444', bytes: '1234' },
     { network: '86.36.123.10:8080', bytes: '120' },
     { network: '86.36.123.10:8000', bytes: '80' },
-  ];
+  ]
   tableDataMalware = [
     { case: 'Mã độc MF', value: '20' },
     { case: 'Mã độc APT', value: '120' },
     // { connect: '86.36.123.10:8000', bytes: '80' },
-  ];
+  ]
   stackChartConfig = {
     title: 'Biểu đồ khai thác',
-    categories: [
-      'QK5',
-      'QK2',
-      'CNQP',
-      'BTL BĐBP',
-      'PKKQ',
-      'QCHQ',
-      'QK7',
-      'TTLL',
-      'TCCT',
-    ],
+    categories: ['QK5', 'QK2', 'CNQP','BTL BĐBP','PKKQ','QCHQ','QK7','TTLL','TCCT'],
     series: [
-      {
-        name: 'Thiết bị',
-        data: [120, 132, 101, 90, 102, 105, 60, 77, 38],
-        color: '#128040ff',
-      },
-      {
-        name: 'Cảnh báo',
-        data: [220, 182, 191, 200, 187, 210, 199, 190, 180],
-        color: '#E74C3C',
-      },
+      { name: 'Thiết bị', data: [120, 132, 101,90,102,105,60,77,38], color: '#128040ff' },
+      { name: 'Cảnh báo', data: [220, 182, 191,200,187,210,199,190,180], color: '#E74C3C' },
+
     ],
     height: '360px',
     tooltipFormatter: (params: any) => {
       const param = params;
-      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(
-        param.seriesName ?? '',
-      )}`;
+      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
     },
-    isStacked: true,
+    isStacked: true
   };
   stackChartConfig2 = {
     title: 'Biểu đồ khai thác',
     categories: ['22', '3389', '80', '443', '27017'],
     series: [
-      {
-        name: 'Số máy',
-        data: [120, 132, 101, 100, 89],
-        color: 'rgba(28, 155, 83, 1)',
-      },
-      {
-        name: 'Mới',
-        data: [220, 182, 191, 159, 170],
-        color: 'rgba(52, 131, 251, 1)',
-      },
+      { name: 'Số máy', data: [120, 132, 101, 100, 89], color: 'rgba(28, 155, 83, 1)' },
+      { name: 'Mới', data: [220, 182, 191, 159, 170], color: 'rgba(52, 131, 251, 1)' },
+
     ],
     height: '360px',
     tooltipFormatter: (params: any) => {
       const param = params;
-      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(
-        param.seriesName ?? '',
-      )}`;
+      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
     },
-    isStacked: true,
+    isStacked: true
   };
   chartConfig: PipeChartConfig = {
     data: [
@@ -209,51 +108,34 @@ export class PtmComponent {
     ],
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
-    legendPosition: 'bottom',
-    radius: ['30%', '50%'],
+    legendPosition: 'left',
+    radius: ['30%', "50%"], 
     showLabelInside: false,
     height: '480px',
     legend: true,
+
   };
   stackChartConfigRedfox = {
     title: 'Biểu đồ khai thác',
     categories: ['Thiết bị', 'NDR', 'EDR'],
     series: [
       { name: 'Online', data: [120, 132, 101], color: 'rgba(28, 155, 83, 1)' },
-      {
-        name: 'Offline',
-        data: [220, 182, 191],
-        color: 'rgba(52, 131, 251, 1)',
-      },
+      { name: 'Offline', data: [220, 182, 191], color: 'rgba(52, 131, 251, 1)' },
+
     ],
     height: '230px',
     tooltipFormatter: (params: any) => {
       const param = params;
-      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(
-        param.seriesName ?? '',
-      )}`;
+      return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
     },
-    isStacked: true,
+    isStacked: true
   };
   nonStackChartConfig: StackChartConfig = {
     title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
     height: '480px',
     isStacked: false,
-    isShowLabel: false,
-    categories: [
-      'Initial Access',
-      'Execution',
-      'Persistence',
-      'Privilege Escalation',
-      'Defense Evasion',
-      'Credential Access',
-      'Discovery',
-      'Lateral Movement',
-      'Collection',
-      'Exfiltration',
-      'Command and Control',
-      'Impact',
-    ],
+    isShowLabel:false,
+    categories: ['Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Exfiltration', 'Command and Control', 'Impact'],
     series: [
       {
         // name: 'Mức 1',
@@ -272,19 +154,19 @@ export class PtmComponent {
               '#60a5fa', // MAI
               '#38bdf8', // MAI
               '#17d2f4', // MAI
-              '#DC143C', // H
+              '#DC143C'  // H
             ];
             return colorList[params.dataIndex];
-          },
+          }
         },
-      },
+      }
     ],
   };
   getLevelOnly(name: string): string {
-    const parts = name.split(' '); // Tách theo dấu cách
+    const parts = name.split(' ');  // Tách theo dấu cách
     return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : name;
   }
-  onChange(result: Date[]): void {
+    onChange(result: Date[]): void {
     console.log('onChange: ', result);
   }
 }

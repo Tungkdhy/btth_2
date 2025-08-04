@@ -18,6 +18,7 @@ import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.
 import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
 import { TablePtmV2Component } from '../../../shared/table-ptm_v2/table-ptm-v2.component';
 import { HeaderChartV2Component } from '../../../shared/header-chart-v2/header-chart-v2.component';
+import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
 
 @Component({
   selector: 'app-tcm-map',
@@ -35,7 +36,8 @@ import { HeaderChartV2Component } from '../../../shared/header-chart-v2/header-c
     HeaderChartComponent,
     HeaderChartV2Component,
     TablePtmComponent,
-    TablePtmV2Component
+    TablePtmV2Component,
+    ChuthichComponent
   ]
 })
 export class TcmMapComponent implements OnInit {
@@ -153,7 +155,7 @@ export class TcmMapComponent implements OnInit {
       { name: 'Đang tiến hành khai thác', data: [220, 182, 191, 234, 290, 330], color: '#045e2b' },
 
     ],
-    height: '455px',
+    height: '480px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -169,7 +171,7 @@ export class TcmMapComponent implements OnInit {
   nonStackChartConfig: StackChartConfig = {
     title: 'Dữ liệu thu thập',
     subTitle: 'Tổng: 40 GB',
-    height: '455px',
+    height: '480px',
     isStacked: false, // 🔁 RẤT QUAN TRỌNG
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
     series: [

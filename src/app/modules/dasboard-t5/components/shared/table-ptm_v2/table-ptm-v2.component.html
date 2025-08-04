@@ -16,7 +16,7 @@
             </ng-container>
 
             <ng-template #normalCell>
-              <p class="ellipsis-text">{{ row[col.field] }}</p>
+              <p class="ellipsis-text" [innerHTML]="row[col.field]"></p>
             </ng-template>
           </td>
         </tr>
