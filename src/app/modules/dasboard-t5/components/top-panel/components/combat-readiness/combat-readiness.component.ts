@@ -17,7 +17,7 @@ export class CombatReadinessComponent {
   },
   {
     "tenMang": "Mạng Internet",
-    "thietBi": "RedFox (1/6), Platform (1/2), Spyder (1/1), DDI (1/1), Nessus (1/1), Acu...",
+    "thietBi": "RedFox (1/6), Platform (1/2), Spyder (1/1), DDI (1/1)",
     "soLuong": 12
   },
   {

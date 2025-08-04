@@ -44,9 +44,9 @@ export class StackChartHori implements OnChanges {
         orient: 'horizontal',
         left: 'center',
         bottom: 0,
-        itemWidth: 20,
+        itemWidth: 22,
         textStyle: {
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 500,
         },
         icon: 'circle',
@@ -83,7 +83,7 @@ export class StackChartHori implements OnChanges {
         axisTick: { show: false },
         axisLabel: {
           show: true,
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 500,
           color: '#000'
         }
@@ -106,11 +106,11 @@ export class StackChartHori implements OnChanges {
       label: {
         show: true,          // Bật hiển thị số
         position: 'inside',  // Hoặc 'top', 'inside', 'insideRight' tùy bạn
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'normal',
         color: '#fff'        // màu chữ
       },
-      barCategoryGap: '35%',
+      barCategoryGap: '15%',
       itemStyle: {
         // borderRadius: [
         //   index === 0 ? 8 : 0,

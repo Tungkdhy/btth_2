@@ -21,6 +21,7 @@ import { HeaderChartV2Component } from '../../../shared/header-chart-v2/header-c
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { AppStateService } from 'src/app/core/services/app-state.service';
+import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
 @Component({
   selector: 'app-tcm',
   standalone: true,
@@ -39,7 +40,8 @@ import { AppStateService } from 'src/app/core/services/app-state.service';
     TablePtmComponent,
     TablePtmV2Component,
     NzDatePickerModule,
-    FormsModule
+    FormsModule,
+    ChuthichComponent
   ]
 })
 export class TcmComponent implements OnInit {
@@ -48,7 +50,7 @@ export class TcmComponent implements OnInit {
   dataReport = [
     {
       stt: 1,
-      direction: 'H',
+      direction: '<a style="width:300px;">H</a>',
       targetType: 'Chủ yếu',
       exploitData: '40GB',
       deepReport: '21 Báo cáo',
@@ -78,7 +80,7 @@ export class TcmComponent implements OnInit {
       { name: 'Mức 3 Thâm nhập sâu', data: [150, 212, 201, 154, 190, 330], color: 'rgba(255, 191, 74, 1)' },
       { name: 'Mức 4 Tấn công phá hủy', data: [320, 332, 301, 334, 390, 320], color: 'rgba(239, 62, 46, 1)' }
     ],
-    height: '388px',
+    height: '330px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -138,7 +140,7 @@ export class TcmComponent implements OnInit {
         color: 'rgba(239, 62, 46, 1)'
       }
     ],
-    height: '388px',
+    height: '390px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -158,7 +160,7 @@ export class TcmComponent implements OnInit {
       { name: 'Đang tiến hành khai thác', data: [220, 182, 191, 234, 290, 330], color: '#045e2b' },
 
     ],
-    height: '388px',
+    height: '390px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -174,9 +176,10 @@ export class TcmComponent implements OnInit {
   nonStackChartConfig: StackChartConfig = {
     title: 'Dữ liệu thu thập',
     subTitle: 'Tổng: 40 GB',
-    height: '388px',
+    height: '430px',
     isStacked: false, // 🔁 RẤT QUAN TRỌNG
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
+    // legend: true,
     series: [
       {
         // name: 'Mức 1',
@@ -207,7 +210,7 @@ export class TcmComponent implements OnInit {
       { name: 'Cấp 3: TT BTTM, BQP', data: [150, 212, 201, 154, 190, 330], color: 'rgba(255, 191, 74, 1)' },
       { name: 'LĐ Đảng, Nhà nước', data: [320, 332, 301, 334, 390, 320], color: 'rgba(239, 62, 46, 1)' }
     ],
-    height: '388px',
+    height: '360px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -227,7 +230,7 @@ export class TcmComponent implements OnInit {
     legendPosition: 'bottom',
     radius: ['30%', '55%'], // 👈 thu nhỏ để tạo khoảng trống
     showLabelInside: false,
-    height: '388px',
+    height: '390px',
 
   };
   constructor(private apiService: ApiService, public appStateService: AppStateService) { }
@@ -284,12 +287,12 @@ export class TcmComponent implements OnInit {
           color: 'rgba(255, 191, 74, 1)'
         },
         {
-          name: 'LĐ Đảng, Nhà nước',
+          name: 'Cấp 4:LĐ Đảng, Nhà nước',
           data: data.map(d => d.level_four),
           color: 'rgba(239, 62, 46, 1)'
         }
       ],
-      height: '388px',
+      height: '330px',
       tooltipFormatter: (params: any) => {
         console.log(params);
 
@@ -329,7 +332,7 @@ export class TcmComponent implements OnInit {
           color: 'rgba(239, 62, 46, 1)'
         }
       ],
-      height: '388px',
+      height: '390px',
       tooltipFormatter: (params: any) => {
         console.log(params);
 
@@ -358,7 +361,7 @@ export class TcmComponent implements OnInit {
           color: '#045e2b'
         },
       ],
-      height: '388px',
+      height: '390px',
       tooltipFormatter: (params: any) => {
         console.log(params);
 
@@ -395,7 +398,7 @@ export class TcmComponent implements OnInit {
       legendPosition: 'bottom',
       radius: ['30%', '55%'],
       showLabelInside: false,
-      height: '388px'
+      height: '306px'
     };
 
     return config;

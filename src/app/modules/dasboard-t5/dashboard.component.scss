@@ -71,3 +71,38 @@ tr:nth-child(even) {
   background-color: #0b683b; /* xanh lá đậm */
   color: #fff;
 }
+.row.gap-8 {
+  transition: all 0.3s ease;
+}
+  .section-title {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5; /* màu nền xám nhạt */
+  padding: 4px 12px;
+  font-size: 34px;
+  font-weight: bold;
+  color: #006400; /* xanh đậm */
+  // border-left: 3px solid #00bfff; /* viền xanh bên trái */
+}
+.reload-icon {
+  font-size: 28px; /* to hơn */
+  color: white;    /* màu trắng */
+  cursor: pointer;
+}
+button{
+      display: flex;
+    align-items: center;
+}
+.reload-icon.spin {
+  animation: spin 1s linear infinite;
+}
+.close-icon1 {
+  font-size: 36px;
+  margin-right: 8px;
+  color: black;
+  cursor: pointer;
+}
+
+.title-text {
+  color: #006400; /* xanh đậm */
+}
