@@ -4,7 +4,7 @@ import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
 import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';
 import { StackChartConfig } from '../../../shared/stack-chart/stack-chart.config';
-import { StackChartHori } from '../../../shared/stack-chart-hori/stack-chart-hori.component';
+import { StackChartHori } from '../mangqs/stack-chart-hori/stack-chart-hori.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { FormsModule } from '@angular/forms';
