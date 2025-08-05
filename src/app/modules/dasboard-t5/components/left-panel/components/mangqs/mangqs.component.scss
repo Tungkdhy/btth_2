@@ -39,3 +39,28 @@
 ::ng-deep app-mangqs .table-wrapper {
   max-height: 660px !important;
 }
+
+::ng-deep app-mangqs .table-cell {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: "Inter";
+}
+
+::ng-deep  nz-radio-group .ant-radio-wrapper {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #080808 !important;
+
+}
+::ng-deep nz-radio-group{
+  display: flex !important;
+}
+
+::ng-deep  .ant-radio-inner::after {
+    background-color: #045E2B !important;
+
+}
+
+::ng-deep  .ant-radio-checked .ant-radio-inner {
+    border-color: #045E2B !important;
+}

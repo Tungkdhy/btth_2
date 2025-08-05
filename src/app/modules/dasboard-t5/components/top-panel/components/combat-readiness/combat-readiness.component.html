@@ -2,37 +2,35 @@
   <div style="margin-bottom: 25px;">
     <h2 class="top-green-text">Trạng thái VKTB</h2>
   </div>
-  <div class="overflow-auto" style="height: 234px; flex: 1">
-    <table class="btth-top-table h-100 table-combat-readiness">
+  <div class="overflow-auto" style="height: 216px; flex: 1">
+    <table class="network-table">
       <thead>
         <tr>
-          <th style="width: 30%;"></th>
+          <th></th>
           <th>Đang xử lý</th>
           <th>Tổng số</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of combatReadinessData, let i = index">
+        <tr>
+          <td><strong>Mạng Quân sự</strong></td>
+          <td>FMC (0/1), Fidelis (0/1), NAC (0/1)</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><strong>Mạng Internet</strong></td>
           <td>
-            <p style="font-weight: 700;">{{item.tenMang }}</p>
+            Nessus (1/1), Platform (0/2), Spyder (0/1), RedFox (0/1), Acunetix (0/1)
           </td>
-          <td>
-
-            <p>
-              {{item.thietBi }}
-            </p>
-
-          </td>
-          <td>
-
-            <p>
-              {{ item.soLuong }}
-            </p>
-
-          </td>
-
+          <td>9</td>
+        </tr>
+        <tr>
+          <td><strong>Mạng Chuyên dùng</strong></td>
+          <td>Flowmon (0/2), VCM (0/2)</td>
+          <td>2</td>
         </tr>
       </tbody>
     </table>
+
   </div>
 </div>

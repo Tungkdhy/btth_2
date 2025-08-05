@@ -18,19 +18,24 @@
     width: 100%;
 
     .label {
-      font-weight: 500;
+      font-weight:700;
       color: #0f3c2d;
-      font-size: 20px;
+      font-size: 22px;
     }
 
     .value {
       font-weight: 700;
       color: #0f3c2d;
-      font-size: 20px;
+      font-size: 22px;
     //   margin-top: 4px;
     }
   }
+ 
 }
+::ng-deep  .ant-picker-range {
+    width: 302px !important;
+    border-radius: 12px !important;
+  }
 ::ng-deep .custom-range-border .ant-picker {
   border: 2px solid #595959 !important;
 }

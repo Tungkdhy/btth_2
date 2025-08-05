@@ -19,56 +19,49 @@
     </div>
     </div>
   </div>
-  <div class="overflow-auto" style="height: 208px; flex: 1">
-    <table class="btth-top-table h-100 table-combat-readiness">
-      <thead>
-        <tr>
-          <th style="width: 30%;"></th>
-          <th>TM</th>
-          <th>CT</th>
-          <th>HCKT</th>
-          <th>51</th>
-          <th>52</th>
-          <th>53</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of combatReadinessData, let i = index">
-          <td>
-            <p style="font-weight: 700!important;">{{item.loai}}</p>
-          </td>
-          <td>
-            
-            <p>{{ item.TM }}</p>
+  <div class="overflow-auto" style="height: 190px; flex: 1">
+<table class="custom-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th style="font-weight: 700;">TM</th>
+      <th style="font-weight: 700;">CT</th>
+      <th style="font-weight: 700;">HCKT</th>
+      <th style="font-weight: 700;">Cụm 51</th>
+      <th style="font-weight: 700;">Cụm 52</th>
+      <th style="font-weight: 700;">Cụm 53</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight: 700;">Trực chỉ huy</td>
+      <td>Đ.Minh</td>
+      <td>B.Sơn</td>
+      <td>Đ.Hội</td>
+      <td>P.Cường</td>
+      <td>N.Cường</td>
+      <td>N.Linh</td>
+    </tr>
+    <tr>
+      <td style="font-weight: 700;">Trạng thái SSCĐ</td>
+      <td><span class="dot"></span> TX</td>
+      <td><span class="dot"></span> TX</td>
+      <td><span class="dot"></span> TX</td>
+      <td><span class="dot"></span> TX</td>
+      <td><span class="dot"></span> TX</td>
+      <td><span class="dot"></span> TX</td>
+    </tr>
+    <tr>
+      <td style="font-weight: 700;">Cấp độ xử trí</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><span class="dot"></span> Cấp độ 1</td>
+      <td><span class="dot"></span> Cấp độ 1</td>
+      <td><span class="dot"></span> Cấp độ 1</td>
+    </tr>
+  </tbody>
+</table>
 
-          </td>
-          <td>
-
-            <p>{{ item.C1 }}</p>
-
-          </td>
-          <td>
-
-            <p>{{ item.HCKT }}</p>
-
-          </td>
-          <td>
-
-            <p>{{ item.CumS1 }}</p>
-
-          </td>
-          <td>
-
-            <p>{{ item.CumS2 }}</p>
-
-          </td>
-          <td>
-
-            <p>{{ item.CumS3 }}</p>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

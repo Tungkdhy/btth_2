@@ -1,0 +1,67 @@
+<div style="padding-top:24px" class="d-flex flex-column gap-6">
+  <!-- Trinh sát mạng -->
+  <div class="row btth-lr-panel-card" style="margin-left: 0;">
+    <div class="col-12">
+      <div class="d-flex flex-column gap-6">
+        <div class="d-flex gap-6">
+          <div class="col-12">
+            <div class="d-flex justify-content-between">
+              <h3>Trinh sát mạng</h3>
+              <nz-range-picker
+                class="custom-range-picker"
+                nzSize="large"
+                [(ngModel)]="date"
+                (ngModelChange)="onChange($event)">
+              </nz-range-picker>
+            </div>
+
+            <div class="row m-0">
+              <!-- Cột 1 -->
+              <div class="col-4">
+                <div style="padding:12px 0;">
+                  <app-header-chart [title]="'Tình hình không gian mạng'"></app-header-chart>
+                </div>
+                <app-table-ptm
+                  [headers]="['STT','Thông tin lộ lọt','Ngày', 'Chủ quan']"
+                  [fields]="['stt', 'thông tin lộ lọt', 'ngày', 'chủ quan']"
+                  [data]="dataLeak">
+                </app-table-ptm>
+              </div>
+
+              <!-- Cột 2 -->
+              <div style="padding-left:12px" class="col-8">
+                <div style="padding:12px 0;">
+                  <app-header-chart [title]="'Lộ lọt dữ liệu'"></app-header-chart>
+                </div>
+                <div class="row m-0">
+                  <div class="col-4">
+                    <app-pie-chart [config]="chartConfig"></app-pie-chart>
+                  </div>
+                  <div class="col-8 p-0">
+                    <app-table-ptm
+                      [height]="'410'"
+                      [headers]="['STT','Thông tin lộ lọt','Ngày', 'Chủ quan']"
+                      [fields]="['stt', 'thông tin lộ lọt', 'ngày', 'chủ quan']"
+                      [data]="dataLeak">
+                    </app-table-ptm>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bảng tổ chức hacker -->
+      <div style="padding:12px 0;">
+        <app-header-chart [title]="'Tổ chức hacker'"></app-header-chart>
+      </div>
+      <app-table-ptm
+        [height]="'410'"
+        [headers]="['STT','Thông tin lộ lọt','Số lượng','Thời gian', 'Trạng thái']"
+        [fields]="['stt', 'thông tin lộ lọt', 'số lượng', 'thời gian', 'trạng thái']"
+        [data]="dataFollow">
+      </app-table-ptm>
+    </div>
+  </div>
+</div>

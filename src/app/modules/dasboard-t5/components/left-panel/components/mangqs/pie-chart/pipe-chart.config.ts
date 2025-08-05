@@ -6,6 +6,5 @@ export interface PipeChartConfig {
     radius?: string | [string, string];
     showLabelInside?: boolean;
     height?: string;
-    legend?:boolean,
-    showLegend?: boolean // thêm height custom nếu cần
+    legend?:boolean // thêm height custom nếu cần
   }

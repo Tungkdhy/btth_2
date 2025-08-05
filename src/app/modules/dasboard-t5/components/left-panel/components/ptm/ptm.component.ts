@@ -108,7 +108,7 @@ export class PtmComponent {
     ],
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
-    legendPosition: 'bottom',
+    legendPosition: 'left',
     radius: ['30%', "50%"], 
     showLabelInside: false,
     height: '480px',

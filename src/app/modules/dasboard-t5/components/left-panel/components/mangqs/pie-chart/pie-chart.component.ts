@@ -9,7 +9,7 @@ import { EChartsOption } from 'echarts';
   styleUrls: ['./pie-chart.component.scss'],
   providers: [provideEcharts()],
   standalone: true,
-  imports: [NgxEchartsDirective]
+  imports: [NgxEchartsDirective],
 })
 export class PieChartComponent implements OnChanges {
   @Input() config!: PipeChartConfig;
@@ -23,53 +23,71 @@ export class PieChartComponent implements OnChanges {
   }
   hotTopicChartOption: EChartsOption = {
     grid: {
-      left: '0',
-      right: '12px',
-      top: '20%',
-      // bottom: 0,
-      containLabel: true
+      left: '5px',
+      right: 0,
+      top: '5%',
+      bottom: 0,
+      containLabel: true,
     },
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
-      }
+        type: 'shadow',
+      },
     },
     xAxis: {
       type: 'category',
       data: ['Jan', 'Feb', 'Mar'],
       axisLine: { show: false }, // Ẩn đường trục X
       axisTick: { show: false }, // Ẩn vạch nhỏ trên trục X
-      axisLabel: { show: true, fontSize: 22, fontWeight: 500, color: '#000' },
+      axisLabel: {
+        show: true,
+        fontSize: 20,
+        fontWeight: 500,
+        color: '#000',
+        fontFamily: 'Inter, sans-serif',
+      },
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
     },
     series: [
       {
         name: 'Sales',
         type: 'bar',
         data: [
-          { value: 30, name: 'Tích cực', itemStyle: { color: 'rgba(28, 155, 83, 1)' } },
-          { value: 30, name: 'Trung lập', itemStyle: { color: 'rgba(52, 131, 251, 1)' } },
-          { value: 40, name: 'Cần xác minh', itemStyle: { color: 'rgba(210, 0, 26, 1)' } },
+          {
+            value: 30,
+            name: 'Tích cực',
+            itemStyle: { color: 'rgba(28, 155, 83, 1)' },
+          },
+          {
+            value: 30,
+            name: 'Trung lập',
+            itemStyle: { color: 'rgba(52, 131, 251, 1)' },
+          },
+          {
+            value: 40,
+            name: 'Cần xác minh',
+            itemStyle: { color: 'rgba(210, 0, 26, 1)' },
+          },
         ],
-        // barWidth: '50%',
+        barWidth: '50%',
 
         label: {
           show: true,
           position: 'top',
-          fontSize: 22,
+          fontSize: 20,
+          color: '#000',
           fontWeight: 500,
-          color: '#000'
+          fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
         },
         itemStyle: {
           borderRadius: [8, 8, 8, 8],
-          color: 'rgba(210, 0, 26, 1)'
-        }
-      }
+          color: 'rgba(210, 0, 26, 1)',
+        },
+      },
     ],
-
   };
   updateChart(): void {
     if (!this.config || !this.config.data) {
@@ -79,17 +97,22 @@ export class PieChartComponent implements OnChanges {
     this.pieChartOptions = {
       title: {
         text: this.config.title || '',
-        // left: 'center',
+        left: 'center',
         // bottom: 0, // 👈 đặt xuống dưới biểu đồ
         textStyle: {
-          fontSize: 22,
-          fontWeight: 'bold'
-        }
+          fontSize: 20,
+          fontWeight: 'bold',
+          fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+          color: '#080808',
+        },
       },
       tooltip: {
         trigger: 'item',
         formatter: '{b}: {c} ',
-
+        textStyle: {
+          fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+          color: '#080808',
+        },
       },
       label: {
         show: true,
@@ -100,36 +123,41 @@ export class PieChartComponent implements OnChanges {
           const percent = Math.round(params.percent); // 👈 Làm tròn đến hàng đơn vị
           return `${value}\n${percent}%`;
         }, // 👈 chính là dòng này hiển thị dữ liệu
-        fontSize: 22 // (optional) tăng size cho dễ nhìn
+        // fontSize: 20, // (optional) tăng size cho dễ nhìn
+        fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+        color: '#080808',
       },
       labelLine: {
         show: true,
-        length: 22,
+        length: 20,
         length2: 10,
+        textStyle: {
+          fontSize: 20,
+          fontWeight: 500,
+          fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+          color: '#080808',
+          padding: 8,
+        },
         lineStyle: {
           width: 1,
         },
       },
       legend: {
         show: this.config.legend,
-        // orient: 'horizontal',
-        orient: this.config.legendPosition === "left" ? 'vertical':"horizontal", // legend dọc
-        left: this.config.legendPosition === "left" ? '20%' : 'center', // căn trái nếu là vertical
-        // left: 'center',
-        bottom: this.config.legendPosition === "left" ? "40%" : '0',
+        orient: 'horizontal',
+        left: 'center',
+        bottom: '15',
         itemWidth: 14,
         itemHeight: 14,
         // itemGap: 40,
         textStyle: {
-          fontSize: 22,
-          fontWeight: 500
+          fontSize: 20,
+          fontWeight: 500,
+          fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+          color: '#080808',
+          padding: 8,
         },
         icon: 'circle',
-        // formatter: (name: string) => {
-        //   const seriesData = (this.config.data as any[])[0]?.data;
-        //   const item = seriesData?.find((d: any) => d.name === name);
-        //   return `${name}: ${item?.value}`;
-        // }
       },
 
       color: this.config.colors?.length ? this.config.colors : undefined,
@@ -141,33 +169,41 @@ export class PieChartComponent implements OnChanges {
           radius: this.config.radius || '50%',
           avoidLabelOverlap: true,
 
-          center: this.config.legendPosition === "left" ? ['65%', '50%'] : ['50%', '50%'], // căn giữa nếu là horizontal
+          center: ['50%', '50%'],
           label: {
             show: true,
-            position: this.config.showLabelInside === false ? 'outer' : 'inside',
-            fontSize: 22,
+            position:
+              this.config.showLabelInside === false ? 'outer' : 'inside',
+            fontSize: 20,
+            fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+            color: '#080808',
           },
           labelLayout: {
-            hideOverlap: true
+            hideOverlap: true,
           },
 
-          data: this.config.data
-        }
+          data: this.config.data,
+        },
       ],
       graphic: [
         {
           type: 'text',
-          left: this.config.legendPosition === "left" ? '60%' : 'center',
+          left: 'center',
           top: 'middle',
           style: {
-            text: this.config.data.reduce((accumulator: any, currentValue) => accumulator + currentValue.value, 0),
+            text: this.config.data.reduce(
+              (accumulator: any, currentValue) =>
+                accumulator + currentValue.value,
+              0,
+            ),
             // textAlign: 'center',
             fill: '#000',
-            fontSize: 36,
-            fontWeight: 500
-          }
-        }
-      ]
+            fontSize: 40,
+            fontWeight: 700,
+            fontFamily: 'Inter, sans-serif', // hoặc font bạn muốn
+          },
+        },
+      ],
     };
   }
 

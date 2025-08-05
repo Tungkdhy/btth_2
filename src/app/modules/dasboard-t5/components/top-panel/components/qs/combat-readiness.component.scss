@@ -1,7 +1,39 @@
 .top-green-text {
   color: rgba(4, 94, 43, 1);
+  font-size: 22px;
 }
 .table-combat-readiness th:nth-child(1),  
 .table-combat-readiness td:nth-child(1) {  
   width: 7.5%;  
+}
+.custom-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  font-size: 22px;
+  vertical-align: middle;
+  font-weight: 600;
+  font-family: "Inter", sans-serif !important;
+}
+
+.custom-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
 }

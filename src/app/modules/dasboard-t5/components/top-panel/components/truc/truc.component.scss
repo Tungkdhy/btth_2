@@ -1,18 +1,88 @@
+.task-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 22px;
+}
+
+.task-table th,
+.task-table td {
+  border: 1px solid #ddd;
+  padding: 9px 12px;
+  vertical-align: middle;
+    font-weight: 600;
+  font-family: "Inter", sans-serif !important;
+}
+
+.task-table th {
+  background: #f9f9f9;
+  font-weight: 700;
+  text-align: left;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.dot.green {
+  background-color: #2e7d32;
+}
+
+.dot.orange {
+  background-color: #ef6c00;
+}
+
 .top-green-text {
   color: rgba(4, 94, 43, 1);
 }
-
-.btth-btn-duty {
-    border: 1px solid rgba(218, 221, 222, 1);
-    border-radius: 8px;
-    padding: 6px 28px;
-    min-width: 120px;
-    font-size: 22px;
-    font-weight: 500;
-    background-color: #FFF;
+.total-text-color{
+  color: rgba(83, 83, 83, 1);
+}
+.table-operational-command th:nth-child(1),  
+.table-operational-command td:nth-child(1) {  
+  width: 7.5%;  
 }
 
-.btth-btn-duty.active {
-    background-color: var(--colorButton2);
-    color: white;
+.table-operational-command th:nth-child(3),
+.table-operational-command th:nth-child(4),
+.table-operational-command td:nth-child(3),
+.table-operational-command td:nth-child(4) {  
+  width: 15%;   
+}
+
+.table-operational-command th:nth-child(2),
+.table-operational-command td:nth-child(2) {  
+  width: 62.5%; 
+}
+.table-operational-command{
+  td{
+    // padding: 4px 24px !important;
+  }
+}
+
+
+.e-control {
+  font-size: 1em;
+}
+
+.e-tip-content {
+  font-size: 2em;
+  padding: 0.2em;
+}
+.table-operational-command td,
+.table-operational-command th {
+  padding: 12px 16px; /* Trên-dưới 12px, trái-phải 16px */
+  vertical-align: middle; /* Canh giữa theo chiều dọc */
+}
+.table-operational-command tbody tr:nth-child(even) {
+  background-color: #f4f6f7; /* Màu nền xen kẽ */
+}
+.table-operational-command th{
+  background-color: #f4f6f7; /* Màu nền cho tiêu đề */
 }

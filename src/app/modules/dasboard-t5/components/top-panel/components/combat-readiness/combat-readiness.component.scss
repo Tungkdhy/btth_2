@@ -5,3 +5,30 @@
 .table-combat-readiness td:nth-child(1) {  
   width: 7.5%;  
 }
+.network-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif !important;
+}
+
+.network-table th,
+.network-table td {
+  border: 1px solid #ddd;
+  padding: 9px 12px;
+  vertical-align: middle;
+}
+
+.network-table th {
+  background: #f9f9f9;
+  font-weight: 600;
+  text-align: left;
+}
+
+.network-table td strong {
+  font-weight: 600;
+}

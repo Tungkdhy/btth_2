@@ -1,0 +1,33 @@
+.table-container {
+  max-height: 300px; /* tạo scroll khi nhiều dữ liệu */
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #f8f8f8;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}

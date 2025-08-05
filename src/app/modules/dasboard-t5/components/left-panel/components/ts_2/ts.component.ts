@@ -14,15 +14,14 @@ import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
-import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
 @Component({
-  selector: 'app-ts',
+  selector: 'app-ts-2',
   standalone: true,
   templateUrl: './ts.component.html',
   styleUrls: ['./ts.component.scss'],
-  imports: [NuanceInforComponent,ChuthichComponent,NzDatePickerModule,FormsModule,HeaderChartComponent, BieuDoBvTieuCucComponent, TablePtmComponent, HotTopicComponent, LineChartComponent, ViralPostsComponent, LivestreamWarningComponent, PieChartComponent, CustomTableComponent, StackChart],
+  imports: [NuanceInforComponent,NzDatePickerModule,FormsModule,HeaderChartComponent, BieuDoBvTieuCucComponent, TablePtmComponent, HotTopicComponent, LineChartComponent, ViralPostsComponent, LivestreamWarningComponent, PieChartComponent, CustomTableComponent, StackChart],
 })
-export class TsComponent {
+export class Ts2Component {
   date = null
   livestreamList: LivestreamItem[] = [
     {
@@ -100,11 +99,11 @@ export class TsComponent {
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
     legendPosition: 'bottom',
-    radius: ['30%', '55%'],
+    radius: ['35%', '55%'],
 
     showLabelInside: false,
     height: '380px',
-    legend:false
+    legend:true
   };
   config: StackChartConfig = {
     isStacked: true,

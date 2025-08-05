@@ -40,7 +40,7 @@ export class StackChart implements OnChanges {
             }
       },
       legend: {
-        show: true,
+        show: false,
         orient: 'horizontal',
         left: 'center',
         bottom: 10,
@@ -75,7 +75,7 @@ export class StackChart implements OnChanges {
         left: '3%',
         right: '4%',
         top: '5%',
-        bottom: !this.config.isStacked ? '6%' : '20%',
+        bottom: '1%' ,
         containLabel: true
       },
       yAxis: {
@@ -113,7 +113,7 @@ export class StackChart implements OnChanges {
           return params.value === 0 ? '' : params.value;
         }        // màu chữ
       },
-      barCategoryGap: '35%',
+      barCategoryGap: '20%',
       center: ['50%', '50%'],
       itemStyle: {
         borderRadius: [

@@ -45,7 +45,14 @@
       </div>
 
       <div class="col-6">
-        <div class="row align-items-center mb-2">
+        <div
+          class="row align-items-center mb-2"
+          style="
+            background-color: #f4f6f7;
+            border-radius: 12px;
+            margin-left: 0px;
+          "
+        >
           <!-- Cột trái -->
           <div class="col">
             <app-header-chart
@@ -55,15 +62,18 @@
 
           <!-- Cột phải -->
           <div class="col-auto">
-            <div class="d-flex align-items-center gap-3">
+            <div
+              class="d-flex align-items-center gap-3"
+              style="font-size: 22px"
+            >
               <span class="d-flex align-items-center">
                 <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
               </span>
-              <span class="d-flex align-items-center">
+              <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot yellow me-1"></span>
                 {{ countByLevel("Trung bình") }}
               </span>
-              <span class="d-flex align-items-center">
+              <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
               </span>
             </div>
@@ -148,7 +158,14 @@
       </div>
 
       <div class="col-6">
-        <div class="row align-items-center mb-2">
+        <div
+          class="row align-items-center mb-2"
+          style="
+            background-color: #f4f6f7;
+            border-radius: 12px;
+            margin-left: 0px;
+          "
+        >
           <!-- Cột trái -->
           <div class="col">
             <app-header-chart
@@ -159,14 +176,14 @@
           <!-- Cột phải -->
           <div class="col-auto">
             <div class="d-flex align-items-center gap-3">
-              <span class="d-flex align-items-center">
+              <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
               </span>
-              <span class="d-flex align-items-center">
+              <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot yellow me-1"></span>
                 {{ countByLevel("Trung bình") }}
               </span>
-              <span class="d-flex align-items-center">
+              <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
               </span>
             </div>
