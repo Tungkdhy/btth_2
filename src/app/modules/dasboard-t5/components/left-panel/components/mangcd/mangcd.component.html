@@ -11,13 +11,19 @@
         nzSize="large"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
+        [nzShowTime]="true"
       ></nz-range-picker>
     </div>
     <div class="row">
       <div class="col-3">
         <app-header-chart
           [title]="'Hạ tầng công nghệ thông tin'"
-          [subTitle]="'Tổng: 86/102'"
+          [subTitle]="
+            'Tổng: ' +
+            titleHT_QH.total_managed_devices +
+            '/' +
+            titleHT_QH.total_all_devices
+          "
         ></app-header-chart>
         <div class="info-cards">
           <div class="card" *ngFor="let item of data">
@@ -35,7 +41,13 @@
       <div class="col-3">
         <app-header-chart
           [title]="'Cảnh báo ATTT'"
-          [subTitle]="'Tổng: 422/500 Thiết bị'"
+          [subTitle]="
+            'Tổng: ' +
+            titleQH.total_alerts +
+            '/' +
+            titleQH.total_devices +
+            ' Thiết bị'
+          "
         ></app-header-chart>
         <div class="row">
           <div class="col-12">
@@ -62,19 +74,18 @@
 
           <!-- Cột phải -->
           <div class="col-auto">
-            <div
-              class="d-flex align-items-center gap-3"
-              style="font-size: 22px"
-            >
-              <span class="d-flex align-items-center">
-                <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
+            <div class="d-flex align-items-center gap-3">
+              <span class="d-flex align-items-center" style="font-size: 22px">
+                <span class="dot red me-1"></span> Cao:
+                {{ countByLevel("Cao") }}
               </span>
               <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot yellow me-1"></span>
-                {{ countByLevel("Trung bình") }}
+                Trung bình: {{ countByLevel("Trung bình") }}
               </span>
               <span class="d-flex align-items-center" style="font-size: 22px">
-                <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
+                <span class="dot green me-1"></span> Thấp:
+                {{ countByLevel("Thấp") }}
               </span>
             </div>
           </div>
@@ -130,7 +141,12 @@
       <div class="col-3">
         <app-header-chart
           [title]="'Hạ tầng công nghệ thông tin'"
-          [subTitle]="'Tổng: 86/102'"
+          [subTitle]="
+            'Tổng: ' +
+            titleHT_CP.total_managed_devices +
+            '/' +
+            titleHT_CP.total_all_devices
+          "
         ></app-header-chart>
         <div class="info-cards">
           <div class="card" *ngFor="let item of data">
@@ -140,7 +156,7 @@
         </div>
         <div class="row" style="margin-top: 16px">
           <app-stack-chart-hori
-            [config]="stackChartConfig"
+            [config]="stackChartConfigCP"
           ></app-stack-chart-hori>
         </div>
       </div>
@@ -148,11 +164,17 @@
       <div class="col-3">
         <app-header-chart
           [title]="'Cảnh báo ATTT'"
-          [subTitle]="'Tổng: 422/500 Thiết bị'"
+          [subTitle]="
+            'Tổng: ' +
+            titleCP.total_alerts +
+            '/' +
+            titleCP.total_devices +
+            ' Thiết bị'
+          "
         ></app-header-chart>
         <div class="row">
           <div class="col-12">
-            <app-pie-chart [config]="chartConfig"></app-pie-chart>
+            <app-pie-chart [config]="chartConfigCP"></app-pie-chart>
           </div>
         </div>
       </div>
@@ -177,14 +199,16 @@
           <div class="col-auto">
             <div class="d-flex align-items-center gap-3">
               <span class="d-flex align-items-center" style="font-size: 22px">
-                <span class="dot red me-1"></span> {{ countByLevel("Cao") }}
+                <span class="dot red me-1"></span> Cao:
+                {{ countByLevelCP("Cao") }}
               </span>
               <span class="d-flex align-items-center" style="font-size: 22px">
                 <span class="dot yellow me-1"></span>
-                {{ countByLevel("Trung bình") }}
+                Trung bình: {{ countByLevelCP("Trung bình") }}
               </span>
               <span class="d-flex align-items-center" style="font-size: 22px">
-                <span class="dot green me-1"></span> {{ countByLevel("Thấp") }}
+                <span class="dot green me-1"></span> Thấp:
+                {{ countByLevelCP("Thấp") }}
               </span>
             </div>
           </div>
@@ -212,7 +236,7 @@
                 'thoi_gian',
                 'muc_do'
               ]"
-              [data]="tableData"
+              [data]="tableDataCP"
             >
             </app-table-ptm>
           </div>

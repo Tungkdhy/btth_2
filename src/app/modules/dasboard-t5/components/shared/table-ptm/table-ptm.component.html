@@ -2,7 +2,11 @@
   <table class="custom-table">
     <thead class="table-head">
       <tr>
-        <th *ngFor="let head of headers" class="table-cell">
+        <th
+          *ngFor="let head of headers"
+          class="table-cell"
+          [ngClass]="{ 'text-center': head === 'STT' || head === 'Số lượng' }"
+        >
           {{ head }}
         </th>
       </tr>
@@ -14,6 +18,9 @@
             (click)="onRowClick(row)"
             *ngFor="let key of headers"
             class="table-cell"
+            [ngClass]="{
+              'text-center': key === 'STT' || key === 'Số lượng'
+            }"
           >
             <ng-container
               *ngIf="key === 'Trạng thái' || key === 'Mức độ'; else normalCell"

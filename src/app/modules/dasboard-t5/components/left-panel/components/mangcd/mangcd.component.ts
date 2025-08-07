@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
 import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
 import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
@@ -9,6 +9,10 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { FormsModule } from '@angular/forms';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import dayjs from 'dayjs';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-mangcd',
   templateUrl: './mangcd.component.html',
@@ -27,114 +31,329 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   ],
 })
 export class MangcdComponent {
-  selectedOption: string = 'Radar';
-  date = null;
-  tableData = [
-    {
-      stt: 1,
-      'mac nguồn': '48:91:D5:E7:05:D0',
-      'ip nguồn': '159.223.162.113',
-      'ip đích': '172.16.22.58',
-      'số lượng': 5,
-      'cảnh báo': 'ET DROP Spamhaus DROP Listed Traffic Inbound group 14',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Cao',
-    },
-    {
-      stt: 2,
-      'mac nguồn': '48:91:D5:E7:05:D0',
-      'ip nguồn': '122.8.186.87',
-      'ip đích': '172.16.22.36',
-      'số lượng': 2,
-      'cảnh báo': 'ET DROP Spamhaus DROP Listed Traffic Inbound group 9',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Cao',
-    },
-    {
-      stt: 3,
-      'mac nguồn': '48:91:D5:D9:59:10',
-      'ip nguồn': '192.168.100.23',
-      'ip đích': '111.10.0.32',
-      'số lượng': 3,
-      'cảnh báo': 'GPL RPC xdmcp info query',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Trung bình',
-    },
-    {
-      stt: 4,
-      'mac nguồn': '48:91:D5:E7:05:D0',
-      'ip nguồn': '36.93.154.207',
-      'ip đích': '172.16.22.50',
-      'số lượng': 4,
-      'cảnh báo': 'ET DROP Spamhaus DROP Listed Traffic Inbound group 1',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Thấp',
-    },
-    {
-      stt: 5,
-      'mac nguồn': '48:91:D5:E7:05:D0',
-      'ip nguồn': '104.164.104.45',
-      'ip đích': '172.16.22.42',
-      'số lượng': 4,
-      'cảnh báo':
-        'ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Request',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Cao',
-    },
-    {
-      stt: 6,
-      'mac nguồn': 'D0:DC:2C:70:41:FF',
-      'ip nguồn': '83.222.191.166',
-      'ip đích': '10.22.72.102',
-      'số lượng': 7,
-      'cảnh báo':
-        'MITRE-Discovery-Network Service Scanning: ET SCAN Potential VNC Scan 5500-5600',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Cao',
-    },
-    {
-      stt: 7,
-      'mac nguồn': '00:09:0D:00:09:1A',
-      'ip nguồn': '80.82.16.100',
-      'ip đích': '172.16.105.166',
-      'số lượng': 2,
-      'cảnh báo': 'ET Drop Dshield Block Listed Source group 1',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Trung bình',
-    },
-    {
-      stt: 8,
-      'mac nguồn': '48:91:D5:E7:05:D0',
-      'ip nguồn': '80.82.77.144',
-      'ip đích': '172.16.22.201',
-      'số lượng': 1,
-      'cảnh báo': 'GPL RPC xdmcp info query',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Thấp',
-    },
-    {
-      stt: 9,
-      'mac nguồn': '48:91:D5:E7:1B:2C',
-      'ip nguồn': '80.82.77.144',
-      'ip đích': '172.16.22.203',
-      'số lượng': 3,
-      'cảnh báo': 'ET DROP Dshield Block Listed Source group 1',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Trung bình',
-    },
-    {
-      stt: 10,
-      'mac nguồn': '50:91:D5:E7:05:56',
-      'ip nguồn': '128.82.224.100',
-      'ip đích': '172.16.22.172',
-      'số lượng': 2,
-      'cảnh báo':
-        'ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Request',
-      'thời gian': '07/7/2025',
-      'mức độ': 'Thấp',
-    },
-  ];
+  titleQH = { total_alerts: 0, total_devices: 0 };
+  titleCP = { total_alerts: 0, total_devices: 0 };
+  titleHT_QH = { total_managed_devices: 0, total_all_devices: 0 };
+  titleHT_CP = { total_managed_devices: 0, total_all_devices: 0 };
 
+  constructor(private cdr: ChangeDetectorRef) {}
+  selectedOption: string = 'Radar';
+  http = inject(HttpClient);
+  headers = new HttpHeaders({
+    apiKey:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE', // 🔐 Thay YOUR_API_KEY_HERE bằng key thật
+  });
+  date = [dayjs().subtract(7, 'day').toDate(), dayjs().toDate()];
+  onChange(result: Date[]): void {
+    if (result && result.length === 2) {
+      const start = formatDate(result[0], 'yyyyMMddHHmmss', 'en-US');
+      const end = formatDate(result[1], 'yyyyMMddHHmmss', 'en-US');
+      this.fetchInfrastructureData(start, end);
+      this.fetchCbatttData(start, end);
+      this.fetchSuCoATTT(start, end);
+    }
+  }
+  fetchInfrastructureData(start: string, end: string) {
+    const body = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPQH',
+    };
+
+    const bodyCP = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPCP',
+    };
+    this.http
+      .post<any>(
+        'http://10.10.53.58:8002/rest/v1/rpc/mang_cd_ha_tang_cntt',
+        body,
+        {
+          headers: this.headers,
+        },
+      )
+      .subscribe((res) => {
+        const details = res?.data?.device_types_detail || [];
+        this.titleHT_QH = {
+          total_managed_devices: res?.data?.summary.total_managed_devices,
+          total_all_devices: res?.data?.summary.total_all_devices,
+        };
+        // 🎯 Các thiết bị cần hiển thị
+
+        const top3Types = [...details]
+          .sort((a, b) => b.total_devices - a.total_devices) // sắp xếp giảm dần theo total_devices
+          .slice(0, 3) // lấy 3 phần tử đầu tiên
+          .map((item) => item.device_type); // lấy ra tên device_type
+
+        const targetTypes = top3Types;
+
+        const typeMap = new Map(
+          details.map((item: any) => [item.device_type, item]),
+        );
+
+        const categories = targetTypes;
+
+        const managedDevices = categories.map(
+          // @ts-ignore
+          (type) => typeMap.get(type)?.total_managed_devices || 0,
+        );
+
+        const totalDevices = categories.map(
+          // @ts-ignore
+          (type) => typeMap.get(type)?.total_devices || 0,
+        );
+
+        this.stackChartConfig = {
+          title: 'Biểu đồ khai thác',
+          categories,
+          series: [
+            {
+              name: 'Thiết bị quản lý',
+              data: managedDevices,
+              color: 'rgb(28, 155, 83)',
+            },
+            {
+              name: 'Tổng số thiết bị',
+              data: totalDevices,
+              color: 'rgb(52, 131, 251)',
+            },
+          ],
+          height: '660px',
+          isStacked: false,
+        };
+
+        this.cdr.detectChanges();
+      });
+    this.http
+      .post<any>(
+        'http://10.10.53.58:8002/rest/v1/rpc/mang_cd_ha_tang_cntt',
+        bodyCP,
+        {
+          headers: this.headers,
+        },
+      )
+      .subscribe((res) => {
+        const details = res?.data?.device_types_detail || [];
+            this.titleHT_CP = {
+              total_managed_devices: res?.data?.summary.total_managed_devices,
+              total_all_devices: res?.data?.summary.total_all_devices,
+            };
+        const top3Types = [...details]
+          .sort((a, b) => b.total_devices - a.total_devices) // sắp xếp giảm dần theo total_devices
+          .slice(0, 3) // lấy 3 phần tử đầu tiên
+          .map((item) => item.device_type); // lấy ra tên device_type
+
+        const targetTypes = top3Types;
+        const typeMap = new Map(
+          details.map((item: any) => [item.device_type, item]),
+        );
+
+        const categories = targetTypes;
+
+        const managedDevices = categories.map(
+          // @ts-ignore
+          (type) => typeMap.get(type)?.total_managed_devices || 0,
+        );
+
+        const totalDevices = categories.map(
+          // @ts-ignore
+          (type) => typeMap.get(type)?.total_devices || 0,
+        );
+
+        this.stackChartConfigCP = {
+          title: 'Biểu đồ khai thác',
+          categories,
+          series: [
+            {
+              name: 'Thiết bị quản lý',
+              data: managedDevices,
+              color: 'rgb(28, 155, 83)',
+            },
+            {
+              name: 'Tổng số thiết bị',
+              data: totalDevices,
+              color: 'rgb(52, 131, 251)',
+            },
+          ],
+          height: '660px',
+          isStacked: false,
+        };
+
+        this.cdr.detectChanges();
+      });
+  }
+  fetchCbatttData(start: string, end: string) {
+    const body = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPQH',
+    };
+    const bodyCP = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPCP',
+    };
+
+    this.http
+      .post<any>('http://10.10.53.58:8002/rest/v1/rpc/mang_cd_cbattt', body, {
+        headers: this.headers,
+      })
+      .subscribe((res) => {
+        const details = res?.data?.severity_detail || [];
+        this.titleQH = {
+          total_alerts: res?.data?.summary.total_alerts,
+          total_devices: res?.data?.summary.total_devices,
+        };
+        const severityLabelMap: Record<string, string> = {
+          High: 'Cao',
+          Medium: 'Trung bình',
+          Low: 'Thấp',
+        };
+
+        const colorMap: Record<string, string> = {
+          High: '#F44336', // đỏ
+          Medium: '#FFC107', // vàng
+          Low: '#4CAF50', // xanh lá
+        };
+        // @ts-ignore
+        const chartData = details.map((item) => ({
+          value: item.total_alerts,
+          name: severityLabelMap[item.severity] || item.severity,
+          itemStyle: { color: colorMap[item.severity] || '#BDBDBD' },
+        }));
+
+        this.chartConfig = {
+          data: chartData,
+          title: '',
+          // @ts-ignore
+          colors: chartData.map((d) => d.itemStyle.color),
+          legendPosition: 'bottom',
+          radius: ['35%', '60%'],
+          showLabelInside: false,
+          height: '660px',
+          legend: true,
+        };
+
+        this.cdr.detectChanges();
+      });
+    this.http
+      .post<any>('http://10.10.53.58:8002/rest/v1/rpc/mang_cd_cbattt', bodyCP, {
+        headers: this.headers,
+      })
+      .subscribe((res) => {
+        const details = res?.data?.severity_detail || [];
+        this.titleCP = {
+          total_alerts: res?.data?.summary.total_alerts,
+          total_devices: res?.data?.summary.total_devices,
+        };
+        const severityLabelMap: Record<string, string> = {
+          High: 'Cao',
+          Medium: 'Trung bình',
+          Low: 'Thấp',
+        };
+
+        const colorMap: Record<string, string> = {
+          High: '#F44336', // đỏ
+          Medium: '#FFC107', // vàng
+          Low: '#4CAF50', // xanh lá
+        };
+        // @ts-ignore
+        const chartData = details.map((item) => ({
+          value: item.total_alerts,
+          name: severityLabelMap[item.severity] || item.severity,
+          itemStyle: { color: colorMap[item.severity] || '#BDBDBD' },
+        }));
+
+        this.chartConfigCP = {
+          data: chartData,
+          title: '',
+          // @ts-ignore
+          colors: chartData.map((d) => d.itemStyle.color),
+          legendPosition: 'bottom',
+          radius: ['35%', '60%'],
+          showLabelInside: false,
+          height: '660px',
+          legend: true,
+        };
+
+        this.cdr.detectChanges();
+      });
+  }
+  convertSeverity(severity: string): string {
+    const map: Record<string, string> = {
+      Critical: 'Cao',
+      High: 'Cao',
+      Medium: 'Trung bình',
+      Low: 'Thấp',
+    };
+    return map[severity] || severity;
+  }
+  fetchSuCoATTT(start: string, end: string) {
+    const body = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPQH',
+    };
+    const bodyCP = {
+      p_start_date: start,
+      p_end_date: end,
+      p_source: 'VPCP',
+    };
+
+    this.http
+      .post<any>(
+        'http://10.10.53.58:8002/rest/v1/rpc/mang_cd_su_co_attt',
+        body,
+        {
+          headers: this.headers,
+        },
+      )
+      .subscribe((res) => {
+        const detail = res?.data?.device_incidents_detail || [];
+
+        const tableData = detail.map((item: any, index: number) => ({
+          stt: index + 1,
+          'mac nguồn': item.source_mac,
+          'ip nguồn': item.source_ip,
+          'ip đích': item.destination_ip,
+          'số lượng': item.total_incidents,
+          'cảnh báo': item.latest_description,
+          'thời gian': item.latest_incident_time,
+          'mức độ': this.convertSeverity(item.most_common_severity),
+        }));
+        this.tableData = tableData;
+        this.cdr.detectChanges();
+      });
+    this.http
+      .post<any>(
+        'http://10.10.53.58:8002/rest/v1/rpc/mang_cd_su_co_attt',
+        bodyCP,
+        {
+          headers: this.headers,
+        },
+      )
+      .subscribe((res) => {
+        const detail = res?.data?.device_incidents_detail || [];
+
+        const tableData = detail.map((item: any, index: number) => ({
+          stt: index + 1,
+          'mac nguồn': item.source_mac,
+          'ip nguồn': item.source_ip,
+          'ip đích': item.destination_ip,
+          'số lượng': item.total_incidents,
+          'cảnh báo': item.latest_description,
+          'thời gian': item.latest_incident_time,
+          'mức độ': this.convertSeverity(item.most_common_severity),
+        }));
+
+        this.tableDataCP = tableData;
+        this.cdr.detectChanges();
+      });
+  }
+
+  tableData = [];
+  tableDataCP = [];
   tableDataHunting = [
     { 'kết nối bất thường': '86.36.123.10:4444', bytes: '1234' },
     { 'kết nối bất thường': '86.36.123.10:8080', bytes: '120' },
@@ -159,6 +378,24 @@ export class MangcdComponent {
     // { connect: '86.36.123.10:8000', bytes: '80' },
   ];
   stackChartConfig = {
+    title: 'Biểu đồ khai thác',
+    categories: ['Thiết bị mạng', 'Máy tính', 'Máy chủ', 'Ứng dụng'], // label của các cột
+    series: [
+      {
+        name: 'Thiết bị quản lý',
+        data: [120, 220, 300, 100], // 3 giá trị tương ứng với 'Thiết bị', 'Cảnh báo', 'Loại 3'
+        color: 'rgb(28, 155, 83)',
+      },
+      {
+        name: 'Tổng số thiết bị',
+        data: [132, 300, 320, 400],
+        color: 'rgb(52, 131, 251)',
+      },
+    ],
+    height: '660px',
+    isStacked: false, // tắt stacked
+  };
+  stackChartConfigCP = {
     title: 'Biểu đồ khai thác',
     categories: ['Thiết bị mạng', 'Máy tính', 'Máy chủ', 'Ứng dụng'], // label của các cột
     series: [
@@ -202,6 +439,20 @@ export class MangcdComponent {
     isStacked: true,
   };
   chartConfig: PipeChartConfig = {
+    data: [
+      { value: 100, name: 'Thấp', itemStyle: { color: '#4CAF50' } },
+      { value: 203, name: 'Trung bình', itemStyle: { color: '#FFC107' } },
+      { value: 154, name: 'Cao', itemStyle: { color: '#F44336' } },
+    ],
+    title: '',
+    colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
+    legendPosition: 'bottom',
+    radius: ['35%', '60%'],
+    showLabelInside: false,
+    height: '660px',
+    legend: true,
+  };
+  chartConfigCP: PipeChartConfig = {
     data: [
       { value: 100, name: 'Thấp', itemStyle: { color: '#4CAF50' } },
       { value: 203, name: 'Trung bình', itemStyle: { color: '#FFC107' } },
@@ -382,10 +633,19 @@ export class MangcdComponent {
     const parts = name.split(' '); // Tách theo dấu cách
     return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : name;
   }
-  onChange(result: Date[]): void {
-    console.log('onChange: ', result);
-  }
+
   countByLevel(level: string): number {
     return this.tableData.filter((item) => item['mức độ'] === level).length;
+  }
+
+  countByLevelCP(level: string): number {
+    return this.tableDataCP.filter((item) => item['mức độ'] === level).length;
+  }
+  ngOnInit(): void {
+    const start = formatDate(this.date[0], 'yyyyMMddHHmmss', 'en-US');
+    const end = formatDate(this.date[1], 'yyyyMMddHHmmss', 'en-US');
+    this.fetchInfrastructureData(start, end);
+    this.fetchCbatttData(start, end);
+    this.fetchSuCoATTT(start, end);
   }
 }
