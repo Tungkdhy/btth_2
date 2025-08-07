@@ -1,5 +1,5 @@
 .table-container {
-  max-height: 300px; /* tạo scroll khi nhiều dữ liệu */
+  max-height: 320px; /* Giới hạn chiều cao để tạo scroll */
   overflow-y: auto;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -15,17 +15,23 @@ thead {
   background-color: #f8f8f8;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 th, td {
   padding: 8px 12px;
   text-align: left;
   white-space: nowrap;
+  font-size: 22px;
+  font-family: "Inter", sans-serif !important;
 }
 
 th {
   font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
 }
 
 tbody tr:nth-child(even) {

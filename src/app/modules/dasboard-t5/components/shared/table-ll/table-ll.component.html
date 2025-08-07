@@ -2,15 +2,7 @@
   <table class="custom-table">
     <thead class="table-head">
       <tr>
-        <th
-          *ngFor="let head of headers"
-          class="table-cell"
-          [ngClass]="{
-            'text-center':
-              head === 'STT' || head === 'Số lượng' || head === 'Mức độ'
-          }"
-          [ngStyle]="head === 'Mức độ' ? { 'max-width': '40px' } : {}"
-        >
+        <th *ngFor="let head of headers" class="table-cell table-head">
           {{ head }}
         </th>
       </tr>
@@ -22,16 +14,11 @@
             (click)="onRowClick(row)"
             *ngFor="let key of headers"
             class="table-cell"
-            [ngClass]="{
-              'text-center':
-                key === 'STT' || key === 'Số lượng' || key === 'Mức độ'
-            }"
           >
             <ng-container
               *ngIf="key === 'Trạng thái' || key === 'Mức độ'; else normalCell"
             >
               <app-badge
-                style="max-width: 40px"
                 [label]="row[key.toLowerCase()]"
                 type="status"
               ></app-badge>

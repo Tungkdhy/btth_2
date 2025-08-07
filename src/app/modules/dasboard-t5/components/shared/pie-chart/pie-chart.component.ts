@@ -95,7 +95,7 @@ export class PieChartComponent implements OnChanges {
         show: true,
         position: 'outside',
         formatter: function (params: any) {
-          console.log(params);
+          // console.log(params);
           const value = params.value;
           const percent = Math.round(params.percent); // 👈 Làm tròn đến hàng đơn vị
           return `${value}\n${percent}%`;
@@ -114,7 +114,7 @@ export class PieChartComponent implements OnChanges {
         show: this.config.legend,
         // orient: 'horizontal',
         orient: this.config.legendPosition === "left" ? 'vertical':"horizontal", // legend dọc
-        left: this.config.legendPosition === "left" ? '20%' : 'center', // căn trái nếu là vertical
+        left: this.config.legendPosition === "left" ? '10%' : 'center', // căn trái nếu là vertical
         // left: 'center',
         bottom: this.config.legendPosition === "left" ? "40%" : '0',
         itemWidth: 14,
@@ -141,7 +141,7 @@ export class PieChartComponent implements OnChanges {
           radius: this.config.radius || '50%',
           avoidLabelOverlap: true,
 
-          center: this.config.legendPosition === "left" ? ['65%', '50%'] : ['50%', '50%'], // căn giữa nếu là horizontal
+          center: this.config.legendPosition === "left" ? ['50%', '50%'] : ['50%', '50%'], // căn giữa nếu là horizontal
           label: {
             show: true,
             position: this.config.showLabelInside === false ? 'outer' : 'inside',
@@ -157,14 +157,14 @@ export class PieChartComponent implements OnChanges {
       graphic: [
         {
           type: 'text',
-          left: this.config.legendPosition === "left" ? '60%' : 'center',
+          left: this.config.legendPosition === "left" ? 'center' : 'center',
           top: 'middle',
           style: {
             text: this.config.data.reduce((accumulator: any, currentValue) => accumulator + currentValue.value, 0),
             // textAlign: 'center',
             fill: '#000',
             fontSize: 36,
-            fontWeight: 500
+            fontWeight: 700
           }
         }
       ]

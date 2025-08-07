@@ -71,14 +71,35 @@ import { Ts2Component } from './components/left-panel/components/ts_2/ts.compone
         style({ opacity: 1, transform: 'translateY(650px)' }),
         animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ]),
-      
+
     ]),
-     trigger('slideLeftFadeTCM', [
+    trigger('slideLeftFadeTCM', [
       transition(':enter', [
         style({ opacity: 1, transform: 'translateY(1015px)' }),
         animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ]),
+
+    ]),
+    trigger('slideFadeHide', [
+      transition(':enter', [
+        style({ opacity: 1, transform: 'translateX(960px)' }),
+        animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0px)' }))
+      ]),
       
+    ]),
+    trigger('slideLeftFadeHide', [
+      transition(':enter', [
+        style({ opacity: 1, transform: 'translateY(-650px)' }),
+        animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+
+    ]),
+    trigger('slideLeftFadeTCMHide', [
+      transition(':enter', [
+        style({ opacity: 1, transform: 'translateY(1015px)' }),
+        animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+
     ])
   ],
   templateUrl: './dashboard.component.html',

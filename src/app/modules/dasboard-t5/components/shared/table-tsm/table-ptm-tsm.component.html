@@ -1,0 +1,65 @@
+<div [style.max-height.px]="height" class="table-wrapper">
+  <table class="custom-table">
+    <thead class="table-head">
+      <tr>
+        <th style="font-weight: 700;" class="table-cell">STT</th>
+        <th style="width:100px;font-weight: 700;" class="table-cell ellipsis-text">Hướng</th>
+        <th style="width:180px;font-weight: 700;" class="table-cell ellipsis-text">Loại mục tiêu</th>
+        <th style="width:180px;font-weight: 700;" class="table-cell ellipsis-text">Dữ liệu khai thác</th>
+        <th style="font-weight: 700;" class="table-cell ellipsis-text">Báo cáo chuyên sâu</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <ng-container *ngFor="let row of data">
+        <tr (click)="onRowClick(row)" class="table-row">
+          <td class="table-cell ellipsis-text">
+            <p>{{ row.stt }}</p>
+          </td>
+          <td class="table-cell ellipsis-text">
+            <p>{{ row.direction }}</p>
+          </td>
+          <td class="table-cell ellipsis-text">
+            <p>{{ row.targetType }}</p>
+          </td>
+          <td class="table-cell ellipsis-text">
+            <p>{{ row.exploitData }}</p>
+          </td>
+          <td class="table-cell ellipsis-text">
+<div class="deep-report">
+  <span style="font-size: 22px;">{{ row.deepReport }}</span>
+
+  <span *ngIf="row.cap1 > 0" class="cap cap1">{{ row.cap1 }}</span>
+  <span *ngIf="row.cap2 > 0" class="cap cap2">{{ row.cap2 }}</span>
+  <span *ngIf="row.cap3 > 0" class="cap cap3">{{ row.cap3 }}</span>
+  <span *ngIf="row.cap4 > 0" class="cap cap4">{{ row.cap4 }}</span>
+</div>
+          </td>
+        </tr>
+
+        <!-- Bảng con mở rộng -->
+        <tr *ngIf="row.stt === expandedRowId && showExpanded && row?.details.length > 0 ">
+          <td [attr.colspan]="5" style="padding-left: 0;">
+            <table class="custom-table">
+              <thead class="table-head">
+                <tr>
+                  <th style="font-weight: 700;" class="table-cell ellipsis-text">STT</th>
+                  <th style="width:460px;font-weight: 700;" class="table-cell ellipsis-text">Tên báo cáo</th>
+                  <th style="width:160px;font-weight: 700;" class="table-cell ellipsis-text">Phát hành</th>
+                  <th style="width:200px;font-weight: 700;" class="table-cell ellipsis-text">Mức</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row" *ngFor="let vuln of row?.details">
+                  <td class="table-cell ellipsis-text">{{ vuln.stt }}</td>
+                  <td class="table-cell ellipsis-text">{{ vuln.tenBaoCao }}</td>
+                  <td class="table-cell ellipsis-text">{{ vuln.phatHanh }}</td>
+                  <td class="table-cell ellipsis-text">{{ vuln.muc }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,5 @@
 .table-wrapper {
-  max-height: 455px;
+  max-height: 430px;
   overflow-y: auto;
   border: 1px solid #fff;
   border-radius: 6px;
@@ -27,6 +27,7 @@ table tr td:first-child {
   padding: 12px;
   border: 1px solid #eee;
   text-align: left;
+  font-weight: 500;
   // min-width: 120px;
 }
 
@@ -43,4 +44,40 @@ table tr td:first-child {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;       /* tránh lỗi hiển thị do margin mặc định của <p> */
+}
+.deep-report {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 22px;
+}
+
+.cap::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.cap1::before {
+  background-color: green;
+}
+
+.cap2::before {
+  background-color: orange;
+}
+
+.cap3::before {
+  background-color: dodgerblue;
+}
+
+.cap4::before {
+  background-color: red;
 }

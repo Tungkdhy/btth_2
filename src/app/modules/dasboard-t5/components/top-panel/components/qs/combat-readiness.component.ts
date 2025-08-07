@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/modules/dashboard/services/supabase.service';
+import { ApiHeaderService } from 'src/app/modules/dasboard-t5/services/header.service';
 @Component({
   selector: 'app-qs',
   standalone: true,
@@ -9,40 +10,60 @@ import { SupabaseService } from 'src/app/modules/dashboard/services/supabase.ser
   styleUrls: ['./combat-readiness.component.scss'],
 })
 export class QSComponent {
-  combatReadinessData: any=[
-  {
-    "loai": "Trực chỉ huy",
-    "TM": "D.Minh",
-    "C1": "B.Sơn",
-    "HCKT": "D.Hội",
-    "CumS1": "P.Cường",
-    "CumS2": "N.Cường",
-    "CumS3": "N.Linh"
-  },
-  {
-    "loai": "Trạng thái SSCD",
-    "TM": "TX",
-    "C1": "TX",
-    "HCKT": "TX",
-    "CumS1": "TX",
-    "CumS2": "TX",
-    "CumS3": "Cao"
-  },
-  {
-    "loai": "Cấp độ xử trí",
-    "TM": "",
-    "C1": "",
-    "HCKT": "",
-    "CumS1": "Cấp độ 1",
-    "CumS2": "Cấp độ 1",
-    "CumS3": "Cấp độ 3"
-  }
-];
+  combatReadinessData: any = [
+    {
+      "loai": "Trực chỉ huy",
+      "TM": "D.Minh",
+      "C1": "B.Sơn",
+      "HCKT": "D.Hội",
+      "CumS1": "P.Cường",
+      "CumS2": "N.Cường",
+      "CumS3": "N.Linh"
+    },
+    {
+      "loai": "Trạng thái SSCD",
+      "TM": "TX",
+      "C1": "TX",
+      "HCKT": "TX",
+      "CumS1": "TX",
+      "CumS2": "TX",
+      "CumS3": "Cao"
+    },
+    {
+      "loai": "Cấp độ xử trí",
+      "TM": "",
+      "C1": "",
+      "HCKT": "",
+      "CumS1": "Cấp độ 1",
+      "CumS2": "Cấp độ 1",
+      "CumS3": "Cấp độ 3"
+    }
+  ];
   constructor(
     private supabase: SupabaseService,
     private cdr: ChangeDetectorRef,
-  ) {}
+    private apiHeaderService: ApiHeaderService
+  ) { }
+  data: any = {};
 
+  ngOnInit() {
+    // Dữ liệu bạn đưa
+    const body = {
+      "p_ngay_kip_truc": "20250131080000"
+    }
+    this.apiHeaderService.fetchDataTruc(body).subscribe({
+      next: (res) => {
+        this.data = res[0]
+        this.cdr.detectChanges()
+      },
+      error: (e) => {
+        console.log(e);
+
+      }
+    })
+
+    
+  }
   getStatusClass(value: number): string {
     switch (value) {
       case 1:
@@ -57,7 +78,12 @@ export class QSComponent {
         return '';
     }
   }
-
+  getDotClass(status: string): string {
+    if (!status) return 'dot';
+    if (status.includes('Ổn định') || status.includes('Bình thường')) return 'dot green';
+    if (status.includes('Cao') || status.includes('Nguy hiểm')) return 'dot red';
+    return 'dot';
+  }
   getStatusText(value: number, id: number): string {
     if (id === 2 || id === 3) {
       switch (value) {

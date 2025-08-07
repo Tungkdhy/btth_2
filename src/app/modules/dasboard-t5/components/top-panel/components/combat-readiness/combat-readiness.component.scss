@@ -14,8 +14,16 @@
   font-size: 22px;
   font-weight: 500;
   font-family: "Inter", sans-serif !important;
+      table-layout: fixed;
 }
-
+.network-table th:nth-child(3),  
+.network-table td:nth-child(3) {  
+  width: 140px;  
+}
+.network-table th:nth-child(1),  
+.network-table td:nth-child(1) {  
+  width: 240px;  
+}
 .network-table th,
 .network-table td {
   border: 1px solid #ddd;
@@ -27,8 +35,16 @@
   background: #f9f9f9;
   font-weight: 600;
   text-align: left;
+  
 }
 
 .network-table td strong {
   font-weight: 600;
+}
+.ellipsis-text {
+  // max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;       /* tránh lỗi hiển thị do margin mặc định của <p> */
 }

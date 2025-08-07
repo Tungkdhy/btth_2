@@ -1,0 +1,34 @@
+<div [style.max-height.px]="height" class="table-wrapper">
+  <table class="custom-table">
+    <thead class="table-head">
+      <tr>
+        <th *ngFor="let col of columns" class="table-cell">
+          {{ col.label }}
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <ng-container *ngFor="let row of data">
+        <tr class="table-row">
+          <td *ngFor="let col of columns" (click)="onRowClick(row)" class="table-cell">
+            <ng-container *ngIf="col.field === 'status' || col.field === 'level'; else normalCell">
+              <app-badge [label]="row[col.field]" type="status"></app-badge>
+            </ng-container>
+
+            <ng-template #normalCell>
+              <p [ngStyle]="{ color: row.stt === expandedRowId ? 'blue' : 'inherit' }" class="ellipsis-text">{{ row[col.field]}}</p>
+            </ng-template>
+          </td>
+        </tr>
+
+        <!-- Bảng con mở rộng -->
+        <tr class="table-row" *ngIf="row.stt === expandedRowId ">
+          <td [attr.colspan]="columns.length" style="padding: 16px;background: #f4f6f7;text-align: justify;font-weight: 600;">
+             {{detail}}
+          </td>
+         
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
