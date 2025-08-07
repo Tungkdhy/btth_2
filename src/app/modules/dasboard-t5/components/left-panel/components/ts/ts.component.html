@@ -11,37 +11,40 @@
                 <h3>
                   Trinh sát mạng
                 </h3>
-                <nz-range-picker class="custom-range-picker" nzSize="large" [(ngModel)]="date"
+                <nz-range-picker class="custom-range-picker" nzSize="large" nzFormat="dd/MM/YYYY" [(ngModel)]="date"
                   (ngModelChange)="onChange($event)"></nz-range-picker>
               </div>
               <div>
                 <div style="padding:12px 0;">
-                  <app-header-chart [title]="'Tình hình không gian mạng'" />
+                  <app-header-chart [title]="'Tình hình không gian mạng'" [subTitle]="'Tổng: ' + thKGM.length"/>
                 </div>
-                <app-table-ptm [headers]="['STT','Thông tin lộ lọt','Ngày', 'Chủ quan']"
-                  [fields]="['stt', 'thông tin lộ lọt', 'ngày', 'chủ quan']" [data]="dataLeak">
-                </app-table-ptm>
+                <app-table-kgm *ngIf="thKGM.length > 0" [columns]="[
+    { label: 'STT', field: 'stt' },
+    { label: 'Nội dung', field: 'noi_dung_rut_gon' },
+    { label: 'Thời gian', field: 'ngay_su_kien' }
+  ]" [data]="thKGM"></app-table-kgm>
               </div>
               <div class="row" style="margin: 0;">
                 <div style="padding:12px 0;">
-                  <app-header-chart [title]="'Lộ lọt dữ liệu'" />
+                  <app-header-chart [subTitle]="chartConfig.subTitle" [title]="'Lộ lọt dữ liệu'" />
                 </div>
-                <div class="col-5" style="position: relative;">
-                  <app-pie-chart [config]="chartConfig"></app-pie-chart>
-                  <div style="position: absolute;bottom: 16px;left:12px;">
+                <div class="col-4" style="position: relative;">
+                  <app-pie-chart [config]="chartConfig" ></app-pie-chart>
+                  <div style="position: absolute;bottom: 10px;left:12px;">
                     <app-legend [items]="[
   { color: '#008000', label: 'BNN' },
   { color: '#1E90FF', label: 'VPQH' },
   { color: '#FFA500', label: 'VPCP' },
   { color: '#FF0000', label: 'Quân đội' },
-  { color: '#FF00FF', label: 'Khác' }
+  { color: 'rgb(140, 119, 119)', label: 'Khác' }
 ]"></app-legend>
                   </div>
                 </div>
-                <div class="col-7" style="padding: 0;">
-                  <app-table-ptm [headers]="['STT','Thông tin lộ lọt','Ngày', 'Chủ quan']"
-                    [fields]="['stt', 'thông tin lộ lọt', 'ngày', 'chủ quan']" [data]="dataLeak">
-                  </app-table-ptm>
+                <div class="col-8" style="padding: 0;">
+
+                  <app-table-ll [headers]="['STT','TT lộ lọt','Ngày', 'Chủ quan']"
+                    [fields]="['stt', 'tt lộ lọt', 'ngày', 'chủ quan']" [data]="dataLeak">
+                  </app-table-ll>
                 </div>
 
               </div>
@@ -54,8 +57,8 @@
       <div style="padding:12px 0;">
         <app-header-chart [title]="'Tổ chức hacker'" />
       </div>
-      <app-table-ptm [height]="'480'" [headers]="['STT','Thông tin lộ lọt','Số lượng','Thời gian', 'Trạng thái']"
-        [fields]="['stt', 'thông tin lộ lọt', 'số lượng', 'thời gian', 'trạng thái']" [data]="dataFollow">
+      <app-table-ptm [height]="'480'" [headers]="['STT','TT lộ lọt','Số lượng','Thời gian', 'Trạng thái']"
+        [fields]="['stt', 'tt lộ lọt', 'số lượng', 'thời gian', 'trạng thái']" [data]="dataFollow">
       </app-table-ptm>
     </div>
   </div>

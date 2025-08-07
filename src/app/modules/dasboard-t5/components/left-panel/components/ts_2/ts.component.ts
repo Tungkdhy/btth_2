@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ApiTSService } from 'src/app/modules/dasboard-t5/services/ts.service';
 import { NuanceInforComponent } from "../../../../../dashboard/components/shared/information-warface/nuance-infor/nuance-infor.component";
 import { BieuDoBvTieuCucComponent } from "../../../../../dashboard/components/shared/information-warface/bieu-do-bv-tieu-cuc/bieu-do-bv-tieu-cuc.component";
 import { HotTopicComponent } from "../../../../../dashboard/components/shared/information-warface/hot-topic/hot-topic.component";
@@ -14,80 +15,64 @@ import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
+import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
+import { TablePtmV2Component } from '../../../shared/table-ptm_v2/table-ptm-v2.component';
+import { CommonModule } from '@angular/common';
+import { forkJoin } from 'rxjs';
+import { convertStatsToChartConfig, convertToDataLeak } from 'src/app/modules/dasboard-t5/utils/covertDataLeak';
+import { TableKGMComponent } from '../../../shared/table-kgm/table-kgm.component';
+import { TableLLComponent } from '../../../shared/table-ll/table-ll.component';
+import dayjs from 'dayjs';
+type SimplifiedItem = {
+  stt: number;
+  noi_dung_day_du: string;
+  noi_dung_rut_gon: string;
+  ngay_su_kien: string;
+};
 @Component({
   selector: 'app-ts-2',
   standalone: true,
   templateUrl: './ts.component.html',
   styleUrls: ['./ts.component.scss'],
-  imports: [NuanceInforComponent,NzDatePickerModule,FormsModule,HeaderChartComponent, BieuDoBvTieuCucComponent, TablePtmComponent, HotTopicComponent, LineChartComponent, ViralPostsComponent, LivestreamWarningComponent, PieChartComponent, CustomTableComponent, StackChart],
+  imports: [NuanceInforComponent, TableLLComponent, TableKGMComponent, TablePtmV2Component, CommonModule, ChuthichComponent, NzDatePickerModule, FormsModule, HeaderChartComponent, BieuDoBvTieuCucComponent, TablePtmComponent, HotTopicComponent, LineChartComponent, ViralPostsComponent, LivestreamWarningComponent, PieChartComponent, CustomTableComponent, StackChart],
 })
-export class Ts2Component {
-  date = null
-  livestreamList: LivestreamItem[] = [
-    {
-      name: 'VOA Tiếng Việt',
-      datetime: '13/03/2025',
-      time: '23:30',
-      views: 211,
-      interactions: 0,
-      avatarUrl: 'assets/avatar-voa.png'
-    },
-    {
-      name: 'VOA Tiếng Việt',
-      datetime: '13/03/2025',
-      time: '20:53',
-      views: 203,
-      interactions: 0
-    },
-    {
-      name: 'VOA Tiếng Việt',
-      datetime: '13/03/2025',
-      time: '23:30',
-      views: 211,
-      interactions: 0,
-      avatarUrl: 'assets/avatar-voa.png'
-    },
+export class Ts2Component implements OnInit {
+  date: Date[] = [
+    new Date(2025, 0, 31), // tháng 1
+    new Date(2025, 7, 31)  // tháng 8
   ];
-  postList: ViralPost[] = [
-    {
-      title: 'Đăng status Facebook',
-      date: '06/03/2025',
-      time: '16:14',
-      likes: '69K',
-      comments: '1.8K',
-      shares: '1.6K'
-    },
-    {
-      title: 'Đăng status Facebook',
-      date: '09/03/2025',
-      time: '08:27',
-      likes: '34K',
-      comments: '2.6K',
-      shares: '7.7K'
-    }
-  ];
+  thKGM: SimplifiedItem[] = []
   data: any[] = [
     {
-      'description': "Thông tin lộ lọt liên quan đến Bộ, Ban Ngành",
+      'description': "Tt lộ lọt liên quan đến Bộ, Ban Ngành",
       'value': "12",
     },
     {
-      'description': "Thông tin lộ lọt liên quan đến VPQH",
+      'description': "Tt lộ lọt liên quan đến VPQH",
       'value': "20",
     },
     {
-      'description': "Thông tin lộ lọt liên quan đến VPCP",
+      'description': "Tt lộ lọt liên quan đến VPCP",
       'value': "30",
     },
     {
-      'description': "Thông tin lộ lọt liên quan đến Quân đội",
+      'description': "Tt lộ lọt liên quan đến Quân đội",
       'value': "21",
     },
     {
-      'description': "Thông tin lộ lọt khác",
+      'description': "Tt lộ lọt khác",
       'value': "40",
     },
   ]
+  data2 = [
+    { stt: 1, title: 'TK thư viện số', ngay: '15/7/2025', chuquan: 'VPQH' },
+    { stt: 2, title: 'TK Văn phòng Đ...', ngay: '11/7/2025', chuquan: 'VPCP' },
+    { stt: 3, title: 'TK Đại sứ quán...', ngay: '10/7/2025', chuquan: 'Khác' },
+    { stt: 4, title: 'Tài liệu SQLQ 2', ngay: '10/7/2025', chuquan: 'Bộ, Ban' },
+    { stt: 5, title: 'TK Bộ công thư...', ngay: '09/7/2025', chuquan: 'VPQH' },
+    { stt: 6, title: 'TK Kho bạc Nh...', ngay: '07/7/2025', chuquan: 'Khác' },
+    { stt: 7, title: 'TK CSDL', ngay: '02/7/2025', chuquan: 'VPCP' }
+  ];
   chartConfig: PipeChartConfig = {
     data: [
       { value: 4, name: 'BBN', itemStyle: { color: 'rgba(28, 155, 83, 1)' } },
@@ -99,11 +84,11 @@ export class Ts2Component {
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
     legendPosition: 'bottom',
-    radius: ['35%', '55%'],
+    radius: ['30%', '55%'],
 
     showLabelInside: false,
     height: '380px',
-    legend:true
+    legend: false
   };
   config: StackChartConfig = {
     isStacked: true,
@@ -229,43 +214,67 @@ export class Ts2Component {
   dataLeak: any[] = [
     {
       stt: 1,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "VPCP"
     },
     {
       stt: 2,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "Quân đội"
     },
     {
       stt: 3,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "Khác"
     },
     {
       stt: 4,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "Bộ, Ban"
     },
     {
       stt: 5,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "VPCP"
     },
     {
       stt: 6,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "VPCP"
     },
     {
       stt: 7,
-      "thông tin lộ lọt": "Thông tin về tài khoản",
+      "tt lộ lọt": "Thông tin về tài khoản",
+      "ngày": "15/05/2025",
+      "chủ quan": "VPCP"
+    },
+    {
+      stt: 8,
+      "tt lộ lọt": "Thông tin về tài khoản",
+      "ngày": "15/05/2025",
+      "chủ quan": "VPCP"
+    },
+    {
+      stt: 9,
+      "tt lộ lọt": "Thông tin về tài khoản",
+      "ngày": "15/05/2025",
+      "chủ quan": "VPCP"
+    },
+    {
+      stt: 10,
+      "tt lộ lọt": "Thông tin về tài khoản",
+      "ngày": "15/05/2025",
+      "chủ quan": "VPCP"
+    },
+    {
+      stt: 11,
+      "tt lộ lọt": "Thông tin về tài khoản",
       "ngày": "15/05/2025",
       "chủ quan": "VPCP"
     }
@@ -273,82 +282,139 @@ export class Ts2Component {
   dataFollow = [
     {
       stt: 1,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 3.142,
       "thời gian": "15/03/2025",
       "trạng thái": "Bình thường"
     },
     {
       stt: 2,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 2.718,
       "thời gian": "22/07/2025",
       "trạng thái": "Bình thường"
     },
     {
       stt: 3,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 4.669,
       "thời gian": "05/11/2025",
       "trạng thái": "Nguy cơ cao"
     },
     {
       stt: 4,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 1.414,
       "thời gian": "18/08/2025",
       "trạng thái": "Bình thường"
     },
     {
       stt: 5,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 6.283,
       "thời gian": "30/01/2025",
       "trạng thái": "Nguy cơ cao"
     },
     {
       stt: 6,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 5.000,
       "thời gian": "12/04/2025",
       "trạng thái": "Bình thường"
     },
     {
       stt: 7,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 7.389,
       "thời gian": "27/09/2025",
       "trạng thái": "Nguy cơ cao"
     },
     {
       stt: 8,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 8.000,
       "thời gian": "21/06/2025",
       "trạng thái": "Theo dõi"
     },
     {
       stt: 9,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 9.000,
       "thời gian": "15/05/2025",
       "trạng thái": "Bình thường"
     },
-     {
+    {
       stt: 10,
-      "thông tin lộ lọt": "Thông tin KGM về A50 cần theo dõi",
+      "tt lộ lọt": "Thông tin KGM về A50 cần theo dõi",
       "số lượng": 9.000,
       "thời gian": "15/05/2025",
       "trạng thái": "Bình thường"
     },
   ]
+  constructor(private apiTSService: ApiTSService, private cdr: ChangeDetectorRef) { }
 
+  ngOnInit() {
+    const body = {
+      startDate: '20250101000000',
+      endDate: '20250831235959',
+      p_page: 1,
+      p_page_size: 1000
+    };
+    this.loadData('20250101000000', '20250831235959', 1, 1000)
+
+  }
+  loadData(startDate: string, endDate: string, p_page: number, p_page_size: number) {
+    const body = {
+      p_start_date: startDate,
+      p_end_date: endDate,
+      p_page,
+      p_page_size
+    };
+
+    forkJoin([
+      this.apiTSService.fetchData(body),
+      this.apiTSService.getDataLL(body)
+    ]).subscribe({
+      next: ([res1, res2]) => {
+        // Lấy dữ liệu
+        this.thKGM = [...this.simplifyData(res1)];
+
+
+        this.dataLeak = convertToDataLeak(res2)
+
+        this.chartConfig = convertStatsToChartConfig(res2, '300px')
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('❌ Lỗi:', err);
+      }
+    });
+  }
+
+  simplifyData(data: any): SimplifiedItem[] {
+    return data.map((item: SimplifiedItem, index: number) => ({
+      stt: index + 1,
+      noi_dung_day_du: item.noi_dung_day_du,
+      noi_dung_rut_gon: item.noi_dung_rut_gon,
+      ngay_su_kien: this.formatDate(item.ngay_su_kien)
+    }));
+  }
   onPopupToggled: (e: any) => {
 
   }
   onChange(event: any) {
-    // this.data = event;
-    // Call your API here with the selected date range
-    console.log('Selected date range:', event);
+    if (event && event.length === 2) {
+      const start = dayjs(event[0]).format('YYYYMMDD') + '000000'; // Bắt đầu ngày
+      const end = dayjs(event[1]).format('YYYYMMDD') + '235959'; // Cuối ngày
+
+      this.loadData(start, end, 1, 1000);
+    }
+  }
+  formatDate(dateStr: string): string {
+    if (dateStr.length < 8) return "";
+    const year = dateStr.slice(0, 4);
+    const month = dateStr.slice(4, 6);
+    const day = dateStr.slice(6, 8);
+    return `${day}/${month}/${year}`;
   }
 }

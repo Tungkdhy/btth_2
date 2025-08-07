@@ -33,11 +33,11 @@ export class StackChartHori implements OnChanges {
         formatter: this.config.tooltipFormatter
           ? this.config.tooltipFormatter
           : (params: any) => {
-              // console.log(param);
-              
-              const param = params[0];
-              return `X: ${param.value} báo cáo ${param.seriesName}`;
-            }
+            // console.log(param);
+
+            const param = params[0];
+            return `X: ${param.value} báo cáo ${param.seriesName}`;
+          }
       },
       legend: {
         show: true,
@@ -52,7 +52,7 @@ export class StackChartHori implements OnChanges {
         icon: 'circle',
         formatter: this.config.legendFormatter ? this.config.legendFormatter : (name: string) => {
           const item = this.config.series.find((s: any) => s.name === name);
-          
+
           if (this.config.isStacked) {
             // Nếu là stack, tính tổng các giá trị
             if (item?.data) {
@@ -95,11 +95,11 @@ export class StackChartHori implements OnChanges {
     };
   }
 
-  generateStackedSeries():BarSeriesOption[] {
-    return this.config.series.map((item:any, index:any, array:any) => ({
+  generateStackedSeries(): BarSeriesOption[] {
+    return this.config.series.map((item: any, index: any, array: any) => ({
       name: item.name,
       type: 'bar',
-      stack:item?.stack ?item.stack: this.config.isStacked ? 'total' : undefined, // << tùy theo isStacked
+      stack: item?.stack ? item.stack : this.config.isStacked ? 'total' : undefined, // << tùy theo isStacked
       emphasis: { focus: 'self' },
       // barCategoryGap: '50%',
 
@@ -108,7 +108,8 @@ export class StackChartHori implements OnChanges {
         position: 'inside',  // Hoặc 'top', 'inside', 'insideRight' tùy bạn
         fontSize: 22,
         fontWeight: 'normal',
-        color: '#fff'        // màu chữ
+        color: '#fff',
+        formatter: (params: any) => params.value === 0 ? '' : params.value        // màu chữ
       },
       barCategoryGap: '15%',
       itemStyle: {

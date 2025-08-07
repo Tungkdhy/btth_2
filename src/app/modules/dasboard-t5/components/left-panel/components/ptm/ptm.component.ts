@@ -10,16 +10,20 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
+import dayjs from 'dayjs';
 @Component({
   selector: 'app-ptm',
   templateUrl: './ptm.component.html',
   styleUrls: ['./ptm.component.scss'],
   standalone: true,
-  imports: [TablePtmComponent,FormsModule,NzDatePickerModule,StackChartHori, StackChart, PieChartComponent, HeaderChartComponent,CommonModule],
+  imports: [TablePtmComponent, FormsModule, NzDatePickerModule, StackChartHori, StackChart, PieChartComponent, HeaderChartComponent, CommonModule],
 })
 export class PtmComponent {
-    date = null
-    data = [
+  date: Date[] = [
+    new Date(2025, 0, 31), // tháng 1
+    new Date(2025, 7, 31)  // tháng 8
+  ];
+  data = [
     { label: 'Thiết bị', value: 12000 },
     { label: 'Máy tính', value: 14000 },
     { label: 'EDR', value: 1500 },
@@ -70,10 +74,10 @@ export class PtmComponent {
   ]
   stackChartConfig = {
     title: 'Biểu đồ khai thác',
-    categories: ['QK5', 'QK2', 'CNQP','BTL BĐBP','PKKQ','QCHQ','QK7','TTLL','TCCT'],
+    categories: ['QK5', 'QK2', 'CNQP', 'BĐBP', 'PKKQ', 'QCHQ', 'QK7', 'TTLL', 'TCCT'],
     series: [
-      { name: 'Thiết bị', data: [120, 132, 101,90,102,105,60,77,38], color: '#128040ff' },
-      { name: 'Cảnh báo', data: [220, 182, 191,200,187,210,199,190,180], color: '#E74C3C' },
+      { name: 'Thiết bị', data: [120, 132, 101, 90, 102, 105, 60, 77, 38], color: '#128040ff' },
+      { name: 'Cảnh báo', data: [220, 182, 191, 200, 187, 210, 199, 190, 180], color: '#E74C3C' },
 
     ],
     height: '360px',
@@ -109,7 +113,7 @@ export class PtmComponent {
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
     legendPosition: 'left',
-    radius: ['30%', "50%"], 
+    radius: ['30%', "50%"],
     showLabelInside: false,
     height: '480px',
     legend: true,
@@ -134,7 +138,7 @@ export class PtmComponent {
     title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
     height: '480px',
     isStacked: false,
-    isShowLabel:false,
+    isShowLabel: false,
     categories: ['Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Exfiltration', 'Command and Control', 'Impact'],
     series: [
       {
@@ -166,7 +170,12 @@ export class PtmComponent {
     const parts = name.split(' ');  // Tách theo dấu cách
     return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : name;
   }
-    onChange(result: Date[]): void {
-    console.log('onChange: ', result);
+  onChange(event: Date[]): void {
+    if (event && event.length === 2) {
+      const start = dayjs(event[0]).format('YYYYMMDD') + '000000'; // Bắt đầu ngày
+      const end = dayjs(event[1]).format('YYYYMMDD') + '235959'; // Cuối ngày
+
+      // this.loadData(start, end);
+    }
   }
 }

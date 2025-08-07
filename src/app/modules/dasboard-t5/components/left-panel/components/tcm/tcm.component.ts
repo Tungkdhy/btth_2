@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { EChartsOption } from 'echarts';
+import dayjs,{Dayjs } from 'dayjs';
 
+import { ApiTcmService } from 'src/app/modules/dasboard-t5/services/tcm.service';
 import { TargetComponent } from 'src/app/modules/dashboard/components/shared/cyber-warface/target/target.component';
-import { ExploitLevelComponent } from 'src/app/modules/dashboard/components/shared/cyber-warface/warface-technique/exploit-level.component';
+import { convertToStackChartHoriPOCConfig } from 'src/app/modules/dasboard-t5/utils/converPOC';
+// import { ExploitLevelComponent } from 'src/app/modules/dashboard/components/shared/cyber-warface/warface-technique/exploit-level.component';
 import { ForceComponent } from 'src/app/modules/dashboard/components/shared/cyber-warface/force/force.component';
 import { CollectedDataComponent } from 'src/app/modules/dashboard/components/shared/cyber-warface/collected-data/collected-data.component';
 // import { ExploitLevelChartComponent } from '../../../shared/stack-chart/stack-chart.component';
@@ -22,6 +24,12 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { AppStateService } from 'src/app/core/services/app-state.service';
 import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
+import { convertToStackChartExploitConfig } from 'src/app/modules/dasboard-t5/utils/convertMTTC';
+import { convertToNonStackChartConfig } from 'src/app/modules/dasboard-t5/utils/convertDLTT';
+import { convertToDataReport } from 'src/app/modules/dasboard-t5/utils/covertDataReport';
+import { convertToStackChartConfig } from 'src/app/modules/dasboard-t5/utils/covertKQKT';
+import { convertToStackChartDeepReportConfig } from 'src/app/modules/dasboard-t5/utils/convertBC';
+import { TablePtmTSMComponent } from '../../../shared/table-tsm/table-ptm-tsm.component';
 @Component({
   selector: 'app-tcm',
   standalone: true,
@@ -41,12 +49,16 @@ import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
     TablePtmV2Component,
     NzDatePickerModule,
     FormsModule,
-    ChuthichComponent
+    ChuthichComponent,
+    TablePtmTSMComponent
   ]
 })
 export class TcmComponent implements OnInit {
   reportData: any;
-  date = null;  // Variable to hold the API response data
+  date: Date[] = [
+  new Date(2025, 0, 31), // tháng 1
+  new Date(2025, 7, 31)  // tháng 8
+]; // Variable to hold the API response data
   dataReport = [
     {
       stt: 1,
@@ -55,8 +67,27 @@ export class TcmComponent implements OnInit {
       exploitData: '40GB',
       deepReport: '21 Báo cáo',
       details: [
-        { name: 'CVE-2024-2001', level: 'Cao' },
-        { name: 'CVE-2024-0002', level: 'Trung bình' }
+        {
+          stt: 1,
+          tenBaoCao: "385/BC-T5 Tập trận Taming Sari 23/25",
+          phatHanh: "15/07/2025",
+          muc: "Gửi BTL",
+          icon: "🟢"
+        },
+        {
+          stt: 1,
+          tenBaoCao: "384/BC-T5 Tập trận Kerismas 28/25 (6...)", // Bị cắt
+          phatHanh: "15/07/2025",
+          muc: "Gửi BTL",
+          icon: "🟢"
+        },
+        {
+          stt: 3,
+          tenBaoCao: "372/BC-T5 Báo cáo Kế hoạch hoạt động...", // Bị cắt
+          phatHanh: "10/07/2025",
+          muc: "Gửi BTL",
+          icon: "🔵"
+        }
       ]
     },
     {
@@ -66,13 +97,39 @@ export class TcmComponent implements OnInit {
       exploitData: '120GB',
       deepReport: '20 Báo cáo',
       details: [
-        { name: 'CVE-2024-0001', level: 'Cao' },
-        { name: 'CVE-2024-0002', level: 'Trung bình' }
+        {
+          stt: 1,
+          tenBaoCao: "385/BC-T5 Tập trận Taming Sari 23/25",
+          phatHanh: "15/07/2025",
+          muc: "Gửi BTL",
+          icon: "🟢"
+        },
+        {
+          stt: 1,
+          tenBaoCao: "384/BC-T5 Tập trận Kerismas 28/25 (6...)", // Bị cắt
+          phatHanh: "15/07/2025",
+          muc: "Gửi BTL",
+          icon: "🟢"
+        },
+        {
+          stt: 3,
+          tenBaoCao: "372/BC-T5 Báo cáo Kế hoạch hoạt động...", // Bị cắt
+          phatHanh: "10/07/2025",
+          muc: "Gửi BTL",
+          icon: "🔵"
+        }
       ]
     }
   ];
   stackChartConfig = {
     title: 'Biểu đồ khai thác',
+    subTitle: "Tổng:21/30",
+    statsList: [
+      { color: '#008000', label: `Mức 1: K.Thác cơ bản (2)` },
+      { color: '#1E90FF', label: `Mức 2: Duy trì kết nối (4)` },
+      { color: '#FFA500', label: `Mức 3: Thâm nhập sâu (6)` },
+      { color: '#FF0000', label: `Mức 4: Tấn công phá huỷ (8)` }
+    ],
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
     series: [
       { name: 'Mức 1 K.Thác cơ bản', data: [120, 132, 101, 134, 90, 230], color: 'rgba(28, 155, 83, 1)' },
@@ -82,8 +139,6 @@ export class TcmComponent implements OnInit {
     ],
     height: '330px',
     tooltipFormatter: (params: any) => {
-      console.log(params);
-
       const param = params;
       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
     },
@@ -91,6 +146,7 @@ export class TcmComponent implements OnInit {
   };
   stackChartHoriPOC = {
     title: 'Lỗ hổng bảo mật - Mã khai thác',
+    subTitle: "Tổng: 49",
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
     series: [
       {
@@ -142,7 +198,6 @@ export class TcmComponent implements OnInit {
     ],
     height: '390px',
     tooltipFormatter: (params: any) => {
-      console.log(params);
 
       const param = params;
       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
@@ -154,6 +209,7 @@ export class TcmComponent implements OnInit {
   };
   stackChartHoriConfig = {
     title: 'Mục tiêu tác chiến',
+    subTitle: "Tổng: 12/20",
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
     series: [
       { name: 'Đã khai thác thành công', data: [120, 132, 101, 134, 90, 230], color: 'rgba(28, 155, 83, 1)' },
@@ -162,7 +218,7 @@ export class TcmComponent implements OnInit {
     ],
     height: '390px',
     tooltipFormatter: (params: any) => {
-      console.log(params);
+
 
       const param = params;
       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
@@ -203,6 +259,12 @@ export class TcmComponent implements OnInit {
   stackChartConfig2: StackChartConfig = {
     title: 'Báo cáo chuyên sâu',
     subTitle: 'Tổng: 70 Báo cáo',
+    summaryList: [
+      { color: '#008000', label: 'Cấp 1: Bộ tư lệnh(807)' },
+      { color: '#1E90FF', label: 'Cấp 2: Cục tác chiến(1447)' },
+      { color: '#FFA500', label: 'Cấp 3: TT BTTM, BQP(1237)' },
+      { color: '#FF0000', label: 'Cấp 4: LĐ Đảng, Nhà nước(1997)' }
+    ],
     categories: ['H', 'MAI', 'IND', 'K', 'BRN', 'TAW'],
     series: [
       { name: 'Cấp 1: Bộ tư lệnh', data: [120, 132, 101, 134, 90, 230], color: 'rgba(28, 155, 83, 1)' },
@@ -212,8 +274,6 @@ export class TcmComponent implements OnInit {
     ],
     height: '360px',
     tooltipFormatter: (params: any) => {
-      console.log(params);
-
       const param = params;
       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
     },
@@ -233,29 +293,52 @@ export class TcmComponent implements OnInit {
     height: '390px',
 
   };
-  constructor(private apiService: ApiService, public appStateService: AppStateService) { }
+  constructor(private apiService: ApiService, public appStateService: AppStateService, private apiTcmService: ApiTcmService, private cdr: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    forkJoin({
-      report1: this.apiService.getReportData(),
-      report2: this.apiService.getExploitData()
-    }).subscribe({
-      next: ({ report1, report2 }) => {
-        console.log('Report 1:', report1);
-        console.log('Report 2:', report2);
 
-        // this.reportData = report1;
-        // this.anotherReportData = report2;
-        this.stackChartHoriConfig = this.convertToStackChartExploitConfig(report1);
-        this.stackChartConfig2 = this.convertToStackChartConfig(report2);
-        this.stackChartConfig = this.convertToStackChartLevelConfig(report1);
-        this.chartConfig = this.convertToPipeChartConfig(report1);
-        // this.anotherChartConfig = this.convertToStackChartConfig(report2); // nếu cần
+
+  ngOnInit() {
+    this.loadData('20250101000000', '20250831235959');
+  }
+
+  loadData(startDate: string, endDate: string) {
+    const body = {
+      p_start_date: startDate,
+      p_end_date: endDate
+    };
+
+    forkJoin([
+      this.apiTcmService.fetchData(body),
+      this.apiTcmService.getDataTcm_mttc(body),
+      this.apiTcmService.getDataDLTT(body),
+      this.apiTcmService.getDataBC(body),
+      this.apiTcmService.getDataPOC(body),
+      this.apiTcmService.getDataBCCS(body)
+    ]).subscribe({
+      next: ([res1, res2, res3, res4, res5,res6]) => {
+        // Lấy dữ liệu mục tiêu khai thác
+        this.stackChartHoriConfig = convertToStackChartExploitConfig(res2);
+        // Lây dữ liệu mục tiêu tác chiến
+        this.stackChartConfig = convertToStackChartConfig(res1);
+        // Lấy dữ liệu thu thập được
+        this.nonStackChartConfig = convertToNonStackChartConfig(res3)
+        //Lấy dữ liệu báo cáo chuyên sâu
+        this.stackChartConfig2 = convertToStackChartDeepReportConfig(res4)
+        //Lấy dữ liệu mã khai thác
+        this.stackChartHoriPOC = convertToStackChartHoriPOCConfig(res5)
+        //Lấy danh sách báo cáo chuyên sâu
+        this.dataReport = convertToDataReport(res6)
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Error fetching reports:', err);
+        console.error('❌ Lỗi:', err);
       }
     });
+  }
+
+  // Khi thay đổi thời gian
+  onTimeChange(startDate: string, endDate: string) {
+    this.loadData(startDate, endDate);
   }
   getLevelOnly(name: string): string {
     const parts = name.split(' ');  // Tách theo dấu cách
@@ -341,68 +424,39 @@ export class TcmComponent implements OnInit {
       },
     };
   }
-  convertToStackChartExploitConfig(data: any[]) {
-    const categories = data.map(d => d.target);
+  // convertToStackChartExploitConfig(data: any[]) {
+  //   const categories = data.map(d => d.target);
 
-    return {
-      title: 'Mục tiêu tác chiến',
-      categories: this.stackChartHoriConfig.categories,
-      isStacked: true,
-      series: [
-        {
-          name: 'Đã khai thác thành công',
-          data: data.map(d => d.current),
-          color: 'rgba(28, 155, 83, 1)'
-        },
-        {
-          name: 'Đang tiến hành khai thác',
+  //   return {
+  //     title: 'Mục tiêu tác chiến',
+  //     categories: this.stackChartHoriConfig.categories,
+  //     isStacked: true,
+  //     series: [
+  //       {
+  //         name: 'Đã khai thác thành công',
+  //         data: data.map(d => d.current),
+  //         color: 'rgba(28, 155, 83, 1)'
+  //       },
+  //       {
+  //         name: 'Đang tiến hành khai thác',
 
-          data: data.map(d => d.non_current),
-          color: '#045e2b'
-        },
-      ],
-      height: '390px',
-      tooltipFormatter: (params: any) => {
-        console.log(params);
+  //         data: data.map(d => d.non_current),
+  //         color: '#045e2b'
+  //       },
+  //     ],
+  //     height: '390px',
+  //     tooltipFormatter: (params: any) => {
+  //       console.log(params);
 
-        const param = params;
-        return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
-      },
-      legendFormatter: (name: string) => {
-        return name;
-      }
-    };
-  }
-  convertToPipeChartConfig(input: any[]) {
-    const colorPalette = [
-      'rgba(28, 155, 83, 1)',
-      'rgba(52, 131, 251, 1)',
-      'rgba(210, 0, 26, 1)',
-      'rgba(255, 174, 0, 1)',
-      'rgba(128, 0, 255, 1)',
-      'rgba(255, 0, 127, 1)'
-    ];
+  //       const param = params;
+  //       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(param.seriesName ?? '')}`;
+  //     },
+  //     legendFormatter: (name: string) => {
+  //       return name;
+  //     }
+  //   };
+  // }
 
-    const data = input.map((item, index) => ({
-      value: item.level_one + item.level_two + item.level_three + item.level_four,
-      name: item.target,
-      itemStyle: {
-        color: colorPalette[index % colorPalette.length]
-      }
-    }));
-
-    const config: PipeChartConfig = {
-      data,
-      title: '',
-      colors: colorPalette,
-      legendPosition: 'bottom',
-      radius: ['30%', '55%'],
-      showLabelInside: false,
-      height: '306px'
-    };
-
-    return config;
-  }
   handleRowClick(row: any) {
     console.log('Click từ component con:', row);
     // Ví dụ mở modal chi tiết:
@@ -410,7 +464,12 @@ export class TcmComponent implements OnInit {
     // this.showDetailModal = true;
   }
   onChange(event: any) {
+    if (event && event.length === 2) {
+      const start = dayjs(event[0]).format('YYYYMMDD') + '000000'; // Bắt đầu ngày
+      const end = dayjs(event[1]).format('YYYYMMDD') + '235959'; // Cuối ngày
 
+      this.loadData(start, end);
+    }
   }
   toggleMap() {
     this.appStateService.toggleShowMap(); // dùng được ngoài constructor

@@ -10,7 +10,8 @@
     <!-- Các phần tử col-3 sẽ không bị xuống dòng nếu chiều rộng đủ -->
     <div class="col-6 ">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartHoriConfig.title" [subTitle]="'Tổng: 44/123'"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartHoriConfig.title"
+          [subTitle]="stackChartHoriConfig.subTitle"></app-header-chart-v2>
 
         <div class="row">
           <div class="col-12">
@@ -23,7 +24,8 @@
     </div>
     <div class="col-6 ">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartHoriPOC.title" [subTitle]="'Tổng: 86/102'"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartHoriPOC.title"
+          [subTitle]="stackChartHoriPOC.subTitle"></app-header-chart-v2>
         <div class="row">
           <div class="col-12">
             <app-stack-chart-hori [config]="stackChartHoriPOC"></app-stack-chart-hori>
@@ -33,34 +35,31 @@
 
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 ">
+
       <div style="margin-right: 12px;">
+        <app-header-chart-v2 [title]="nonStackChartConfig.title"
+          [subTitle]="nonStackChartConfig.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
       </div>
     </div>
     <div class="col-6">
 
       <div style="margin-right: 12px;">
+        <app-header-chart-v2 [title]="stackChartConfig.title"
+          [subTitle]="stackChartConfig.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig"></app-stack-chart>
-        <app-legend [items]="[
-  { color: '#008000', label: 'Mức 1: K.Thác cơ bản (12)' },
-  { color: '#1E90FF', label: 'Mức 2: Duy trì kết nối (2)' },
-  { color: '#FFA500', label: 'Mức 3: Thâm nhập sâu (2)' },
-  { color: '#FF0000', label: 'Mức 4: Tấn công phá huỷ (5)' }
-]"></app-legend>
+        <app-legend [items]="stackChartConfig.statsList"></app-legend>
       </div>
 
 
     </div>
     <div class="col-6">
       <div style="margin-right: 12px;">
+        <app-header-chart-v2 [title]="stackChartConfig2.title"
+          [subTitle]="stackChartConfig2.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig2"></app-stack-chart>
-        <app-legend [items]="[
-  { color: '#008000', label: 'Cấp 1: Bộ tư lệnh(807)' },
-  { color: '#1E90FF', label: 'Cấp 2: Cục tác chiến(1447)' },
-  { color: '#FFA500', label: 'Cấp 3: TT BTTM, BQP(1237)' },
-  { color: '#FF0000', label: 'Cấp 4: LĐ Đảng, Nhà nước(1997)' }
-]"></app-legend>
+        <app-legend [items]="stackChartConfig2?.summaryList"></app-legend>
       </div>
     </div>
     <div class="col-6">

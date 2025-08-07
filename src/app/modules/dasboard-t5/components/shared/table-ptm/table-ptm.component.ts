@@ -13,7 +13,7 @@ import { BadgeComponent } from '../badge/badge.component';
 })
 export class TablePtmComponent {
   @Input() headers: string[] = ['Cột 1', 'Cột 2'];
-  @Input() height: string = '380px';
+  @Input() height: string = '370px';
   @Input() fields: string[] = ['field1', 'field2']; // field key trong object data
   @Input() data: any[] = [];
   @Input() showExpanded: boolean = false;

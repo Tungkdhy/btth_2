@@ -5,24 +5,26 @@ import { BadgeComponent } from '../badge/badge.component';
 // import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-table-ptm-v2',
-  templateUrl: './table-ptm-v2.component.html',
-  styleUrls: ['./table-ptm-v2.component.scss'],
+  selector: 'app-table-kgm',
+  templateUrl: './table-kgm.component.html',
+  styleUrls: ['./table-kgm.component.scss'],
   standalone: true,
   imports: [CommonModule,BadgeComponent],
 })
-export class TablePtmV2Component {
+export class TableKGMComponent {
   @Input() headers?: string[] = ['Cột 1', 'Cột 2'];
   @Input() height: string = '380px';
   @Input() columns: { label: string; field: string }[] = [];
   @Input() fields?: string[] = ['field1', 'field2']; // field key trong object data
   @Input() data:any;
-  @Input() showExpanded: boolean = false;
+  @Input() detail: string = '';
   @Output() rowClicked = new EventEmitter<any>();
   // @Output() \ = new EventEmitter<any>();
   expandedRowId: number | null = null;
   onRowClick(row: any) {
     this.expandedRowId = this.expandedRowId === row.stt ? null : row.stt;
+    console.log(row);
+    this.detail = row.noi_dung_day_du
     this.rowClicked.emit(row);
   }
 }

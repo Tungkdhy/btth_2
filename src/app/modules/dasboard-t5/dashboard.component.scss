@@ -11,6 +11,28 @@ th {
   border: solid #0c0b0b 1.5px !important;
 }
 
+.view-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  transition: all 0.2s ease-in-out;
+
+  i {
+    font-size: 24px;
+    transition: all 0.2s ease-in-out;
+    color: #666;
+    font-weight: 700;
+  }
+
+  &.active i {
+    font-size: 24px;
+    /* To hơn khi active */
+    color: #007bff;
+    /* Màu xanh khi active */
+  }
+}
+
 table thead {
   background-color: #f3f3f3;
 }
@@ -22,37 +44,46 @@ table tbody tr td {
   font-size: 25px;
   padding: 15px;
 }
+
 table thead tr th {
   text-align: center;
   vertical-align: middle;
   font-size: 30px;
   font-weight: 700;
 }
+
 .card {
   padding: 5px;
   border-radius: 16px;
 }
+
 .inner-card {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   border: solid #0c0b0b 1.5px !important;
 }
+
 .title {
   text-align: center;
   font-size: 40px;
   font-weight: 700;
 }
+
 .green-text {
   color: green;
   font-weight: 700;
 }
+
 .wrap-text {
   width: 450px;
   line-height: 1.5;
 }
+
 table tbody tr:hover {
-  background-color: #f0f0f0; /* Change background color on hover */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  background-color: #f0f0f0;
+  /* Change background color on hover */
+  cursor: pointer;
+  /* Change cursor to pointer on hover */
 }
 
 button {
@@ -64,38 +95,55 @@ button {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
 .selected {
   background-color: #d3d3d3;
 }
+
+.btth-btn {
+  background: #e6e9eb;
+}
+
 .btth-btn.active {
-  background-color: #0b683b; /* xanh lá đậm */
+  background-color: #0b683b;
+  /* xanh lá đậm */
   color: #fff;
 }
+
 .row.gap-8 {
   transition: all 0.3s ease;
 }
-  .section-title {
+
+.section-title {
   display: flex;
   align-items: center;
-  background-color: #f5f5f5; /* màu nền xám nhạt */
+  background-color: #f5f5f5;
+  /* màu nền xám nhạt */
   padding: 4px 12px;
   font-size: 34px;
   font-weight: bold;
-  color: #006400; /* xanh đậm */
+  color: #006400;
+  /* xanh đậm */
   // border-left: 3px solid #00bfff; /* viền xanh bên trái */
 }
+
 .reload-icon {
-  font-size: 28px; /* to hơn */
-  color: white;    /* màu trắng */
+  font-size: 28px;
+  /* to hơn */
+  color: white;
+  /* màu trắng */
   cursor: pointer;
 }
-button{
-      display: flex;
-    align-items: center;
+
+button {
+  display: flex;
+  align-items: center;
 }
+
 .reload-icon.spin {
   animation: spin 1s linear infinite;
 }
+
 .close-icon1 {
   font-size: 36px;
   margin-right: 8px;
@@ -104,5 +152,6 @@ button{
 }
 
 .title-text {
-  color: #006400; /* xanh đậm */
+  color: #006400;
+  /* xanh đậm */
 }
