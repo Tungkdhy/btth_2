@@ -1,5 +1,5 @@
 .table-wrapper {
-  max-height: 380px;
+  max-height: 455px;
   overflow-y: auto;
   border: 1px solid #fff;
   border-radius: 6px;
@@ -10,6 +10,7 @@
   border-collapse: collapse;
    font-family: "Inter", sans-serif !important;
   font-size: 22px;
+    table-layout: fixed;
 }
 
 .table-head {
@@ -18,12 +19,15 @@
   background-color: #fff;
   z-index: 1;
 }
-
+table tr th:first-child,
+table tr td:first-child {
+  width: 80px;
+}
 .table-cell {
   padding: 12px;
   border: 1px solid #eee;
   text-align: left;
-  min-width: 120px;
+  // min-width: 120px;
 }
 
 .table-body .table-row:nth-child(odd) {
@@ -34,7 +38,7 @@
   background-color: #f0f0f0;
 }
 .ellipsis-text {
-  max-width: 150px;
+  // max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

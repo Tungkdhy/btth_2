@@ -1,5 +1,6 @@
 export interface StackChartConfig {
     title?: string;
+    summaryList?: { color: string; label: string; }[],
     subTitle?: string;
     categories: string[];
     series: {

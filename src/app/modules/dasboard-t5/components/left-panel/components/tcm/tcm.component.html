@@ -19,7 +19,7 @@
           </svg>
           Bản đồ hình thái chung
         </button>
-        <nz-range-picker class="custom-range-picker" nzSize="large" [(ngModel)]="date"
+        <nz-range-picker class="custom-range-picker"  nzFormat="dd/MM/YYYY" nzSize="large" [(ngModel)]="date"
           (ngModelChange)="onChange($event)"></nz-range-picker>
 
       </div>
@@ -28,7 +28,7 @@
     <!-- Mục tiêu tác chiến -->
     <div class="col-4 ">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartHoriConfig.title" [subTitle]="'Tổng: 44/123'"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartHoriConfig.title" [subTitle]="stackChartHoriConfig?.subTitle"></app-header-chart-v2>
         <div class="row">
           <div class="col-12">
             <app-stack-chart-hori [config]="stackChartHoriConfig"></app-stack-chart-hori>
@@ -39,7 +39,7 @@
     <!-- Lỗ hổng bảo mật - Mã khai thác -->
     <div class="col-4 ">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartHoriPOC.title" [subTitle]="'Tổng: 86/102'"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartHoriPOC.title" [subTitle]="stackChartHoriPOC.subTitle"></app-header-chart-v2>
         <div class="row">
           <div class="col-12">
             <app-stack-chart-hori [config]="stackChartHoriPOC"></app-stack-chart-hori>
@@ -52,14 +52,9 @@
     <!-- Biểu đồ khai thác -->
     <div class="col-4">
       <div style="margin-right: 12px;">
-        <app-header-chart-v2 [title]="stackChartConfig.title" [subTitle]="'Tổng: 44/123'"></app-header-chart-v2>
+        <app-header-chart-v2 [title]="stackChartConfig.title" [subTitle]="stackChartConfig.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig"></app-stack-chart>
-        <app-legend [items]="[
-  { color: '#008000', label: 'Mức 1: K.Thác cơ bản (12)' },
-  { color: '#1E90FF', label: 'Mức 2: Duy trì kết nối (2)' },
-  { color: '#FFA500', label: 'Mức 3: Thâm nhập sâu (2)' },
-  { color: '#FF0000', label: 'Mức 4: Tấn công phá huỷ (5)' }
-]"></app-legend>
+        <app-legend [items]="stackChartConfig.statsList"></app-legend>
 
       </div>
     </div>
@@ -77,12 +72,7 @@
         <app-header-chart-v2 [title]="stackChartConfig2.title"
           [subTitle]="stackChartConfig2?.subTitle"></app-header-chart-v2>
         <app-stack-chart [config]="stackChartConfig2"></app-stack-chart>
-        <app-legend [items]="[
-  { color: '#008000', label: 'Cấp 1: Bộ tư lệnh(807)' },
-  { color: '#1E90FF', label: 'Cấp 2: Cục tác chiến(1447)' },
-  { color: '#FFA500', label: 'Cấp 3: TT BTTM, BQP(1237)' },
-  { color: '#FF0000', label: 'Cấp 4: LĐ Đảng, Nhà nước(1997)' }
-]"></app-legend>
+        <app-legend [items]="stackChartConfig2?.summaryList"></app-legend>
       </div>
     </div>
     <!-- Danh sách báo cáo chuyên sâu -->
@@ -96,9 +86,9 @@
   ]"></app-header-chart-v2>
       <div class="row">
         <div class="col-12">
-          <app-table-ptm-v2
-            [columns]="[{ label: 'STT', field: 'stt' }, { label: 'Hướng', field: 'direction' }, { label: 'Loại mục tiêu', field: 'targetType' }, { label: 'Dữ liệu khai thác', field: 'exploitData' }, { label: 'Báo cáo chuyên sâu', field: 'deepReport' }]"
-            [data]="dataReport" [showExpanded]="true" (rowClicked)="handleRowClick($event)"></app-table-ptm-v2>
+          <app-table-ptm-tsm
+            
+            [data]="dataReport" [showExpanded]="true" (rowClicked)="handleRowClick($event)"></app-table-ptm-tsm>
         </div>
       </div>
     </div>

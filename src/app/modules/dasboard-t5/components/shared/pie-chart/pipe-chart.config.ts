@@ -7,5 +7,6 @@ export interface PipeChartConfig {
     showLabelInside?: boolean;
     height?: string;
     legend?:boolean,
-    showLegend?: boolean // thêm height custom nếu cần
+    showLegend?: boolean,
+    subTitle?:string // thêm height custom nếu cần
   }

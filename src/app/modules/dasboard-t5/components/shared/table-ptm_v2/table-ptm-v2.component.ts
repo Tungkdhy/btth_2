@@ -16,7 +16,7 @@ export class TablePtmV2Component {
   @Input() height: string = '380px';
   @Input() columns: { label: string; field: string }[] = [];
   @Input() fields?: string[] = ['field1', 'field2']; // field key trong object data
-  @Input() data: any[] = [];
+  @Input() data:any;
   @Input() showExpanded: boolean = false;
   @Output() rowClicked = new EventEmitter<any>();
   // @Output() \ = new EventEmitter<any>();

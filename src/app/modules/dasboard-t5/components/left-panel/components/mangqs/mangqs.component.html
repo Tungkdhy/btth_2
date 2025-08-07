@@ -14,7 +14,7 @@
         [nzShowTime]="true"
       ></nz-range-picker>
     </div>
-    <div class="row">
+    <div class="d-flex gap-6">
       <div class="col-3">
         <app-header-chart [title]="'Phạm vi săn tìm'"></app-header-chart>
         <div class="info-cards">
@@ -26,7 +26,7 @@
         <div class="row" style="margin-top: 16px">
           <!-- <app-pie-chart [config]="chartConfig"></app-pie-chart> -->
           <app-stack-chart-hori
-            [config]="stackChartConfig"
+            [config]="stackChartHoriPOC"
           ></app-stack-chart-hori>
         </div>
       </div>
@@ -34,7 +34,7 @@
       <div class="col-3">
         <app-header-chart
           [title]="'Cảnh báo ATTT'"
-          [subTitle]="'Tổng: 422/500 Thiết bị'"
+          [subTitle]="'Tổng: 12/12 Thiết bị'"
         ></app-header-chart>
         <div class="row">
           <div class="col-12">
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div style="width: 30%">
         <!-- <app-header-chart [title]="'Dấu hiệu tấn công theo chiến - kỹ thuật'"></app-header-chart> -->
         <div class="row">
           <app-header-chart
@@ -52,10 +52,12 @@
           <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
         </div>
       </div>
-      <div class="col-2">
+      <div style="width: 20%">
         <app-header-chart
           [title]="'Kết quả săn tìm mối nguy cơ'"
-          [subTitle]="'Tổng: 361 TB/12 loại MĐ'"
+          [subTitle]="
+            'Tổng: ' + tableData.length + '/' + tableData.length + ' loại MĐ'
+          "
         ></app-header-chart>
         <div class="row mt-4">
           <div class="col-12">
@@ -85,7 +87,7 @@
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
     </div>
-    <div class="row">
+    <div class="d-flex gap-6">
       <div class="col-3">
         <app-header-chart [title]="'Giám sát cổng mở'"></app-header-chart>
         <div class="info-cards">
@@ -105,33 +107,37 @@
       <div class="col-3">
         <app-header-chart
           [title]="'Cảnh báo ATTT'"
-          [subTitle]="'Tổng: 422/500 Thiết bị'"
+          [subTitle]="'Tổng: 7/7 Thiết bị'"
         ></app-header-chart>
         <div class="row">
           <div class="col-12">
-            <app-pie-chart [config]="chartConfig"></app-pie-chart>
+            <app-pie-chart [config]="chartConfigTDH"></app-pie-chart>
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div style="width: 30%">
         <div class="row">
           <app-header-chart
-            [title]="nonStackChartConfig.title"
-            [subTitle]="nonStackChartConfig?.subTitle"
+            [title]="nonStackChartConfigTDH.title"
+            [subTitle]="nonStackChartConfigTDH?.subTitle"
           ></app-header-chart>
-          <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
+          <app-stack-chart [config]="nonStackChartConfigTDH"></app-stack-chart>
         </div>
       </div>
-      <div class="col-2">
+      <div style="width: 20%">
         <div>
           <div class="row align-items-center justify-content-between">
             <div
               class="d-flex align-items-center gap-2"
-              style="background: #f4f6f7; border-radius: 12px; margin-left: 8px"
+              style="
+                background: #f4f6f7;
+                border-radius: 12px;
+                justify-content: space-between;
+              "
             >
               <!-- app-header-chart -->
               <app-header-chart
-                [title]="nonStackChartConfig.title"
+                [title]="'Kết quả săn tìm mối nguy cơ'"
                 [subTitle]="nonStackChartConfig?.subTitle"
               ></app-header-chart>
 
@@ -148,7 +154,7 @@
                 <app-table-ptm
                   [headers]="['STT', 'Mã độc', 'Số lượng']"
                   [fields]="['stt', 'name', 'qantity']"
-                  [data]="tableData"
+                  [data]="tableDataTDH"
                 >
                 </app-table-ptm>
               </div>

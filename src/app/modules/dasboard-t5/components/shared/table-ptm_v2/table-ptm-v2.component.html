@@ -16,7 +16,7 @@
             </ng-container>
 
             <ng-template #normalCell>
-              <p class="ellipsis-text" [innerHTML]="row[col.field]"></p>
+              <p class="ellipsis-text">{{ row[col.field]}}</p>
             </ng-template>
           </td>
         </tr>
@@ -27,14 +27,18 @@
             <table class="custom-table">
               <thead class="table-head">
                 <tr>
-                  <th class="table-cell">Tên lỗ hổng</th>
-                  <th class="table-cell">Độ nghiêm trọng</th>
+                  <th class="table-cell">STT</th>
+                  <th class="table-cell">Tên báo cáo</th>
+                  <th class="table-cell">Phát hành</th>
+                  <th class="table-cell">Mức</th>
                 </tr>
               </thead>
               <tbody class="table-body">
                 <tr class="table-row" *ngFor="let vuln of row?.details">
-                  <td class="table-cell">{{ vuln.name }}</td>
-                  <td class="table-cell">{{ vuln.level }}</td>
+                  <td class="table-cell">{{ vuln.stt }}</td>
+                  <td class="table-cell">{{ vuln.tenBaoCao }}</td>
+                  <td class="table-cell">{{ vuln.phatHanh }}</td>
+                  <td class="table-cell">{{ vuln.muc }}</td>
                 </tr>
               </tbody>
             </table>

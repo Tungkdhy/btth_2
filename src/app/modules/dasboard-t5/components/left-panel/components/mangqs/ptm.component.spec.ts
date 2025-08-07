@@ -8,7 +8,7 @@ describe('PtmComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PtmComponent]
+      declarations: [PtmComponent],
     });
     fixture = TestBed.createComponent(PtmComponent);
     component = fixture.componentInstance;
