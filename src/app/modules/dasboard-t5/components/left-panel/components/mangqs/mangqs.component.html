@@ -14,7 +14,7 @@
         [nzShowTime]="true"
       ></nz-range-picker>
     </div>
-    <div class="row">
+    <div class="d-flex gap-6">
       <div class="col-3">
         <app-header-chart [title]="'Phạm vi săn tìm'"></app-header-chart>
         <div class="info-cards">
@@ -26,7 +26,7 @@
         <div class="row" style="margin-top: 16px">
           <!-- <app-pie-chart [config]="chartConfig"></app-pie-chart> -->
           <app-stack-chart-hori
-            [config]="stackChartConfig"
+            [config]="stackChartHoriPOC"
           ></app-stack-chart-hori>
         </div>
       </div>
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div style="width: 30%">
         <!-- <app-header-chart [title]="'Dấu hiệu tấn công theo chiến - kỹ thuật'"></app-header-chart> -->
         <div class="row">
           <app-header-chart
@@ -52,7 +52,7 @@
           <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
         </div>
       </div>
-      <div class="col-2">
+      <div style="width: 20%">
         <app-header-chart
           [title]="'Kết quả săn tìm mối nguy cơ'"
           [subTitle]="'Tổng: 361 TB/12 loại MĐ'"
@@ -85,7 +85,7 @@
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
     </div>
-    <div class="row">
+    <div class="d-flex gap-6">
       <div class="col-3">
         <app-header-chart [title]="'Giám sát cổng mở'"></app-header-chart>
         <div class="info-cards">
@@ -113,7 +113,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div style="width: 30%">
         <div class="row">
           <app-header-chart
             [title]="nonStackChartConfig.title"
@@ -122,12 +122,16 @@
           <app-stack-chart [config]="nonStackChartConfig"></app-stack-chart>
         </div>
       </div>
-      <div class="col-2">
+      <div style="width: 20%">
         <div>
           <div class="row align-items-center justify-content-between">
             <div
               class="d-flex align-items-center gap-2"
-              style="background: #f4f6f7; border-radius: 12px; margin-left: 8px"
+              style="
+                background: #f4f6f7;
+                border-radius: 12px;
+                justify-content: space-between;
+              "
             >
               <!-- app-header-chart -->
               <app-header-chart
