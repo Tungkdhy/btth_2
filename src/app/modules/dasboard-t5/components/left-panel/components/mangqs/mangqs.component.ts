@@ -9,6 +9,12 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { FormsModule } from '@angular/forms';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import dayjs from 'dayjs';
+import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
+import { inject } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-mangqs',
   templateUrl: './mangqs.component.html',
@@ -27,8 +33,167 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   ],
 })
 export class MangqsComponent {
+  constructor(private cdr: ChangeDetectorRef) {}
+  getColorForEvent(eventType: string): string {
+    const colors = {
+      'Authentication Failure': '#4CAF50',
+      'Botnet Activity': '#FFC107',
+      'Phishing Attempt': '#F44336',
+      'Malware Detected': '#9E9E9E',
+      // thêm các loại khác nếu có
+    };
+    // @ts-ignore
+    return colors[eventType] || '#90CAF9'; // default màu nếu không có
+  }
+
+  http = inject(HttpClient);
+  headers = new HttpHeaders({
+    apiKey:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE', // 🔐 Thay YOUR_API_KEY_HERE bằng key thật
+  });
+  date = [dayjs().subtract(7, 'day').toDate(), dayjs().toDate()];
+  onChange(result: Date[]): void {
+    if (result && result.length === 2) {
+      const start = formatDate(result[0], 'yyyyMMddHHmmss', 'en-US');
+      const end = formatDate(result[1], 'yyyyMMddHHmmss', 'en-US');
+
+      this.fetchChartDataWithRange(start, end);
+      this.fetchCbatttData(start, end);
+    }
+  }
+  fetchChartDataWithRange(start: string, end: string) {
+    const body = {
+      p_start_date: start,
+      p_end_date: end,
+    };
+    // pham vi san tim
+    this.http
+      .post<any>('http://10.10.53.58:8002/rest/v1/rpc/mang_qs_pvst', body, {
+        headers: this.headers, // ✅ Đúng cú pháp
+      })
+      .subscribe((res) => {
+        const units = res.data.units_detail || [];
+
+        const categories = units.map((unit: any) => unit.unit_code).slice(0, 3);
+        const deviceData = units
+          .map((unit: any) => unit.total_devices)
+          .slice(0, 3);
+        const edrData = units.map((unit: any) => unit.total_edr).slice(0, 3);
+        const dinhDanhData = units
+          .map((unit: any) => unit.total_dinh_danh)
+          .slice(0, 3);
+
+        this.stackChartHoriPOC = {
+          fontFamily: 'Roboto, sans-serif', // Thay font tại đây
+          toolbar: { show: false },
+          dataLabels: {
+            style: {
+              fontSize: '14px',
+              fontWeight: 'bold',
+              colors: ['#333'],
+            },
+          },
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '12px',
+                fontFamily: 'Roboto',
+                colors: 'red',
+              },
+            },
+          },
+
+          title: 'Phạm vi săn tìm',
+          categories,
+          series: [
+            {
+              name: 'Máy tính',
+              type: 'bar',
+              data: deviceData,
+              color: 'rgba(35, 166, 94, 1)',
+            },
+            {
+              name: 'EDR',
+              type: 'bar',
+              data: edrData,
+              color: 'rgba(51, 126, 255, 1)',
+            },
+            {
+              name: 'Định danh',
+              type: 'bar',
+              data: dinhDanhData,
+              color: 'rgba(251, 171, 0, 1)',
+            },
+          ],
+          height: '660px',
+          tooltipFormatter: (params: any) => `${params.name}`,
+          legendFormatter: (name: string) => name,
+          isStacked: false,
+        };
+        this.cdr.detectChanges();
+      });
+  }
+
+  fetchCbatttData(start: string, end: string) {
+    const body = {
+      p_start_date: start,
+      p_end_date: end,
+      p_event_source: 'QS',
+    };
+
+    this.http
+      .post<any>('http://10.10.53.58:8002/rest/v1/rpc/mang_qs_cbattt', body, {
+        headers: this.headers,
+      })
+      .subscribe((res) => {
+        const details = res?.data?.event_types_detail || [];
+
+        // 👉 Sắp xếp giảm dần theo total_events
+        const sorted = [...details].sort(
+          (a, b) => b.total_events - a.total_events,
+        );
+
+        // 👉 Lấy 3 phần tử đầu tiên
+        const top3 = sorted.slice(0, 3);
+        const others = sorted.slice(3);
+
+        const chartData = top3.map((item) => ({
+          value: item.total_events,
+          name: item.event_type,
+          itemStyle: {
+            color: this.getColorForEvent(item.event_type),
+          },
+        }));
+
+        // 👉 Tính tổng số events còn lại và thêm mục "Other"
+        const otherTotal = others.reduce(
+          (sum, item) => sum + item.total_events,
+          0,
+        );
+        if (otherTotal > 0) {
+          chartData.push({
+            value: otherTotal,
+            name: 'Other',
+            itemStyle: { color: '#BDBDBD' }, // màu xám cho "Other"
+          });
+        }
+
+        this.chartConfig = {
+          data: chartData,
+          title: '',
+          colors: chartData.map((d) => d.itemStyle.color),
+          legendPosition: 'bottom',
+          radius: ['35%', '60%'],
+          showLabelInside: false,
+          height: '660px',
+          legend: true,
+        };
+
+        this.cdr.detectChanges();
+      });
+  }
+
   selectedOption: string = 'Radar';
-  date = null;
   tableData = [
     { stt: 1, 'mã độc': 'Mustang Panda', 'số lượng': 12 },
     { stt: 2, 'mã độc': 'Redline Stealer', 'số lượng': 33 },
@@ -152,27 +317,45 @@ export class MangqsComponent {
     legend: true,
   };
   stackChartHoriPOC = {
-    title: 'Phạm vi săn tìm',
+    fontFamily: 'Roboto, sans-serif', // Thay font tại đây
+    toolbar: { show: false },
+    dataLabels: {
+      style: {
+        fontSize: '14px',
+        fontWeight: 'bold',
+        colors: ['#333'],
+      },
+    },
+    xaxis: {
+      labels: {
+        style: {
+          fontSize: '12px',
+          fontFamily: 'Roboto',
+          colors: 'red',
+        },
+      },
+    },
+    title: 'Biểu đồ khai thác',
     categories: ['BDBP', 'QC HQ', 'QC PKKQ'],
     series: [
       {
         name: 'Máy tính',
         type: 'bar',
         // stack: 'Tổng',
-        data: [48, 48, 48],
+        data: [0, 0, 0],
         color: 'rgba(35, 166, 94, 1)', // màu xanh lá
       },
       {
         name: 'EDR',
         type: 'bar',
         // stack: 'Tổng',
-        data: [9, 9, 9],
+        data: [0, 0, 0],
         color: 'rgba(51, 126, 255, 1)', // màu xanh dương
       },
       {
         name: 'Định danh',
         type: 'bar',
-        data: [30, 33, 28],
+        data: [0, 0, 0],
         color: 'rgba(251, 171, 0, 1)', // màu vàng cam
       },
     ],
@@ -318,7 +501,11 @@ export class MangqsComponent {
     const parts = name.split(' '); // Tách theo dấu cách
     return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : name;
   }
-  onChange(result: Date[]): void {
-    console.log('onChange: ', result);
+
+  ngOnInit(): void {
+    const start = formatDate(this.date[0], 'yyyyMMddHHmmss', 'en-US');
+    const end = formatDate(this.date[1], 'yyyyMMddHHmmss', 'en-US');
+    this.fetchChartDataWithRange(start, end);
+    this.fetchCbatttData(start, end); // 👈 thêm dòng này
   }
 }
