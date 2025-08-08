@@ -17,7 +17,7 @@ import {
   ViralPost,
   ViralPostsComponent,
 } from '../../../shared/viral-posts/viral-posts.component';
-import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
+import { TablePtmComponent } from './table-ptm/table-ptm.component';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
@@ -88,14 +88,14 @@ export class Ts2Component implements OnInit {
         const groups = res?.data?.hacker_groups || [];
         this.dataFollow = groups.map((item: any, index: number) => ({
           stt: index + 1,
-          'tên nhóm hacker': item.name,
-          'hình thức hoạt động': item.description,
-          'mô tả': item.known_for,
-          'thời gian hoạt động gần nhất': item.last_activity,
-          'quốc gia': item.origin_country,
-          'mức độ hoạt động': item.activity_level,
-          'mức độ đe dọa': item.threat_level,
-          'năm thành lập': item.formation_year,
+          ten_nhom_hacker: item.name || '',
+          hinh_thuc_hoat_dong: item.description || '',
+          mo_ta: item.known_for || '',
+          thoi_gian_hoat_dong_gan_nhat: item.last_activity.split('T')[0] || '',
+          quoc_gia: item.origin_country || '',
+          muc_do_hoat_dong: item.activity_level || '',
+          muc_do_de_doa: item.threat_level || '',
+          nam_thanh_lap: item.formation_year || '',
         }));
 
         this.cdr.detectChanges();

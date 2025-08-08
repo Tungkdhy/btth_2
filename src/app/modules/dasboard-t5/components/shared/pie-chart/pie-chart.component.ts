@@ -9,7 +9,7 @@ import { EChartsOption } from 'echarts';
   styleUrls: ['./pie-chart.component.scss'],
   providers: [provideEcharts()],
   standalone: true,
-  imports: [NgxEchartsDirective]
+  imports: [NgxEchartsDirective],
 })
 export class PieChartComponent implements OnChanges {
   @Input() config!: PipeChartConfig;
@@ -27,13 +27,13 @@ export class PieChartComponent implements OnChanges {
       right: '12px',
       top: '20%',
       // bottom: 0,
-      containLabel: true
+      containLabel: true,
     },
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
-      }
+        type: 'shadow',
+      },
     },
     xAxis: {
       type: 'category',
@@ -43,16 +43,28 @@ export class PieChartComponent implements OnChanges {
       axisLabel: { show: true, fontSize: 22, fontWeight: 500, color: '#000' },
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
     },
     series: [
       {
         name: 'Sales',
         type: 'bar',
         data: [
-          { value: 30, name: 'Tích cực', itemStyle: { color: 'rgba(28, 155, 83, 1)' } },
-          { value: 30, name: 'Trung lập', itemStyle: { color: 'rgba(52, 131, 251, 1)' } },
-          { value: 40, name: 'Cần xác minh', itemStyle: { color: 'rgba(210, 0, 26, 1)' } },
+          {
+            value: 30,
+            name: 'Tích cực',
+            itemStyle: { color: 'rgba(28, 155, 83, 1)' },
+          },
+          {
+            value: 30,
+            name: 'Trung lập',
+            itemStyle: { color: 'rgba(52, 131, 251, 1)' },
+          },
+          {
+            value: 40,
+            name: 'Cần xác minh',
+            itemStyle: { color: 'rgba(210, 0, 26, 1)' },
+          },
         ],
         // barWidth: '50%',
 
@@ -61,15 +73,14 @@ export class PieChartComponent implements OnChanges {
           position: 'top',
           fontSize: 22,
           fontWeight: 500,
-          color: '#000'
+          color: '#000',
         },
         itemStyle: {
           borderRadius: [8, 8, 8, 8],
-          color: 'rgba(210, 0, 26, 1)'
-        }
-      }
+          color: 'rgba(210, 0, 26, 1)',
+        },
+      },
     ],
-
   };
   updateChart(): void {
     if (!this.config || !this.config.data) {
@@ -83,13 +94,12 @@ export class PieChartComponent implements OnChanges {
         // bottom: 0, // 👈 đặt xuống dưới biểu đồ
         textStyle: {
           fontSize: 22,
-          fontWeight: 'bold'
-        }
+          fontWeight: 'bold',
+        },
       },
       tooltip: {
         trigger: 'item',
         formatter: '{b}: {c} ',
-
       },
       label: {
         show: true,
@@ -100,7 +110,7 @@ export class PieChartComponent implements OnChanges {
           const percent = Math.round(params.percent); // 👈 Làm tròn đến hàng đơn vị
           return `${value}\n${percent}%`;
         }, // 👈 chính là dòng này hiển thị dữ liệu
-        fontSize: 22 // (optional) tăng size cho dễ nhìn
+        fontSize: 22, // (optional) tăng size cho dễ nhìn
       },
       labelLine: {
         show: true,
@@ -113,16 +123,17 @@ export class PieChartComponent implements OnChanges {
       legend: {
         show: this.config.legend,
         // orient: 'horizontal',
-        orient: this.config.legendPosition === "left" ? 'vertical':"horizontal", // legend dọc
-        left: this.config.legendPosition === "left" ? '10%' : 'center', // căn trái nếu là vertical
+        orient:
+          this.config.legendPosition === 'left' ? 'vertical' : 'horizontal', // legend dọc
+        left: this.config.legendPosition === 'left' ? '10%' : 'center', // căn trái nếu là vertical
         // left: 'center',
-        bottom: this.config.legendPosition === "left" ? "40%" : '0',
+        bottom: this.config.legendPosition === 'left' ? '40%' : '0',
         itemWidth: 14,
         itemHeight: 14,
         // itemGap: 40,
         textStyle: {
           fontSize: 22,
-          fontWeight: 500
+          fontWeight: 500,
         },
         icon: 'circle',
         // formatter: (name: string) => {
@@ -141,33 +152,41 @@ export class PieChartComponent implements OnChanges {
           radius: this.config.radius || '50%',
           avoidLabelOverlap: true,
 
-          center: this.config.legendPosition === "left" ? ['50%', '50%'] : ['50%', '50%'], // căn giữa nếu là horizontal
+          center:
+            this.config.legendPosition === 'left'
+              ? ['50%', '50%']
+              : ['50%', '50%'], // căn giữa nếu là horizontal
           label: {
             show: true,
-            position: this.config.showLabelInside === false ? 'outer' : 'inside',
+            position:
+              this.config.showLabelInside === false ? 'outer' : 'inside',
             fontSize: 22,
           },
           labelLayout: {
-            hideOverlap: true
+            hideOverlap: true,
           },
 
-          data: this.config.data
-        }
+          data: this.config.data,
+        },
       ],
       graphic: [
         {
           type: 'text',
-          left: this.config.legendPosition === "left" ? 'center' : 'center',
+          left: this.config.legendPosition === 'left' ? 'center' : 'center',
           top: 'middle',
           style: {
-            text: this.config.data.reduce((accumulator: any, currentValue) => accumulator + currentValue.value, 0),
+            text: this.config.data.reduce(
+              (accumulator: any, currentValue) =>
+                accumulator + currentValue.value,
+              0,
+            ),
             // textAlign: 'center',
             fill: '#000',
             fontSize: 36,
-            fontWeight: 700
-          }
-        }
-      ]
+            fontWeight: 700,
+          },
+        },
+      ],
     };
   }
 

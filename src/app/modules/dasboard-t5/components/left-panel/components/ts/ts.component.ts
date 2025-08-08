@@ -1,28 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiTSService } from 'src/app/modules/dasboard-t5/services/ts.service';
-import { NuanceInforComponent } from '../../../../../dashboard/components/shared/information-warface/nuance-infor/nuance-infor.component';
-import { BieuDoBvTieuCucComponent } from '../../../../../dashboard/components/shared/information-warface/bieu-do-bv-tieu-cuc/bieu-do-bv-tieu-cuc.component';
-import { HotTopicComponent } from '../../../../../dashboard/components/shared/information-warface/hot-topic/hot-topic.component';
-import { LineChartComponent } from '../../../shared/line-chart/line-chart.component';
 import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';
-import { CustomTableComponent } from '../../../shared/custom-table/custom-table.component';
 import { StackChartConfig } from '../../../shared/stack-chart/stack-chart.config';
-import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
-import {
-  LivestreamItem,
-  LivestreamWarningComponent,
-} from '../../../shared/live-stream/live-stream.component';
-import {
-  ViralPost,
-  ViralPostsComponent,
-} from '../../../shared/viral-posts/viral-posts.component';
-import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
+import { TablePtmComponent } from './table-ptm/table-ptm.component';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
-import { TablePtmV2Component } from '../../../shared/table-ptm_v2/table-ptm-v2.component';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import {
@@ -33,7 +18,6 @@ import dayjs from 'dayjs';
 // import { Tab } from 'bootstrap';
 import { TableKGMComponent } from '../../../shared/table-kgm/table-kgm.component';
 import { TableLLComponent } from '../../../shared/table-ll/table-ll.component';
-import { HeaderChartV2Component } from '../../../shared/header-chart-v2/header-chart-v2.component';
 type SimplifiedItem = {
   stt: number;
   noi_dung_day_du: string;
@@ -46,25 +30,15 @@ type SimplifiedItem = {
   templateUrl: './ts.component.html',
   styleUrls: ['./ts.component.scss'],
   imports: [
-    NuanceInforComponent,
     TableLLComponent,
     TableKGMComponent,
-    TablePtmV2Component,
     CommonModule,
     ChuthichComponent,
     NzDatePickerModule,
     FormsModule,
-    HeaderChartV2Component,
     HeaderChartComponent,
-    BieuDoBvTieuCucComponent,
     TablePtmComponent,
-    HotTopicComponent,
-    LineChartComponent,
-    ViralPostsComponent,
-    LivestreamWarningComponent,
     PieChartComponent,
-    CustomTableComponent,
-    StackChart,
   ],
 })
 export class TsComponent implements OnInit {
