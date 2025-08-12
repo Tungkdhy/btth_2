@@ -5,19 +5,24 @@
       <button (click)="hideTCM()" class="view-toggle-btn" [ngClass]="{ active: isHideTCM }">
         <i class="bi-layout-wtf"></i>
       </button>
-      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
-        (click)="selectNetwork('internet')">
+      <button type="button" class="btth-btn"
+        [ngClass]="{ active: hoveredNetwork === 'internet' || (!hoveredNetwork && selectedNetwork === 'internet') }"
+        (click)="selectNetwork('internet')" (mouseenter)="hoveredNetwork = 'internet'"
+        (mouseleave)="hoveredNetwork = null">
         Mạng Internet
-
       </button>
 
-      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
-        (click)="selectNetwork('military')">
+      <button type="button" class="btth-btn"
+        [ngClass]="{ active: hoveredNetwork === 'military' || (!hoveredNetwork && selectedNetwork === 'military') }"
+        (click)="selectNetwork('military')" (mouseenter)="hoveredNetwork = 'military'"
+        (mouseleave)="hoveredNetwork = null">
         Mạng máy tính Quân sự
       </button>
 
-      <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'special' }"
-        (click)="selectNetwork('special')">
+      <button type="button" class="btth-btn"
+        [ngClass]="{ active: hoveredNetwork === 'special' || (!hoveredNetwork && selectedNetwork === 'special') }"
+        (click)="selectNetwork('special')" (mouseenter)="hoveredNetwork = 'special'"
+        (mouseleave)="hoveredNetwork = null">
         Mạng chuyên dụng
       </button>
     </div>
@@ -43,21 +48,24 @@
 
       <div class="col-6 row gap-6">
         <div *ngIf="(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
-          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'internet' }"
-            (click)="selectNetwork('internet')">
+          <button type="button" class="btth-btn"
+            [ngClass]="{ active: hoveredNetwork === 'internet' || (!hoveredNetwork && selectedNetwork === 'internet') }"
+            (click)="selectNetwork('internet')" (mouseenter)="hoveredNetwork = 'internet'"
+            (mouseleave)="hoveredNetwork = null">
             Mạng Internet
-            <!-- <button >
-              <i class="bi bi-arrow-repeat reload-icon"></i>
-            </button> -->
           </button>
 
-          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'military' }"
-            (click)="selectNetwork('military')">
+          <button type="button" class="btth-btn"
+            [ngClass]="{ active: hoveredNetwork === 'military' || (!hoveredNetwork && selectedNetwork === 'military') }"
+            (click)="selectNetwork('military')" (mouseenter)="hoveredNetwork = 'military'"
+            (mouseleave)="hoveredNetwork = null">
             Mạng máy tính Quân sự
           </button>
 
-          <button type="button" class="btth-btn" [ngClass]="{ active: selectedNetwork === 'special' }"
-            (click)="selectNetwork('special')">
+          <button type="button" class="btth-btn"
+            [ngClass]="{ active: hoveredNetwork === 'special' || (!hoveredNetwork && selectedNetwork === 'special') }"
+            (click)="selectNetwork('special')" (mouseenter)="hoveredNetwork = 'special'"
+            (mouseleave)="hoveredNetwork = null">
             Mạng chuyên dụng
           </button>
         </div>
