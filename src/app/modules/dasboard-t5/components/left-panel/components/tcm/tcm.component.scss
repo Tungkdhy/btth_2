@@ -15,3 +15,22 @@
   border-radius: 12px;
   padding:12px;
 }
+.btth-btn {
+  background-color: transparent; /* mặc định trong suốt */
+  color: black; /* chữ đen */
+  border: 1px solid black; /* viền đen */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btth-btn:hover {
+  background-color: black; /* khi hover nền đen */
+  color: white; /* chữ trắng */
+}
+.btth-btn svg path {
+  fill: black;
+  transition: fill 0.3s ease;
+}
+
+.btth-btn:hover svg path {
+  fill: white;
+}
