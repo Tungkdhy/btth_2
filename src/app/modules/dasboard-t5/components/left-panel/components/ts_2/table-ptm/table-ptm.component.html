@@ -21,7 +21,7 @@
             [ngClass]="columnClasses[field] || ''"
             (click)="onRowClick(row)"
           >
-            <p class="ellipsis-text">{{ row[field] }}</p>
+            <p [class]="'ellipsis-text ' + row[field]">{{ row[field] }}</p>
           </td>
         </tr>
       </ng-container>

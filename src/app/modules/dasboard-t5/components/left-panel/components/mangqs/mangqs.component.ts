@@ -34,18 +34,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class MangqsComponent {
   constructor(private cdr: ChangeDetectorRef) {}
-  getColorForEvent(eventType: string): string {
-    const colors = {
-      'Authentication Failure': '#4CAF50',
-      'Botnet Activity': '#FFC107',
-      'Phishing Attempt': '#F44336',
-      'Malware Detected': '#9E9E9E',
-      // thêm các loại khác nếu có
-    };
-    // @ts-ignore
-    return colors[eventType] || '#90CAF9'; // default màu nếu không có
-  }
-
+  stackChartHoriPOCSummary = null;
   http = inject(HttpClient);
   headers = new HttpHeaders({
     apiKey:
@@ -78,7 +67,7 @@ export class MangqsComponent {
       })
       .subscribe((res) => {
         const units = res.data.units_detail || [];
-
+        this.stackChartHoriPOCSummary = res.data.summary.total_all_devices;
         const categories = units.map((unit: any) => unit.unit_code).slice(0, 3);
         const deviceData = units
           .map((unit: any) => unit.total_devices)
@@ -89,8 +78,8 @@ export class MangqsComponent {
           .slice(0, 3);
 
         this.stackChartHoriPOC = {
-          fontFamily: 'Roboto, sans-serif', // Thay font tại đây
-          toolbar: { show: false },
+          fontFamily: 'Inter, sans-serif', // Thay font tại đây
+          toolbar: { show: true },
           dataLabels: {
             style: {
               fontSize: '14px',
@@ -102,7 +91,7 @@ export class MangqsComponent {
             labels: {
               style: {
                 fontSize: '12px',
-                fontFamily: 'Roboto',
+                fontFamily: 'Inter',
                 colors: 'red',
               },
             },
@@ -161,15 +150,14 @@ export class MangqsComponent {
         // 👉 Lấy 3 phần tử đầu tiên
         const top3 = sorted.slice(0, 3);
         const others = sorted.slice(3);
-
-        const chartData = top3.map((item) => ({
+        const PALETTE = ['#4CAF50', '#FFC107', '#F44336', '#9E9E9E', '#90CAF9'];
+        const chartData = top3.map((item, idx) => ({
           value: item.total_events,
           name: item.event_type,
           itemStyle: {
-            color: this.getColorForEvent(item.event_type),
+            color: PALETTE[idx % PALETTE.length], // an toàn nếu > số màu
           },
         }));
-
         // 👉 Tính tổng số events còn lại và thêm mục "Other"
         const otherTotal = others.reduce(
           (sum, item) => sum + item.total_events,
@@ -186,7 +174,7 @@ export class MangqsComponent {
         this.chartConfig = {
           data: chartData,
           title: '',
-          colors: chartData.map((d) => d.itemStyle.color),
+          colors: chartData.map((d) => d.itemStyle.color), // đồng bộ legend/series
           legendPosition: 'bottom',
           radius: ['35%', '60%'],
           showLabelInside: false,
@@ -240,7 +228,7 @@ export class MangqsComponent {
     const body = {
       p_start_date: start,
       p_end_date: end,
-      p_event_source: 'VQ',
+      p_event_source: 'HQ',
     };
 
     this.http
@@ -254,16 +242,17 @@ export class MangqsComponent {
         const sorted = [...details].sort(
           (a, b) => b.total_events - a.total_events,
         );
+        const PALETTE = ['#4CAF50', '#FFC107', '#F44336', '#9E9E9E', '#90CAF9'];
 
         // 👉 Lấy 3 phần tử đầu tiên
         const top3 = sorted.slice(0, 3);
         const others = sorted.slice(3);
 
-        const chartData = top3.map((item) => ({
+        const chartData = top3.map((item, idx) => ({
           value: item.total_events,
           name: item.event_type,
           itemStyle: {
-            color: this.getColorForEvent(item.event_type),
+            color: PALETTE[idx % PALETTE.length], // an toàn nếu > số màu
           },
         }));
 
@@ -283,7 +272,7 @@ export class MangqsComponent {
         this.chartConfigTDH = {
           data: chartData,
           title: '',
-          colors: chartData.map((d) => d.itemStyle.color),
+          colors: chartData.map((d) => d.itemStyle.color), // đồng bộ legend/series
           legendPosition: 'bottom',
           radius: ['35%', '60%'],
           showLabelInside: false,
@@ -294,7 +283,6 @@ export class MangqsComponent {
         // Lấy danh sách event_type làm categories
         const categories = details.map((item: any) => item.event_type);
         const data = details.map((item: any) => item.total_events);
-
         this.nonStackChartConfigTDH = {
           title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
           height: '660px',
@@ -360,8 +348,8 @@ export class MangqsComponent {
         const tableData = Array.from(groupedMap.entries()).map(
           ([name, count], index) => ({
             stt: index + 1,
-            'mã độc': name,
-            'số lượng': count,
+            name: name,
+            count: count,
           }),
         );
 
@@ -396,8 +384,8 @@ export class MangqsComponent {
         const tableData = Array.from(groupedMap.entries()).map(
           ([name, count], index) => ({
             stt: index + 1,
-            'mã độc': name,
-            'số lượng': count,
+            name: name,
+            count: count,
           }),
         );
 
@@ -470,32 +458,8 @@ export class MangqsComponent {
   }
 
   selectedOption: string = 'Radar';
-  tableData = [
-    { stt: 1, 'mã độc': 'Mustang Panda', 'số lượng': 12 },
-    { stt: 2, 'mã độc': 'Redline Stealer', 'số lượng': 33 },
-    { stt: 3, 'mã độc': 'DarkPink', 'số lượng': 21 },
-    { stt: 4, 'mã độc': 'BlackCat', 'số lượng': 4 },
-    { stt: 5, 'mã độc': 'Mustang Panda', 'số lượng': 27 },
-    { stt: 6, 'mã độc': 'Redline Stealer', 'số lượng': 121 },
-    { stt: 7, 'mã độc': 'DarkPink', 'số lượng': 4 },
-    { stt: 8, 'mã độc': 'BlackCat', 'số lượng': 29 },
-    { stt: 9, 'mã độc': 'Mustang Panda', 'số lượng': 71 },
-    { stt: 10, 'mã độc': 'Redline Stealer', 'số lượng': 19 },
-    { stt: 11, 'mã độc': 'DarkPink', 'số lượng': 59 },
-  ];
-  tableDataTDH = [
-    { stt: 1, 'mã độc': 'Mustang Panda', 'số lượng': 12 },
-    { stt: 2, 'mã độc': 'Redline Stealer', 'số lượng': 33 },
-    { stt: 3, 'mã độc': 'DarkPink', 'số lượng': 21 },
-    { stt: 4, 'mã độc': 'BlackCat', 'số lượng': 4 },
-    { stt: 5, 'mã độc': 'Mustang Panda', 'số lượng': 27 },
-    { stt: 6, 'mã độc': 'Redline Stealer', 'số lượng': 121 },
-    { stt: 7, 'mã độc': 'DarkPink', 'số lượng': 4 },
-    { stt: 8, 'mã độc': 'BlackCat', 'số lượng': 29 },
-    { stt: 9, 'mã độc': 'Mustang Panda', 'số lượng': 71 },
-    { stt: 10, 'mã độc': 'Redline Stealer', 'số lượng': 19 },
-    { stt: 11, 'mã độc': 'DarkPink', 'số lượng': 59 },
-  ];
+  tableData = [{ stt: 1, name: 'Mustang Panda', count: 12 }];
+  tableDataTDH = [{ stt: 1, name: 'Mustang Panda', count: 12 }];
 
   tableDataHunting = [
     { 'kết nối bất thường': '86.36.123.10:4444', bytes: '1234' },
