@@ -1,69 +1,27 @@
-<div [style.max-height.px]="height" class="table-wrapper">
+<div [style.max-height]="height" class="table-wrapper">
   <table class="custom-table">
     <thead class="table-head">
       <tr>
         <th
-          *ngFor="let head of headers"
+          *ngFor="let head of headers; let i = index"
           class="table-cell"
-          [ngClass]="{
-            'text-center':
-              head === 'STT' || head === 'Số lượng' || head === 'Mức độ'
-          }"
-          [ngStyle]="head === 'Mức độ' ? { 'max-width': '40px' } : {}"
+          [ngClass]="columnClasses[fields[i]] || ''"
         >
           {{ head }}
         </th>
       </tr>
     </thead>
+
     <tbody class="table-body">
       <ng-container *ngFor="let row of data">
         <tr class="table-row">
           <td
-            (click)="onRowClick(row)"
-            *ngFor="let key of headers"
+            *ngFor="let field of fields"
             class="table-cell"
-            [ngClass]="{
-              'text-center':
-                key === 'STT' || key === 'Số lượng' || key === 'Mức độ'
-            }"
+            [ngClass]="columnClasses[field] || ''"
+            (click)="onRowClick(row)"
           >
-            <ng-container
-              *ngIf="key === 'Trạng thái' || key === 'Mức độ'; else normalCell"
-            >
-              <app-badge
-                style="max-width: 40px"
-                [label]="row[key.toLowerCase()]"
-                type="status"
-              ></app-badge>
-            </ng-container>
-
-            <!-- Ngược lại, hiển thị bình thường -->
-            <ng-template #normalCell>
-              <p class="ellipsis-text">{{ row[key.toLowerCase()] }}</p>
-            </ng-template>
-          </td>
-        </tr>
-        <tr *ngIf="row.stt === expandedRowId && showExpanded">
-          <td style="padding-left: 0" [attr.colspan]="headers.length">
-            <!-- Table con -->
-            <table class="custom-table">
-              <thead class="table-head">
-                <tr>
-                  <th class="table-cell">STT</th>
-                  <th class="table-cell">Tên báo cáo</th>
-                  <th class="table-cell">Phát hành</th>
-                  <th class="table-cell">Mức</th>
-                </tr>
-              </thead>
-              <tbody class="table-body">
-                <tr class="table-row" *ngFor="let vuln of row?.details">
-                  <td class="table-cell">{{ vuln.stt }}</td>
-                  <td class="table-cell">{{ vuln.tenBaocao }}</td>
-                  <td class="table-cell">{{ vuln.phatHanh }}</td>
-                  <td class="table-cell">{{ vuln.muc }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <p class="ellipsis-text">{{ row[field] }}</p>
           </td>
         </tr>
       </ng-container>

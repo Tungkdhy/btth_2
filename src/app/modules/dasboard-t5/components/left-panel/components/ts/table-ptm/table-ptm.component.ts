@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewEncapsulation,
+} from '@angular/core';
 import { BadgeComponent } from '../../../../../../../../app/modules/dasboard-t5/components/shared/badge/badge.component';
-// improt BadgeComponent
-// import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table-ptm',
@@ -10,16 +14,20 @@ import { BadgeComponent } from '../../../../../../../../app/modules/dasboard-t5/
   styleUrls: ['./table-ptm.component.scss'],
   standalone: true,
   imports: [CommonModule, BadgeComponent],
+  encapsulation: ViewEncapsulation.None, // 👈 cho phép nhận class global
 })
 export class TablePtmComponent {
-  @Input() headers: string[] = ['Cột 1', 'Cột 2'];
+  @Input() headers: string[] = [];
   @Input() height: string = '370px';
-  @Input() fields: string[] = ['field1', 'field2']; // field key trong object data
+  @Input() fields: string[] = [];
   @Input() data: any[] = [];
   @Input() showExpanded: boolean = false;
+  @Input() columnClasses: { [key: string]: string } = {}; // 👈 Thêm input này
+
   @Output() rowClicked = new EventEmitter<any>();
-  // @Output() \ = new EventEmitter<any>();
+
   expandedRowId: number | null = null;
+
   onRowClick(row: any) {
     this.expandedRowId = this.expandedRowId === row.stt ? null : row.stt;
     this.rowClicked.emit(row);
