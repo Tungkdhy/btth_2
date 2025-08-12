@@ -16,7 +16,7 @@ type AttackData = {
   global_total: number;
 };
 
-export function convertToStackChartConfig(data: AttackData[] | any,height='330px') {
+export function convertToStackChartConfig(data: AttackData[] | any,height='310px') {
   const nameMap: Record<string, string> = {
     MAL: "MAI",
     TWN: "TAW",

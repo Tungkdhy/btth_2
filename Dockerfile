@@ -1,30 +1,22 @@
-# Production Dockerfile for Angular Frontend
-FROM node:18-alpine AS build
-
+# Stage 1: Build
+FROM node:18 AS builder
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+COPY package.json package-lock.json ./
+RUN npm install
 
-# Install all dependencies (including dev dependencies needed for build)
-RUN npm ci
-
-# Copy source code
 COPY . .
-
-# Build the Angular app
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+# Stage 2: Serve with Nginx
+FROM nginx:stable-alpine AS production
 
-# Copy built app to nginx
-COPY --from=build /app/dist/demo1 /usr/share/nginx/html
-
-# Copy nginx server configuration
+# Copy nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Copy build files
+COPY --from=builder /app/dist/demo1 /usr/share/nginx/html
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

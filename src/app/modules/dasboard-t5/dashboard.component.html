@@ -2,7 +2,7 @@
   <app-top-panel></app-top-panel>
   <div class="row">
     <div *ngIf="!(showMap$ | async)" class="d-flex gap-2" style="padding-bottom: 20px">
-      <button (click)="hideTCM()" class="view-toggle-btn" [ngClass]="{ active: isHideTCM }">
+      <button (click)="hideTCM()" class="view-toggle-btn" [ngClass]="{ active: !isHideTCM }">
         <i class="bi-layout-wtf"></i>
       </button>
       <button type="button" class="btth-btn"

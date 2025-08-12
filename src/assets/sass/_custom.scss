@@ -1622,10 +1622,10 @@ text {
   font-size: 22px !important;
    font-family: "Inter", sans-serif !important;
 }
-// .ant-picker-large .ant-picker-input>input{
-//   font-size: 22px !important; /* input hiển thị ngày tháng */
-//   font-family: "Inter", sans-serif !important; /* Đảm bảo font chữ giống với input */ 
-// }
+.ant-picker-large .ant-picker-input>input{
+  font-size: 22px !important; /* input hiển thị ngày tháng */
+  font-family: "Inter", sans-serif !important; /* Đảm bảo font chữ giống với input */ 
+}
 // // .right-panel {
 //   .right-header.row {
 //     margin: 0 0 0 0 !important;

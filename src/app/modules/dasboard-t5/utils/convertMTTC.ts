@@ -2,7 +2,7 @@ function   getLevelOnly(name: string): string {
     const parts = name.split(' ');  // Tách theo dấu cách
     return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : name;
   }
-export function convertToStackChartExploitConfig(data: any,height ='390px') { 
+export function convertToStackChartExploitConfig(data: any,height ='370px') { 
   // Chuyển đổi dữ liệu sang dạng dùng cho chart
   const converted = data.map((d:any) => ({
     target: d.huong_tc,
