@@ -10,8 +10,8 @@
         class="custom-range-picker"
         nzSize="large"
         [(ngModel)]="date"
+        nzFormat="dd/MM/yyyy"
         (ngModelChange)="onChange($event)"
-        [nzShowTime]="true"
       ></nz-range-picker>
     </div>
     <div class="d-flex gap-6">
@@ -105,15 +105,25 @@
               ]"
               [fields]="[
                 'stt',
-                'mac_nguon',
-                'ip_nguon',
-                'ip_dich',
-                'so_luong',
-                'canh_bao',
-                'thoi_gian',
-                'muc_do'
+                'source_mac',
+                'source_ip',
+                'destination_ip',
+                'total_incidents',
+                'latest_description',
+                'latest_incident_time',
+                'most_common_severity'
               ]"
               [data]="tableData"
+              [columnClasses]="{
+                stt: 'text-center col-05',
+                source_mac: 'text-center col-15',
+                source_ip: 'col-102',
+                destination_ip: 'col-102',
+                total_incidents: 'text-center  col-1',
+                latest_description: 'col-3',
+                latest_incident_time: 'text-center col-1',
+                most_common_severity: 'text-center col-1'
+              }"
             >
             </app-table-ptm>
           </div>
@@ -133,6 +143,7 @@
         class="custom-range-picker"
         nzSize="large"
         [(ngModel)]="date"
+        nzFormat="dd/MM/yyyy"
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
     </div>
@@ -227,15 +238,25 @@
               ]"
               [fields]="[
                 'stt',
-                'mac_nguon',
-                'ip_nguon',
-                'ip_dich',
-                'so_luong',
-                'canh_bao',
-                'thoi_gian',
-                'muc_do'
+                'source_mac',
+                'source_ip',
+                'destination_ip',
+                'total_incidents',
+                'latest_description',
+                'latest_incident_time',
+                'most_common_severity'
               ]"
-              [data]="tableDataCP"
+              [data]="tableData"
+              [columnClasses]="{
+                stt: 'text-center col-05',
+                source_mac: 'text-center col-15',
+                source_ip: 'col-102',
+                destination_ip: 'col-102',
+                total_incidents: 'text-center  col-1',
+                latest_description: 'col-3',
+                latest_incident_time: 'text-center col-1',
+                most_common_severity: 'text-center col-1'
+              }"
             >
             </app-table-ptm>
           </div>

@@ -57,7 +57,28 @@
 ::ng-deep app-mangcd .table-wrapper {
   max-height: 660px !important;
 }
-::ng-deep .badge{
-      width: 100% !important;
-      font-size: 22px !important;
+::ng-deep .badge {
+  width: 100% !important;
+  font-size: 22px !important;
+}
+
+::ng-deep .Cao {
+  background: #d72036;
+  color: white;
+  border-radius: 18px;
+  padding: 5px;
+}
+
+::ng-deep .Trung.bình {
+  background: #feb42c;
+  color: white;
+  border-radius: 18px;
+  padding: 5px;
+}
+
+::ng-deep .Thấp {
+  background: #4caf50;
+  color: white;
+  border-radius: 18px;
+  padding: 5px;
 }
