@@ -1,7 +1,7 @@
 <div class="duty-roster-3107 btth-top-panel-card">
   <div class="d-flex justify-content-between" style="margin-bottom: 25px;">
     <div>
-      <h2 class="top-green-text">Kịp trực, trạng thái TCTT, cấp độ xử trí</h2>
+      <h2 class="top-green-text">Kịp trực, trạng thái SSCĐ, cấp độ xử trí</h2>
       <h4 class="top-green-text">
         TCH TT: {{ data.truc_chi_huy }} - TB: {{ data.truc_ban }}
       </h4>
@@ -25,7 +25,7 @@
     <table class="custom-table">
       <thead>
         <tr>
-          <th></th>
+          <th style="width: 240px;"></th>
           <th style="font-weight: 700;">TM</th>
           <th style="font-weight: 700;">CT</th>
           <th style="font-weight: 700;">HCKT</th>
@@ -45,7 +45,7 @@
           <td>{{ data.tch_cm53 }}</td>
         </tr>
         <tr>
-          <td style="font-weight: 700;">Trạng thái TCTT</td>
+          <td style="font-weight: 700;width: 240px;">Trạng thái TCTT</td>
           <td><span [class]="getDotClass(data.ttsscd_tm)"></span>{{ data.ttsscd_tm }}</td>
           <td><span [class]="getDotClass(data.ttsscd_ct)"></span>{{ data.ttsscd_ct }}</td>
           <td><span [class]="getDotClass(data.ttsscd_hckt)"></span>{{ data.ttsscd_hckt }}</td>
@@ -54,7 +54,7 @@
           <td><span [class]="getDotClass(data.ttsscd_cm53)"></span>{{ data.ttsscd_cm53 }}</td>
         </tr>
         <tr>
-          <td style="font-weight: 700;">Cấp độ xử trí</td>
+          <td style="font-weight: 700; width: 240px;">Cấp độ xử trí</td>
           <td>
             <span class="status-dot" [ngClass]="getStatusClassCD(data.cap_do_xu_tri_tm)">
             </span>

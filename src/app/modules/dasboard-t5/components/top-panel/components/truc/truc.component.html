@@ -4,7 +4,7 @@
       <h2 class="top-green-text">
         Điều hành tác chiến
       </h2>
-      <h2 class="total-text-color">Tổng số: {{ data.length }}</h2>
+      <h2 class="total-text-color">Tổng số: {{ data[0].total_count }}</h2>
     </div>
     <div class="d-flex gap-7">
       <ngb-pagination [collectionSize]="total" [maxSize]="1" [(page)]="page" [pageSize]="pageSize"
