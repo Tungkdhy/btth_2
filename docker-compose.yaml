@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder   # Chỉ build đến stage builder để cache nếu cần (có thể bỏ)
+    volumes:
+      - .:/app
+    command: npm run build
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "4200:80"
+    depends_on:
+      - app

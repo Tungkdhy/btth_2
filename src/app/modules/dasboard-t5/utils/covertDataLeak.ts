@@ -22,7 +22,7 @@ export function convertToDataLeak(rawData:any) {
   // Chuyển đổi
   return rawData.data.records.map((item:any, index:number) => ({
     stt: index + 1,
-    "tt lộ lọt": item.tong_quan_lo_lot,
+    "tt lộ lọt": item.noi_dung_rut_gon,
     "ngày": formatDate(item.ngay_bi_lo_lot),
     "chủ quan": mapChuQuan(item.he_thong)
   }))

@@ -10,6 +10,7 @@
                 <h3>Trinh sát mạng</h3>
                 <nz-range-picker
                   class="custom-range-picker"
+                   style="width: 1220px"
                   nzSize="large"
                   nzFormat="dd/MM/YYYY"
                   [(ngModel)]="date"
@@ -71,7 +72,7 @@
         <app-header-chart [title]="'Tổ chức hacker'" />
       </div>
       <app-table-ptm
-        [height]="'480px'"
+        [height]="'470'"
         [headers]="['STT', 'Tên nhóm hacker', 'Mô tả', 'Năm thành lập']"
         [fields]="['stt', 'ten_nhom_hacker', 'mo_ta', 'nam_thanh_lap']"
         [data]="dataFollow"

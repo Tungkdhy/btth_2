@@ -14,7 +14,7 @@ import { PipeChartConfig } from '../pie-chart/pipe-chart.config';
 })
 export class ChuthichComponent {
   @Input() items?: { color: string, label: string }[];
-
+  @Input() colSize ? = 6; // giá trị mặc định là 6
   line1: { color: string, label: string }[] = [];
   line2: { color: string, label: string }[] = [];
 

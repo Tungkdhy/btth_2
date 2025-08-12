@@ -78,6 +78,15 @@ export class QSComponent {
         return '';
     }
   }
+  getStatusClassCD(level: string | null): string {
+  switch (level) {
+    case '1': return 'status-green';
+    case '2': return 'status-yellow';
+    case '3': return 'status-orange';
+    case '4': return 'status-red';
+    default: return '';
+  }
+}
   getDotClass(status: string): string {
     if (!status) return 'dot';
     if (status.includes('Ổn định') || status.includes('Bình thường')) return 'dot green';

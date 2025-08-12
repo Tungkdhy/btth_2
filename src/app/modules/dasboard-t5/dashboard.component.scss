@@ -12,24 +12,28 @@ th {
 }
 
 .view-toggle-btn {
-  background: transparent;
+  background: #e6e9eb;
   border: none;
   cursor: pointer;
-  padding: 2px;
+  padding: 6px 12px;
   transition: all 0.2s ease-in-out;
+  border-radius: 50%;
 
   i {
-    font-size: 24px;
+    font-size: 20px;
     transition: all 0.2s ease-in-out;
-    color: #666;
+    color: black;
     font-weight: 700;
   }
 
   &.active i {
-    font-size: 24px;
+    font-size: 20px;
     /* To hơn khi active */
-    color: #007bff;
+    color: white;
     /* Màu xanh khi active */
+  }
+  &.active{
+    background-color: #0b683b;
   }
 }
 
