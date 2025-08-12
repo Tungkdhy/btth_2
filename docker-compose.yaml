@@ -14,8 +14,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: stable-alpine
+      target: production
     ports:
-      - "80:80"
+      - "4200:80"
     depends_on:
       - app
