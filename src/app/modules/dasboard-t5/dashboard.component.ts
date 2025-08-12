@@ -107,6 +107,10 @@ import { Ts2Component } from './components/left-panel/components/ts_2/ts.compone
 })
 export class DashboardComponent {
   selectedNetwork: string = 'internet';
+  hoveredNetwork: string | null = null;
+// Active mặc định
+
+
   isHideTCM: boolean = true; // mặc định nút đầu tiên được chọn
   showMap$ = new Observable<boolean>();
   constructor(private store: Store, public appStateService: AppStateService) {
@@ -127,4 +131,5 @@ export class DashboardComponent {
   toggleMap() {
     this.appStateService.toggleShowMap(); // dùng được ngoài constructor
   }
+  
 }
