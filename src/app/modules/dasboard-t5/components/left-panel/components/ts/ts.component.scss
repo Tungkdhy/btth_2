@@ -18,7 +18,8 @@ thead {
   z-index: 2;
 }
 
-th, td {
+th,
+td {
   padding: 8px 12px;
   text-align: left;
   white-space: nowrap;
@@ -36,4 +37,7 @@ tbody tr:nth-child(even) {
 
 tbody tr:nth-child(even) {
   background-color: #fafafa;
+}
+.w-20 {
+  width: 20px !important;
 }

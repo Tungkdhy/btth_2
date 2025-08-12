@@ -1,0 +1,30 @@
+<div [style.max-height]="height" class="table-wrapper">
+  <table class="custom-table">
+    <thead class="table-head">
+      <tr>
+        <th
+          *ngFor="let head of headers; let i = index"
+          class="table-cell"
+          [ngClass]="columnClasses[fields[i]] || ''"
+        >
+          {{ head }}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="table-body">
+      <ng-container *ngFor="let row of data">
+        <tr class="table-row">
+          <td
+            *ngFor="let field of fields"
+            class="table-cell"
+            [ngClass]="columnClasses[field] || ''"
+            (click)="onRowClick(row)"
+          >
+            <p [class]="'ellipsis-text ' + row[field]">{{ row[field] }}</p>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

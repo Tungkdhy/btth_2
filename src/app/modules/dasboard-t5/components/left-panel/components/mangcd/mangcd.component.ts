@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
+import { TablePtmComponent } from '../ts_2/table-ptm/table-ptm.component';
 import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
 import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';
@@ -31,6 +31,17 @@ import { formatDate } from '@angular/common';
   ],
 })
 export class MangcdComponent {
+  formatDateToDDMMYYYY(dateStr: any) {
+    const date = new Date(dateStr);
+    //@ts-ignore
+    if (isNaN(date)) return null; // Trả về null nếu dateStr không hợp lệ
+
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
   titleQH = { total_alerts: 0, total_devices: 0 };
   titleCP = { total_alerts: 0, total_devices: 0 };
   titleHT_QH = { total_managed_devices: 0, total_all_devices: 0 };
@@ -135,10 +146,10 @@ export class MangcdComponent {
       )
       .subscribe((res) => {
         const details = res?.data?.device_types_detail || [];
-            this.titleHT_CP = {
-              total_managed_devices: res?.data?.summary.total_managed_devices,
-              total_all_devices: res?.data?.summary.total_all_devices,
-            };
+        this.titleHT_CP = {
+          total_managed_devices: res?.data?.summary.total_managed_devices,
+          total_all_devices: res?.data?.summary.total_all_devices,
+        };
         const top3Types = [...details]
           .sort((a, b) => b.total_devices - a.total_devices) // sắp xếp giảm dần theo total_devices
           .slice(0, 3) // lấy 3 phần tử đầu tiên
@@ -314,13 +325,15 @@ export class MangcdComponent {
 
         const tableData = detail.map((item: any, index: number) => ({
           stt: index + 1,
-          'mac nguồn': item.source_mac,
-          'ip nguồn': item.source_ip,
-          'ip đích': item.destination_ip,
-          'số lượng': item.total_incidents,
-          'cảnh báo': item.latest_description,
-          'thời gian': item.latest_incident_time,
-          'mức độ': this.convertSeverity(item.most_common_severity),
+          source_mac: item.source_mac,
+          source_ip: item.source_ip,
+          destination_ip: item.destination_ip,
+          total_incidents: item.total_incidents,
+          latest_description: item.latest_description,
+          latest_incident_time: this.formatDateToDDMMYYYY(
+            item.latest_incident_time,
+          ),
+          most_common_severity: this.convertSeverity(item.most_common_severity),
         }));
         this.tableData = tableData;
         this.cdr.detectChanges();
@@ -338,13 +351,15 @@ export class MangcdComponent {
 
         const tableData = detail.map((item: any, index: number) => ({
           stt: index + 1,
-          'mac nguồn': item.source_mac,
-          'ip nguồn': item.source_ip,
-          'ip đích': item.destination_ip,
-          'số lượng': item.total_incidents,
-          'cảnh báo': item.latest_description,
-          'thời gian': item.latest_incident_time,
-          'mức độ': this.convertSeverity(item.most_common_severity),
+          source_mac: item.source_mac,
+          source_ip: item.source_ip,
+          destination_ip: item.destination_ip,
+          total_incidents: item.total_incidents,
+          latest_description: item.latest_description,
+          latest_incident_time: this.formatDateToDDMMYYYY(
+            item.latest_incident_time,
+          ),
+          most_common_severity: this.convertSeverity(item.most_common_severity),
         }));
 
         this.tableDataCP = tableData;
@@ -635,11 +650,15 @@ export class MangcdComponent {
   }
 
   countByLevel(level: string): number {
-    return this.tableData.filter((item) => item['mức độ'] === level).length;
+    return this.tableData.filter(
+      (item) => item['most_common_severity'] === level,
+    ).length;
   }
 
   countByLevelCP(level: string): number {
-    return this.tableDataCP.filter((item) => item['mức độ'] === level).length;
+    return this.tableDataCP.filter(
+      (item) => item['most_common_severity'] === level,
+    ).length;
   }
   ngOnInit(): void {
     const start = formatDate(this.date[0], 'yyyyMMddHHmmss', 'en-US');

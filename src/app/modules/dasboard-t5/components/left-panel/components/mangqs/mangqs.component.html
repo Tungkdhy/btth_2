@@ -9,14 +9,18 @@
       <nz-range-picker
         class="custom-range-picker"
         nzSize="large"
+        nzFormat="dd-MM-yyyy"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
-        [nzShowTime]="true"
       ></nz-range-picker>
     </div>
     <div class="d-flex gap-6">
       <div class="col-3">
-        <app-header-chart [title]="'Phạm vi săn tìm'"></app-header-chart>
+        <app-header-chart
+          [title]="'Phạm vi săn tìm'"
+          [subTitle]="'Tổng: ' + stackChartHoriPOCSummary"
+        ></app-header-chart>
+
         <div class="info-cards">
           <div class="card" *ngFor="let item of data">
             <div class="label">{{ item.label }}</div>
@@ -63,8 +67,13 @@
           <div class="col-12">
             <app-table-ptm
               [headers]="['STT', 'Mã độc', 'Số lượng']"
-              [fields]="['stt', 'name', 'qantity']"
+              [fields]="['stt', 'name', 'count']"
               [data]="tableData"
+              [columnClasses]="{
+                stt: 'text-center col-1',
+                name: 'col-2',
+                count: 'text-center col-1'
+              }"
             >
             </app-table-ptm>
           </div>
@@ -83,6 +92,7 @@
       <nz-range-picker
         class="custom-range-picker"
         nzSize="large"
+        nzFormat="dd-MM-yyyy"
         [(ngModel)]="date"
         (ngModelChange)="onChange($event)"
       ></nz-range-picker>
@@ -153,8 +163,13 @@
               <div class="col-12">
                 <app-table-ptm
                   [headers]="['STT', 'Mã độc', 'Số lượng']"
-                  [fields]="['stt', 'name', 'qantity']"
+                  [fields]="['stt', 'name', 'count']"
                   [data]="tableDataTDH"
+                  [columnClasses]="{
+                    stt: 'text-center col-1',
+                    name: 'col-2',
+                    count: 'text-center col-1'
+                  }"
                 >
                 </app-table-ptm>
               </div>

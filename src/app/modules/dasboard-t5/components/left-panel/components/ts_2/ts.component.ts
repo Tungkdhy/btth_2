@@ -1,28 +1,13 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ApiTSService } from 'src/app/modules/dasboard-t5/services/ts.service';
-import { NuanceInforComponent } from '../../../../../dashboard/components/shared/information-warface/nuance-infor/nuance-infor.component';
-import { BieuDoBvTieuCucComponent } from '../../../../../dashboard/components/shared/information-warface/bieu-do-bv-tieu-cuc/bieu-do-bv-tieu-cuc.component';
-import { HotTopicComponent } from '../../../../../dashboard/components/shared/information-warface/hot-topic/hot-topic.component';
-import { LineChartComponent } from '../../../shared/line-chart/line-chart.component';
 import { PieChartComponent } from '../../../shared/pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';
-import { CustomTableComponent } from '../../../shared/custom-table/custom-table.component';
 import { StackChartConfig } from '../../../shared/stack-chart/stack-chart.config';
-import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
-import {
-  LivestreamItem,
-  LivestreamWarningComponent,
-} from '../../../shared/live-stream/live-stream.component';
-import {
-  ViralPost,
-  ViralPostsComponent,
-} from '../../../shared/viral-posts/viral-posts.component';
-import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
+import { TablePtmComponent } from './table-ptm/table-ptm.component';
 import { HeaderChartComponent } from '../../../shared/header-chart/header-chart.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
 import { ChuthichComponent } from '../../../shared/chuthich/chuthich.component';
-import { TablePtmV2Component } from '../../../shared/table-ptm_v2/table-ptm-v2.component';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import {
@@ -45,27 +30,29 @@ type SimplifiedItem = {
   templateUrl: './ts.component.html',
   styleUrls: ['./ts.component.scss'],
   imports: [
-    NuanceInforComponent,
     TableLLComponent,
     TableKGMComponent,
-    TablePtmV2Component,
     CommonModule,
     ChuthichComponent,
     NzDatePickerModule,
     FormsModule,
     HeaderChartComponent,
-    BieuDoBvTieuCucComponent,
     TablePtmComponent,
-    HotTopicComponent,
-    LineChartComponent,
-    ViralPostsComponent,
-    LivestreamWarningComponent,
     PieChartComponent,
-    CustomTableComponent,
-    StackChart,
   ],
 })
 export class Ts2Component implements OnInit {
+  formatDateToDDMMYYYY(dateStr: any) {
+    const date = new Date(dateStr);
+    //@ts-ignore
+    if (isNaN(date)) return null; // Trả về null nếu dateStr không hợp lệ
+
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
   dataFollow = [];
   http = inject(HttpClient);
   headers = new HttpHeaders({
@@ -88,14 +75,15 @@ export class Ts2Component implements OnInit {
         const groups = res?.data?.hacker_groups || [];
         this.dataFollow = groups.map((item: any, index: number) => ({
           stt: index + 1,
-          'tên nhóm hacker': item.name,
-          'hình thức hoạt động': item.description,
-          'mô tả': item.known_for,
-          'thời gian hoạt động gần nhất': item.last_activity,
-          'quốc gia': item.origin_country,
-          'mức độ hoạt động': item.activity_level,
-          'mức độ đe dọa': item.threat_level,
-          'năm thành lập': item.formation_year,
+          ten_nhom_hacker: item.name || '',
+          hinh_thuc_hoat_dong: item.description || '',
+          mo_ta: item.known_for || '',
+          thoi_gian_hoat_dong_gan_nhat:
+            this.formatDateToDDMMYYYY(item.last_activity) || '',
+          quoc_gia: item.origin_country || '',
+          muc_do_hoat_dong: item.activity_level || '',
+          muc_do_de_doa: item.threat_level || '',
+          nam_thanh_lap: item.formation_year || '',
         }));
 
         this.cdr.detectChanges();
