@@ -153,10 +153,10 @@ export class Ts2Component implements OnInit {
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
     legendPosition: 'bottom',
-    radius: ['30%', '55%'],
+    radius: ['30%', '85%'],
 
     showLabelInside: false,
-    height: '380px',
+    height: '400px',
     legend: false,
   };
   config: StackChartConfig = {
@@ -386,7 +386,7 @@ export class Ts2Component implements OnInit {
 
         this.dataLeak = convertToDataLeak(res2);
 
-        this.chartConfig = convertStatsToChartConfig(res2, '300px');
+        this.chartConfig = convertStatsToChartConfig(res2, '320px');
         this.cdr.detectChanges();
       },
       error: (err) => {

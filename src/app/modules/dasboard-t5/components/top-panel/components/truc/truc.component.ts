@@ -63,8 +63,9 @@ export class TrucComponent implements OnInit, OnDestroy {
 
   // Hàm lấy class màu trạng thái
   getStatusClass(trangThai: string): string {
-    if (trangThai.includes('Chưa')) return 'dot orange';
+    if (trangThai.includes('Chưa')) return 'dot red';
     if (trangThai.includes('Đã')) return 'dot green';
+    if (trangThai.includes('Đang')) return 'dot orange';
     return ''
   }
   constructor(private cdr: ChangeDetectorRef, private apiHeaderService: ApiHeaderService) { }

@@ -1,4 +1,4 @@
-export function convertToStackChartHoriPOCConfig(data: any,height="390px") {
+export function convertToStackChartHoriPOCConfig(data: any,height="370px") {
   // Map tên quốc gia
   const nameMap: any = {
     MAL: "MAI",

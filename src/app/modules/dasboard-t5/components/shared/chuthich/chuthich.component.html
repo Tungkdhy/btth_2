@@ -1,9 +1,14 @@
 <div class="row mb-2 align-items-center" style="margin:12px 12px">
-  <div class="col-6 d-flex align-items-center" *ngFor="let item of line1">
+  <div class="d-flex align-items-center" 
+       *ngFor="let item of line1" 
+       [ngClass]="'col-' + colSize">
     <span class="legend-color" [style.backgroundColor]="item.color"></span>
     <span class="legend-label">{{ item.label }}</span>
   </div>
-  <div class="col-6 d-flex align-items-center" *ngFor="let item of line2">
+
+  <div class="d-flex align-items-center" 
+       *ngFor="let item of line2" 
+       [ngClass]="'col-' + colSize">
     <span class="legend-color" [style.backgroundColor]="item.color"></span>
     <span class="legend-label">{{ item.label }}</span>
   </div>
