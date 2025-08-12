@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TablePtmComponent } from '../../../shared/table-ptm/table-ptm.component';
+import { TablePtmComponent } from '../ts_2/table-ptm/table-ptm.component';
 import { StackChart } from '../../../shared/stack-chart/stack-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { PipeChartConfig } from '../../../shared/pie-chart/pipe-chart.config';

@@ -71,12 +71,21 @@
         <app-header-chart [title]="'Tổ chức hacker'" />
       </div>
       <app-table-ptm
-        [height]="'480'"
-        [headers]="['STT', 'TT lộ lọt', 'Số lượng', 'Thời gian', 'Trạng thái']"
-        [fields]="['stt', 'tt lộ lọt', 'số lượng', 'thời gian', 'trạng thái']"
+        [height]="'480px'"
+        [headers]="['STT', 'Tên nhóm hacker', 'Mô tả', 'Năm thành lập']"
+        [fields]="['stt', 'ten_nhom_hacker', 'mo_ta', 'nam_thanh_lap']"
         [data]="dataFollow"
-      >
-      </app-table-ptm>
+        [columnClasses]="{
+          stt: 'text-center col-1',
+          thoi_gian_hoat_dong_gan_nhat: 'text-center col-1',
+          ten_nhom_hacker: 'col-2',
+          mo_ta: 'col-3',
+          quoc_gia: 'text-center  col-1',
+          muc_do_hoat_dong: 'text-center col-1',
+          muc_do_de_doa: 'text-center col-1',
+          nam_thanh_lap: 'text-center col-1'
+        }"
+      ></app-table-ptm>
     </div>
   </div>
 </div>

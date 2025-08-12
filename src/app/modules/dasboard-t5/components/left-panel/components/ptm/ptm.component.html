@@ -35,10 +35,13 @@
       <div style="padding-left: 12px" class="col-4">
         <app-header-chart
           [title]="'Cảnh báo ATTT'"
-          [subTitle]=""
+          [subTitle]="'Tổng 16/20 Thiết bị'"
         ></app-header-chart>
         <div class="row">
-          <div class="col-12">
+          <div
+            class="col-12"
+            style="transform: translate(calc(50% - 400px), 0)"
+          >
             <app-pie-chart [config]="chartConfig"></app-pie-chart>
           </div>
         </div>

@@ -66,7 +66,7 @@ export class PtmComponent {
 
         this.stackChartConfig = {
           title: 'Biểu đồ khai thác',
-          categories: categories.splice(0, 5),
+          categories: categories.splice(0, 10),
           series: [
             {
               name: 'Thiết bị',
