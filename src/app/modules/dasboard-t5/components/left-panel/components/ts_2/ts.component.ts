@@ -374,7 +374,7 @@ export class Ts2Component implements OnInit {
 
         this.dataLeak = convertToDataLeak(res2);
 
-        this.chartConfig = convertStatsToChartConfig(res2, '320px');
+        this.chartConfig = convertStatsToChartConfig(res2, '320px',['48%','80%']);
         this.cdr.detectChanges();
       },
       error: (err) => {

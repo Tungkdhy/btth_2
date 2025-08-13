@@ -27,7 +27,7 @@ export function convertToDataLeak(rawData:any) {
     "chủ quan": mapChuQuan(item.he_thong)
   }))
 }
-export function convertStatsToChartConfig(input: any,height="'380px'"):PipeChartConfig {
+export function convertStatsToChartConfig(input: any,height="'380px'",radius=['30%', '55%']):PipeChartConfig {
   // Màu cố định cho từng hệ thống
   const colorMap: Record<string, string> = {
     'BBN': 'rgba(28, 155, 83, 1)',
@@ -58,7 +58,7 @@ export function convertStatsToChartConfig(input: any,height="'380px'"):PipeChart
     title: '',
     colors: ['#ff4d4f', '#40a9ff', '#73d13d'],
     legendPosition: 'bottom',
-    radius: ['30%', '55%'],
+    radius:  [radius[0], radius[1]],
     showLabelInside: false,
     height: height,
     legend: false,
