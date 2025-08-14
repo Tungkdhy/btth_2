@@ -7,13 +7,8 @@
           <div class="col-12">
             <div class="d-flex justify-content-between">
               <h3>Trinh sát mạng</h3>
-              <nz-range-picker
-                class="custom-range-picker"
-                nzSize="large"
-                [(ngModel)]="date"
-                nzFormat="dd/MM/YYYY"
-                (ngModelChange)="onChange($event)"
-              >
+              <nz-range-picker class="custom-range-picker" nzSize="large" [(ngModel)]="date" nzFormat="dd/MM/YYYY"
+                (ngModelChange)="onChange($event)">
               </nz-range-picker>
             </div>
 
@@ -21,50 +16,35 @@
               <!-- Cột 1 -->
               <div class="col-5">
                 <div style="padding: 12px 0">
-                  <app-header-chart
-                    [title]="'Tình hình không gian mạng'"
-                  ></app-header-chart>
+                  <app-header-chart [title]="'Tình hình không gian mạng'"
+                    [subTitle]="'Tổng: ' + thKGM.length"></app-header-chart>
                 </div>
-                <app-table-kgm
-                  *ngIf="thKGM.length > 0"
-                  [height]="'405'"
-                  [columns]="[
+                <app-table-kgm *ngIf="thKGM.length > 0" [height]="'405'" [columns]="[
                     { label: 'STT', field: 'stt' },
                     { label: 'Nội dung', field: 'noi_dung_rut_gon' },
                     { label: 'Thời gian', field: 'ngay_su_kien' }
-                  ]"
-                  [data]="thKGM"
-                ></app-table-kgm>
+                  ]" [data]="thKGM"></app-table-kgm>
               </div>
 
               <!-- Cột 2 -->
               <div style="padding-left: 12px" class="col-7">
                 <div style="padding: 12px 0">
-                  <app-header-chart
-                    [title]="'Lộ lọt dữ liệu'"
-                  ></app-header-chart>
+                  <app-header-chart [title]="'Lộ lọt dữ liệu'" [subTitle]="chartConfig.subTitle"></app-header-chart>
                 </div>
                 <div class="row m-0">
                   <div class="col-3">
                     <app-pie-chart [config]="chartConfig"></app-pie-chart>
-                    <app-legend
-                      [colSize]="4"
-                      [items]="[
+                    <app-legend [colSize]="4" [items]="[
                         { color: '#008000', label: 'BNN' },
                         { color: '#1E90FF', label: 'VPQH' },
                         { color: '#FFA500', label: 'VPCP' },
                         { color: '#FF0000', label: 'Quân đội' },
                         { color: 'rgb(140, 119, 119)', label: 'Khác' }
-                      ]"
-                    ></app-legend>
+                      ]"></app-legend>
                   </div>
                   <div class="col-9 p-0">
-                    <app-table-ll
-                      [height]="'405'"
-                      [headers]="['STT', 'TT lộ lọt', 'Ngày', 'Chủ quan']"
-                      [fields]="['stt', 'tt lộ lọt', 'ngày', 'chủ quan']"
-                      [data]="dataLeak"
-                    >
+                    <app-table-ll [height]="'405'" [headers]="['STT', 'TT lộ lọt', 'Ngày', 'Chủ quan']"
+                      [fields]="['stt', 'tt lộ lọt', 'ngày', 'chủ quan']" [data]="dataLeak">
                     </app-table-ll>
                   </div>
                 </div>
@@ -78,11 +58,7 @@
       <div style="padding: 12px 0">
         <app-header-chart [title]="'Tổ chức hacker'"></app-header-chart>
       </div>
-      <app-table-ptm
-
-        [height]="'396px'"
-
-        [headers]="[
+      <app-table-ptm [height]="'396px'" [headers]="[
           'STT',
           'Tên nhóm hacker',
           'Hình thức hoạt động',
@@ -92,8 +68,7 @@
           'Mức độ hoạt động',
           'Mức độ đe dọa',
           'Năm thành lập'
-        ]"
-        [fields]="[
+        ]" [fields]="[
           'stt',
           'ten_nhom_hacker',
           'hinh_thuc_hoat_dong',
@@ -103,9 +78,7 @@
           'muc_do_hoat_dong',
           'muc_do_de_doa',
           'nam_thanh_lap'
-        ]"
-        [data]="dataFollow"
-        [columnClasses]="{
+        ]" [data]="dataFollow" [columnClasses]="{
           stt: 'text-center w-120px',
           thoi_gian_hoat_dong_gan_nhat: 'text-center col-1',
           ten_nhom_hacker: 'col-2',
@@ -114,8 +87,7 @@
           muc_do_hoat_dong: 'text-center col-1',
           muc_do_de_doa: 'text-center col-1',
           nam_thanh_lap: 'text-center col-1'
-        }"
-      ></app-table-ptm>
+        }"></app-table-ptm>
     </div>
   </div>
 </div>
