@@ -31,22 +31,33 @@ export class TrucComponent implements OnInit, OnDestroy {
   data = [
     {
       id: '02ca63ed-043c-41f4-8390-19c09b3fd608',
-      noi_dung: 'Tăng cường bảo mật và che giấu dấu vết sau hoạt động khai thác thành công hệ thống VietcomBank',
-      nguoi_giao: 'Thiếu tá Mai Thanh Tùng - Chuyên viên An ninh mạng',
-      ngay_giao: '20250131153000',
-      trang_thai: 'Chưa thực hiện',
-      total_count: 5,
+      noi_dung: 'Tổng hợp thông tin liên quan đến hoạt động kỷ niệm 80 năm Cách mạng tháng Tám và Quốc Khánh 2/9 (Dư luận quốc tế)',
+      nguoi_giao: '4// Nguyễn Tiền Giang - PTL-TMT',
+      ngay_giao: '20250081753000',
+      trang_thai: 'Đã thực hiện',
+      total_count: 3,
       current_page: 1,
       total_pages: 3,
       has_more: true
     },
     {
       id: 'ec316211-ec31-4459-b6e6-1b0f91b85941',
-      noi_dung: 'Chuẩn bị báo cáo tiến độ tác chiến quý I/2025 trình lên lãnh đạo Bộ',
-      nguoi_giao: 'Trung tá Phạm Đức Hùng - Phó Trưởng phòng TC',
-      ngay_giao: '20250131070000',
-      trang_thai: 'Đã thực hiện',
-      total_count: 5,
+      noi_dung: 'Tác chiến thông tin',
+      nguoi_giao: '4// Nguyễn Tiền Giang - PTL-TMT',
+      ngay_giao: '20250081270000',
+      trang_thai: 'Đang thực hiện',
+      total_count: 3,
+      current_page: 1,
+      total_pages: 3,
+      has_more: true
+    },
+    {
+      id: 'ec316211-ec31-4459-b6e6-1b0f91b85941',
+      noi_dung: 'Trinh sát thông tin liên quan đến tài khoản Tiktok',
+      nguoi_giao: '4// Nguyễn Tiền Giang - Phó TMT',
+      ngay_giao: '20250812070000',
+      trang_thai: 'Đang thực hiện',
+      total_count: 3,
       current_page: 1,
       total_pages: 3,
       has_more: true
@@ -79,13 +90,13 @@ export class TrucComponent implements OnInit, OnDestroy {
     }
     this.apiHeaderService.fetchData(body).subscribe({
       next: (res) => {
-        this.data = res || [];
+        // this.data = res || [];
       },
       error: (err) => {
         console.error('Lỗi load dữ liệu:', err);
       }
     })
-      this.cdr.detectChanges();
+    this.cdr.detectChanges();
   }
   startRealTimeClock(): void {
     this.intervalId = setInterval(() => {
@@ -95,7 +106,7 @@ export class TrucComponent implements OnInit, OnDestroy {
   }
   async onPageChange(page = 1) {
     console.log(page);
-    
+
     this.page = page;
     const body = {
       "p_start_date": "20250121000000",
@@ -111,7 +122,7 @@ export class TrucComponent implements OnInit, OnDestroy {
         console.error('Lỗi load dữ liệu:', err);
       }
     })
-      this.cdr.detectChanges();
+    this.cdr.detectChanges();
     // let data = await this.supabase.getDanhSachServerFmc(page, this.pageSize);
     ;
   }
