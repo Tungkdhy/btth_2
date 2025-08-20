@@ -7,8 +7,8 @@
       <h2 class="total-text-color">Tổng số: {{ data[0].total_count }}</h2>
     </div>
     <div class="d-flex gap-7">
-      <ngb-pagination [collectionSize]="total" [maxSize]="1" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)" *ngIf="total >= 0" class="btth-pagination">
+      <ngb-pagination [collectionSize]="data[0].total_count" [maxSize]="1" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)" *ngIf="data[0].total_count >= 0" class="btth-pagination">
       </ngb-pagination>
       <!-- > 3 -->
       <button type="button" (click)="togglePopup(true, 'AddOperator')" class="btth-btn"

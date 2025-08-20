@@ -51,7 +51,7 @@ export function convertToStackChartConfig(data: AttackData[] | any,height='310px
   ];
 
   const stackChartConfig = {
-    title: `Biểu đồ khai thác`,
+    title: `Mức độ khai thác`,
     subTitle:`Tổng:(${totalKhaiThac}/${totalTargets})`, 
     categories,
     series: [

@@ -23,7 +23,7 @@
         [ngClass]="{ active: hoveredNetwork === 'special' || (!hoveredNetwork && selectedNetwork === 'special') }"
         (click)="selectNetwork('special')" (mouseenter)="hoveredNetwork = 'special'"
         (mouseleave)="hoveredNetwork = null">
-        Mạng chuyên dụng
+        Mạng chuyên dùng
       </button>
     </div>
     <ng-container *ngIf="selectedNetwork === 'special'; else notCd">
@@ -66,7 +66,7 @@
             [ngClass]="{ active: hoveredNetwork === 'special' || (!hoveredNetwork && selectedNetwork === 'special') }"
             (click)="selectNetwork('special')" (mouseenter)="hoveredNetwork = 'special'"
             (mouseleave)="hoveredNetwork = null">
-            Mạng chuyên dụng
+            Mạng chuyên dùng
           </button>
         </div>
       </div>

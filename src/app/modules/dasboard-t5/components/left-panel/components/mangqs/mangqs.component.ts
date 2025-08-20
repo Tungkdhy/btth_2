@@ -40,7 +40,7 @@ export class MangqsComponent {
     apiKey:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE', // 🔐 Thay YOUR_API_KEY_HERE bằng key thật
   });
-  date = [dayjs().subtract(7, 'day').toDate(), dayjs().toDate()];
+  date = [dayjs().subtract(30, 'day').toDate(), dayjs().toDate()];
   onChange(result: Date[]): void {
     if (result && result.length === 2) {
       const start = formatDate(result[0], 'yyyyMMddHHmmss', 'en-US');
@@ -119,7 +119,7 @@ export class MangqsComponent {
               color: 'rgba(251, 171, 0, 1)',
             },
           ],
-          height: '660px',
+          height: '655px',
           tooltipFormatter: (params: any) => `${params.name}`,
           legendFormatter: (name: string) => name,
           isStacked: false,
@@ -178,7 +178,7 @@ export class MangqsComponent {
           legendPosition: 'bottom',
           radius: ['35%', '60%'],
           showLabelInside: false,
-          height: '660px',
+          height: '655px',
           legend: true,
         };
 
@@ -188,7 +188,7 @@ export class MangqsComponent {
 
         this.nonStackChartConfig = {
           title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
-          height: '660px',
+          height: '655px',
           isStacked: false,
           isShowLabel: false,
           categories,
@@ -276,7 +276,7 @@ export class MangqsComponent {
           legendPosition: 'bottom',
           radius: ['35%', '60%'],
           showLabelInside: false,
-          height: '660px',
+          height: '655px',
           legend: true,
         };
 
@@ -285,7 +285,7 @@ export class MangqsComponent {
         const data = details.map((item: any) => item.total_events);
         this.nonStackChartConfigTDH = {
           title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
-          height: '660px',
+          height: '655px',
           isStacked: false,
           isShowLabel: false,
           categories,
@@ -443,7 +443,7 @@ export class MangqsComponent {
               color: 'rgb(239, 62, 46)',
             },
           ],
-          height: '660px',
+          height: '655px',
           isStacked: true,
           tooltipFormatter: (params: any) => {
             const param = params;
@@ -522,7 +522,7 @@ export class MangqsComponent {
         color: 'rgb(254, 180, 44)',
       },
     ],
-    height: '660px',
+    height: '655px',
     isStacked: false, // tắt stacked
   };
 
@@ -541,7 +541,7 @@ export class MangqsComponent {
         color: 'rgb(239, 62, 46)',
       },
     ],
-    height: '660px',
+    height: '655px',
     tooltipFormatter: (params: any) => {
       const param = params;
       return `${param.name}: ${param.value} mục tiêu ${this.getLevelOnly(
@@ -566,7 +566,7 @@ export class MangqsComponent {
     legendPosition: 'bottom',
     radius: ['35%', '60%'],
     showLabelInside: false,
-    height: '660px',
+    height: '655px',
     legend: true,
   };
   chartConfigTDH: PipeChartConfig = {
@@ -585,7 +585,7 @@ export class MangqsComponent {
     legendPosition: 'bottom',
     radius: ['35%', '60%'],
     showLabelInside: false,
-    height: '660px',
+    height: '655px',
     legend: true,
   };
   stackChartHoriPOC = {
@@ -631,7 +631,7 @@ export class MangqsComponent {
         color: 'rgba(251, 171, 0, 1)', // màu vàng cam
       },
     ],
-    height: '660px',
+    height: '655px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -665,7 +665,7 @@ export class MangqsComponent {
         color: 'rgba(210, 0, 26, 1)', // màu xanh dương
       },
     ],
-    height: '660px',
+    height: '655px',
     tooltipFormatter: (params: any) => {
       console.log(params);
 
@@ -682,7 +682,7 @@ export class MangqsComponent {
   };
   nonStackChartConfig: StackChartConfig = {
     title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
-    height: '660px',
+    height: '655px',
     isStacked: false,
     isShowLabel: false,
     categories: [
@@ -727,7 +727,7 @@ export class MangqsComponent {
   };
   nonStackChartConfigTDH: StackChartConfig = {
     title: 'Dấu hiệu tấn công theo chiến - kỹ thuật',
-    height: '660px',
+    height: '655px',
     isStacked: false,
     isShowLabel: false,
     categories: [
